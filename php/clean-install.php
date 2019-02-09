@@ -12,6 +12,4 @@
     $query = "INSERT INTO 'usuario' ('username', 'password', 'nombre', 'apellido_p', 'apellido_m',
     'telefono', 'direccion', 'tipo') VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', '$tel', '$dir', 'administrador')";
     echo json_encode($query);
-
-
 ?>
