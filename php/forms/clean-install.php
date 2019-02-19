@@ -19,7 +19,7 @@
 
     $result = mysqli_query($conexion, $query) or die('"El nombre de usuario ya existe"');
 
-    echo json_encode("Exito!");
+    echo '"Exito!"';
 
-    mysqli_close($connection);
+    mysqli_close($conexion);
 ?>
