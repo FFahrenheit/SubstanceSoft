@@ -3,14 +3,13 @@ var formulario = document.getElementById('formulario');
 formulario.addEventListener('submit',function(e)
 {
     e.preventDefault();
-
-    console.log("Inicio");
+    console.log('working!');
 
     var datos = new FormData(formulario);
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/modificar-usuario.php',
+        fetch('../../php/forms/agregar-receta.php', 
         {
             method: 'POST', 
             body: datos
@@ -23,8 +22,8 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
-
+                window.location.reload(false); 
+                
             })
     }
 })

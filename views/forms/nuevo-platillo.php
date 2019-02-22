@@ -69,7 +69,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-danger">Continuar a enlistar ingredientes</button>
+                            <button type="submit" class="btn btn-primary">
+                                Continuar a enlistar ingredientes
+                            </button>
                         </div>
                     </form>
                 </div>

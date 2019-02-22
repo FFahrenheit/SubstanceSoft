@@ -22,7 +22,8 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                //redireccionamiento jsjs
+                //jsjs
+
             })
     }
 })
