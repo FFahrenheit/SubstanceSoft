@@ -9,7 +9,7 @@ html, body{
     height: 100%;
     width: 100%;
     margin: auto;
-    background-image: url("https://upserve.com/media/sites/2/Restaurant-POS--1100x600.jpg");
+    background-image: url("../images/index.jpg");
     display: table;
     top: 0;
     background-size: cover;
@@ -19,7 +19,7 @@ html, body{
     display: table-cell;
     vertical-align: middle;
     width: 100%;
-    max-width: none;    
+    max-width: none;
 }
 
 .content {

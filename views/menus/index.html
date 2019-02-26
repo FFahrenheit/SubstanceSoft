@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, inicial-scale=1">
-        
+
         <title>
             ¡Bienvenido a SubstanceSoft - Restaurant Control System!
         </title>
@@ -30,63 +30,63 @@
                     <form id="formulario" novalidate onsubmit="return check();">
                         <div class="form-group">
                             <label for="">Nombre del restaurante: </label> <font color="red">*</font>
-                            <input type="text" name="res" placeholder="Escriba el nombre del restaurante" class="form-control" required> 
+                            <input type="text" name="res" placeholder="Escriba el nombre del restaurante" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">Nombre de usuario del administrador:  </label> <font color="red">*</font>
-                            <input name="usu" type="text" placeholder="Escriba el nombre para iniciar sesión en el sistema" class="form-control" required> 
+                            <input name="usu" type="text" placeholder="Escriba el nombre para iniciar sesión en el sistema" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">Contraseña: </label> <font color="red">*</font>
-                            <input onkeyup='check();' id="password" type="password" name="pas" placeholder="Escriba la contraseña que usará para iniciar sesión" class="form-control" required> 
+                            <input onkeyup='check();' id="password" type="password" name="pas" placeholder="Escriba la contraseña que usará para iniciar sesión" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
-                        </div>       
+                        </div>
                         <div class="form-group">
                             <label for="">Confirmar contraseña: </label> <font color="red">*</font>
-                            <input onkeyup='check();' id="confirm_password"type="password" placeholder="Repita la contraseña" class="form-control" required> 
+                            <input onkeyup='check();' id="confirm_password"type="password" placeholder="Repita la contraseña" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                               </div>
                               <span id="message"> </span>
 
-                        </div>                
+                        </div>
                         <div class="form-group">
                             <label for="">Nombre del administrador </label>
-                            <input name="nom"type="text" placeholder="Escriba el nombre del administrador" class="form-control"> 
-                        </div>                
+                            <input name="nom"type="text" placeholder="Escriba el nombre del administrador" class="form-control">
+                        </div>
                         <div class="form-group">
                                 <label for="">Apellido paterno del administrador</label>
-                                <input name="pat" type="text" placeholder="Escriba el apellido paterno del administrador" class="form-control"> 
-                        </div>  
+                                <input name="pat" type="text" placeholder="Escriba el apellido paterno del administrador" class="form-control">
+                        </div>
                         <div class="form-group">
                             <label for="">Apellido materno del administrador</label>
-                            <input name ="mat" type="text" placeholder="Escriba el apellido materno del administrador" class="form-control"> 
-                        </div>                
+                            <input name ="mat" type="text" placeholder="Escriba el apellido materno del administrador" class="form-control">
+                        </div>
                         <div class="form-group">
                             <label for="">Teléfono de contacto</label>
-                            <input name="tel" type="number" placeholder="Escriba el teléfono de contacto del administrador" class="form-control"> 
+                            <input name="tel" type="number" placeholder="Escriba el teléfono de contacto del administrador" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Dirección:</label>
-                            <input name="dir" type="text" placeholder="Escriba la dirección del administrador / restaurante." class="form-control"> 
+                            <input name="dir" type="text" placeholder="Escriba la dirección del administrador / restaurante." class="form-control">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-danger">Continuar</button>
                         </div>
                     </form>
                 </div>
-            </div>    
+            </div>
         </section>
         <script>
-            function check() 
+            function check()
             {
                 if (document.getElementById('password').value ==
                     document.getElementById('confirm_password').value) {
@@ -102,7 +102,7 @@
 
             (function() {
                 'use strict';
-            
+
                 window.addEventListener('load', function() {
                 var form = document.getElementById('formulario');
                 form.addEventListener('submit', function(event) {
@@ -114,10 +114,10 @@
                 }, false);
                 }, false);
             })();
-        </script>    
+        </script>
     </body>
     <script src="../../js/forms/clean-install.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
+    <script src="../../js/vendor/popper.min.js"></script>
+    <script src="../../js/vendor/bootstrap.min.js"></script>
 </html>
