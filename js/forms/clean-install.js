@@ -11,7 +11,7 @@ formulario.addEventListener('submit',function(e)
     {
         fetch('../../php/forms/clean-install.php',
         {
-            method: 'POST', 
+            method: 'POST',
             body: datos
         })
         .then (res => res.json())
@@ -21,7 +21,7 @@ formulario.addEventListener('submit',function(e)
                 console.log(data);
 
                 alert(data);
-                
+
                 window.location.pathname = '/substancesoft/views/menus/menu-install.html';
 
             })

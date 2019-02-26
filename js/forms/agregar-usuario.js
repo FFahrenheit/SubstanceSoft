@@ -9,16 +9,20 @@ formulario.addEventListener('submit',function(e)
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/agregar-usuario.php', 
+        fetch('../../php/forms/agregar-usuario.php',
         {
-            method: 'POST', 
+            method: 'POST',
             body: datos
         })
         .then (res => res.json())
-        .then (data => 
+        .then (data =>
             {
                 console.log("aqui llega js");
                 console.log(data);
+
+                alert(data);
+
+                window.location.pathname = '/substancesoft/views/forms/nuevo-usuario.html';
             })
     }
 })

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, inicial-scale=1">
-        
+
         <title>
             Agregar nuevo platillo
         </title>
@@ -21,14 +21,14 @@
                     <form id="formulario" novalidate>
                         <div class="form-group">
                             <label for="">Nombre del platillo:  </label> <font color="red">*</font>
-                            <input name="name" type="text" placeholder="Escriba el nombre del platillo" class="form-control" required> 
+                            <input name="name" type="text" placeholder="Escriba el nombre del platillo" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">Precio: </label> <font color="red">*</font>
-                            <input type="number" step="0.01" name="price" placeholder="Escriba el precio del platillo" class="form-control" required> 
+                            <input type="number" step="0.01" name="price" placeholder="Escriba el precio del platillo" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -38,12 +38,12 @@
                             <?php
                                 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-                                $query = "select * from cocina"; 
-        
+                                $query = "select * from cocina";
+
                                 $sql = mysqli_query($connection, $query) or die("error en query");
                             ?>
                             <select class="form-control" name="kitchen">
-                                <?php                                 
+                                <?php
                                 while($row = mysqli_fetch_array($sql))
                                 {
                                 ?>
@@ -56,8 +56,8 @@
                         </div>
                         <div class="form-group">
                             <label for="">Descripcion</label>
-                            <input name="description"type="text" placeholder="Describa el platillo" class="form-control"> 
-                        </div>                
+                            <input name="description"type="text" placeholder="Describa el platillo" class="form-control">
+                        </div>
                         <div class="form-group">
                             <label for="">Dificultad</label> <font color="red">*</font>
                             <select class="form-control" name="dif">
@@ -75,26 +75,10 @@
                         </div>
                     </form>
                 </div>
-            </div>    
+            </div>
         </section>
-        <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                  'use strict';
-                
-                  window.addEventListener('load', function() {
-                    var form = document.getElementById('formulario');
-                    form.addEventListener('submit', function(event) {
-                      if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
-                      form.classList.add('was-validated');
-                    }, false);
-                  }, false);
-                })();
-                </script>    
     </body>
+    <script src="../../js/vendor/validate-form.js"></script>
     <script src="../../js/forms/agregar-platillo.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

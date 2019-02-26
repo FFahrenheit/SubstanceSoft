@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, inicial-scale=1">
-        
+
         <title>
             Agregar ingredientes a platillos
         </title>
@@ -16,7 +16,7 @@
         <?php
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-            $query = "select max(clave) as pk from platillo"; 
+            $query = "select max(clave) as pk from platillo";
 
             $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -38,7 +38,7 @@
                 &nbsp;
                 <div class="row">
                     <div class="col-sm">
-                        Ingredientes agregados: 
+                        Ingredientes agregados:
                         <div class="containter-fluid">
                             <table class="table table-hover">
                             <thead>
@@ -72,11 +72,11 @@
                     </div>
                 </div>
                     <div class="col-sm">
-                        Agregar ingrediente: 
+                        Agregar ingrediente:
                         <?php
-                            $query = "select nombre, clave, especificacion from ingrediente where 
+                            $query = "select nombre, clave, especificacion from ingrediente where
                             clave not in(select ingrediente from recetas where platillo=$pk) order by nombre asc";
-                            
+
                             $sql = mysqli_query($connection, $query) or die("error en query");
                         ?>
                         <form id="formulario" novalidate>
@@ -88,7 +88,7 @@
                                     {
                                 ?>
                                 <option value="<?php echo $row['clave'];?>"> <?php echo $row['nombre']." (".$row['especificacion'].")";?> </option>
-                                <?php   
+                                <?php
                                     }
                                     mysqli_close($connection);
                                 ?>
@@ -116,24 +116,8 @@
                 </a>
             </div>
         </section>
-        <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                  'use strict';
-                
-                  window.addEventListener('load', function() {
-                    var form = document.getElementById('formulario');
-                    form.addEventListener('submit', function(event) {
-                      if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
-                      form.classList.add('was-validated');
-                    }, false);
-                  }, false);
-                })();
-                </script>    
     </body>
+    <script src="../../js/vendor/validate-form.js"></script>
     <script src="../../js/forms/agregar-receta.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

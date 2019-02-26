@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, inicial-scale=1">
-        
+
         <title>
             Mostrar usuarios
         </title>
@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <td>Nombre de usuario</td>
+                            <td>Tipo de usuario</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
@@ -29,7 +30,7 @@
                         <?php
                             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
-                            $query = "select username from usuario"; 
+                            $query = "select username, tipo from usuario";
 
                             $sql = mysqli_query($connection, $query) or die("error");
 
@@ -38,12 +39,13 @@
                         ?>
                         <tr>
                             <td><?php echo $row['username']; ?></td>
-                            <td> <a href="modificar-usuario-form.php?user=<?php echo $row['username']?>" class="btn btn-primary">Modificar</a> </td> 
-                            <td> 
-                                <a style="color: white;"data-toggle="modal" data-target="#delete" 
+                            <td><?php echo $row['tipo'];?></td>
+                            <td> <a href="modificar-usuario-form.php?user=<?php echo $row['username']?>" class="btn btn-primary">Modificar</a> </td>
+                            <td>
+                                <a style="color: white;"data-toggle="modal" data-target="#delete"
                                 class="btn btn-danger" id="<?php echo $row['username']?>" onClick="showDetails(this)">
                                     Eliminar
-                                </a> 
+                                </a>
                             </td>
                         </tr>
                         <?php
