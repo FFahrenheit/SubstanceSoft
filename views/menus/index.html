@@ -27,7 +27,7 @@
             <p class="lead text-center">Por favor, llene los campos con la información requerida. Los campos marcados con <font color="red">*</font> son obligatorios.</p>
             <div class="row">
                 <div class="col-8">
-                    <form id="formulario" novalidate>
+                    <form id="formulario" novalidate onsubmit="return check();">
                         <div class="form-group">
                             <label for="">Nombre del restaurante: </label> <font color="red">*</font>
                             <input type="text" name="res" placeholder="Escriba el nombre del restaurante" class="form-control" required> 
@@ -44,17 +44,19 @@
                         </div>
                         <div class="form-group">
                             <label for="">Contraseña: </label> <font color="red">*</font>
-                            <input type="password" name="pas" placeholder="Escriba la contraseña que usará para iniciar sesión" class="form-control" required> 
+                            <input onkeyup='check();' id="password" type="password" name="pas" placeholder="Escriba la contraseña que usará para iniciar sesión" class="form-control" required> 
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
                         </div>       
                         <div class="form-group">
                             <label for="">Confirmar contraseña: </label> <font color="red">*</font>
-                            <input type="password" placeholder="Repita la contraseña" class="form-control" required> 
+                            <input onkeyup='check();' id="confirm_password"type="password" placeholder="Repita la contraseña" class="form-control" required> 
                             <div class="invalid-feedback">
                                 Ingresa datos
                               </div>
+                              <span id="message"> </span>
+
                         </div>                
                         <div class="form-group">
                             <label for="">Nombre del administrador </label>
@@ -84,22 +86,35 @@
             </div>    
         </section>
         <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                  'use strict';
-                
-                  window.addEventListener('load', function() {
-                    var form = document.getElementById('formulario');
-                    form.addEventListener('submit', function(event) {
-                      if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                      }
-                      form.classList.add('was-validated');
-                    }, false);
-                  }, false);
-                })();
-                </script>    
+            function check() 
+            {
+                if (document.getElementById('password').value ==
+                    document.getElementById('confirm_password').value) {
+                    document.getElementById('message').style.color = 'green';
+                    document.getElementById('message').innerHTML = 'Ok';
+                    return true;
+                } else {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'Las contraseñas no coinciden';
+                    return false;
+                }
+            }
+
+            (function() {
+                'use strict';
+            
+                window.addEventListener('load', function() {
+                var form = document.getElementById('formulario');
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+                }, false);
+            })();
+        </script>    
     </body>
     <script src="../../js/forms/clean-install.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

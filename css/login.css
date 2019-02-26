@@ -1,0 +1,61 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.intro {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-image: url("https://upserve.com/media/sites/2/Restaurant-POS--1100x600.jpg");
+    display: table;
+    top: 0;
+    background-size: cover;
+}
+
+.intro .inner{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    max-width: none;    
+}
+
+.content {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content h1{
+    -webkit-text-stroke: 0.9px rgb(49, 49, 49);
+    color: #F9F3F4;
+    text-shadow: 0px 0px 300px #000;
+    font-size: 250%;
+}
+
+.content label{
+    -webkit-text-stroke: 0.25px rgb(49, 49, 49);
+    color: #F9F3F4;
+    text-shadow: 0px 0px 300px #000;
+    font-size: 110%;
+}
+
+.content .btn {
+    border-radius: 9px;
+    color: #AE7233;
+    -webkit-text-stroke: 0.2px rgb(49, 49, 49);
+    font-size: 130%;
+    padding: 10px 20px;
+    border: solid #AE7233 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-text-stroke: 0.1px black;
+    background: transparent;
+}
+
+.content .btn:hover{
+    color: rgb(255, 168, 74);
+    border: solid rgb(255, 168, 74)3px;
+}
