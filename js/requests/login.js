@@ -19,7 +19,6 @@ formulario.addEventListener('submit',function(e)
             {
                 console.log("aqui llega js");
                 console.log(data);
-
                 switch(data)
                 {
                     case 'user':
@@ -32,7 +31,7 @@ formulario.addEventListener('submit',function(e)
                         window.location.pathname = '/substancesoft/views/menus/login.html';
                         break;
                     case 'success':
-                    window.location.pathname = '/substancesoft/views/menus/plantilla.html';
+                        window.location.pathname = '/substancesoft/views/menus/index.php';
                     break;
                 }
             })
