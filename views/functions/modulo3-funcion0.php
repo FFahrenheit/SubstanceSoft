@@ -24,7 +24,7 @@
       <div class="sidebar-heading"> SubstanceSoft </div>
       <div class="list-group list-group-flush">
         <!--Submenu-->
-        <?php 
+        <?php
             if(isset($_GET['mod']))
             {
                 $curMod = $_GET['mod'];
@@ -55,7 +55,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <?php
                 for($i=0; $i<$_SESSION['functions'];$i++)
-                { 
+                {
                 ?>
                 <?php
                     $desc = "function".$i;
@@ -67,7 +67,7 @@
                     <?php echo $current;?>
                     </a>
                 <?php
-                } 
+                }
                 ?>
               </nav>
         </div>
@@ -78,22 +78,23 @@
           <div class="col-9 text-center">
           <h1 class="mt-4"> Mesas disponibles </h1>
               <p> Aquí puede agregar y administrar las mesas actuales.</p>
-              <?php 
+              <?php
                 $user = $_SESSION['username'];
                 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
 
-                $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'"; 
-            
+                $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'";
+
                 $result = mysqli_query($connection, $query) or die ('"query"');
-                
+                if($result->num_rows!=0)
+                {
                 for($i=0; $i<$result->num_rows; $i++)
                 {
-                    $row = mysqli_fetch_array($result);    
+                    $row = mysqli_fetch_array($result);
                     if($i%4 == 0)
                     {
                         ?>
                         <div class="card-deck">
-                        <?php 
+                        <?php
                     }
                 ?>
                 <div class="card text-center">
@@ -108,7 +109,7 @@
                             </div>
                     </div>
                 </div>
-            <?php 
+            <?php
                 if(($i+1)%4==0)
                 {
                     ?>
@@ -128,11 +129,12 @@
             <?php
             }
             if($rest>0)
-            { 
+            {
             ?>
             </div>
             <?php
-            }?>
+            }
+          }?>
           </div>
           <div class="col-3">
             <div class="containter text-center">
