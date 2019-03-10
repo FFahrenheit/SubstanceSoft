@@ -1,4 +1,3 @@
-<!-- ESTO ES PARA MODULO1 FUNCIÓN 0 jijiji-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +6,7 @@
   <title>SubstanceSoft: Index</title>
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
+  <link href="../../css/index.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -15,7 +15,7 @@
     ?>
   <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading"> SubstanceSoft </div>
+      <a href="../menus/index.php" class="hide"><div class="sidebar-heading"> SubstanceSoft </div></a>
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php 
@@ -36,36 +36,35 @@
             </nav>
         </div>
       </nav>
-      <!--Body-->
       <div class="container-fluid">
         <div class="row">
-          <div class="col-9 text-center">
-          <h1 class="mt-4"> Mesas disponibles </h1>
+            <div class="col-9 text-center">
+            <!-- BODY -->
+            <h1 class="mt-4"> Mesas disponibles </h1>
               <p> Aquí puede agregar y administrar las mesas actuales.</p>
-              <?php echo getOpenOrders();?>
-          </div>
-          <div class="col-3">
-            <div class="containter text-center">
-              <img src="../../images/users.png" style="width: 50%;">
-              <h3 class="mt4">
-                <?php echo $_SESSION['name']; ?>
-              </h3>
-              <h4 class="mt4">
-                <?php echo $_SESSION['username'];?>
-              </h4>
-              <p class="well">Message</p>
-              <p class="border">Message</p>
-
-              <a href="../../php/requests/logout.php">
-                  <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
-                  Salir
-                  </button>
-            </a>
-                </div>
-          </div>
+              <?php echo  getOrdersForAdd();?>
+            </div>
+            <!-- /BODY -->
+            <div class="col-3">
+                <div class="containter text-center">
+                    <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
+                    <h3 class="mt4">
+                    <?php echo $_SESSION['name']; ?>
+                    </h3>
+                    <h4 class="mt4">
+                    <?php echo $_SESSION['username'];?>
+                    </h4>
+                    <p class="well">Message</p>
+                    <p class="border">Message</p>
+                    <a href="../../php/requests/logout.php">
+                        <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
+                            Salir
+                        </button>
+                    </a>
+                    </div>
+            </div>
         </div>
       </div>
-      <!--Body-->
     </div>
   </div>
   <script src="../../js/vendor/jquery/jquery.min.js"></script>
@@ -73,6 +72,6 @@
   <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
-  <script src="../../js/vendor/common_functions.js"></script>
+  <script src="../../js/vendor/common-functions.js"></script>
 </body>
 </html>

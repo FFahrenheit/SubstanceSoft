@@ -1,0 +1,16 @@
+a.foot{
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    float: right;
+    margin-right: 60px;
+}
+
+a.hide{
+    text-decoration: none;
+    color: #000000;
+}
+
+a.hide:hover
+{
+    color: #616161;
+}

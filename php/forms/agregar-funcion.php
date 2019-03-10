@@ -9,4 +9,6 @@
     $result = mysqli_query($connection, $query) or die ('"Error al agregar"');
 
     echo json_encode("Permiso agregado");
+
+    mysqli_close($connection);
 ?>

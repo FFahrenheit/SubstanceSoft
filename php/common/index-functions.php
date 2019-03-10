@@ -28,6 +28,15 @@
         }
         return $output;
     }
+
+    function getLogStatus()
+    {
+        if(!isset($_SESSION['username']))
+        {
+            header("Location: /substancesoft/views/menus/login.html");
+            exit();   
+        }
+    }
     function getNavBar()
     {
         $output="";

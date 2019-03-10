@@ -10,6 +10,7 @@
 <body>
     <?php
         include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
+        getLogStatus();
     ?>
   <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
@@ -45,7 +46,7 @@
             <div class="containter text-center">
               <img src="../../images/users.png" style="width: 50%;">
               <?php echo getUserStatus();?>
-              <a href="../menus/login.html">
+              <a href="../../php/requests/logout.php">
                   <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">Salir</button>
               </a>
             </div>
