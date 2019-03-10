@@ -29,7 +29,7 @@
                 {
                     $output.='<h4 class="card-title">Mesa'.$row['mesa'].'</h4>';
                 }
-                $output.='<p class="card-text">Elija qué hacer con esta mesa</p>';
+                $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                 $output.='<p><a href="../forms/nuevo-usuario.html" class="btn btn-primary">Agregar</a></p>';
                 $output.='<p><a href="../lists/listar-usuarios.php" class="btn btn-primary">Cancelar</a></p>';
                 $output.='<p><a href="../forms/modificar-usuario.php" class="btn btn-primary">Cerrar</a></p>';
@@ -79,8 +79,8 @@
                     {
                         $output.='<h4 class="card-title">Mesa'.$row['mesa'].'</h4>';
                     }
-                    $output.='<p class="card-text">Elija qué hacer con esta mesa</p>';
-                    $output.='<p><a href="../functions/forms/nueva-comanda.php" class="btn btn-primary">Agregar</a></p>';
+                    $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
+                    $output.='<p><a href="../functions/forms/nueva-comanda.php?clave='.$row['clave'].'" class="btn btn-primary">Agregar</a></p>';
                     $output.='</div></div></div>';
                     if(($i+1)%4==0)
                     {

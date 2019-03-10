@@ -11,6 +11,8 @@
 <body>
     <?php
         include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
+        getLogStatus();
+
         include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/functions/mesero.php');
     ?>
   <div class="d-flex" id="wrapper">
