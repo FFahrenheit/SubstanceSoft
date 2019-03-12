@@ -12,6 +12,14 @@
         $result = mysqli_query($connection, $query) or die ('"Error en query"');
     }
 
+    $query = "update orden set total = (select sum(platillo.precio) from platillo, (select * from orden) as ord, 
+    pedidos where platillo.clave= pedidos.platillo and ord.clave = $clave and 
+    ord.clave=pedidos.orden) 
+    where clave = $clave";
+
+    $result = mysqli_query($connection, $query) or die ('"Error en query 2"');
+
+
     echo json_encode("Exito!");
 
     mysqli_close($connection);
