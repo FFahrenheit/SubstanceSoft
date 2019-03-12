@@ -13,7 +13,7 @@ function confirmDelete()
     datos.append("user",user);
 
     console.log(user);
-    fetch('../../php/forms/eliminar-usuario.php', 
+    fetch('../../../php/requests/cerrar.php', 
     {
         method: 'POST',
         body: datos
@@ -24,6 +24,8 @@ function confirmDelete()
         console.log("aqui llega js");
         console.log(data);
         alert(data);
-        window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
+        window.location.pathname = '/substancesoft/views/functions/modulo1-funcion3.php';
+
     })
 }
+
