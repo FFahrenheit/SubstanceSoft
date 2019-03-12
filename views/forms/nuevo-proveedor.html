@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, inicial-scale=1">
 
         <title>
-            Agregar nueva cocina
+            Agregar nuevo proveedor
         </title>
 
         <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
@@ -14,14 +14,14 @@
     </head>
     <body>
         <section class="container">
-            <h1 class="text-uppercase text-center">Agregar cocina</h2>
+            <h1 class="text-uppercase text-center">Agregar usuario</h2>
             <p class="lead text-center">Por favor, llene los campos con la información requerida. Los campos marcados con <font color="red">*</font> son obligatorios.</p>
             <div class="row">
                 <div class="col-8">
-                    <form id="formulario" novalidate>
+                    <form id="formulario" novalidate onsubmit='return check();'>
                         <div class="form-group">
-                            <label for="">Nombre de cocina:  </label> <font color="red">*</font>
-                            <input name="nom" type="text" placeholder="Escriba el nombre de la cocina" class="form-control" required>
+                            <label for="">Nombre del proovedor:  </label> <font color="red">*</font>
+                            <input name="nom" type="text" placeholder="Escriba el nombre del proveedor" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -35,8 +35,7 @@
         </section>
     </body>
     <script src="../../js/vendor/validate-form.js"></script>
-    <script src="../../js/forms/agregar-cocina.js"></script>
+    <script src="../../js/forms/agregar-proveedor.js"></script>
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>
-</html>

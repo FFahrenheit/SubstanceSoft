@@ -11,7 +11,7 @@
 
     $result = mysqli_query($connection, $query) or die('"Error en query"');
 
-    echo json_encode("Exito!");
+    echo json_encode($esp);
 
     mysqli_close($connection);
 ?>
