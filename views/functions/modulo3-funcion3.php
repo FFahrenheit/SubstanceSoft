@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SubstanceSoft: Index</title>
+  <title>SubstanceSoft: Liberar ordenes</title>
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
   <link href="../../css/index.css" rel="stylesheet">
 </head>
 <body>
     <?php
-          include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
-      (isset($_GET['mod'])) ? getLogStatusChange($_GET['mod']) : getLogStatus();
+        include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
+        getLogStatus();
+        include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/functions/cajero.php');
     ?>
   <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
-    <a href="../menus/index.php" class="hide"><div class="sidebar-heading"> SubstanceSoft </div></a>
+      <a href="../menus/index.php" class="hide"><div class="sidebar-heading"> SubstanceSoft </div></a>
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php 
@@ -33,28 +34,39 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <?php echo getNavBar();?>
-              </nav>
+            </nav>
         </div>
       </nav>
-      <!--Body-->
       <div class="container-fluid">
         <div class="row">
-          <div class="col-9 text-center">
-              <h1 class="mt-4"><?php echo getModuleDescription(); ?></h1>
-              <p> Bienvenido al sistema. Por favor, elija la función correspondiente a lo que desea hacer en el modulo en el lado derecho.</p>
-          </div>
-          <div class="col-3">
-            <div class="containter text-center">
-              <img src="../../images/users.png" style="width: 50%;">
-              <?php echo getUserStatus();?>
-              <a href="../../php/requests/logout.php">
-                  <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">Salir</button>
-              </a>
+            <div class="col-9 text-center">
+            <!-- BODY -->
+            <h1 class="mt-4"> Cuentas para cerrar </h1>
+              <p> Aquí puede cerrar las cuentas listas</p>
+              <?php echo getAccountsToClose();?>
+                <p> &nbsp;</p>
             </div>
-          </div>
+            <!-- /BODY -->
+            <div class="col-3">
+                <div class="containter text-center">
+                    <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
+                    <h3 class="mt4">
+                    <?php echo $_SESSION['name']; ?>
+                    </h3>
+                    <h4 class="mt4">
+                    <?php echo $_SESSION['username'];?>
+                    </h4>
+                    <p class="well">Message</p>
+                    <p class="border">Message</p>
+                    <a href="../../php/requests/logout.php">
+                        <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
+                            Salir
+                        </button>
+                    </a>
+                    </div>
+            </div>
         </div>
       </div>
-      <!--Body-->
     </div>
   </div>
   <script src="../../js/vendor/jquery/jquery.min.js"></script>

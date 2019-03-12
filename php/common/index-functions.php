@@ -29,13 +29,24 @@
         return $output;
     }
 
-    function getLogStatus()
+    function getLogStatusChange($module)
     {
         if(!isset($_SESSION['username']))
         {
             header("Location: /substancesoft/views/menus/login.html");
             exit();   
         }
+        $curMod = $module; 
+        $_SESSION['actual'] = $module;
+    }
+
+    function getLogStatus()
+    {
+        if(!isset($_SESSION['username']))
+        {
+            header("Location: /substancesoft/views/menus/login.html");
+            exit();   
+        }        
     }
     function getNavBar()
     {
@@ -46,7 +57,7 @@
             $var = "valuefunction".$i;
             $current = $_SESSION[$desc];
             $val = $_SESSION[$var];
-            $output .= "<a class='navbar-brand' href='index.php?mod=$val'>";
+            $output .= "<a class='navbar-brand' href='http://localhost/substancesoft/views/menus/index.php?mod=$val'>";
             $output .=  $current;
             $output .=  "</a>";
         } 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2019 a las 17:19:16
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 12-03-2019 a las 04:10:12
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -68,9 +68,9 @@ CREATE TABLE `funcion` (
 --
 
 INSERT INTO `funcion` (`clave`, `descripcion`) VALUES
-(1, 'Mesero (gestion de ordenes)'),
-(2, 'Chef (gestion de comandas)'),
-(3, 'Cajero (gestion de cuentas)'),
+(1, 'Mesero '),
+(2, 'Chef'),
+(3, 'Cajero '),
 (4, 'Cajero drive-through'),
 (5, 'Individual: Liberar mesa'),
 (6, 'Individual:Consulta inventario'),
@@ -130,16 +130,17 @@ CREATE TABLE `orden` (
   `usuario` varchar(30) NOT NULL,
   `mesa` int(11) NOT NULL,
   `estado` enum('abierta','cerrada','','') NOT NULL,
-  `descripcion` varchar(20) NOT NULL
+  `descripcion` varchar(20) NOT NULL,
+  `total` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `orden`
 --
 
-INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`) VALUES
-(1, '2019-03-05 04:52:39', 'Admin100', 1, 'abierta', ''),
-(18, '2019-03-10 10:09:58', 'Admin100', 2, 'abierta', 'Mesa cool');
+INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`) VALUES
+(1, '2019-03-05 04:52:39', 'Admin100', 1, 'cerrada', '', 0),
+(18, '2019-03-10 10:09:58', 'Admin100', 2, 'cerrada', 'Mesa cool', 8252.2);
 
 -- --------------------------------------------------------
 
@@ -160,12 +161,31 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
-(1, 'pedido', '2019-03-10 10:42:38', 3, 18),
-(2, 'pedido', '2019-03-10 12:27:07', 1, 18),
-(3, 'pedido', '2019-03-10 12:29:57', 4, 18),
-(4, 'pedido', '2019-03-10 12:30:04', 3, 18),
-(5, 'pedido', '2019-03-10 12:30:04', 3, 18),
-(6, 'pedido', '2019-03-10 12:30:04', 3, 18);
+(2, 'entregado', '2019-03-10 12:27:07', 1, 18),
+(3, 'entregado', '2019-03-10 12:29:57', 4, 18),
+(4, 'entregado', '2019-03-10 12:30:04', 3, 18),
+(5, 'entregado', '2019-03-10 12:30:04', 3, 18),
+(6, 'entregado', '2019-03-10 12:30:04', 3, 18),
+(20, 'entregado', '2019-03-12 01:53:07', 4, 18),
+(21, 'entregado', '2019-03-12 02:00:05', 4, 18),
+(23, 'entregado', '2019-03-12 02:02:48', 4, 18),
+(24, 'entregado', '2019-03-12 02:05:09', 4, 18),
+(25, 'entregado', '2019-03-12 02:05:12', 4, 18),
+(26, 'entregado', '2019-03-12 02:06:11', 3, 18);
+
+--
+-- Disparadores `pedidos`
+--
+DELIMITER $$
+CREATE TRIGGER `sumar-pedido` AFTER INSERT ON `pedidos` FOR EACH ROW BEGIN
+update orden set total = 
+(select sum(platillo.precio) from platillo, (select * from orden) as ord, 
+pedidos where platillo.clave= pedidos.platillo and ord.clave = NEW.clave and 
+ord.clave=pedidos.orden) 
+where clave = NEW.clave;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -418,7 +438,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

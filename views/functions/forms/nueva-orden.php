@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Breve descripción: </label> 
-                            <input name="desc" type="text" placeholder="Escriba el nombre del platillo" class="form-control">
+                            <input name="desc" type="text" placeholder="Escriba una descripción para la orden" class="form-control">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
