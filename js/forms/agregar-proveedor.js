@@ -9,7 +9,7 @@ formulario.addEventListener('submit',function(e)
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/agregar-platillo.php',
+        fetch('../../php/forms/agregar-proveedor.php', 
         {
             method: 'POST',
             body: datos
@@ -19,7 +19,6 @@ formulario.addEventListener('submit',function(e)
             {
                 console.log("aqui llega js");
                 console.log(data);
-                alert(data);
             })
     }
 })
