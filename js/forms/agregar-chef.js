@@ -1,4 +1,6 @@
 var user;
+var formulario = document.getElementById('formulario');
+
 
 function showDetails(button)
 {
@@ -13,7 +15,7 @@ function confirmDelete()
     datos.append("user",user);
 
     console.log(user);
-    fetch('../../php/forms/eliminar-permiso.php', 
+    fetch('../../php/forms/eliminar-chef.php', 
     {
         method: 'POST',
         body: datos
@@ -28,8 +30,6 @@ function confirmDelete()
     })
 }
 
-var formulario = document.getElementById('formulario');
-
 formulario.addEventListener('submit',function(e)
 {
     e.preventDefault();
@@ -39,7 +39,7 @@ formulario.addEventListener('submit',function(e)
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/agregar-funcion.php', 
+        fetch('../../php/forms/agregar-chef.php', 
         {
             method: 'POST', 
             body: datos

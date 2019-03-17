@@ -29,7 +29,8 @@
                         <?php
                             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
-                            $query = "select username, tipo from usuario";
+                            $query = "select usuario.username as username, tipo from usuario, permisos where permisos.permiso=2
+                            and usuario.username = permisos.username";
 
                             $sql = mysqli_query($connection, $query) or die("error");
 
@@ -46,7 +47,7 @@
                                 }
                                 else
                                 {
-                                    echo "<td> <a href='nueva-funcion.php?user=".$row['username']."' class='btn btn-primary'>Gestionar</a> </td>";
+                                    echo "<td> <a href='nuevo-cocinero.php?user=".$row['username']."' class='btn btn-primary'>Gestionar</a> </td>";
                                 }
                             ?>
                         </tr>

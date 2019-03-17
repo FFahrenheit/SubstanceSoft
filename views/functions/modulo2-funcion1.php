@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SubstanceSoft: Liberar ordenes</title>
+  <title>SubstanceSoft: Index</title>
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
   <link href="../../css/index.css" rel="stylesheet">
@@ -12,7 +12,7 @@
     <?php
         include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
         getLogStatus();
-        include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/functions/cajero.php');
+        include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/functions/chef.php');
     ?>
   <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
@@ -41,9 +41,9 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Cuentas para pagar </h1>
-              <p> Aquí puede marcar como pagadas las cuentas listas</p>
-              <?php echo getUnpaidAccounts();?>
+            <h1 class="mt-4">Inventario</h1>
+              <p> Aquí puede consultar el inventario.</p>
+              <?php echo getInventory();?>
                 <p> &nbsp;</p>
             </div>
             <!-- /BODY -->
