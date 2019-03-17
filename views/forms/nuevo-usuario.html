@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, inicial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>
             Agregar nuevo usuario
@@ -21,10 +21,11 @@
                     <form id="formulario" novalidate onsubmit='return check();'>
                         <div class="form-group">
                             <label for="">Nombre de usuario:  </label> <font color="red">*</font>
-                            <input name="usu" type="text" placeholder="Escriba el nombre para iniciar sesión en el sistema" class="form-control" required>
+                            <input id="usu" name="usu" type="text" placeholder="Escriba el nombre para iniciar sesión en el sistema" class="form-control" required onkeyup="validate_regex();">
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
+                            <span id="mensaje"></span>
                         </div>
                         <div class="form-group">
                             <label for="">Contraseña: </label> <font color="red">*</font>
