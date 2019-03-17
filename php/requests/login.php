@@ -4,7 +4,7 @@
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
 
-    $query = "SELECT password, nombre , apellido_p, apellido_m from usuario where username='$username'"; 
+    $query = "SELECT password, nombre , apellido_p, apellido_m, tipo from usuario where username='$username'"; 
 
     $result = mysqli_query($connection, $query) or die ('"query"');
 
@@ -20,6 +20,8 @@
         die;
     }
 
+    $tipo = $row['tipo'];
+
     if($pass == $password)
     {
         session_start();
@@ -33,7 +35,17 @@
 
         $n_rows = $result->num_rows;
         $_SESSION['functions'] = $result->num_rows;
-        
+
+        if($tipo == 'administrador')
+        {
+            $query = "SELECT descripcion, clave as permiso from funcion where
+            funcion.clave<=4";
+
+            $result = mysqli_query($connection, $query) or die ('"query admin"');
+
+            $_SESSION['functions'] = $result->num_rows+1;
+            $n_rows = $result->num_rows;
+        }
         for($i=0; $i<$n_rows; $i++)
         {
             $row = mysqli_fetch_array($result);    
@@ -48,7 +60,14 @@
             $_SESSION[$index] = $row['descripcion'];
             $_SESSION[$index2] = $row['permiso'];
         }
-        $row = mysqli_fetch_array($result); 
+        if($tipo == 'administrador')
+        {
+            $index = "function".$n_rows;
+            $index2 = "valuefunction".$n_rows;
+            $_SESSION[$index] = "Administración";
+            $_SESSION[$index2] = "0";
+        }
+        //$row = mysqli_fetch_array($result); 
 
         echo json_encode("success");
     }

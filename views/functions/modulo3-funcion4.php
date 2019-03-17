@@ -41,9 +41,9 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Cuentas para pagar </h1>
-              <p> Aquí puede marcar como pagadas las cuentas listas</p>
-              <?php echo getUnpaidAccounts();?>
+            <h1 class="mt-4"> Historial de cuentas </h1>
+              <p> Aquí puede encontrar las últimas cuentas cerradas y pagadas</p>
+              <?php echo getClosedAccounts();?>
                 <p> &nbsp;</p>
             </div>
             <!-- /BODY -->

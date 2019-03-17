@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, inicial-scale=1">
 
         <title>
-            Agregar funciones a usuarios
+            Agregar cocinas a chefs
         </title>
 
         <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
@@ -18,23 +18,23 @@
 
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-            $query = "select permisos.clave as pk, nombre, usuario.username as user, permiso, descripcion from permisos, usuario, funcion where 
-            usuario.username = '$user' and usuario.username=permisos.username and funcion.clave = permisos.permiso";
+            $query = "select chefs.clave as pk, cocina.nombre as descripcion from usuario, chefs, cocina where 
+            cocina.clave = chefs.cocina and usuario.username = '$user' and usuario.username = chefs.usuario";
 
             $sql = mysqli_query($connection, $query) or die("error en query");
         ?>
         <section class="container">
             <div class="text-center">
-                <h1>Gestionar permisos a: <?php echo $user?></h1>
+                <h1>Gestionar cocinas a: <?php echo $user?></h1>
                 &nbsp;
                 <div class="row">
                     <div class="col-sm">
-                        Permiso actuales:
+                        Cocinas actuales:
                         <div class="containter-fluid">
                             <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <td>Permiso</td>
+                                    <td>Cocina</td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </thead>
@@ -45,12 +45,11 @@
                                     ?>
                                 <tr>
                                     <td><?php echo $row['descripcion'];?></td>
-                                    <td>
-                                    <a onClick='showDetails(this)' style="color: white;"data-toggle="modal" data-target="#delete"
-                                    class="btn btn-danger" id="<?php echo $row['pk']?>">
-                                        Eliminar
-                                        </a>
-                                    </td>
+                                    <td> 
+                                    <a style="color: white;"data-toggle="modal" data-target="#delete"
+                                class="btn btn-danger" id="<?php echo $row['pk']?>" onClick="showDetails(this)">
+                                    Eliminar
+                                </a></td>
                                 </tr>
                                 <?php
                                     }
@@ -60,10 +59,10 @@
                     </div>
                 </div>
                     <div class="col-sm">
-                        Agregar funciones:
+                        Agregar cocinas:
                         <?php
-                            $query = "select * from funcion where
-                            clave not in(select permiso from permisos where username='$user') order by descripcion asc";
+                            $query = "select * from cocina where
+                            clave not in(select cocina from chefs where usuario='$user') order by nombre asc";
 
                             $sql = mysqli_query($connection, $query) or die("error en query");
                         ?>
@@ -75,7 +74,7 @@
                                     while($row = mysqli_fetch_array($sql))
                                     {
                                 ?>
-                                <option value="<?php echo $row['clave'];?>"> <?php echo $row['descripcion'];?> </option>
+                                <option value="<?php echo $row['clave'];?>"> <?php echo $row['nombre'];?> </option>
                                 <?php
                                     }
                                     mysqli_close($connection);
@@ -107,7 +106,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ¿Seguro que desea eliminar el permiso?
+                                ¿Seguro que desea eliminar la cocina asignada?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -118,7 +117,7 @@
                     </div>
         </section>
     </body>
-    <script src="../../js/forms/agregar-funcion.js"></script>
+    <script src="../../js/forms/agregar-chef.js"></script>
     <script src="../../js/vendor/validate-form.js"></script>
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>

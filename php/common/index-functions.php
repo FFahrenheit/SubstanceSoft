@@ -1,10 +1,10 @@
 <?php
     session_start();
     $permisos = array(
-        array( ""),
+        array("Administrar base", "Estadísticas", "Inventario"),
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar" ),
         array( "Recibir", "Consultar", "Notificar"),
-        array("Consultar","Ticket","Cobro","Liberar"),
+        array("Consultar","Ticket","Cobro","Liberar","Historial"),
         array("Crear","Cancelar","Consultar","Ticket","Cobro")
       );
       if(isset($_GET['mod']))
@@ -67,6 +67,10 @@
     function getModuleDescription()
     {
         global $curMod;
+        if($curMod==0)
+        {
+            return "Administración del sistema";
+        }
         $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
         $query = "SELECT descripcion FROM FUNCION WHERE CLAVE = $curMod"; 
         $result = mysqli_query($connection, $query) or die ('"query"');
