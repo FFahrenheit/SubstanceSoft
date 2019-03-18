@@ -3,13 +3,14 @@ var formulario = document.getElementById('formulario');
 formulario.addEventListener('submit',function(e)
 {
     e.preventDefault();
-    console.log('working!');
+
+    console.log("Inicio");
 
     var datos = new FormData(formulario);
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/agregar-cocina.php',
+        fetch('../../php/forms/modificar-cocina.php',
         {
             method: 'POST',
             body: datos
@@ -22,7 +23,8 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.pathname = '/substancesoft/views/forms/nueva-cocina.html';
+                window.location.pathname = '/substancesoft/views/forms/modificar-cocina.php';
+
             })
     }
 })
