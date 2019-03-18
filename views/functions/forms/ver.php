@@ -73,7 +73,7 @@
                         </tbody>
                         </table>
                        <div  class="text-center"> 
-                        <a href="../modulo2-funcion0.php">
+                       <a href = "../../menus/index.php">
                         <button type="button" class="btn btn-primary">Regresar</button>
                         </a>
                         </div>

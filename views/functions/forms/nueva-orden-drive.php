@@ -21,29 +21,8 @@
                     <form id="formulario" novalidate>
                     <div class="form-group">
                             <label for="">Mesa asginada: </label> <font color="red">*</font>
-                            <?php
-                                $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
-
-                                $query = "select * from mesa where numero not in (select mesa from orden where estado
-                                ='abierta') and numero!=0";
-
-                                $sql = mysqli_query($connection, $query) or die("error en query");
-                                
-                                if($sql->num_rows==0)
-                                {
-                                    echo "No hay mesas disponibles en sistema. Se usará una alterna";
-                                }
-                            ?>
                             <select class="form-control" name="mesa">
-                                <?php
-                                while($row = mysqli_fetch_array($sql))
-                                {
-                                ?>
-                                <option><?php echo $row['numero'];?></option>
-                                <?php
-                                }
-                                    mysqli_close($connection);
-                                ?>
+                                <option>0</option>
                             </select>
                         </div>
                         <div class="form-group">
