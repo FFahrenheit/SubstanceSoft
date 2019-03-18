@@ -72,13 +72,13 @@
                                                 Cerrar y liberar
                         </a>
                         <p>&nbsp;</p>
-                        <a href = "../modulo1-funcion3.php">
+                        <a href = "../../menus/index.php">
                         <button class="btn btn-primary">Cancelar</button>
                         </a>
                         </a>
                     </div>
                 </div>
-                <a href = "../modulo1-funcion3.php">
+                <a href = "../../menus/index.php">
                 <button class="btn btn-success">Regresar</button>
                 </a>
             </div>

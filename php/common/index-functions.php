@@ -5,7 +5,8 @@
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar" ),
         array( "Recibir", "Consultar", "Notificar"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
-        array("Crear","Cancelar","Consultar","Ticket","Cobro")
+        array("Crear","Cancelar","Consultar","Ticket","Cobro"),
+        array("Liberar", "Inventario", "Cuenta", "Ticket")
       );
       if(isset($_GET['mod']))
       {
@@ -20,9 +21,32 @@
       {
         global $permisos;
         global $curMod;
+
+        if($curMod==5)
+        {
+            return getIndividual();
+        }
         $output ="";
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
+            $path = "modulo".$curMod."-funcion".$i.".php";
+            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
+        }
+        
+        return $output;
+    }
+
+    function getIndividual()
+    {
+        global $curMod;
+        global $permisos;
+        $output="";
+        $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
+        $query = "SELECT * from permisos where permiso>4 and username = '".$_SESSION['username']."'";
+        $result = mysqli_query($connection, $query) or die ('"query fallida"');
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result); 
             $path = "modulo".$curMod."-funcion".$i.".php";
             $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
         }
@@ -61,7 +85,24 @@
             $output .=  $current;
             $output .=  "</a>";
         } 
+        $output .= getIndividuals();
         return $output;
+    }
+
+    function getIndividuals()
+    {
+        $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
+        $query = "SELECT * from permisos where permiso>4 and username = '".$_SESSION['username']."'";
+        $result = mysqli_query($connection, $query) or die ('"query fallida"');
+        if($result->num_rows>0)
+        {
+            return "<a class='navbar-brand' href='http://localhost/substancesoft/views/menus/index.php?mod=5'>
+            Individuales </a>";
+        }
+        else
+        {
+            return "";
+        }
     }
 
     function getModuleDescription()

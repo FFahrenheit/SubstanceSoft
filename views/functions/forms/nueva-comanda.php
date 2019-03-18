@@ -88,7 +88,7 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../modulo1-funcion1.php">
+                <a href = "../../menus/index.php">
                 <button class="btn btn-success">Continuar</button>
                 </a>
             </div>
