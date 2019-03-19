@@ -5,7 +5,11 @@ $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"
 function getOpenAccounts()
     {
         global $user, $connection;
-        $query = "select * from orden where ESTADO='ABIERTA' and usuario = '$user' and mesa=0";
+        $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
+        if($_SESSION['tipo']!='administrador')
+        {
+            $query.= " and usuario = '$user'";
+        }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -54,7 +58,11 @@ function getOpenAccounts()
 function getOpenOrders()
     {
         global $user, $connection;
-        $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA' and mesa=0";
+        $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
+        if($_SESSION['tipo']!='administrador')
+        {
+            $query.= " and usuario = '$user'";
+        }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -103,7 +111,11 @@ function getOpenOrders()
     function getOrdersForCancel()
         {
             global $user, $connection;
-            $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA' and mesa=0";
+            $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
+            if($_SESSION['tipo']!='administrador')
+            {
+                $query.= " and usuario = '$user'";
+            }
             $result = mysqli_query($connection, $query) or die ('"query"');
             $output = "";
             if($result->num_rows!=0)
@@ -151,7 +163,11 @@ function getOpenOrders()
         function getUnimpressedAcounts()
     {
             global $user, $connection;
-            $query = "select * from orden where ESTADO='cerrada' and usuario = '$user' and mesa=0";
+            $query = "select * from orden where ESTADO='cerrada' and mesa=0";
+            if($_SESSION['tipo']!='administrador')
+            {
+                $query.= " and usuario = '$user'";
+            }
             $result = mysqli_query($connection, $query) or die ('"query"');
             $output = "";
             if($result->num_rows!=0)
@@ -199,7 +215,11 @@ function getOpenOrders()
     function getUnpaidAccounts()
     {
         global $user, $connection;
-        $query = "select * from orden where ESTADO='cerrada' and usuario = '$user' and mesa=0";
+        $query = "select * from orden where ESTADO='cerrada' and mesa=0";
+        if($_SESSION['tipo']!='administrador')
+        {
+            $query.= " and usuario = '$user'";
+        }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)

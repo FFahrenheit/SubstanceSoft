@@ -5,8 +5,17 @@
     function getAvailableKitchens()
     {
         global $user, $connection;
-        $query = "select cocina.nombre as nombre, chefs.cocina as pk from chefs, cocina where
-        chefs.usuario = '$user' and cocina.clave = chefs.cocina";
+
+        if($_SESSION['tipo']=='administrador')
+        {
+            $query = "select nombre, clave as pk from cocina";
+        }
+        else
+        {
+            $query = "select cocina.nombre as nombre, chefs.cocina as pk from chefs, cocina where
+            chefs.usuario = '$user' and cocina.clave = chefs.cocina";
+        }
+
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -47,8 +56,15 @@
     function getKitchens()
     {
         global $user, $connection;
-        $query = "select cocina.nombre as nombre, chefs.cocina as pk from chefs, cocina where
-        chefs.usuario = '$user' and cocina.clave = chefs.cocina";
+        if($_SESSION['tipo']=='administrador')
+        {
+            $query = "select nombre, clave as pk from cocina";
+        }
+        else
+        {
+            $query = "select cocina.nombre as nombre, chefs.cocina as pk from chefs, cocina where
+            chefs.usuario = '$user' and cocina.clave = chefs.cocina";
+        }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)

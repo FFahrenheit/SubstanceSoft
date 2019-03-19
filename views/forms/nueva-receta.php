@@ -99,7 +99,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Cantidad:  </label> <font color="red">*</font>
-                            <input name="qty" type="number" placeholder="Escriba la cantidad" class="form-control" required>
+                            <input name="qty" type="number" step="0.01" placeholder="Escriba la cantidad" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>

@@ -41,10 +41,16 @@
             $query = "SELECT descripcion, clave as permiso from funcion where
             funcion.clave<=4";
 
+            $_SESSION['tipo'] = 'administrador';
+
             $result = mysqli_query($connection, $query) or die ('"query admin"');
 
             $_SESSION['functions'] = $result->num_rows+1;
             $n_rows = $result->num_rows;
+        }
+        else
+        {
+            $_SESSION['tipo'] = 'empleado';
         }
         for($i=0; $i<$n_rows; $i++)
         {

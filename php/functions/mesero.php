@@ -5,7 +5,11 @@
     function getOpenOrders()
     {
         global $user, $connection;
-        $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'";
+        $query = "select * from orden where ESTADO='ABIERTA'";
+        if($_SESSION['tipo']!='administrador')
+        {
+            $query.= " and usuario = '$user'";
+        }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -55,7 +59,11 @@
         function  getOrdersForAdd()
         {
             global $user, $connection;
-            $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'";
+            $query = "select * from orden where ESTADO='ABIERTA'";
+            if($_SESSION['tipo']!='administrador')
+            {
+                $query.= " and usuario = '$user'";
+            }
             $result = mysqli_query($connection, $query) or die ('"query"');
             $output = "";
             if($result->num_rows!=0)
@@ -103,7 +111,11 @@
         function getOrdersForCancel()
         {
             global $user, $connection;
-            $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'";
+            $query = "select * from orden where ESTADO='ABIERTA'";
+            if($_SESSION['tipo']!='administrador')
+            {
+                $query.= " and usuario = '$user'";
+            }
             $result = mysqli_query($connection, $query) or die ('"query"');
             $output = "";
             if($result->num_rows!=0)
@@ -150,7 +162,11 @@
         function getOpenOrdersForClosing()
         {
             global $user, $connection;
-            $query = "select * from orden where usuario = '$user' AND ESTADO='ABIERTA'";
+            $query = "select * from orden where ESTADO='ABIERTA'";
+            if($_SESSION['tipo']!='administrador')
+            {
+                $query.= " and usuario = '$user'";
+            }
             $result = mysqli_query($connection, $query) or die ('"query"');
             $output = "";
             if($result->num_rows!=0)

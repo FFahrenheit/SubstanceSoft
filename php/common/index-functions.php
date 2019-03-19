@@ -32,7 +32,7 @@
             $path = "modulo".$curMod."-funcion".$i.".php";
             $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
         }
-        
+
         return $output;
     }
 

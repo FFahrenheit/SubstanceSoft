@@ -33,7 +33,7 @@
                     platillo.nombre as platillo, orden.mesa as mesa, pedidos.hora as hora 
                     from platillo, orden, pedidos 
                     where platillo.clave = pedidos.platillo and platillo.cocina = $clave
-                    and pedidos.estado = 'pedido' and orden.clave = pedidos.orden";
+                    and pedidos.estado = 'pedido' and orden.clave = pedidos.orden order by pedidos.estado";
 
                     $sql = mysqli_query($connection, $query) or die("error en query");
 

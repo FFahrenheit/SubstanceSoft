@@ -22,7 +22,7 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.reload(false); 
+                window.location.pathname = '/substancesoft/views/forms/nueva-receta.php';
                 
             })
     }
