@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2019 a las 04:10:12
+-- Tiempo de generación: 19-03-2019 a las 03:46:36
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -34,6 +34,15 @@ CREATE TABLE `chefs` (
   `cocina` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `chefs`
+--
+
+INSERT INTO `chefs` (`clave`, `usuario`, `cocina`) VALUES
+(4, 'chef1', 1),
+(2, 'chef1', 2),
+(3, 'chef1', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -50,7 +59,9 @@ CREATE TABLE `cocina` (
 --
 
 INSERT INTO `cocina` (`clave`, `nombre`) VALUES
-(1, 'Mexicana');
+(1, 'Mexicana'),
+(2, 'Alemana'),
+(3, 'Bebidas');
 
 -- --------------------------------------------------------
 
@@ -115,6 +126,7 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`numero`, `capacidad`) VALUES
+(0, 0),
 (1, 10),
 (2, 10);
 
@@ -129,7 +141,7 @@ CREATE TABLE `orden` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `usuario` varchar(30) NOT NULL,
   `mesa` int(11) NOT NULL,
-  `estado` enum('abierta','cerrada','','') NOT NULL,
+  `estado` enum('abierta','cerrada','pagada') NOT NULL,
   `descripcion` varchar(20) NOT NULL,
   `total` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -140,7 +152,10 @@ CREATE TABLE `orden` (
 
 INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`) VALUES
 (1, '2019-03-05 04:52:39', 'Admin100', 1, 'cerrada', '', 0),
-(18, '2019-03-10 10:09:58', 'Admin100', 2, 'cerrada', 'Mesa cool', 8252.2);
+(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', 8252.2),
+(19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', 240),
+(20, '2019-03-17 20:09:59', 'admin', 1, 'abierta', 'Prueba comandas', NULL),
+(21, '2019-03-18 02:18:40', 'Admin100', 0, 'abierta', 'Orden chico 1', 360);
 
 -- --------------------------------------------------------
 
@@ -171,7 +186,15 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (23, 'entregado', '2019-03-12 02:02:48', 4, 18),
 (24, 'entregado', '2019-03-12 02:05:09', 4, 18),
 (25, 'entregado', '2019-03-12 02:05:12', 4, 18),
-(26, 'entregado', '2019-03-12 02:06:11', 3, 18);
+(26, 'entregado', '2019-03-12 02:06:11', 3, 18),
+(27, 'entregado', '2019-03-12 05:23:53', 4, 19),
+(28, 'entregado', '2019-03-12 05:23:53', 4, 19),
+(29, 'listo', '2019-03-17 20:10:31', 3, 20),
+(30, 'listo', '2019-03-17 20:11:09', 4, 20),
+(31, 'pedido', '2019-03-17 20:22:52', 1, 20),
+(33, 'pedido', '2019-03-18 02:28:36', 4, 21),
+(34, 'pedido', '2019-03-18 02:28:36', 4, 21),
+(35, 'pedido', '2019-03-18 02:28:36', 4, 21);
 
 --
 -- Disparadores `pedidos`
@@ -204,9 +227,12 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`clave`, `username`, `permiso`) VALUES
-(3, 'Admin100', 1),
-(1, 'Admin100', 3),
-(2, 'Admin100', 4);
+(9, 'chef1', 2),
+(12, 'chef1', 5),
+(14, 'chef1', 6),
+(11, 'chef1', 7),
+(13, 'chef1', 8),
+(10, 'chef2', 2);
 
 -- --------------------------------------------------------
 
@@ -301,8 +327,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`) VALUES
-('', '102', 'Uma delisia', '', '', 0, '', 'administrador'),
+('admin', '102', 'Uma delisia', '', '', 0, '', 'administrador'),
 ('Admin100', 'Ivan', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador'),
+('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado'),
+('chef2', 'chef', 'Chef 2', '', '', 0, '', 'empleado'),
 ('DAADSDA', 'da', '', '', '', 0, '', 'administrador');
 
 --
@@ -408,13 +436,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `chefs`
 --
 ALTER TABLE `chefs`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cocina`
 --
 ALTER TABLE `cocina`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `funcion`
@@ -432,19 +460,19 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `platillo`
