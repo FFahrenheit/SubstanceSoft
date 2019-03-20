@@ -19,6 +19,14 @@
             <div class="row">
                 <div class="col-8">
                     <form id="formulario" novalidate>
+                      <div class="form-group">
+                          <label for="">N&uacute;mero de mesa:  </label> <font color="red">*</font>
+                          <input id = "numero_mesa" name="num" type="number" placeholder="Escriba el número de mesa" class="form-control" required onkeyup="checkTable();">
+                          <div class="invalid-feedback">
+                              Ingresa datos
+                          </div>
+                          <span id = "message"></span>
+                      </div>
                         <div class="form-group">
                             <label for="">Tamaño de mesa (N° Personas):  </label> <font color="red">*</font>
                             <input name="tam" type="number" placeholder="Escriba el número de personas que puede haber en la mesa" class="form-control" required>

@@ -13,7 +13,6 @@ function check()
 }
 function validate_regex()
 {
-  console.log("Oye si estoy");
     if(/^[(a-z|A-Z|0-9)]{4,}$/.test(document.getElementById('usu').value))
     {
       document.getElementById('mensaje').style.color = 'green';

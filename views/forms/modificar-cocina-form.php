@@ -27,7 +27,7 @@
                 <form id="formulario" novalidate>
                     <div class="form-group">
                         <label for="">Nombre de cocina</label> <font color="red">*</font>
-                        <input name="usu" type="text" value="<?php printRow($row,'nombre'); ?>"" class="form-control" required>
+                        <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>"" class="form-control" required>
                         <div class="invalid-feedback">
                             Ingresa datos
                         </div>
