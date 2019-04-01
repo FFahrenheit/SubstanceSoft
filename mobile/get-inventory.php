@@ -7,7 +7,6 @@
 
     $nfilas = mysqli_num_rows($result);
 
-
     if($nfilas > 0)
     {
         echo "[";
@@ -19,6 +18,8 @@
             $existencia = $row['cantidad'];
             $critica = $row['existencia_critica'];
             $especificacion = $row['especificacion'];
+            $clave = $row['clave'];
+            echo '"clave" : "'.$clave.'",';            
             echo '"nombre" : "'.$nombre.'",';
             echo '"existencia": "'.$existencia.'",';
             echo '"critica" : "'.$critica.'",';
