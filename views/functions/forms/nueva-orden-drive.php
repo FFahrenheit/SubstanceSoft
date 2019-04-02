@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-8">
                     <form id="formulario" novalidate>
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                             <label for="">Mesa asginada: </label> <font color="red">*</font>
                             <select class="form-control" name="mesa">
                                 <option>0</option>

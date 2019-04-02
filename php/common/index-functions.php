@@ -5,7 +5,7 @@
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar" ),
         array( "Recibir", "Consultar", "Notificar"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
-        array("Crear","Cancelar","Consultar","Ticket","Cobro"),
+        array("Crear","Cancelar","Consultar","Cerrar","Ticket","Cobro"),
         array("Liberar", "Inventario", "Cuenta", "Ticket")
       );
       if(isset($_GET['mod']))

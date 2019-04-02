@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-          include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
+      include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/common/index-functions.php');
       (isset($_GET['mod'])) ? getLogStatusChange($_GET['mod']) : getLogStatus();
     ?>
   <div class="d-flex" id="wrapper">

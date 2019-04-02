@@ -41,9 +41,9 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Imprimir ticket </h1>
-              <p> Aquí puede solicitar la impresión de ticket de una cuenta</p>
-              <?php echo getUnimpressedAcounts();?>
+            <h1 class="mt-4"> Cerrar ordenes </h1>
+              <p> Aquí puede cerrar las ordenes drive - through para su posterior cobro</p>
+              <?php echo  getOrdersToClose();?>
                 <p> &nbsp;</p>
             </div>
             <!-- /BODY -->

@@ -41,9 +41,9 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Imprimir ticket </h1>
-              <p> Aquí puede solicitar la impresión de ticket de una cuenta</p>
-              <?php echo getUnimpressedAcounts();?>
+            <h1 class="mt-4"> Cuentas para pagar </h1>
+              <p> Aquí puede marcar como pagadas las cuentas listas</p>
+              <?php echo getUnpaidAccounts();?>
                 <p> &nbsp;</p>
             </div>
             <!-- /BODY -->
