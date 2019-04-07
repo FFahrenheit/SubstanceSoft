@@ -105,7 +105,7 @@
     function getInventory()
     {
         global $user, $connection;
-        $query = "select * from ingrediente";
+        $query = "select * from ingrediente order by nombre asc";
         $result = mysqli_query($connection, $query) or die ('"query"');   
         $output = '<table class="table table-hover">';
         $output .= '<thead> <tr>

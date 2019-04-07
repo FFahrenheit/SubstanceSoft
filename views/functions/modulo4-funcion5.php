@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Cuentas para pagar </h1>
-              <p> Aquí puede marcar como pagadas las cuentas listas</p>
+            <h1 class="mt-4"> Ordenes drive through para pagar </h1>
+              <p> Aquí puede marcar como pagadas las cuentas drive through y finalizarlas</p>
               <?php echo getUnpaidAccounts();?>
                 <p> &nbsp;</p>
             </div>

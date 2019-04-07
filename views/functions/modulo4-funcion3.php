@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Cerrar ordenes </h1>
+            <h1 class="mt-4"> Cerrar ordenes drive through</h1>
               <p> Aquí puede cerrar las ordenes drive - through para su posterior cobro</p>
               <?php echo  getOrdersToClose();?>
                 <p> &nbsp;</p>

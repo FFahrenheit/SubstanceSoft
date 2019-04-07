@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Mesas disponibles </h1>
-              <p> Aquí puede agregar y administrar las mesas actuales.</p>
+            <h1 class="mt-4"> Órdenes drive through abiertas </h1>
+              <p> Aquí puede agregar pedidos a las ordenes drive through abiertas y crear nuevas ordenes.</p>
               <?php echo getOpenOrders();?>
                 <p> &nbsp;</p>
                 <a href="forms/nueva-orden-drive.php" class="foot">

@@ -42,7 +42,7 @@
             <div class="col-9 text-center">
             <!-- BODY -->
             <h1 class="mt-4"> Imprimir ticket </h1>
-              <p> Aquí puede solicitar la impresión de ticket de una cuenta</p>
+              <p> Aquí puede solicitar la impresión de ticket de una orden drive through</p>
               <?php echo getUnimpressedAcounts();?>
                 <p> &nbsp;</p>
             </div>

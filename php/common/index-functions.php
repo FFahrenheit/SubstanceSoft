@@ -3,7 +3,7 @@
     $permisos = array(
         array("Administrar base", "Estadísticas", "Inventario"),
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar" ),
-        array( "Recibir", "Consultar", "Notificar"),
+        array( "Recibir comandas", "Inventario", "Notificar comanda lista"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
         array("Crear","Cancelar","Consultar","Cerrar","Ticket","Cobro"),
         array("Liberar", "Inventario", "Cuenta", "Ticket")

@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Mesas disponibles </h1>
-              <p> Aquí puede elegir a qué mesa realizar una cancelación</p>
+            <h1 class="mt-4"> Ordenes drive through disponibles </h1>
+              <p> Aquí puede elegir a qué orden drive through realizar una cancelación</p>
               <?php echo  getOrdersForCancel();?>
             </div>
             <!-- /BODY -->

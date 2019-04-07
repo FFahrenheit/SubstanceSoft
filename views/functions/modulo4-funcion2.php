@@ -41,8 +41,8 @@
         <div class="row">
             <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Cuentas abiertas </h1>
-              <p> Aquí puede consultar el historial de pedidos de una cuenta abierta actualmente.</p>
+            <h1 class="mt-4"> Ordenes drive through abiertas </h1>
+              <p> Aquí puede consultar los detalles de las ordenes drive through abiertas.</p>
               <?php echo getOpenAccounts();?>
                 <p> &nbsp;</p>
             </div>
