@@ -108,4 +108,64 @@
         }
         return $output;   
     }
+
+    function getParticipationTitles()
+    {
+        global $connection;
+        $query = "SELECT * FROM usuario_ordenes";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $output .= "'".$row['usuario']."'";
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;   
+    }
+
+    function getParticipationOrdersData()
+    {
+        global $connection;
+        $query = "SELECT * FROM usuario_ordenes";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            ($row['suma']=="") ? $output .= "0" : $output.= $row['suma'];
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;   
+    }
+
+    function getParticipationRequestsData()
+    {
+        global $connection;
+        $query = "SELECT COUNT(tab.usuario) as 'suma', tab.usuario FROM
+        (select pedidos.hora as 'hora', usuario from pedidos, orden where orden.clave = pedidos.orden)
+        AS tab
+        WHERE tab.hora >= (SELECT valor from fechas where nombre='fecha_in') 
+        AND tab.hora <= (SELECT valor from fechas where nombre='fecha_fin') 
+        GROUP BY tab.usuario
+        ORDER BY tab.usuario";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            ($row['suma']=="") ? $output .= "0" : $output.= $row['suma'];
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;  
+    }
 ?>

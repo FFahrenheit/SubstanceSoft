@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2019 a las 02:57:05
+-- Tiempo de generación: 08-04-2019 a las 03:49:58
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -447,6 +447,17 @@ INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `usuario_ordenes`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `usuario_ordenes` (
+`suma` bigint(21)
+,`usuario` varchar(30)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `ventas_dia`
 -- (Véase abajo para la vista actual)
 --
@@ -463,6 +474,15 @@ CREATE TABLE `ventas_dia` (
 DROP TABLE IF EXISTS `platillos_populares`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `platillos_populares`  AS  select count(`pedidos`.`clave`) AS `suma`,`platillo`.`nombre` AS `nombre` from (`pedidos` join `platillo`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by `pedidos`.`platillo` order by count(`pedidos`.`clave`) desc limit 10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `usuario_ordenes`
+--
+DROP TABLE IF EXISTS `usuario_ordenes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `usuario_ordenes`  AS  select count(`orden`.`clave`) AS `suma`,`orden`.`usuario` AS `usuario` from `orden` where ((`orden`.`fecha` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`orden`.`fecha` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by `orden`.`usuario` order by `orden`.`usuario` desc ;
 
 -- --------------------------------------------------------
 

@@ -69,8 +69,8 @@
                                     <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
                                     <div class="card-block">
                                         <h4 class="card-title">Empleados</h4>
-                                        <p class="card-text">Consulte la participación de empleados</p>
-                                        <p><a href="#" class="btn btn-success">Ver</a></p>
+                                        <p class="card-text">Consulte la participación de empleados respecto a ordenes</p>
+                                        <p><a href="charts/participacion.php" class="btn btn-success">Ver</a></p>
                                     </div>
                             </div>
                         </div>
