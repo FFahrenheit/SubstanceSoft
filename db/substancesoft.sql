@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2019 a las 03:46:36
+-- Tiempo de generación: 08-04-2019 a las 02:57:05
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -66,6 +66,25 @@ INSERT INTO `cocina` (`clave`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `fechas`
+--
+
+CREATE TABLE `fechas` (
+  `nombre` varchar(15) NOT NULL,
+  `valor` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `fechas`
+--
+
+INSERT INTO `fechas` (`nombre`, `valor`) VALUES
+('fecha_in', '2019-03-17 19:51:20'),
+('fecha_fin', '2019-04-07 19:51:20');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `funcion`
 --
 
@@ -91,6 +110,47 @@ INSERT INTO `funcion` (`clave`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `horarios`
+--
+
+CREATE TABLE `horarios` (
+  `nombre` varchar(30) NOT NULL,
+  `venta` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`nombre`, `venta`) VALUES
+('00:00 a 01:00', NULL),
+('01:00 a 02:00', NULL),
+('02:00 a 03:00', NULL),
+('03:00 a 04:00', NULL),
+('04:00 a 05:00', NULL),
+('05:00 a 06:00', NULL),
+('06:00 a 07:00', NULL),
+('07:00 a 08:00', NULL),
+('08:00 a 09:00', NULL),
+('09:00 a 10:00', NULL),
+('10:00 a 11:00', NULL),
+('11:00 a 12:00', NULL),
+('12:00 a 13:00', NULL),
+('13:00 a 14:00', 100),
+('14:00 a 15:00', NULL),
+('15:00 a 16:00', NULL),
+('16:00 a 17:00', NULL),
+('17:00 a 18:00', NULL),
+('18:00 a 19:00', NULL),
+('19:00 a 20:00', NULL),
+('20:00 a 21:00', NULL),
+('21:00 a 22:00', 360),
+('22:00 a 23:00', NULL),
+('23:00 a 24:00', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ingrediente`
 --
 
@@ -107,8 +167,10 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', 150.2, 'kg', 4),
-(2, 'queso', 500, 'lt', 1);
+(1, 'pollo', 156, 'kg', 4),
+(2, 'queso', 518, 'lt', 1),
+(3, 'maiz', 105, 'kg', 1),
+(4, 'Agua', 200, 'lt', 10);
 
 -- --------------------------------------------------------
 
@@ -151,11 +213,18 @@ CREATE TABLE `orden` (
 --
 
 INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`) VALUES
-(1, '2019-03-05 04:52:39', 'Admin100', 1, 'cerrada', '', 0),
-(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', 8252.2),
+(1, '2019-03-05 04:52:39', 'Admin100', 1, 'pagada', '', NULL),
+(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', 8132.2),
 (19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', 240),
-(20, '2019-03-17 20:09:59', 'admin', 1, 'abierta', 'Prueba comandas', NULL),
-(21, '2019-03-18 02:18:40', 'Admin100', 0, 'abierta', 'Orden chico 1', 360);
+(20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', 2048.2),
+(21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', 360),
+(22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', 5484),
+(23, '2019-03-19 18:33:19', 'Admin100', 2, 'cerrada', 'Orden mesa 2', 1928),
+(24, '2019-03-19 20:22:23', 'Admin100', 2, 'abierta', 'Orden nueva', 120),
+(25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', 240),
+(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', NULL),
+(27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
+(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100);
 
 -- --------------------------------------------------------
 
@@ -189,12 +258,24 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (26, 'entregado', '2019-03-12 02:06:11', 3, 18),
 (27, 'entregado', '2019-03-12 05:23:53', 4, 19),
 (28, 'entregado', '2019-03-12 05:23:53', 4, 19),
-(29, 'listo', '2019-03-17 20:10:31', 3, 20),
-(30, 'listo', '2019-03-17 20:11:09', 4, 20),
-(31, 'pedido', '2019-03-17 20:22:52', 1, 20),
-(33, 'pedido', '2019-03-18 02:28:36', 4, 21),
-(34, 'pedido', '2019-03-18 02:28:36', 4, 21),
-(35, 'pedido', '2019-03-18 02:28:36', 4, 21);
+(29, 'entregado', '2019-03-17 20:10:31', 3, 20),
+(30, 'entregado', '2019-03-17 20:11:09', 4, 20),
+(31, 'entregado', '2019-03-17 20:22:52', 1, 20),
+(33, 'entregado', '2019-03-18 02:28:36', 4, 21),
+(34, 'entregado', '2019-03-18 02:28:36', 4, 21),
+(35, 'entregado', '2019-03-18 02:28:36', 4, 21),
+(36, 'entregado', '2019-03-19 18:18:26', 3, 22),
+(37, 'entregado', '2019-03-19 18:18:26', 3, 22),
+(38, 'entregado', '2019-03-19 18:18:27', 3, 22),
+(39, 'entregado', '2019-03-19 18:33:39', 3, 23),
+(40, 'entregado', '2019-03-19 18:39:33', 6, 23),
+(41, 'pedido', '2019-03-19 20:26:48', 4, 24),
+(42, 'entregado', '2019-03-19 20:33:42', 4, 25),
+(44, 'entregado', '2019-03-19 20:33:42', 4, 25),
+(46, 'entregado', '2019-04-02 03:00:16', 4, 27),
+(47, 'entregado', '2019-04-02 03:00:16', 4, 27),
+(48, 'entregado', '2019-04-02 03:00:16', 4, 27),
+(51, 'entregado', '2019-04-07 22:50:40', 6, 28);
 
 --
 -- Disparadores `pedidos`
@@ -257,7 +338,19 @@ CREATE TABLE `platillo` (
 INSERT INTO `platillo` (`clave`, `nombre`, `precio`, `dificultad`, `descripcion`, `imagen`, `cocina`) VALUES
 (1, '0', 100.2, '1', 'Uma delisia', NULL, 1),
 (3, 'Caviar', 1828, '1', 'Uma delisia', NULL, 1),
-(4, 'pizza', 120, '1', 'pizza', NULL, 1);
+(4, 'pizza', 120, '1', 'pizza', NULL, 1),
+(6, 'Sopa du macaco', 100, '5', 'Uma delisia', NULL, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `platillos_populares`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `platillos_populares` (
+`suma` bigint(21)
+,`nombre` varchar(35)
+);
 
 -- --------------------------------------------------------
 
@@ -269,6 +362,14 @@ CREATE TABLE `proveedor` (
   `clave` int(11) NOT NULL,
   `nombre` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`clave`, `nombre`) VALUES
+(1, 'Fedex'),
+(2, 'Navarro');
 
 -- --------------------------------------------------------
 
@@ -289,7 +390,9 @@ CREATE TABLE `recetas` (
 
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 (1, 0.5, 1, 3),
-(3, 10, 2, 3);
+(3, 10, 2, 3),
+(4, 0.01, 1, 6),
+(5, 0.01, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -302,8 +405,16 @@ CREATE TABLE `surtidos` (
   `cantidad` float NOT NULL,
   `frecuencia` int(11) NOT NULL,
   `ingrediente` int(11) NOT NULL,
-  `proveedor` int(11) NOT NULL
+  `proveedor` int(11) NOT NULL,
+  `nombre_trigger` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `surtidos`
+--
+
+INSERT INTO `surtidos` (`clave`, `cantidad`, `frecuencia`, `ingrediente`, `proveedor`, `nombre_trigger`) VALUES
+(1, 100, 1, 4, 1, 'triggerIng4Prov1');
 
 -- --------------------------------------------------------
 
@@ -332,6 +443,35 @@ INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido
 ('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado'),
 ('chef2', 'chef', 'Chef 2', '', '', 0, '', 'empleado'),
 ('DAADSDA', 'da', '', '', '', 0, '', 'administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `ventas_dia`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `ventas_dia` (
+`suma` double
+,`dia` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `platillos_populares`
+--
+DROP TABLE IF EXISTS `platillos_populares`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `platillos_populares`  AS  select count(`pedidos`.`clave`) AS `suma`,`platillo`.`nombre` AS `nombre` from (`pedidos` join `platillo`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by `pedidos`.`platillo` order by count(`pedidos`.`clave`) desc limit 10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `ventas_dia`
+--
+DROP TABLE IF EXISTS `ventas_dia`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ventas_dia`  AS  select sum(`platillo`.`precio`) AS `suma`,cast(`pedidos`.`hora` as date) AS `dia` from (`pedidos` join `platillo`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by dayofmonth(`pedidos`.`hora`) order by `pedidos`.`hora` ;
 
 --
 -- Índices para tablas volcadas
@@ -404,7 +544,8 @@ ALTER TABLE `platillo`
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`clave`);
+  ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `recetas`
@@ -454,19 +595,19 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `ingrediente`
 --
 ALTER TABLE `ingrediente`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -478,25 +619,25 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `platillo`
 --
 ALTER TABLE `platillo`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `surtidos`
 --
 ALTER TABLE `surtidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -549,6 +690,142 @@ ALTER TABLE `recetas`
 ALTER TABLE `surtidos`
   ADD CONSTRAINT `surtidos_ibfk_1` FOREIGN KEY (`ingrediente`) REFERENCES `ingrediente` (`clave`),
   ADD CONSTRAINT `surtidos_ibfk_2` FOREIGN KEY (`proveedor`) REFERENCES `proveedor` (`clave`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `triggerIng4Prov1` ON SCHEDULE EVERY 1 DAY STARTS '2019-04-07 15:39:11' ON COMPLETION PRESERVE ENABLE DO UPDATE ingrediente SET cantidad = cantidad + 100 WHERE 
+    clave = 4$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `update_stats` ON SCHEDULE EVERY 1 WEEK STARTS '2019-04-07 23:59:59' ON COMPLETION PRESERVE ENABLE DO BEGIN
+UPDATE fechas SET valor = NOW() where nombre='fecha_fin';
+UPDATE fechas SET valor = DATE_SUB(NOW(), INTERVAL 7 DAY) where nombre='fecha_in';
+DELETE FROM HORARIOS;
+DELETE FROM HORARIOS;
+
+INSERT INTO HORARIOS(venta, nombre) VALUES
+((SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='00:00:00' AND HOUR(fecha)<'01:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'00:00 a 01:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES
+((SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='01:00:00' AND HOUR(fecha)<'02:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'01:00 a 02:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES
+((SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='02:00:00' AND HOUR(fecha)<'03:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'02:00 a 03:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES
+((SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='03:00:00' AND HOUR(fecha)<'04:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'03:00 a 04:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='04:00:00' AND HOUR(fecha)<'05:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'04:00 a 05:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='05:00:00' AND HOUR(fecha)<'06:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+    '05:00 a 06:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='06:00:00' AND HOUR(fecha)<'07:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')), 
+'06:00 a 07:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='07:00:00' AND HOUR(fecha)<'08:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')),
+'07:00 a 08:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='08:00:00' AND HOUR(fecha)<'09:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'08:00 a 09:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='09:00:00' AND HOUR(fecha)<'10:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'09:00 a 10:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='10:00:00' AND HOUR(fecha)<'11:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'10:00 a 11:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='11:00:00' AND HOUR(fecha)<'12:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'11:00 a 12:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='12:00:00' AND HOUR(fecha)<'13:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '12:00 a 13:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='13:00:00' AND HOUR(fecha)<'14:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'13:00 a 14:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='14:00:00' AND HOUR(fecha)<'15:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'14:00 a 15:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='15:00:00' AND HOUR(fecha)<'16:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'15:00 a 16:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='16:00:00' AND HOUR(fecha)<'17:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '16:00 a 17:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='17:00:00' AND HOUR(fecha)<'18:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'17:00 a 18:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='18:00:00' AND HOUR(fecha)<'19:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '18:00 a 19:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='19:00:00' AND HOUR(fecha)<'20:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '19:00 a 20:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='20:00:00' AND HOUR(fecha)<'21:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '20:00 a 21:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='21:00:00' AND HOUR(fecha)<'22:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+, '21:00 a 22:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='22:00:00' AND HOUR(fecha)<'23:00:00' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'22:00 a 23:00');
+
+INSERT INTO HORARIOS(venta, nombre) VALUES(
+(SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='23:00:00' AND HOUR(fecha)<'23:59:59' AND 
+fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
+,'23:00 a 24:00');
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

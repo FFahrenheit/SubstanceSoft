@@ -21,7 +21,6 @@
 
     $fecha = $row['hora'];
 
-
     $query = "CREATE EVENT $trigger ON SCHEDULE EVERY $frequency DAY STARTS  '$fecha' ON 
     COMPLETION PRESERVE ENABLE DO UPDATE ingrediente SET cantidad = cantidad + $qty WHERE 
     clave = $ingredient";
