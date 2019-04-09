@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2019 a las 03:49:58
+-- Tiempo de generación: 09-04-2019 a las 03:20:44
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -79,8 +79,8 @@ CREATE TABLE `fechas` (
 --
 
 INSERT INTO `fechas` (`nombre`, `valor`) VALUES
-('fecha_in', '2019-03-17 19:51:20'),
-('fecha_fin', '2019-04-07 19:51:20');
+('fecha_in', '2019-03-31 23:59:59'),
+('fecha_fin', '2019-04-07 23:59:59');
 
 -- --------------------------------------------------------
 
@@ -147,6 +147,17 @@ INSERT INTO `horarios` (`nombre`, `venta`) VALUES
 ('21:00 a 22:00', 360),
 ('22:00 a 23:00', NULL),
 ('23:00 a 24:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `horarios_venta`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `horarios_venta` (
+`SUM(total)` double
+,`hour(fecha)` int(2)
+);
 
 -- --------------------------------------------------------
 
@@ -465,6 +476,15 @@ CREATE TABLE `ventas_dia` (
 `suma` double
 ,`dia` date
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `horarios_venta`
+--
+DROP TABLE IF EXISTS `horarios_venta`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `horarios_venta`  AS  select sum(`orden`.`total`) AS `SUM(total)`,hour(`orden`.`fecha`) AS `hour(fecha)` from `orden` where (`orden`.`fecha` between (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in')) and (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin'))) group by hour(`orden`.`fecha`) ;
 
 -- --------------------------------------------------------
 
@@ -843,6 +863,7 @@ INSERT INTO HORARIOS(venta, nombre) VALUES(
 (SELECT SUM(total) FROM orden WHERE HOUR(fecha)>='23:00:00' AND HOUR(fecha)<'23:59:59' AND 
 fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT valor from fechas where nombre='fecha_fin')) 
 ,'23:00 a 24:00');
+
 END$$
 
 DELIMITER ;
