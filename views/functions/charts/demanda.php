@@ -8,6 +8,8 @@
         <title>
             Demanda de platillos
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
+
 
         <?php include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/charts.php');?>
 
@@ -32,9 +34,7 @@
                 <div id="container" style="width: 75%;">
                         <canvas id="canvas"></canvas>
                 </div>
-                <a href = "../modulo0-funcion1.php">
-                    <button class="btn btn-success">Regresar</button>
-                </a>
+                    <button onclick="goBack()" class="btn btn-success">Regresar</button>
             </div>
         </section>
     </body>
@@ -85,6 +85,7 @@
     
             };
         </script>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/validate-form.js"></script>
     <script src="../../../js/forms/functions/nueva-orden.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>

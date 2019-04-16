@@ -8,6 +8,7 @@
         <title>
             Agregar nuevo platillo
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
@@ -60,6 +61,7 @@
             </div>
         </section>
     </body>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/validate-form.js"></script>
     <script src="../../../js/forms/functions/nueva-orden.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>

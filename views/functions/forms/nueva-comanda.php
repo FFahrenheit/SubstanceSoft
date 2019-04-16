@@ -8,6 +8,7 @@
         <title>
             Agregar platillos a orden
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
@@ -88,12 +89,11 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../../menus/index.php">
-                <button class="btn btn-success">Continuar</button>
-                </a>
+                <button class="btn btn-success" onclick="goBack()">Continuar</button>
             </div>
         </section>
     </body>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
     <script src="../../../js/vendor/validate-form.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>

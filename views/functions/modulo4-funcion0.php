@@ -46,7 +46,7 @@
               <p> Aquí puede agregar pedidos a las ordenes drive through abiertas y crear nuevas ordenes.</p>
               <?php echo getOpenOrders();?>
                 <p> &nbsp;</p>
-                <a href="forms/nueva-orden-drive.php" class="foot">
+                <a href="forms/nueva-orden-drive.html" class="foot">
                     <button type="button" class="btn btn-success" style="margin-top: auto">
                         Nueva orden
                     </button>

@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, inicial-scale=1">
 
         <title>
-            Cancelar comanda
+            Ver comandas
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
@@ -73,9 +74,7 @@
                         </tbody>
                         </table>
                        <div  class="text-center"> 
-                       <a href = "../../menus/index.php">
-                        <button type="button" class="btn btn-primary">Regresar</button>
-                        </a>
+                        <button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button>
                         </div>
                     </div>
                     </div>
@@ -83,6 +82,7 @@
             </div>
         </section>
     </body>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/forms/functions/notificar-comanda.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>

@@ -8,6 +8,8 @@
         <title>
             Participacion de empleados
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
+
 
         <?php include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/charts.php');?>
 

@@ -8,6 +8,7 @@
         <title>
             Liberar mesa y cerrar orden
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
@@ -78,9 +79,7 @@
                         </a>
                     </div>
                 </div>
-                <a href = "../../menus/index.php">
-                <button class="btn btn-success">Regresar</button>
-                </a>
+                <button class="btn btn-success"onclick="goBack()">Regresar</button>
             </div>
         </section>
         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,6 +103,7 @@
                     </div>
         </div>
     </body>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>
     <script src="../../../js/vendor/bootstrap.min.js"></script>
