@@ -19,8 +19,10 @@
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
-      <a href="../menus/index.php" class="hide">
-        <div class="sidebar-heading"> SubstanceSoft </div>
+      <a href="../menus/index.php" class="hide nochange">
+        <div align="center" class="sidebar-heading nochange">
+          <i>SubstanceSoft</i>
+        </div>
       </a>
       <div class="list-group list-group-flush">
         <!--Submenu-->
@@ -39,12 +41,12 @@
           </nav>
         </div>
       </nav>
-      <div class="container-fluid">
+      <div class="container-fluid ss-bg">
         <div class="row">
           <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Mesas disponibles </h1>
-            <p> Aquí puede agregar y administrar las mesas actuales.</p>
+            <h1 class="mt-4"> Liberaciones </h1>
+            <p> Aquí puede liberar las mesas</p>
             <?php echo getOpenOrdersForClosing(); ?>
             <p> &nbsp;</p>
           </div>

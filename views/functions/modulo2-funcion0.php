@@ -18,8 +18,10 @@
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
-      <a href="../menus/index.php" class="hide">
-        <div class="sidebar-heading"> SubstanceSoft </div>
+      <a href="../menus/index.php" class="hide nochange">
+        <div align="center" class="sidebar-heading nochange">
+          <i>SubstanceSoft</i>
+        </div>
       </a>
       <div class="list-group list-group-flush">
         <!--Submenu-->
@@ -38,12 +40,12 @@
           </nav>
         </div>
       </nav>
-      <div class="container-fluid">
+      <div class="container-fluid ss-bg">
         <div class="row">
           <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4">Cocinas disponibles</h1>
-            <p> Aquí pueden consultar las cocinas disponibles.</p>
+            <h1 class="mt-4">Ver comandas</h1>
+            <p> Aquí puede ver las comandas de las cocinas.</p>
             <?php echo getKitchens(); ?>
             <p> &nbsp;</p>
           </div>

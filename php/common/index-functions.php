@@ -49,7 +49,7 @@
         {
             $row = mysqli_fetch_array($result); 
             $path = "modulo".$curMod."-funcion".$i.".php";
-            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
+            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
         }
         return $output;
     }

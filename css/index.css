@@ -1,4 +1,10 @@
-html,body { height: 100%; margin: 0px; padding: 0px; 
+html,body 
+{ 
+    height: 100%; 
+    margin: 0px; 
+    padding: 0px;
+    border: 0px;
+    overflow: auto;
 }
 
 :root
@@ -32,12 +38,10 @@ a.hide:hover
     color: #616161;
 }
 
-
 .ss-bg
 {
     background: rgb(255,255,255);
-background: linear-gradient(99deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 61%, rgba(221,221,221,1) 100%);
-    background: rgb(246,246,246);
+    background: linear-gradient(99deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 61%, rgba(221,221,221,1) 100%);
     height: 100%;
 }
 
