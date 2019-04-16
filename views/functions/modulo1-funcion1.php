@@ -17,7 +17,7 @@
         include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/functions/mesero.php');
     ?>
   <div class="d-flex" id="wrapper">
-    <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="ss-sb border-right" id="sidebar-wrapper">
       <a href="../menus/index.php" class="hide"><div class="sidebar-heading"> SubstanceSoft </div></a>
       <div class="list-group list-group-flush">
         <!--Submenu-->
@@ -28,15 +28,12 @@
       </div>
     </div>
     <div id="page-content-wrapper">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">&#9668;</button>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg ss-nb border-bottom">
+        <button class="btn btn-light" id="menu-toggle">&lt;</button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg">
                 <?php echo getNavBar();?>
-            </nav>
+              </nav>
         </div>
       </nav>
       <div class="container-fluid">

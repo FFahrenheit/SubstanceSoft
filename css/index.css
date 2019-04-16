@@ -1,4 +1,21 @@
-a.foot{
+html,body { height: 100%; margin: 0px; padding: 0px; 
+}
+
+:root
+{
+    --bg: #F8F9FB;
+    --sb-bg: rgb(146, 0, 0);
+    --sb-bg-h:rgb(185, 0, 0);
+    --sb-t: rgb(240, 240, 240); 
+    --sb-t-h:  #b9b9b9;
+    --nb-bg: rgb(129, 0, 0);
+    /*nb-bg-h:
+    nb-t:
+    nb-t-h:*/
+}
+
+a.foot
+{
     margin-bottom: 50px;
     padding-bottom: 50px;
     float: right;
@@ -13,4 +30,69 @@ a.hide{
 a.hide:hover
 {
     color: #616161;
+}
+
+
+.ss-bg
+{
+    background: rgb(255,255,255);
+background: linear-gradient(99deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 61%, rgba(221,221,221,1) 100%);
+    background: rgb(246,246,246);
+    height: 100%;
+}
+
+.ss-sb
+{
+    background: rgb(83,0,0);
+    background: linear-gradient(90deg, rgba(83,0,0,1) 0%, rgba(205,0,0,1) 100%);
+    height: auto;
+}
+
+.nochange
+{
+    background: rgb(83,0,0);
+    background: linear-gradient(90deg, rgba(83,0,0,1) 0%, rgba(205,0,0,1) 100%);
+}
+
+.ss-sb :hover
+{
+    background-color: var(--sb-bg-h);
+}
+ 
+.ss-sb a
+{
+    text-decoration: none;
+    color: var(--sb-t);
+    text-shadow: 1px 1px 1px #000000;
+}
+
+.ss-sb a:hover
+{
+    background: rgb(205,0,0);
+    color: var(--sb-t-h);
+    text-shadow: 2px 2px 2px #000000;
+}
+
+.nochange :hover
+{
+    background:  #00000000
+
+}
+.ss-nb
+{
+    background: rgb(205,0,0);
+    background: linear-gradient(90deg, rgba(205,0,0,1) 0%, rgba(116,0,0,1) 50%, rgba(219,0,0,1) 100%);
+}
+
+.ss-nb a
+{
+    text-decoration: none;
+    color: rgb(240, 240, 240); 
+    text-shadow: 1px 1px 1px #000000;
+}
+
+.ss-nb a:hover
+{
+    color: #b9b9b9;
+    text-shadow: 2px 2px 2px #000000;
 }

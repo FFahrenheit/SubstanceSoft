@@ -17,6 +17,7 @@
       {
           $curMod = $_SESSION['actual'];
       }
+
       function getSideBar()
       {
         global $permisos;
@@ -30,7 +31,7 @@
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
             $path = "modulo".$curMod."-funcion".$i.".php";
-            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
+            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
         }
 
         return $output;
