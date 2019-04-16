@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>SubstanceSoft: Index</title>
+  <title>Consultar inventario</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
   <link href="../../css/index.css" rel="stylesheet">

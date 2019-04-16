@@ -43,7 +43,7 @@
             var horizontalBarChartData = {
                 labels: [<?php echo getSalesPerHourTitles(); ?>],
                 datasets: [{
-                    label: 'Ventas por horario',
+                    label: 'Monto ganado',
                     backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
                     borderColor: window.chartColors.red,
                     borderWidth: 1,
@@ -77,7 +77,7 @@
                         },
                         title: {
                             display: true,
-                            text: 'Ventas por horario'
+                            text: 'Monto ganado por horario'
                         }
                     }
                 });
