@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>SubstanceSoft: Inicio</title>
+
   <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
+
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
   <link href="../../css/index.css" rel="stylesheet">
@@ -33,7 +35,12 @@
     </div>
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg ss-nb border-bottom">
-        <button class="btn btn-light" id="menu-toggle">&lt;</button>
+            <button class="btn btn-light" id="menu-toggle">
+              <img src = "../../images/collapse.png">
+            </button>
+            <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <img src = "../../images/collapse2.png">
+            </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <nav class="navbar navbar-expand-lg">
             <?php echo getNavBar(); ?>

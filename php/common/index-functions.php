@@ -134,4 +134,5 @@
         $output .= '<p class="border">Message</p>';
         return $output;
     }
+    
 ?>

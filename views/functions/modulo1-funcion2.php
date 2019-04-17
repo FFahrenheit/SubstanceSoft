@@ -35,8 +35,12 @@
     </div>
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg ss-nb border-bottom">
-        <button class="btn btn-light" id="menu-toggle">&lt;</button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <button class="btn btn-light" id="menu-toggle">
+              <img src = "../../images/collapse.png">
+            </button>
+            <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <img src = "../../images/collapse2.png">
+            </button>        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <nav class="navbar navbar-expand-lg">
             <?php echo getNavBar(); ?>
           </nav>

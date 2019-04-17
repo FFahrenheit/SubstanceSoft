@@ -5,6 +5,8 @@ html,body
     padding: 0px;
     border: 0px;
     overflow: auto;
+    background: rgb(255,255,255);
+    background: linear-gradient(99deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 61%, rgba(221,221,221,1) 100%);
 }
 
 :root
@@ -15,9 +17,6 @@ html,body
     --sb-t: rgb(240, 240, 240); 
     --sb-t-h:  #b9b9b9;
     --nb-bg: rgb(129, 0, 0);
-    /*nb-bg-h:
-    nb-t:
-    nb-t-h:*/
 }
 
 a.foot
@@ -42,7 +41,7 @@ a.hide:hover
 {
     background: rgb(255,255,255);
     background: linear-gradient(99deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 61%, rgba(221,221,221,1) 100%);
-    height: 100%;
+    height: auto; 
 }
 
 .ss-sb
@@ -99,4 +98,14 @@ a.hide:hover
 {
     color: #b9b9b9;
     text-shadow: 2px 2px 2px #000000;
+}
+
+.ss-nb button img 
+{
+    height: 15px;
+}
+
+.ss-nb span
+{
+    color: black;
 }
