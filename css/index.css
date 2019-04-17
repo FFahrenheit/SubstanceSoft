@@ -109,3 +109,59 @@ a.hide:hover
 {
     color: black;
 }
+
+/* Chat chats */
+.chat {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px 0;
+  }
+  
+  /* Darker chat chat */
+  .darker {
+    border-color: rgb(168, 168, 168);
+    background-color: #ddd;
+  }
+  
+  /* Clear floats */
+  .chat::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Style images */
+  .chat img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
+  
+  /* Style the right image */
+  .chat img.right {
+    float: right;
+    margin-left: 4px;
+    margin-right:0;
+  }
+  
+  /* Style time text */
+  .time-right {
+    float: right;
+    color: #aaa;
+    size: 10px;
+  }
+  
+  /* Style time text */
+  .time-left {
+    float: left;
+    color: #999;
+  }
+
+  .chat p
+  {
+      margin-bottom: -6px;
+  }
