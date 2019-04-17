@@ -22,7 +22,9 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.pathname = '/substancesoft/views/forms/nueva-cocina.html';
+                //window.location.pathname = '/substancesoft/views/forms/nueva-cocina.html';
+                window.history.back();
+
             })
     }
 })
