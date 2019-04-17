@@ -26,8 +26,16 @@
         }
         </style>
     </head>
-    <body>
-        <section class="container">
+    <body class="s-bg">
+            <div class = "s-nb"> 
+                    <a onclick = "goBack()" href="#inicio" style="float: left;">
+                            <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
+                    </a>
+                    <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
+                    <a onclick = "refreshPage()" href="#inicio" style="float: left;">
+                            <img src="../../../images/reload.png" alt="Recargar">
+                    </a>
+                </div>        <section class="container">
             <div align="center">
                 <h1 class="text-uppercase text-center">Platillos mas populares</h2>
                 <p class="lead text-center">A continuación se muestran las datos de los platillos mas populares durante la semana pasada</p>

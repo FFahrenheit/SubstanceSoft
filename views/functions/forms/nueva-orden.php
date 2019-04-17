@@ -16,18 +16,15 @@
 </head>
 
 <body class="s-bg">
-    <div class = "s-nb"> 
-        <a onclick = "goBack()">
-            <img src="img/logo.png" alt="&iexcl;Bienvenido a void loop!">
-            <h1>Atrás</h1>
-        </a>
-        <ul>
-            <li><a href="inicio.html#header">Inicio</a></li>
-            <li><a href="placas.html#header">Placas</a></li>
-            <li><a href="software.html#header">Software</a></li>
-            <li><a href="proyectos.html#header">Proyectos</a></li>
-        </ul>
-    </div>
+            <div class = "s-nb"> 
+                    <a onclick = "goBack()" href="#inicio" style="float: left;">
+                            <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
+                    </a>
+                    <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
+                    <a onclick = "refreshPage()" href="#inicio" style="float: left;">
+                            <img src="../../../images/reload.png" alt="Recargar">
+                    </a>
+                </div>
     <section class="container">
         <h1 class="text-uppercase text-center">Nueva orden</h2>
             <p class="lead text-center">Por favor, llene los campos con la información requerida. Los campos marcados con <font color="red">*</font> son obligatorios.</p>

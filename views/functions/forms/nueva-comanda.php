@@ -13,7 +13,16 @@
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
     </head>
-    <body>
+    <body class="s-bg">
+            <div class = "s-nb"> 
+                    <a onclick = "goBack()" href="#inicio" style="float: left;">
+                            <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
+                    </a>
+                    <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
+                    <a onclick = "refreshPage()" href="#inicio" style="float: left;">
+                            <img src="../../../images/reload.png" alt="Recargar">
+                    </a>
+                </div>
         <?php
             $clave  = $_GET['clave'];
 
