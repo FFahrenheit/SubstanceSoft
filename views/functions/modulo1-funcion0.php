@@ -63,14 +63,7 @@
           <div class="col-3">
             <div class="containter text-center">
               <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
-              <h3 class="mt4">
-                <?php echo $_SESSION['name']; ?>
-              </h3>
-              <h4 class="mt4">
-                <?php echo $_SESSION['username']; ?>
-              </h4>
-              <p class="well">Message</p>
-              <p class="border">Message</p>
+              <?php echo getUserStatus(); ?>
               <a href="../../php/requests/logout.php">
                 <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
                   Salir
