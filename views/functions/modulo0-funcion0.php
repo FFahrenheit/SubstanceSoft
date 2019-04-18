@@ -34,12 +34,13 @@
         </div>
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg ss-nb border-bottom">
-            <button class="btn btn-light" id="menu-toggle">
-              <img src = "../../images/collapse.png">
-            </button>
-            <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <img src = "../../images/collapse2.png">
-            </button>                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <button class="btn btn-light" id="menu-toggle">
+                    <img src="../../images/collapse.png">
+                </button>
+                <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <img src="../../images/collapse2.png">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <nav class="navbar navbar-expand-lg">
                         <?php echo getNavBar(); ?>
                     </nav>
@@ -167,8 +168,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card text-center" style="visibility: hidden">
-                                        <div class="card-body"></div>
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img class="card-img-top img-fluid" src="../../images/code.png" alt="Usuarios">
+                                            <div class="card-block">
+                                                <h4 class="card-title">Codigos</h4>
+                                                <p class="card-text">Administre el inicio de sesión mediante codigos</p>
+                                                <p><a href="../forms/gestionar-codigos.php" class="btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-codigos.php" class="btn btn-primary">Ver</a></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card text-center" style="visibility: hidden">
                                         <div class="card-body"></div>
@@ -186,7 +195,7 @@
                             <?php echo getUserStatus(); ?>
                             <a href="../../php/requests/logout.php">
                                 <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
-                                    Salir   
+                                    Salir
                                 </button>
                             </a>
                         </div>
