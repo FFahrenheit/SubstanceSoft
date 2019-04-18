@@ -20,6 +20,7 @@ formulario.addEventListener('submit',function(e)
                 console.log("aqui llega js");
                 console.log(data);
                 alert(data);
+                window.location.reload(true);
             })
     }
 })

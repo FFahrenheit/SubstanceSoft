@@ -8,6 +8,7 @@
         <title>
             Demanda de platillos
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <?php include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/charts.php');?>
 
@@ -17,24 +18,31 @@
         <script src="../../../js/vendor/Chart.js/Chart.js"></script>
         <script src="../../../js/vendor/Chart.js/samples/utils.js"></script>
         <style>
-        canvas {
+        canvas 
+        {
             -moz-user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
         }
         </style>
     </head>
-    <body>
-        <section class="container">
+    <body class="s-bg">
+            <div class = "s-nb"> 
+                    <a onclick = "goBack()" href="#inicio" style="float: left;">
+                            <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
+                    </a>
+                    <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
+                    <a onclick = "refreshPage()" href="#inicio" style="float: left;">
+                            <img src="../../../images/reload.png" alt="Recargar">
+                    </a>
+                </div>        <section class="container">
             <div align="center">
                 <h1 class="text-uppercase text-center">Cortes de la semana</h2>
                 <p class="lead text-center">A continuación se muestran el total ganado de la semana pasada por día</p>
                 <div id="container" style="width: 75%;">
                         <canvas id="canvas"></canvas>
                 </div>
-                <a href = "../modulo0-funcion1.php">
-                    <button class="btn btn-success">Regresar</button>
-                </a>
+                    <button onclick="goBack()" class="btn btn-success">Regresar</button>
             </div>
         </section>
     </body>
@@ -85,6 +93,7 @@
     
             };
         </script>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/validate-form.js"></script>
     <script src="../../../js/forms/functions/nueva-orden.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>

@@ -8,10 +8,25 @@
         <title>
             Agregar surtido fijo a proveedores.
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
 
-        <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
+<link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/clean-install.css" rel="stylesheet">
+<script src="../../js/vendor/common-functions.js"></script>
+</head>
+
+<body class="s-bg">
+<div class="s-nb">
+    <a onclick="goBack()" href="#inicio" style="float: left;">
+        <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
+    </a>
+    <a href="../../views/menus/index.php">
+        <h1>SubstanceSoft</h1>
+    </a>
+    <a onclick="refreshPage()" href="#inicio" style="float: left;">
+        <img src="../../images/reload.png" alt="Recargar">
+    </a>
+</div>
         <section class="container text-center">
         <p>&nbsp;</p>
             <h1 class="text-uppercase text-center">Listado de proveedores</h1>

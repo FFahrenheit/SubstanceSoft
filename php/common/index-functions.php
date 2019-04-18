@@ -17,6 +17,7 @@
       {
           $curMod = $_SESSION['actual'];
       }
+
       function getSideBar()
       {
         global $permisos;
@@ -30,7 +31,7 @@
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
             $path = "modulo".$curMod."-funcion".$i.".php";
-            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
+            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
         }
 
         return $output;
@@ -48,7 +49,7 @@
         {
             $row = mysqli_fetch_array($result); 
             $path = "modulo".$curMod."-funcion".$i.".php";
-            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action bg-light">'.$permisos[$curMod][$i].'</a>';
+            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
         }
         return $output;
     }
@@ -128,9 +129,28 @@
         $output .= '<h4 class="mt4">';
         $output .= $_SESSION['username'];
         $output .= "</h4>";
-        //Message management
-        $output .= '<p class="well">Message</p>';
-        $output .= '<p class="border">Message</p>';
+        $output .= getChat();
         return $output;
+    }
+
+    function getChat()
+    {
+        $user  =  $_SESSION['username'];
+        $out = "";
+        $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
+        mysqli_set_charset($connection,"utf8");
+
+        $query = "SELECT * FROM mensajes WHERE destinatario = '$user' ORDER BY fecha DESC LIMIT 5";
+
+        $result = mysqli_query($connection, $query) or die ('"query fallida"');
+
+        while($row = mysqli_fetch_array($result))
+        {
+            $out .= '<div class="chat">';
+            $out .= "<p>".$row['texto']."</p>";
+            $out .= '<span class="time-right">'.$row['fecha'].'</span>';
+            $out .= "</div>";
+        }
+        return $out;
     }
 ?>

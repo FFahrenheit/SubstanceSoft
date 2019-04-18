@@ -24,6 +24,9 @@ function confirmDelete()
         console.log("aqui llega js");
         console.log(data);
         alert(data);
-        window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
+        //window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
+        window.history.back();
+
     })
+    
 }

@@ -8,11 +8,21 @@
         <title>
             Cancelar comanda
         </title>
+        <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
         <link href="../../../css/clean-install.css" rel="stylesheet">
     </head>
-    <body>
+    <body class="s-bg">
+            <div class = "s-nb"> 
+                    <a onclick = "goBack()" href="#inicio" style="float: left;">
+                            <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
+                    </a>
+                    <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
+                    <a onclick = "refreshPage()" href="#inicio" style="float: left;">
+                            <img src="../../../images/reload.png" alt="Recargar">
+                    </a>
+                </div>
         <section class="container">
             <h1 class="text-uppercase text-center">Cancelar comanda</h2>
             <p class="lead text-center">Aquí puede cancelar comandas. Solo puede realizar cancelaciones en órdenes no listas.</p>
@@ -71,9 +81,7 @@
                         </tbody>
                         </table>
                        <div  class="text-center"> 
-                       <a href = "../../menus/index.php">
-                        <button type="button" class="btn btn-success">Regresar</button>
-                        </a>
+                        <button type="button" onclick="goBack()" class="btn btn-success">Regresar</button>
                         </div>
                         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -99,6 +107,7 @@
             </div>
         </section>
     </body>
+    <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/forms/functions/cancelar-comanda.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>

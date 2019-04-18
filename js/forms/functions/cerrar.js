@@ -25,7 +25,6 @@ function confirmDelete()
         console.log(data);
         alert(data);
         window.location.pathname = '/substancesoft/views/functions/modulo1-funcion3.php';
-
     })
 }
 

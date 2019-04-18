@@ -1,6 +1,7 @@
 <?php 
 $user = $_SESSION['username'];
 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
+mysqli_set_charset($connection,"utf8");
 
 function getOpenAccounts()
     {

@@ -21,8 +21,10 @@ formulario.addEventListener('submit',function(e)
                 console.log(data);
 
                 alert(data);
+                window.history.back();
 
-                window.location.pathname = '/substancesoft/views/menus/menu-install.html';
+
+                //window.location.pathname = '/substancesoft/views/menus/menu-install.html';
 
             })
     }

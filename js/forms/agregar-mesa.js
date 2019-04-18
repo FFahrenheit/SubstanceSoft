@@ -22,7 +22,8 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.pathname = '/substancesoft/views/forms/nueva-mesa.html';
+                //window.location.pathname = '/substancesoft/views/forms/nueva-mesa.html';
+                window.history.back();
             })
     }
 })

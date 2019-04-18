@@ -22,8 +22,10 @@ formulario.addEventListener('submit',function(e)
                 console.log(data);
 
                 alert(data);
+                window.history.back();
 
-                window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
+
+                //window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
 
             })
     }

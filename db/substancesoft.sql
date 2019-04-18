@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2019 a las 03:20:44
+-- Tiempo de generación: 18-04-2019 a las 02:01:51
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -79,8 +79,8 @@ CREATE TABLE `fechas` (
 --
 
 INSERT INTO `fechas` (`nombre`, `valor`) VALUES
-('fecha_in', '2019-03-31 23:59:59'),
-('fecha_fin', '2019-04-07 23:59:59');
+('fecha_in', '2019-04-07 23:59:59'),
+('fecha_fin', '2019-04-14 23:59:59');
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,7 @@ INSERT INTO `horarios` (`nombre`, `venta`) VALUES
 ('10:00 a 11:00', NULL),
 ('11:00 a 12:00', NULL),
 ('12:00 a 13:00', NULL),
-('13:00 a 14:00', 100),
+('13:00 a 14:00', NULL),
 ('14:00 a 15:00', NULL),
 ('15:00 a 16:00', NULL),
 ('16:00 a 17:00', NULL),
@@ -144,7 +144,7 @@ INSERT INTO `horarios` (`nombre`, `venta`) VALUES
 ('18:00 a 19:00', NULL),
 ('19:00 a 20:00', NULL),
 ('20:00 a 21:00', NULL),
-('21:00 a 22:00', 360),
+('21:00 a 22:00', NULL),
 ('22:00 a 23:00', NULL),
 ('23:00 a 24:00', NULL);
 
@@ -180,8 +180,31 @@ CREATE TABLE `ingrediente` (
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
 (1, 'pollo', 156, 'kg', 4),
 (2, 'queso', 518, 'lt', 1),
-(3, 'maiz', 105, 'kg', 1),
-(4, 'Agua', 200, 'lt', 10);
+(3, 'maiz', 115, 'kg', 1),
+(4, 'Agua', 310, 'lt', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes`
+--
+
+CREATE TABLE `mensajes` (
+  `id` int(11) NOT NULL,
+  `destinatario` varchar(30) NOT NULL,
+  `texto` text NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `mensajes`
+--
+
+INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`) VALUES
+(24, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:33:45'),
+(25, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:34:06'),
+(26, 'Admin100', 'La cuenta en la mesa 2 ha sido pagada', '2019-04-18 00:00:46'),
+(27, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-18 00:00:51');
 
 -- --------------------------------------------------------
 
@@ -230,12 +253,42 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', 2048.2),
 (21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', 360),
 (22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', 5484),
-(23, '2019-03-19 18:33:19', 'Admin100', 2, 'cerrada', 'Orden mesa 2', 1928),
-(24, '2019-03-19 20:22:23', 'Admin100', 2, 'abierta', 'Orden nueva', 120),
+(23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', 1928),
+(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', 240),
 (25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', 240),
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', NULL),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
-(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100);
+(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', NULL),
+(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL);
+
+--
+-- Disparadores `orden`
+--
+DELIMITER $$
+CREATE TRIGGER `notificacion_orden` BEFORE UPDATE ON `orden` FOR EACH ROW BEGIN
+	IF (NEW.estado = 'cerrada')
+	THEN
+		INSERT INTO mensajes(destinatario, texto) VALUES 
+		(
+			OLD.usuario,
+				(SELECT CONCAT('La cuenta en la mesa ',
+                  (OLD.mesa), ' ha sido cerrada'))
+        );
+    END IF;
+            
+    IF (NEW.estado = 'pagada')
+     THEN
+    	INSERT INTO mensajes(destinatario, texto) VALUES 
+		(
+			OLD.usuario,
+				(SELECT CONCAT('La cuenta en la mesa ',
+                  (OLD.mesa), ' ha sido pagada'))
+        );
+     END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -278,19 +331,37 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (36, 'entregado', '2019-03-19 18:18:26', 3, 22),
 (37, 'entregado', '2019-03-19 18:18:26', 3, 22),
 (38, 'entregado', '2019-03-19 18:18:27', 3, 22),
-(39, 'entregado', '2019-03-19 18:33:39', 3, 23),
+(39, 'listo', '2019-03-19 18:33:39', 3, 23),
 (40, 'entregado', '2019-03-19 18:39:33', 6, 23),
-(41, 'pedido', '2019-03-19 20:26:48', 4, 24),
+(41, 'entregado', '2019-04-17 23:10:38', 4, 24),
 (42, 'entregado', '2019-03-19 20:33:42', 4, 25),
 (44, 'entregado', '2019-03-19 20:33:42', 4, 25),
 (46, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (47, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (48, 'entregado', '2019-04-02 03:00:16', 4, 27),
-(51, 'entregado', '2019-04-07 22:50:40', 6, 28);
+(51, 'entregado', '2019-04-07 22:50:40', 6, 28),
+(52, 'pedido', '2019-04-16 18:00:56', 4, 24);
 
 --
 -- Disparadores `pedidos`
 --
+DELIMITER $$
+CREATE TRIGGER `notifiacion_platillo` BEFORE UPDATE ON `pedidos` FOR EACH ROW BEGIN
+	IF NEW.estado = 'listo'
+	THEN
+		INSERT INTO mensajes(destinatario, texto) VALUES 
+		(
+			(SELECT usuario FROM orden WHERE clave = OLD.orden),
+				(SELECT CONCAT('El platillo ', 
+				(SELECT nombre FROM platillo  WHERE clave = OLD.platillo),
+				' de la mesa ',
+				(SELECT mesa FROM orden WHERE clave = OLD.orden),
+				' esta listo' ))
+        );
+       END IF;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `sumar-pedido` AFTER INSERT ON `pedidos` FOR EACH ROW BEGIN
 update orden set total = 
@@ -544,6 +615,13 @@ ALTER TABLE `ingrediente`
   ADD PRIMARY KEY (`clave`);
 
 --
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `destinatario` (`destinatario`);
+
+--
 -- Indices de la tabla `mesa`
 --
 ALTER TABLE `mesa`
@@ -638,16 +716,22 @@ ALTER TABLE `ingrediente`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -689,6 +773,12 @@ ALTER TABLE `surtidos`
 ALTER TABLE `chefs`
   ADD CONSTRAINT `chefs_ibfk_1` FOREIGN KEY (`cocina`) REFERENCES `cocina` (`clave`),
   ADD CONSTRAINT `chefs_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`destinatario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `orden`
