@@ -1,12 +1,30 @@
 <?php
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
 
-    $query = "SELECT password, nombre , apellido_p, apellido_m, tipo from usuario where username='$username'"; 
+    if(isset($_POST['code']))
+    {
+        $code = $_POST['code'];
+        $sub = " codigo = $code ";
+        $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
+        $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
+        $row = mysqli_fetch_array($result); 
+        if(!isset($row['valor']) || $row['valor']==0)
+        {
+            echo json_encode("unable");
+            die();
+        }
+    }
+    else 
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sub = " username = '$username'";
+    }
 
-    $result = mysqli_query($connection, $query) or die ('"query"');
+
+    $query = "SELECT password, username,nombre , apellido_p, apellido_m, tipo from usuario where".$sub; 
+
+    $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
 
     $row = mysqli_fetch_array($result); 
 
@@ -22,14 +40,15 @@
 
     $tipo = $row['tipo'];
 
-    if($pass == $password)
+    if(isset($_POST['code']) || $pass == $password)
     {
         session_start();
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $row['username'];
         //$_SESSION['password'] = $password;
         $_SESSION['name'] = $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m'];
-        $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion where 
-        username='$username' and permisos.permiso<=4 and permisos.permiso = funcion.clave"; 
+        $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion 
+        where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave"; 
+
 
         $result = mysqli_query($connection, $query) or die ('"query"');
 
