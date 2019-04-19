@@ -14,6 +14,8 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
+    <script src="../../js/forms/generar-codigo.js"></script>
+
 </head>
 
 <body class="s-bg">
@@ -41,9 +43,11 @@
                     $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
 
                     $row = mysqli_fetch_array($result); 
-                    if(1||!isset($row['valor']) || $row['valor']==0)
+                    if(!isset($row['valor']) || $row['valor']==0)
                     {
-                        echo "<h1>El acceso por código está deshabilitado&nsbp;</h1><h3>Habilitelo desde la sección administrar</h3>";
+                        echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
+                        echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
+                        echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
                         die();
                     }
                 ?>
@@ -73,11 +77,13 @@
                 ?>
                     </tbody>
                 </table>
+                <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Desabilitar</button>
+
             </div>
         </div>
     </section>
 </body>
-<script src="js/agregar-cocina.js"></script>
+<script src="../../js/forms/generar-codigo.js"></script>
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>

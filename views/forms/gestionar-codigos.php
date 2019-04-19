@@ -14,6 +14,7 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
+    <script src="../../js/forms/generar-codigo.js"></script>
 </head>
 
 <body class="s-bg">
@@ -33,6 +34,24 @@
         <h1 class="text-uppercase text-center">Listado de códigos</h1>
         <div class="row">
             <div class="container-fluid">
+
+                <?php
+                    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
+
+                    $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
+
+                    $result = mysqli_query($connection, $query) or die('"error al ejecutar"');
+
+                    $row = mysqli_fetch_array($result);
+
+                if (!isset($row['valor']) || $row['valor'] == 0) 
+                {
+                    echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
+                    echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
+                    echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
+                    die();
+                }
+                ?>
                 <table class="table table-hover" style="margin: auto">
                     <thead>
                         <tr>
@@ -43,14 +62,13 @@
                     </thead>
                     <tbody>
                         <?php
-                        $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
                         $query = "select username, codigo from usuario";
 
                         $sql = mysqli_query($connection, $query) or die("error");
 
                         while ($row = mysqli_fetch_array($sql)) {
-                                ?>
+                            ?>
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
                                 <td><?php echo $row['codigo']; ?></td>
@@ -62,10 +80,12 @@
                             </tr>
                         <?php
                     }
-                mysqli_close($connection);
-                ?>
+                    mysqli_close($connection);
+                    ?>
                     </tbody>
                 </table>
+                <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Desabilitar</button>
+
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -80,7 +100,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" onClick="confirmDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-primary" onClick="confirmDelete()">Generar</button>
                             </div>
                         </div>
                     </div>
@@ -89,7 +109,6 @@
         </div>
     </section>
 </body>
-<script src="../../js/forms/generar-codigo.js"></script>
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>

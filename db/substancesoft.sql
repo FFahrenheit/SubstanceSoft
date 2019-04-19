@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2019 a las 02:01:51
+-- Tiempo de generación: 19-04-2019 a las 04:34:37
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -259,7 +259,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', NULL),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', NULL),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 3656),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL);
 
 --
@@ -340,7 +340,9 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (47, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (48, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (51, 'entregado', '2019-04-07 22:50:40', 6, 28),
-(52, 'pedido', '2019-04-16 18:00:56', 4, 24);
+(52, 'pedido', '2019-04-16 18:00:56', 4, 24),
+(53, 'pedido', '2019-04-18 20:55:40', 3, 29),
+(54, 'pedido', '2019-04-18 20:55:45', 3, 29);
 
 --
 -- Disparadores `pedidos`
@@ -437,6 +439,24 @@ CREATE TABLE `platillos_populares` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `preferencias`
+--
+
+CREATE TABLE `preferencias` (
+  `nombre` varchar(30) NOT NULL,
+  `valor` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `preferencias`
+--
+
+INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
+('acceso_codigo', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `proveedor`
 --
 
@@ -512,19 +532,29 @@ CREATE TABLE `usuario` (
   `apellido_m` varchar(30) DEFAULT NULL,
   `telefono` bigint(11) DEFAULT NULL,
   `direccion` varchar(40) DEFAULT NULL,
-  `tipo` enum('administrador','empleado') DEFAULT NULL
+  `tipo` enum('administrador','empleado') DEFAULT NULL,
+  `codigo` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`) VALUES
-('admin', '102', 'Uma delisia', '', '', 0, '', 'administrador'),
-('Admin100', 'Ivan', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador'),
-('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado'),
-('chef2', 'chef', 'Chef 2', '', '', 0, '', 'empleado'),
-('DAADSDA', 'da', '', '', '', 0, '', 'administrador');
+INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`) VALUES
+('admin', '102', 'Uma delisia', '', '', 0, '', 'administrador', 2893),
+('Admin100', 'Ivan', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994),
+('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado', 9425),
+('chef2', 'chef', 'Chef 2', '', '', 0, '', 'empleado', 2056),
+('DAADSDA', 'da', '', '', '', 0, '', 'administrador', 1872),
+('IVX', 'NNNN', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423);
+
+--
+-- Disparadores `usuario`
+--
+DELIMITER $$
+CREATE TRIGGER `generar-codigo` BEFORE INSERT ON `usuario` FOR EACH ROW SET NEW.codigo = (Select Cast(rand()*10000 as int) FROM usuario WHERE Cast(rand()*10000 as int) NOT IN (SELECT codigo FROM usuario) limit 1)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -659,6 +689,12 @@ ALTER TABLE `platillo`
   ADD KEY `cocina` (`cocina`);
 
 --
+-- Indices de la tabla `preferencias`
+--
+ALTER TABLE `preferencias`
+  ADD PRIMARY KEY (`nombre`);
+
+--
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
@@ -731,7 +767,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

@@ -30,3 +30,24 @@ function confirmDelete()
     })
     
 }
+
+function setCodeStatus(new_status)
+{
+    console.log(new_status);
+
+    var datos = new FormData();
+    datos.append("new",new_status);
+    fetch('../../php/forms/cambiar-codigo.php', 
+    {
+        method: 'POST',
+        body: datos
+    })
+    .then (res => res.json())
+    .then (data =>
+    {
+        console.log("aqui llega js");
+        console.log(data);
+        //alert(data);
+        window.location.reload();
+    })
+}
