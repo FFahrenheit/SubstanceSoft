@@ -11,7 +11,26 @@ function buscarPlatillo(consulta)
     .done(function(respuesta)
     {
         $("#busqueda").html(respuesta);
-    }) 
+    })    
+    .fail(function()
+    {
+        console.log("error");
+    })
+}
+
+function buscarCategoria(category)
+{
+    console.log(category);
+    $.ajax({
+        url:'/substancesoft/php/requests/platillo.php',
+        type: 'POST',
+        datatype: 'html',
+        data: {categoria:category}
+    })
+    .done(function(respuesta)
+    {
+        $("#busqueda").html(respuesta);
+    })    
     .fail(function()
     {
         console.log("error");

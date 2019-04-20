@@ -56,7 +56,7 @@
                             <tbody>
                                 <?php
                                 while ($row = mysqli_fetch_array($sql)) {
-                                        ?>
+                                    ?>
                                     <tr>
                                         <td><?php echo $row['name']; ?></td>
                                         <td><?php echo $row['price']; ?></td>
@@ -64,25 +64,41 @@
                                     </tr>
                                 <?php
                             }
-                        ?>
+                            ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="col-sm">
                     Agregar platillos: &nbsp;
-                    <?php
-                    //$query = "select * from funcion where
-                    //clave not in(select permiso from permisos where username='$user') order by descripcion asc";
-
-                    $sql = mysqli_query($connection, $query) or die("error en query");
-                    ?>
                     <form id="formulario" novalidate>
                         <div class="form-group">
                             <label for=""> Platillo: </label>
+                            <p class="comm">&nbsp;Elija la categoria:</p>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-danger round" onclick="buscarCategoria('Bebidas');">
+                                    <input type="radio" name="options" class="hide">Bebidas
+                                </label>
+                                <label class="btn btn-warning round" onclick="buscarCategoria('Guisados')";>
+                                    <input type="radio" name="options" class="hide">Guisados
+                                </label>
+                                <label class="btn btn-danger round" onclick="buscarCategoria('Postres');">
+                                    <input type="radio" name="options" class="hide">Postres
+                                </label>
+                                <label class="btn btn-warning round" onclick="buscarCategoria('Rapida');">
+                                    <input type="radio" name="options" class="hide">Rapida
+                                </label>
+                                <label class="btn btn-danger round" onclick="buscarCategoria('Sopas');">
+                                    <input type="radio" name="options"  class="hide">Sopas
+                                </label>
+                                <label class="btn btn-warning round" onclick="buscarCategoria('Otros');">
+                                    <input type="radio"  name="options" class="hide" >Otros
+                                </label>
+                            </div>
+                            <p class="comm">&nbsp;O busque su platillo:</p>
                             <input type="text" name="search" id="search" class="form-control" placeholder="Escriba su busqueda aquí">
                         </div>
-                        <div id="busqueda" align="left" class="form-group">
+                        <div id="busqueda" align="center" class="form-group">
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>

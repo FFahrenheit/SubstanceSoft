@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/ingredientes.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/ingredientes.png" alt="Ingredientes">
                                             <div class="card-block">
                                                 <h4 class="card-title">Ingredientes</h4>
                                                 <p class="card-text">Administre los distintos ingredientes usados en el sistema</p>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/mesas.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/mesas.png" alt="Mesas">
                                             <div class="card-block">
                                                 <h4 class="card-title">Mesas</h4>
                                                 <p class="card-text">Administre las distintas mesas que hay en el sistema.</p>
@@ -107,7 +107,7 @@
                                 <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/roles.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/roles.png" alt="Roles">
                                             <div class="card-block">
                                                 <h4 class="card-title">Roles</h4>
                                                 <p class="card-text">Administre los roles de usuario</p>
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/platillos.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/platillos.png" alt="Platillos">
                                             <div class="card-block">
                                                 <h4 class="card-title">Platillos</h4>
                                                 <p class="card-text">Administre los platillos en el sistema</p>
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/proveedores.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/proveedores.png" alt="Proveedores">
                                             <div class="card-block">
                                                 <h4 class="card-title">Proveedores</h4>
                                                 <p class="card-text">Administre el listado de proveedores en el sistema</p>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/surtidos.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/surtidos.png" alt="Surtido fijo">
                                             <div class="card-block">
                                                 <h4 class="card-title">Surtidos</h4>
                                                 <p class="card-text">Administre los proveedores automáticos del sistema</p>
@@ -158,7 +158,7 @@
                                 <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/chef.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/chef.png" alt="Chefs">
                                             <div class="card-block">
                                                 <h4 class="card-title">Chefs</h4>
                                                 <p class="card-text">Administre las cocinas de los chefs</p>
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/code.png" alt="Usuarios">
+                                            <img class="card-img-top img-fluid" src="../../images/code.png" alt="Codigos">
                                             <div class="card-block">
                                                 <h4 class="card-title">Codigos</h4>
                                                 <p class="card-text">Administre el inicio de sesión mediante codigos</p>
@@ -179,8 +179,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card text-center" style="visibility: hidden">
-                                        <div class="card-body"></div>
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img class="card-img-top img-fluid" src="../../images/receta.png" alt="Recetas">
+                                            <div class="card-block">
+                                                <h4 class="card-title">Recetas</h4>
+                                                <p class="card-text">Administre los ingredientes involucrados en los platillos</p>
+                                                <p><a href="../forms/gestionar-recetas.php" class="btn btn-primary">Administrar</a></p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="card text-center" style="visibility: hidden">
                                         <div class="card-body"></div>

@@ -105,3 +105,25 @@ html, body{
 .s-nb a:hover{
     color: rgb(252, 252, 252);
 }
+
+.comm
+{
+    font-style:italic;
+    color: rgb(116, 116, 116);
+}
+
+.hide
+{
+    visibility:hidden;
+}
+
+.round
+{
+    border-radius: 10px;
+}
+
+.ss-s
+{
+    background: rgb(255, 235, 52);
+    border-radius: 5px;
+}
