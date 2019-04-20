@@ -130,6 +130,7 @@
         $output .= $_SESSION['username'];
         $output .= "</h4>";
         $output .= getChat();
+        $output.='<p><a style="font-size: 75%;" href="../functions/forms/mensajes.php?clave='.$_SESSION['username'].'" class="btn btn-light">Ver últimos mensajes</a></p>';
         return $output;
     }
 
