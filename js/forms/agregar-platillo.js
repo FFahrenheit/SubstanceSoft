@@ -19,8 +19,16 @@ formulario.addEventListener('submit',function(e)
             {
                 console.log("aqui llega js");
                 console.log(data);
-                alert(data);
-                window.location.reload(true);
+                if(!isNaN(data))
+                {
+                    var path = '/substancesoft/views/forms/nueva-receta.php?key=';
+                    path.concat(data);
+                    window.location.pathname = path;
+                }
+                else 
+                {
+                    alert(data);
+                }
             })
     }
 })

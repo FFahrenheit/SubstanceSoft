@@ -73,6 +73,17 @@
                             <input name="description"type="text" placeholder="Describa el platillo" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="">Categoria</label> <font color="red">*</font>
+                            <select class="form-control" name="cat">
+                                <option>Bebidas</option>
+                                <option>Guisados</option>
+                                <option>Postres</option>
+                                <option>Rapida</option>
+                                <option>Sopas</option>
+                                <option>Otros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="">Dificultad</label> <font color="red">*</font>
                             <select class="form-control" name="dif">
                                 <option>1</option>

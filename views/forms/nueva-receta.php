@@ -29,14 +29,18 @@
 </div>
         <?php
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
-
-            $query = "select max(clave) as pk from platillo";
-
-            $sql = mysqli_query($connection, $query) or die("error en query");
-
-            $row = mysqli_fetch_array($sql);
-
-            $pk = $row['pk'];
+            
+            if(isset($_GET['key']))
+            {
+                $pk = $_GET['key'];
+            }
+            else
+            {
+                $query = "select max(clave) as pk from platillo";
+                $sql = mysqli_query($connection, $query) or die("error en query");
+                $row = mysqli_fetch_array($sql);
+                $pk = $row['pk'];
+            }
 
             $query = "select nombre from platillo where clave=$pk";
 
