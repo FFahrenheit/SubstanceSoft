@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2019 a las 04:34:37
+-- Tiempo de generación: 20-04-2019 a las 07:14:33
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -412,18 +412,21 @@ CREATE TABLE `platillo` (
   `dificultad` enum('1','2','3','4','5') DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `imagen` blob,
-  `cocina` int(11) NOT NULL
+  `cocina` int(11) NOT NULL,
+  `categoria` enum('Bebidas','Sopas','Rapida','Postres','Guisados','Otros') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `platillo`
 --
 
-INSERT INTO `platillo` (`clave`, `nombre`, `precio`, `dificultad`, `descripcion`, `imagen`, `cocina`) VALUES
-(1, '0', 100.2, '1', 'Uma delisia', NULL, 1),
-(3, 'Caviar', 1828, '1', 'Uma delisia', NULL, 1),
-(4, 'pizza', 120, '1', 'pizza', NULL, 1),
-(6, 'Sopa du macaco', 100, '5', 'Uma delisia', NULL, 2);
+INSERT INTO `platillo` (`clave`, `nombre`, `precio`, `dificultad`, `descripcion`, `imagen`, `cocina`, `categoria`) VALUES
+(1, 'Hamburguesa Ranch', 100.2, '1', 'Uma delisia', NULL, 1, 'Rapida'),
+(3, 'Caviar', 1828, '1', 'Uma delisia', NULL, 1, 'Sopas'),
+(4, 'pizza', 120, '1', 'pizza', NULL, 1, 'Rapida'),
+(6, 'Sopa du macaco', 100, '5', 'Uma delisia', NULL, 2, 'Sopas'),
+(7, 'Omelette du fomage', 50, '1', 'Un gran postre', NULL, 2, 'Postres'),
+(9, 'Sprite', 14, '1', 'Sprite 500ml', NULL, 3, 'Bebidas');
 
 -- --------------------------------------------------------
 
@@ -779,7 +782,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `platillo`
 --
 ALTER TABLE `platillo`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
