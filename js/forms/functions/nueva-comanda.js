@@ -68,10 +68,28 @@ formulario.addEventListener('submit',function(e)
         .then (res => res.json())
         .then (data =>
             {
-                console.log("aqui llega js");
                 console.log(data);
+                switch(data)
+                {
+                    case 'exito':
+                        alert('Comanda(s) agregada(s)');
+                        break;
+                    case 'conexion':
+                        alert('Error en la conexion');
+                        break;
+                    case 'query':
+                        alert('No se pudo agregar la comanda');
+                        break;
+                    case 'query2':
+                        alert('No se actualizó el total pero si se pidió comanda');
+                        break;
+                    default:
+                        alert(data);
+                        break;
+                }
+                console.log("aqui llega js");
                 
-                alert(data);
+                //alert(data);
 
                 window.location.reload(false); 
             })

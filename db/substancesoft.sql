@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2019 a las 04:51:30
+-- Tiempo de generación: 21-04-2019 a las 06:34:47
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `substancesoft`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarTotal` (IN `claveOrden` INT)  BEGIN
+ 
+update orden set total = (select sum(platillo.precio) from platillo, (select * from orden) as ord, 
+    pedidos where platillo.clave= pedidos.platillo and ord.clave = claveOrden and 
+    ord.clave=pedidos.orden)
+    where clave = claveOrden;
+    SELECT 2+2;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerIngredientes` (IN `clavePlatillo` INT)  BEGIN
+
+    SELECT 
+    recetas.cantidad AS necesario, 
+    ingrediente.cantidad AS existencia 
+    FROM recetas, ingrediente WHERE 
+    recetas.ingrediente = ingrediente.clave
+    AND recetas.platillo = clavePlatillo;
+    END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -178,8 +203,8 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', 157, 'kg', 4),
-(2, 'queso', 518, 'lt', 1),
+(1, 'pollo', 155, 'kg', 4),
+(2, 'queso', 497, 'lt', 1),
 (3, 'maiz', 115, 'kg', 1),
 (4, 'Agua', 20, 'lt', 10);
 
@@ -204,7 +229,24 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`) VALUES
 (24, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:33:45'),
 (25, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:34:06'),
 (26, 'Admin100', 'La cuenta en la mesa 2 ha sido pagada', '2019-04-18 00:00:46'),
-(27, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-18 00:00:51');
+(27, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-18 00:00:51'),
+(41, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:07'),
+(42, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:13'),
+(43, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:27'),
+(44, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:58'),
+(45, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:59'),
+(46, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00'),
+(47, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00'),
+(48, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01'),
+(49, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01'),
+(50, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:03'),
+(51, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:05'),
+(52, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:10'),
+(53, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:12'),
+(54, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:13'),
+(55, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:16'),
+(56, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-04-21 04:01:56'),
+(57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40');
 
 -- --------------------------------------------------------
 
@@ -256,10 +298,10 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', 1928),
 (24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', 240),
 (25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', 240),
-(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', NULL),
+(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', 120),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 3656),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 5584),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL);
 
 --
@@ -342,7 +384,10 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (51, 'entregado', '2019-04-07 22:50:40', 6, 28),
 (52, 'pedido', '2019-04-16 18:00:56', 4, 24),
 (53, 'pedido', '2019-04-18 20:55:40', 3, 29),
-(54, 'pedido', '2019-04-18 20:55:45', 3, 29);
+(54, 'pedido', '2019-04-18 20:55:45', 3, 29),
+(55, 'pedido', '2019-04-21 02:56:35', 3, 29),
+(56, 'pedido', '2019-04-21 04:03:08', 4, 26),
+(57, 'pedido', '2019-04-21 04:32:32', 6, 29);
 
 --
 -- Disparadores `pedidos`
@@ -361,6 +406,27 @@ CREATE TRIGGER `notifiacion_platillo` BEFORE UPDATE ON `pedidos` FOR EACH ROW BE
 				' esta listo' ))
         );
        END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `restar-ingrediente` AFTER UPDATE ON `pedidos` FOR EACH ROW BEGIN
+	IF (OLD.estado = 'pedido' AND 
+        (NEW.estado = 'listo' OR NEW.estado = 'entregado'))
+		THEN
+        	UPDATE ingrediente 
+			SET cantidad = cantidad - 
+        	(
+           		(SELECT recetas.cantidad FROM 
+         		recetas, 
+                (SELECT * from ingrediente) as ing 
+         		WHERE platillo = NEW.platillo
+         		AND ing.clave = recetas.ingrediente 
+         		AND ingrediente.clave = ing.clave)
+    		)
+			WHERE ingrediente.clave IN 
+			(SELECT ingrediente from recetas WHERE platillo = NEW.platillo);
+    	END IF;
 END
 $$
 DELIMITER ;
@@ -496,7 +562,7 @@ CREATE TABLE `recetas` (
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 (1, 0.5, 1, 3),
 (3, 10, 2, 3),
-(4, 0.01, 1, 6),
+(4, 10, 1, 6),
 (5, 0.01, 2, 6);
 
 -- --------------------------------------------------------
@@ -761,7 +827,7 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -773,7 +839,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
