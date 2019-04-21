@@ -30,7 +30,7 @@ function buscarCategoria(category)
     .done(function(respuesta)
     {
         $("#busqueda").html(respuesta);
-    })    
+    })
     .fail(function()
     {
         console.log("error");
@@ -77,3 +77,9 @@ formulario.addEventListener('submit',function(e)
             })
     }
 })
+
+function updateText(label)
+{
+    $("#actual").html("Platillo actual: ".concat(label.id));   
+    console.log(label.id);
+}

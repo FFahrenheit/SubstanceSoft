@@ -71,6 +71,7 @@
                 </div>
                 <div class="col-sm">
                     Agregar platillos: &nbsp;
+                    <p id="actual" class="comm" style="color: #000;"></p>
                     <form id="formulario" novalidate>
                         <div class="form-group">
                             <label for=""> Platillo: </label>

@@ -30,7 +30,7 @@
         for($i = 0; $i<$result->num_rows; $i++)
         {
             $row = mysqli_fetch_array($result); 
-            $output .= '<label class = "btn btn-warning ss-s">';
+            $output .= '<label onclick = "updateText(this);" id ="'.$row['nombre'].'" class = "btn btn-warning ss-s">';
             $output.='<input type="radio" class="hide" name="platillo" value="'.$row['clave'].'" required checked>'.$row['nombre'].'<br>';
             $output .= '</label>';
         }

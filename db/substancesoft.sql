@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2019 a las 07:14:33
+-- Tiempo de generación: 21-04-2019 a las 04:51:30
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -59,9 +59,9 @@ CREATE TABLE `cocina` (
 --
 
 INSERT INTO `cocina` (`clave`, `nombre`) VALUES
-(1, 'Mexicana'),
 (2, 'Alemana'),
-(3, 'Bebidas');
+(3, 'Bebidas'),
+(1, 'Mexicana');
 
 -- --------------------------------------------------------
 
@@ -178,10 +178,10 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', 156, 'kg', 4),
+(1, 'pollo', 157, 'kg', 4),
 (2, 'queso', 518, 'lt', 1),
 (3, 'maiz', 115, 'kg', 1),
-(4, 'Agua', 310, 'lt', 10);
+(4, 'Agua', 20, 'lt', 10);
 
 -- --------------------------------------------------------
 
@@ -633,7 +633,8 @@ ALTER TABLE `chefs`
 -- Indices de la tabla `cocina`
 --
 ALTER TABLE `cocina`
-  ADD PRIMARY KEY (`clave`);
+  ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `funcion`
@@ -645,7 +646,8 @@ ALTER TABLE `funcion`
 -- Indices de la tabla `ingrediente`
 --
 ALTER TABLE `ingrediente`
-  ADD PRIMARY KEY (`clave`);
+  ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `mensajes`
@@ -689,6 +691,7 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `platillo`
   ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `cocina` (`cocina`);
 
 --

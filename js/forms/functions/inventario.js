@@ -40,9 +40,29 @@ function addInventory(btn)
     {
         alert('Por favor, ingrese la cantidad a agregar');
     }
+    else if(qty<0)
+    {
+        alert('Ingrese una cantidad válida');
+    }
     else 
     {
-        console.log(btn.id);
-        console.log(qty);
+        var datos = new FormData();
+        datos.append("id",btn.id);
+        datos.append("qty",qty);
+        fetch('../../php/forms/functions/agregar-inventario.php', 
+        {
+            method: 'POST',
+            body: datos
+        })
+        .then (res => res.json())
+        .then (data =>
+            {
+                console.log("aqui llega js");
+                console.log(data);
+                
+                alert(data);
+
+                window.location.reload(false); 
+            })
     }
 }
