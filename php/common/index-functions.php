@@ -1,7 +1,7 @@
 <?php
     session_start();
     $permisos = array(
-        array("Administrar base", "Estadísticas", "Inventario"),
+        array("Administrar base", "Estadísticas", "Inventario", "Preferencias"),
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar" ),
         array( "Recibir comandas", "Inventario", "Notificar comanda lista"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
