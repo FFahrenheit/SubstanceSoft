@@ -47,6 +47,7 @@
                 if (!isset($row['valor']) || $row['valor'] == 0) 
                 {
                     echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
+                    echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
                     die();
@@ -85,6 +86,7 @@
                     </tbody>
                 </table>
                 <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Desabilitar</button>
+                <p>&nbsp;</p>
 
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">

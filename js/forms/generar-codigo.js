@@ -37,7 +37,8 @@ function setCodeStatus(new_status)
 
     var datos = new FormData();
     datos.append("new",new_status);
-    fetch('../../php/forms/cambiar-codigo.php', 
+    datos.append("preferencia",'acceso_codigo')
+    fetch('../../php/forms/cambiar-preferencia.php', 
     {
         method: 'POST',
         body: datos
