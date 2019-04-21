@@ -34,11 +34,11 @@
     </div>
     <section class="container text-center">
         <p>&nbsp;</p>
-        <h1 class="text-uppercase text-center">Horarios habilitados</h1>
+        <h1 class="text-uppercase text-center">Horario de habilitación</h1>
         <p>
-            Aqui puede gestionar los horarios de habilitación del sistema. &nbsp;
+            Aqui puede gestionar los horarios de habilitación del sistema para empleados. <br>
             Seleccione un horario en que el sistema se habilitará y otro para
-            el cual se deshabilitará. Los administradores podrán ingresar en cualquier horario.
+            el cual se deshabilitará. Los administradores podrán ingresar en cualquier horario.&nbsp;
         </p>
 
         <div class="row">
@@ -115,7 +115,7 @@
                         </form>
                     </div>
                 </div>
-                <button type="button" onclick="setCodeStatus(false)" class="btn btn-danger">Desabilitar</button>
+                <button type="button" onclick="setCodeStatus(false)" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
             </div>
         </div>

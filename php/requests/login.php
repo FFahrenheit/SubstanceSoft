@@ -1,12 +1,22 @@
 <?php
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
 
+    $query = "CALL verificarHorario()";
+
+    freeQuery(); 
+
+    $result = mysqli_query($connection,$query);
+    $row = mysqli_fetch_array($result);
+
+    $available = ($row['status']=='yes')? true : false;
+
     if(isset($_POST['code']))
     {
         $code = $_POST['code'];
         $sub = " codigo = $code ";
         $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
-        $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
+        freeQuery(); 
+        $result = mysqli_query($connection, $query) or die ('"error al ejecutar1"');
         $row = mysqli_fetch_array($result); 
         if(!isset($row['valor']) || $row['valor']==0)
         {
@@ -24,6 +34,8 @@
 
     $query = "SELECT password, username,nombre , apellido_p, apellido_m, tipo from usuario where".$sub; 
 
+    freeQuery(); 
+
     $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
 
     $row = mysqli_fetch_array($result); 
@@ -40,6 +52,12 @@
 
     $tipo = $row['tipo'];
 
+    if($tipo != 'administrador' && !$available)
+    {
+        echo json_encode("horario");
+        die;
+    }
+
     if(isset($_POST['code']) || $pass == $password)
     {
         session_start();
@@ -49,6 +67,7 @@
         $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion 
         where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave"; 
 
+        freeQuery(); 
 
         $result = mysqli_query($connection, $query) or die ('"query"');
 
@@ -61,6 +80,8 @@
             funcion.clave<=4";
 
             $_SESSION['tipo'] = 'administrador';
+            
+            freeQuery(); 
 
             $result = mysqli_query($connection, $query) or die ('"query admin"');
 
@@ -99,5 +120,16 @@
     else
     {
         echo json_encode("password");
+    }
+
+    function freeQuery()
+    {
+        global $connection;
+        do 
+        {
+            if ($res = $connection->store_result()) {
+              $res->free();
+            }
+        } while ($connection->more_results() && $connection->next_result()); 
     }
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2019 a las 06:34:47
+-- Tiempo de generación: 21-04-2019 a las 21:18:40
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -44,6 +44,32 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerIngredientes` (IN `clavePlat
     recetas.ingrediente = ingrediente.clave
     AND recetas.platillo = clavePlatillo;
     END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarHorario` ()  NO SQL
+BEGIN
+	IF((SELECT valor FROM preferencias WHERE nombre='apagado_dinamico')=1)
+    THEN 
+    	IF
+        (
+            ((SELECT TIMEDIFF(
+                TIME(NOW()),
+                TIME((SELECT valor FROM fechas WHERE nombre='Encendido'))))
+            >= 0) AND 
+           ((SELECT TIMEDIFF(
+                TIME(NOW()),
+                TIME((SELECT valor FROM fechas WHERE nombre='Apagado'))))
+            <= 0)
+        )
+        THEN 
+        	    SELECT 'yes' as status;
+        ELSE  
+            	SELECT 'no' as status;
+        END IF;
+        
+    ELSE  
+    	SELECT 'yes' as status;
+    END IF;
+END$$
 
 DELIMITER ;
 
@@ -95,6 +121,7 @@ INSERT INTO `cocina` (`clave`, `nombre`) VALUES
 --
 
 CREATE TABLE `fechas` (
+  `clave` tinyint(4) NOT NULL,
   `nombre` varchar(15) NOT NULL,
   `valor` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -103,9 +130,11 @@ CREATE TABLE `fechas` (
 -- Volcado de datos para la tabla `fechas`
 --
 
-INSERT INTO `fechas` (`nombre`, `valor`) VALUES
-('fecha_in', '2019-04-07 23:59:59'),
-('fecha_fin', '2019-04-14 23:59:59');
+INSERT INTO `fechas` (`clave`, `nombre`, `valor`) VALUES
+(1, 'fecha_in', '2019-04-07 23:59:59'),
+(2, 'fecha_fin', '2019-04-14 23:59:59'),
+(3, 'Encendido', '2019-04-21 00:00:00'),
+(4, 'Apagado', '2019-04-21 12:00:59');
 
 -- --------------------------------------------------------
 
@@ -521,7 +550,9 @@ CREATE TABLE `preferencias` (
 --
 
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
-('acceso_codigo', 1);
+('acceso_codigo', 1),
+('apagado_dinamico', 1),
+('desperdicio_diario', 0);
 
 -- --------------------------------------------------------
 
@@ -703,6 +734,13 @@ ALTER TABLE `cocina`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `fechas`
+--
+ALTER TABLE `fechas`
+  ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
 -- Indices de la tabla `funcion`
 --
 ALTER TABLE `funcion`
@@ -810,6 +848,12 @@ ALTER TABLE `chefs`
 --
 ALTER TABLE `cocina`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `fechas`
+--
+ALTER TABLE `fechas`
+  MODIFY `clave` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `funcion`

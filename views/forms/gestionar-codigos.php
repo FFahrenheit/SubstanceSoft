@@ -85,7 +85,7 @@
                     ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Desabilitar</button>
+                <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
 
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
