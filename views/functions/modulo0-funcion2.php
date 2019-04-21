@@ -15,7 +15,7 @@
   <?php
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/common/index-functions.php');
   getLogStatus();
-  include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php'); //Cambiar a admin.
+  include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/admin.php'); //Cambiar a admin.
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
@@ -34,12 +34,13 @@
     </div>
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg ss-nb border-bottom">
-      <button class="btn btn-light" id="menu-toggle">
-              <img src = "../../images/collapse.png">
-            </button>
-            <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <img src = "../../images/collapse2.png">
-            </button>        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="btn btn-light" id="menu-toggle">
+          <img src="../../images/collapse.png">
+        </button>
+        <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <img src="../../images/collapse2.png">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <nav class="navbar navbar-expand-lg">
             <?php echo getNavBar(); ?>
           </nav>
@@ -47,11 +48,22 @@
       </nav>
       <div class="container-fluid ss-bg">
         <div class="row">
-          <div class="col-9 text-center">
+          <div class="col-9 text-center" align="center">
             <!-- BODY -->
             <h1 class="mt-4">Inventario</h1>
             <p> Aquí puede consultar el inventario.</p>
-            <?php echo getInventory(); ?>
+            <form class="form-horizontal form-inline justify-content-center ">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="busqueda">Busqueda:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="search" id="search" placeholder="Escriba su busqueda">
+                </div>
+              </div>
+            </form>
+            <p> &nbsp;</p>
+            <div id="tabla">
+              <!-- Tabla autogenerada -->
+            </div>
             <p> &nbsp;</p>
           </div>
           <!-- /BODY -->
@@ -70,12 +82,12 @@
       </div>
     </div>
   </div>
-  <script src="../../js/vendor/jquery/jquery.min.js"></script>
+  <script src="../../js/vendor/jquery-3.1.1.min.js"></script>
   <script src="../../js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>
+  <script src="../../js/forms/functions/inventario.js"></script>
 </body>
 
 </html>

@@ -105,7 +105,7 @@
 
     function getInventory()
     {
-        global $user, $connection;
+        global $connection;
         $query = "select * from ingrediente order by nombre asc";
         $result = mysqli_query($connection, $query) or die ('"query"');   
         $output = '<table class="table table-hover">';
@@ -115,9 +115,13 @@
         for($i = 0; $i<$result->num_rows; $i++)
         {
             $row = mysqli_fetch_array($result);
+            $critica = $row['existencia_critica'];
+            $cantidad = $row['cantidad'];
+            $existencia = ($critica > $row['cantidad']) ? "<td> <font color='red'>$cantidad<font> </td>" : "<td>$cantidad</td>"; 
+
             $output .= "<tr>";
             $output .= "<td>".$row['nombre']."</td>";
-            $output .= "<td>".$row['cantidad']."</td>";
+            $output .= $existencia;
             $output .= "<td>".$row['especificacion']."</td>";
             $output .= '</tr>';
         }

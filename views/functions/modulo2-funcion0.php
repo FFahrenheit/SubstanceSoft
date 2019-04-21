@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Recibir comandas</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
   <link href="../../css/index.css" rel="stylesheet">
@@ -16,6 +17,7 @@
   getLogStatus();
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php');
   ?>
+
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
       <a href="../menus/index.php" class="hide nochange">
