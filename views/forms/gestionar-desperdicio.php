@@ -49,7 +49,7 @@
                 $row = mysqli_fetch_array($result);
 
                 if (!isset($row['valor']) || $row['valor'] == 0) {
-                    echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
+                    echo '<h2>El desperdicio fijo está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
@@ -72,7 +72,7 @@
                     <form id="formulario" class="form-horizontal form-inline" novalidate>
                         <div class="form-group" style="text-align:center;">
                             <div class="col-sm-8">
-                                <input style="width:200px" placeholder="Ingrese la nueva razón de desperdicio" type="number" min="0" max="100" name="rate" id="rate" value="<?php echo $row['valor']; ?>" class="form-control" required>
+                                <input style="width:200px" placeholder="Ingrese la nueva razón de desperdicio" type="number" min="0" max="100" name="rate" id="rate" class="form-control" required>
                                 <div class="invalid-feedback">
                                     Entrada inválida
                                 </div>

@@ -15,7 +15,7 @@ function setCodeStatus(new_status)
     {
         console.log("aqui llega js");
         console.log(data);
-        alert(data);
+        //alert(data);
         window.location.reload();
     })
 }

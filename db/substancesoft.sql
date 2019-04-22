@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2019 a las 21:18:40
+-- Tiempo de generación: 22-04-2019 a las 04:52:31
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -134,7 +134,7 @@ INSERT INTO `fechas` (`clave`, `nombre`, `valor`) VALUES
 (1, 'fecha_in', '2019-04-07 23:59:59'),
 (2, 'fecha_fin', '2019-04-14 23:59:59'),
 (3, 'Encendido', '2019-04-21 00:00:00'),
-(4, 'Apagado', '2019-04-21 12:00:59');
+(4, 'Apagado', '2019-04-21 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -232,8 +232,8 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', 155, 'kg', 4),
-(2, 'queso', 497, 'lt', 1),
+(1, 'pollo', 154, 'kg', 4),
+(2, 'queso', 477, 'lt', 1),
 (3, 'maiz', 115, 'kg', 1),
 (4, 'Agua', 20, 'lt', 10);
 
@@ -275,7 +275,8 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`) VALUES
 (54, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:13'),
 (55, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:16'),
 (56, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-04-21 04:01:56'),
-(57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40');
+(57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40'),
+(58, 'Admin100', 'El platillo Caviar de la mesa 0 esta listo', '2019-04-22 02:48:12');
 
 -- --------------------------------------------------------
 
@@ -416,7 +417,8 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (54, 'pedido', '2019-04-18 20:55:45', 3, 29),
 (55, 'pedido', '2019-04-21 02:56:35', 3, 29),
 (56, 'pedido', '2019-04-21 04:03:08', 4, 26),
-(57, 'pedido', '2019-04-21 04:32:32', 6, 29);
+(57, 'pedido', '2019-04-21 04:32:32', 6, 29),
+(58, 'listo', '2019-04-22 02:47:47', 3, 26);
 
 --
 -- Disparadores `pedidos`
@@ -452,7 +454,9 @@ CREATE TRIGGER `restar-ingrediente` AFTER UPDATE ON `pedidos` FOR EACH ROW BEGIN
          		WHERE platillo = NEW.platillo
          		AND ing.clave = recetas.ingrediente 
          		AND ingrediente.clave = ing.clave)
-    		)
+    		)*(1 + 
+                  ((SELECT valor from preferencias 
+                    WHERE nombre ='razon_desperdicio')/100))
 			WHERE ingrediente.clave IN 
 			(SELECT ingrediente from recetas WHERE platillo = NEW.platillo);
     	END IF;
@@ -552,7 +556,8 @@ CREATE TABLE `preferencias` (
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
 ('acceso_codigo', 1),
 ('apagado_dinamico', 1),
-('desperdicio_diario', 0);
+('desperdicio_diario', 1),
+('razon_desperdicio', 100);
 
 -- --------------------------------------------------------
 
@@ -871,7 +876,7 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -883,7 +888,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
