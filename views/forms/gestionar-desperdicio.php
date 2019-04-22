@@ -14,9 +14,9 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
-    <script src="../../js/forms/gestionar-desperdicio.js"></script>
+    <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
-
+  
 <body class="s-bg">
     <div class="s-nb">
         <a onclick="goBack()" style="float: left;">
@@ -52,7 +52,7 @@
                     echo '<h2>El desperdicio fijo está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,'."'desperdicio_diario'".')" class="btn btn-success">Habilitar</button> ';
                     die();
                 }
 
@@ -84,7 +84,7 @@
                     </form>
                 </div>
                 <br></br><br></br>
-                <button type="button" onclick="setCodeStatus(false)" class="btn btn-danger">Deshabilitar</button>
+                <button type="button" onclick="setCodeStatus(false,'desperdicio_diario')" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
             </div>
         </div>

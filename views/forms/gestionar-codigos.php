@@ -15,6 +15,7 @@
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
     <script src="../../js/forms/generar-codigo.js"></script>
+    <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
 
 <body class="s-bg">
@@ -49,7 +50,7 @@
                     echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,'."'acceso_codigo'".')" class="btn btn-success">Habilitar</button> ';
                     die();
                 }
                 ?>
@@ -85,7 +86,7 @@
                     ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "setCodeStatus(false)" class="btn btn-danger">Deshabilitar</button>
+                <button type="button" onclick = "setCodeStatus(false,'acceso_codigo')" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
 
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -114,5 +115,5 @@
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
-
+  
 </html>

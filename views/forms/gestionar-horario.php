@@ -16,10 +16,10 @@
     <script type="text/javascript" src="../../js/vendor/clock/dist/jquery-clockpicker.min.js"></script>
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
-    <script src="../../js/forms/gestionar-horario.js"></script>
+    <script src="../../js/forms/gestionar-preferencia.js"></script>
     <script src="../../js/vendor/common-functions.js"></script>
 </head>
-
+  
 <body class="s-bg">
     <div class="s-nb">
         <a onclick="goBack()"   style="float: left;">
@@ -57,7 +57,7 @@
                     echo '<h2>El horario dinámico está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,'."'apagado_dinamico'".')" class="btn btn-success">Habilitar</button> ';
                     mysqli_close($connection);
                     die();
                 }
@@ -115,7 +115,7 @@
                         </form>
                     </div>
                 </div>
-                <button type="button" onclick="setCodeStatus(false)" class="btn btn-danger">Deshabilitar</button>
+                <button type="button" onclick="setCodeStatus(false,'apagado_dinamico')" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
             </div>
         </div>
