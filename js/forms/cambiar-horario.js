@@ -7,12 +7,12 @@ formulario.addEventListener('submit',function(e)
 
     var apagado = document.getElementById('apagado').value;
     var encendido = document.getElementById('encendido').value;
-    if(apagado < encendido)
+    if(apagado < encendido && formulario.checkValidity()===true)
     {
         alert("Error, el encendido debe pasar antes que el apagado.");
-        formulario.reset();
+        formulario.reset();   
     }
-    else 
+    else if(formulario.checkValidity()===true)
     {
         var datos = new FormData();
         datos.append("apagado",apagado);
@@ -35,12 +35,6 @@ formulario.addEventListener('submit',function(e)
                   
             })
     }
-
-
-    /*if(formulario.checkValidity()===true)
-    {
-        
-    }*/
 })
 
 var input = $('#encendido');

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>preferencias</title>
+  <title>Preferencias</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
@@ -50,7 +50,7 @@
         <div class="row">
           <div class="col-9 text-center" align="center">
             <!-- BODY -->
-            <h1 class="mt-4">Inventario</h1>
+            <h1 class="mt-4">Preferencias</h1>
             <p> Aquí puede las diversas preferencias del sistema</p>
             <?php echo getPreferencias() ?>
           </div>

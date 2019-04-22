@@ -52,7 +52,7 @@
             <!-- BODY -->
             <h1 class="mt-4">Inventario</h1>
             <p> Aquí puede consultar el inventario.</p>
-            <form class="form-horizontal form-inline justify-content-center ">
+            <form class="form-horizontal form-inline justify-content-center">
               <div class="form-group">
                 <label class="control-label col-sm-2" for="busqueda">Busqueda:</label>
                 <div class="col-sm-9">

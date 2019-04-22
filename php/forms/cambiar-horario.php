@@ -10,7 +10,7 @@
 
     $query = "UPDATE fechas SET valor = (SELECT CONCAT(DATE(NOW()),' ','$apa',':59')) WHERE nombre='Apagado'";
 
-    echo json_encode("exito");
+    mysqli_query($connection,$query) or die("'Error en apagado'");
 
-    mysqli_query($connection,$query);
+    echo json_encode("exito");
 ?>

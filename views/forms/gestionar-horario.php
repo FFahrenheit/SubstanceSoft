@@ -121,8 +121,8 @@
         </div>
     </section>
 </body>
-<script src="../../js/forms/cambiar-horario.js"></script>
 <script src="../../js/vendor/validate-form.js"></script>
+<script src="../../js/forms/cambiar-horario.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
 
