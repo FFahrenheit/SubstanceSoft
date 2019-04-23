@@ -25,18 +25,11 @@
         </style>
     </head>
     <body>
-        <section class="container">
-            <div align="center">
-                <h1 class="text-uppercase text-center">Participacion de empleados</h2>
-                <p class="lead text-center">A continuación se muestra el total de ordenes y pedidos concretados por usuario</p>
-                <div id="container" style="width: 75%;">
-                        <canvas id="canvas"></canvas>
-                </div>
-                <a href = "../modulo0-funcion1.php">
-                    <button class="btn btn-success">Regresar</button>
-                </a>
-            </div>
-        </section>
+      <section class="container">
+              <div id="container" style="width: 100%; height: 100%;">
+                      <canvas id="canvas"></canvas>
+              </div>
+      </section>
     </body>
     <script>
             var color = Chart.helpers.color;
@@ -48,20 +41,20 @@
                     borderColor: window.chartColors.red,
                     borderWidth: 1,
                     data: [
-                       <?php echo getParticipationOrdersData(); ?> 
+                       <?php echo getParticipationOrdersData(); ?>
                     ]
-                }, 
+                },
                 {
                     label: 'Pedidos hechos',
                     backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
                     borderColor: window.chartColors.blue,
                     borderWidth: 1,
                     data: [
-                       <?php echo getParticipationRequestsData(); ?> 
+                       <?php echo getParticipationRequestsData(); ?>
                     ]
                 }
                 ]};
-    
+
             window.onload = function() {
                 var ctx = document.getElementById('canvas').getContext('2d');
                 window.myHorizontalBar = new Chart(ctx, {
@@ -90,7 +83,7 @@
                         }
                     }
                 });
-    
+
             };
         </script>
     <script src="../js/vendor/validate-form.js"></script>

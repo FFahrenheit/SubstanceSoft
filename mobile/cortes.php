@@ -26,16 +26,9 @@
     </head>
     <body>
         <section class="container">
-            <div align="center">
-                <h1 class="text-uppercase text-center">Cortes de la semana</h2>
-                <p class="lead text-center">A continuación se muestran el total ganado de la semana pasada por día</p>
-                <div id="container" style="width: 75%;">
+                <div id="container" style="width: 100%; height: 100%;">
                         <canvas id="canvas"></canvas>
                 </div>
-                <a href = "../modulo0-funcion1.php">
-                    <button class="btn btn-success">Regresar</button>
-                </a>
-            </div>
         </section>
     </body>
     <script>
@@ -48,12 +41,12 @@
                     borderColor: window.chartColors.red,
                     borderWidth: 1,
                     data: [
-                       <?php echo getDailyEarningData(); ?> 
+                       <?php echo getDailyEarningData(); ?>
                     ]
                 }]
-    
+
             };
-    
+
             window.onload = function() {
                 var ctx = document.getElementById('canvas').getContext('2d');
                 window.myHorizontalBar = new Chart(ctx, {
@@ -82,7 +75,7 @@
                         }
                     }
                 });
-    
+
             };
         </script>
     <script src="../js/vendor/validate-form.js"></script>

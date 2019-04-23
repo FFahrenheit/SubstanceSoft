@@ -25,18 +25,9 @@
         </style>
     </head>
     <body>
-        <section class="container">
-            <div align="center">
-                <h1 class="text-uppercase text-center">Horarios de ventas</h2>
-                <p class="lead text-center">A continuación se muestran las datos de los horarios de ventas más populares de la última semana</p>
-                <div id="container" style="width: 75%;">
+                <div id="container" style="width: 100%; height: 100%; ">
                         <canvas id="canvas"></canvas>
                 </div>
-                <a href = "../modulo0-funcion1.php">
-                    <button class="btn btn-success">Regresar</button>
-                </a>
-            </div>
-        </section>
     </body>
     <script>
             var color = Chart.helpers.color;
@@ -48,11 +39,11 @@
                     borderColor: window.chartColors.red,
                     borderWidth: 1,
                     data: [
-                       <?php echo getSalesPerHourData(); ?> 
+                       <?php echo getSalesPerHourData(); ?>
                     ]
-                }]    
+                }]
             };
-    
+
             window.onload = function() {
                 var ctx = document.getElementById('canvas').getContext('2d');
                 window.myHorizontalBar = new Chart(ctx, {
@@ -81,7 +72,7 @@
                         }
                     }
                 });
-    
+
             };
         </script>
     <script src="../js/vendor/validate-form.js"></script>
