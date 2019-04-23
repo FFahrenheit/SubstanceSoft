@@ -68,8 +68,8 @@
                   <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Cocinas">
                   <div class="card-block">
                     <h4 class="card-title">Uso de ingredientes</h4>
-                    <p class="card-text">Consulte el uso de inhgredientes</p>
-                    <p><a href="#" class="btn btn-success">Ver</a></p>
+                    <p class="card-text">Consulte el uso y surtido de ingredientes</p>
+                    <p><a href="charts/ingredientes.php" class="btn btn-success">Ver</a></p>
                   </div>
                 </div>
               </div>
@@ -83,6 +83,9 @@
                   </div>
                 </div>
               </div>
+              </div>
+            <p>&nbsp;</p>
+            <div class="card-deck">
               <div class="card text-center">
                 <div class="card-body">
                   <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
@@ -93,9 +96,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <p>&nbsp;</p>
-            <div class="card-deck">
               <div class="card text-center">
                 <div class="card-body">
                   <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
@@ -109,12 +109,7 @@
               <div class="card text-center" style="visibility: hidden">
                 <div class="card-body"></div>
               </div>
-              <div class="card text-center" style="visibility: hidden">
-                <div class="card-body"></div>
-              </div>
-              <div class="card text-center" style="visibility: hidden">
-                <div class="card-body"></div>
-              </div>
+
             </div>
             <!-- /BODY -->
           </div>
