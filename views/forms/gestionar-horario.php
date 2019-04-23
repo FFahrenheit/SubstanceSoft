@@ -9,6 +9,12 @@
     <title>
         Gestionar horario de encendido / apagado
     </title>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
     <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
 
     <link rel="stylesheet" type="text/css" href="../../js/vendor/clock/dist/jquery-clockpicker.min.css">
@@ -19,16 +25,16 @@
     <script src="../../js/forms/gestionar-preferencia.js"></script>
     <script src="../../js/vendor/common-functions.js"></script>
 </head>
-  
+
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()"   style="float: left;">
+        <a onclick="goBack()" style="float: left;">
             <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../views/menus/index.php">
             <h1>SubstanceSoft</h1>
         </a>
-        <a onclick="refreshPage()"   style="float: left;">
+        <a onclick="refreshPage()" style="float: left;">
             <img src="../../images/reload.png" alt="Recargar">
         </a>
     </div>
@@ -57,7 +63,7 @@
                     echo '<h2>El horario dinámico está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true,'."'apagado_dinamico'".')" class="btn btn-success">Habilitar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,' . "'apagado_dinamico'" . ')" class="btn btn-success">Habilitar</button> ';
                     mysqli_close($connection);
                     die();
                 }
@@ -74,7 +80,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $i=0;
+                                $i = 0;
                                 $query = "SELECT TIME(valor) as t,nombre FROM fechas WHERE nombre='encendido' OR nombre='apagado'";
                                 $result = mysqli_query($connection, $query);
                                 while ($row = mysqli_fetch_array($result)) {
@@ -125,5 +131,9 @@
 <script src="../../js/forms/cambiar-horario.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
+<script>
+    if (window.module) module = window.module;
+</script>
+
 
 </html>

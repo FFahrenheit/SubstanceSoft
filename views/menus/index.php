@@ -13,7 +13,7 @@
   <link href="../../css/index.css" rel="stylesheet">
 </head>
 
-<body>
+<body> 
   <?php
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/common/index-functions.php');
   (isset($_GET['mod'])) ? getLogStatusChange($_GET['mod']) : getLogStatus();

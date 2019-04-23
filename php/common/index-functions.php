@@ -59,10 +59,14 @@
         if(!isset($_SESSION['username']))
         {
             header("Location: /substancesoft/views/menus/login.html");
-            exit();   
+            exit();
         }
-        $curMod = $module; 
-        $_SESSION['actual'] = $module;
+        else 
+        {
+            global $curMod;
+            $curMod = $module; 
+            $_SESSION['actual'] = $module;
+        }
     }
 
     function getLogStatus()
@@ -71,7 +75,7 @@
         {
             header("Location: /substancesoft/views/menus/login.html");
             exit();   
-        }        
+        }
     }
     function getNavBar()
     {

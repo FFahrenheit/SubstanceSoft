@@ -62,7 +62,7 @@
     {
         session_start();
         $_SESSION['username'] = $row['username'];
-        //$_SESSION['password'] = $password;
+        //$_SESSION['password'] = $password; // why tho
         $_SESSION['name'] = $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m'];
         $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion 
         where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave"; 
