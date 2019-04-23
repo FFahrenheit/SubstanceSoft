@@ -9,6 +9,12 @@
     <title>
         Agregar platillos a orden
     </title>
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
     <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
     <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
@@ -128,5 +134,6 @@
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>
 <script src="../../../js/forms/functions/nueva-comanda.js"></script>
+<script>if (window.module) module = window.module;</script>
 
 </html>

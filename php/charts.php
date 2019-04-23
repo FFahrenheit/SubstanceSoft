@@ -168,4 +168,94 @@
         }
         return $output;  
     }
+
+    function getIngredientUse()
+    {
+        global $connection;
+        $query = "SELECT * FROM uso_ingredientes";
+        $array = getIngredientTitlesForUse();
+        $output = "";
+        for($i = 0; $i < sizeof($array); $i++)
+        {
+            $result = mysqli_query($connection,$query);
+            $found = false;
+            for($j=0; $j<$result->num_rows;$j++)
+            {
+                $row = mysqli_fetch_array($result);
+                if($row['nombre'] == $array[$i])
+                {
+                    $output .= "'".$row['suma']."',";
+                    $found = true;
+                    break;
+                }
+            }
+            if(!$found)
+            {
+                $output .= "'0',";
+            }
+        }
+        $output = trim($output,",");
+        return $output;
+    }
+
+    function getIngredientSupply()
+    {
+        global $connection;
+        $query = "SELECT * FROM surtido_ingredientes";
+        $array = getIngredientTitlesForUse();
+        $output = "";
+        for($i = 0; $i < sizeof($array); $i++)
+        {
+            $result = mysqli_query($connection,$query);
+            $found = false;
+            for($j=0; $j<$result->num_rows;$j++)
+            {
+                $row = mysqli_fetch_array($result);
+                if($row['nombre'] == $array[$i])
+                {
+                    $output .= "'".$row['suma']."',";
+                    $found = true;
+                    break;
+                }
+            }
+            if(!$found)
+            {
+                $output .= "'0',";
+            }
+        }
+        $output = trim($output,",");
+        return $output;
+    }
+
+    function getIngredientTitles()
+    {
+        global $connection;
+        $query = "SELECT * FROM titulos_ingredientes";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $output .= "'".$row['nombre']."'";
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }   
+        } 
+        return $output;
+    }
+
+    function getIngredientTitlesForUse()
+    {
+        global $connection;
+        $query = "SELECT * FROM titulos_ingredientes_2";
+        $result = mysqli_query($connection,$query);
+        $array = array();
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $array[$i] = $row['nombre'];
+        } 
+        return $array;
+    }
 ?>

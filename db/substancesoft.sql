@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2019 a las 04:52:31
+-- Tiempo de generación: 23-04-2019 a las 08:33:41
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -38,7 +38,9 @@ update orden set total = (select sum(platillo.precio) from platillo, (select * f
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerIngredientes` (IN `clavePlatillo` INT)  BEGIN
 
     SELECT 
-    recetas.cantidad AS necesario, 
+    recetas.cantidad * (1+ (
+        (SELECT valor FROM preferencias WHERE nombre = 'razon_desperdicio')
+        /100) ) AS necesario, 
     ingrediente.cantidad AS existencia 
     FROM recetas, ingrediente WHERE 
     recetas.ingrediente = ingrediente.clave
@@ -132,7 +134,7 @@ CREATE TABLE `fechas` (
 
 INSERT INTO `fechas` (`clave`, `nombre`, `valor`) VALUES
 (1, 'fecha_in', '2019-04-07 23:59:59'),
-(2, 'fecha_fin', '2019-04-14 23:59:59'),
+(2, 'fecha_fin', '2019-04-30 23:59:59'),
 (3, 'Encendido', '2019-04-21 00:00:00'),
 (4, 'Apagado', '2019-04-21 00:00:00');
 
@@ -160,6 +162,32 @@ INSERT INTO `funcion` (`clave`, `descripcion`) VALUES
 (6, 'Individual:Consulta inventario'),
 (7, 'Individual: Consulta cuenta'),
 (8, 'Individual: Pedir ticket');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial_ingredientes`
+--
+
+CREATE TABLE `historial_ingredientes` (
+  `clave` int(11) NOT NULL,
+  `ingrediente` int(11) NOT NULL,
+  `cantidad` decimal(10,4) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tipo` enum('uso','surtido') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `historial_ingredientes`
+--
+
+INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha`, `tipo`) VALUES
+(1, 1, '-10.0000', '2019-04-23 05:18:15', 'uso'),
+(2, 2, '-0.0100', '2019-04-23 05:18:15', 'uso'),
+(3, 1, '-10.0000', '2019-04-23 05:24:48', 'uso'),
+(4, 2, '-0.0100', '2019-04-23 05:24:48', 'uso'),
+(5, 4, '1.0000', '2019-04-23 05:41:07', 'surtido'),
+(6, 1, '11.0000', '2019-04-23 06:04:22', 'surtido');
 
 -- --------------------------------------------------------
 
@@ -222,9 +250,9 @@ CREATE TABLE `horarios_venta` (
 CREATE TABLE `ingrediente` (
   `clave` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `cantidad` float DEFAULT '0',
+  `cantidad` decimal(10,4) DEFAULT '0.0000',
   `especificacion` enum('kg','mg','lt','ml','pza') NOT NULL,
-  `existencia_critica` float DEFAULT '0'
+  `existencia_critica` float(10,4) DEFAULT '0.0000'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -232,10 +260,37 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', 154, 'kg', 4),
-(2, 'queso', 477, 'lt', 1),
-(3, 'maiz', 115, 'kg', 1),
-(4, 'Agua', 20, 'lt', 10);
+(1, 'pollo', '145.0000', 'kg', 4.0000),
+(2, 'queso', '477.0000', 'lt', 1.0000),
+(3, 'maiz', '115.0000', 'kg', 1.0000),
+(4, 'Agua', '21.0000', 'lt', 10.0000);
+
+--
+-- Disparadores `ingrediente`
+--
+DELIMITER $$
+CREATE TRIGGER `historial_de_ingrediente` BEFORE UPDATE ON `ingrediente` FOR EACH ROW BEGIN
+	IF (NEW.cantidad < OLD.cantidad)
+    THEN 
+    	INSERT INTO historial_ingredientes(ingrediente,cantidad,tipo) 
+        VALUES (
+            NEW.clave,
+            (NEW.cantidad  - OLD.cantidad),
+            'uso'
+        );
+    END IF;
+    IF (NEW.cantidad > OLD.cantidad)
+    THEN 
+        	INSERT INTO historial_ingredientes(ingrediente,cantidad,tipo) 
+        VALUES (
+            NEW.clave,
+            (NEW.cantidad  - OLD.cantidad),
+            'surtido'
+        );
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -276,7 +331,18 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`) VALUES
 (55, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:16'),
 (56, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-04-21 04:01:56'),
 (57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40'),
-(58, 'Admin100', 'El platillo Caviar de la mesa 0 esta listo', '2019-04-22 02:48:12');
+(58, 'Admin100', 'El platillo Caviar de la mesa 0 esta listo', '2019-04-22 02:48:12'),
+(59, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:18:15'),
+(60, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:20:00'),
+(61, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:48'),
+(62, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:51'),
+(63, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:52'),
+(64, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53'),
+(65, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53'),
+(66, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:54'),
+(67, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:04'),
+(68, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:05'),
+(69, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:51:24');
 
 -- --------------------------------------------------------
 
@@ -331,7 +397,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', 120),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 5584),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 5684),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL);
 
 --
@@ -404,7 +470,7 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (37, 'entregado', '2019-03-19 18:18:26', 3, 22),
 (38, 'entregado', '2019-03-19 18:18:27', 3, 22),
 (39, 'listo', '2019-03-19 18:33:39', 3, 23),
-(40, 'entregado', '2019-03-19 18:39:33', 6, 23),
+(40, 'listo', '2019-03-19 18:39:33', 6, 23),
 (41, 'entregado', '2019-04-17 23:10:38', 4, 24),
 (42, 'entregado', '2019-03-19 20:33:42', 4, 25),
 (44, 'entregado', '2019-03-19 20:33:42', 4, 25),
@@ -417,8 +483,9 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (54, 'pedido', '2019-04-18 20:55:45', 3, 29),
 (55, 'pedido', '2019-04-21 02:56:35', 3, 29),
 (56, 'pedido', '2019-04-21 04:03:08', 4, 26),
-(57, 'pedido', '2019-04-21 04:32:32', 6, 29),
-(58, 'listo', '2019-04-22 02:47:47', 3, 26);
+(57, 'listo', '2019-04-21 04:32:32', 6, 29),
+(58, 'listo', '2019-04-22 02:47:47', 3, 26),
+(59, 'pedido', '2019-04-22 02:56:23', 6, 29);
 
 --
 -- Disparadores `pedidos`
@@ -554,10 +621,10 @@ CREATE TABLE `preferencias` (
 --
 
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
-('acceso_codigo', 1),
-('apagado_dinamico', 1),
-('desperdicio_diario', 1),
-('razon_desperdicio', 100);
+('acceso_codigo', 0),
+('apagado_dinamico', 0),
+('desperdicio_diario', 0),
+('razon_desperdicio', 0);
 
 -- --------------------------------------------------------
 
@@ -586,7 +653,7 @@ INSERT INTO `proveedor` (`clave`, `nombre`) VALUES
 
 CREATE TABLE `recetas` (
   `clave` bigint(20) NOT NULL,
-  `cantidad` float NOT NULL,
+  `cantidad` decimal(10,4) NOT NULL,
   `ingrediente` int(11) NOT NULL,
   `platillo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -596,10 +663,10 @@ CREATE TABLE `recetas` (
 --
 
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
-(1, 0.5, 1, 3),
-(3, 10, 2, 3),
-(4, 10, 1, 6),
-(5, 0.01, 2, 6);
+(1, '0.5000', 1, 3),
+(3, '100000.0000', 2, 3),
+(4, '10.0000', 1, 6),
+(5, '0.0100', 2, 6);
 
 -- --------------------------------------------------------
 
@@ -609,7 +676,7 @@ INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 
 CREATE TABLE `surtidos` (
   `clave` bigint(20) NOT NULL,
-  `cantidad` float NOT NULL,
+  `cantidad` decimal(10,4) NOT NULL,
   `frecuencia` int(11) NOT NULL,
   `ingrediente` int(11) NOT NULL,
   `proveedor` int(11) NOT NULL,
@@ -621,7 +688,49 @@ CREATE TABLE `surtidos` (
 --
 
 INSERT INTO `surtidos` (`clave`, `cantidad`, `frecuencia`, `ingrediente`, `proveedor`, `nombre_trigger`) VALUES
-(1, 100, 1, 4, 1, 'triggerIng4Prov1');
+(1, '100.0000', 1, 4, 1, 'triggerIng4Prov1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `surtido_ingredientes`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `surtido_ingredientes` (
+`nombre` varchar(30)
+,`suma` decimal(32,4)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `titulos_ingredientes`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `titulos_ingredientes` (
+`nombre` varchar(35)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `titulos_ingredientes_2`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `titulos_ingredientes_2` (
+`nombre` varchar(30)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `uso_ingredientes`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `uso_ingredientes` (
+`nombre` varchar(30)
+,`suma` decimal(32,4)
+);
 
 -- --------------------------------------------------------
 
@@ -704,6 +813,42 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Estructura para la vista `surtido_ingredientes`
+--
+DROP TABLE IF EXISTS `surtido_ingredientes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `surtido_ingredientes`  AS  select `ingrediente`.`nombre` AS `nombre`,sum(`historial_ingredientes`.`cantidad`) AS `suma` from (`historial_ingredientes` join `ingrediente`) where ((`historial_ingredientes`.`ingrediente` = `ingrediente`.`clave`) and (`historial_ingredientes`.`fecha` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`historial_ingredientes`.`fecha` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin'))) and (`historial_ingredientes`.`tipo` = 'surtido')) group by `historial_ingredientes`.`ingrediente` order by sum(`historial_ingredientes`.`cantidad`) limit 15 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `titulos_ingredientes`
+--
+DROP TABLE IF EXISTS `titulos_ingredientes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `titulos_ingredientes`  AS  select concat(`ingrediente`.`nombre`,'(',`ingrediente`.`especificacion`,')') AS `nombre` from ((`ingrediente` join `uso_ingredientes`) join `surtido_ingredientes`) where ((`ingrediente`.`nombre` = `uso_ingredientes`.`nombre`) or (`ingrediente`.`nombre` = `surtido_ingredientes`.`nombre`)) group by `ingrediente`.`nombre` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `titulos_ingredientes_2`
+--
+DROP TABLE IF EXISTS `titulos_ingredientes_2`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `titulos_ingredientes_2`  AS  select `ingrediente`.`nombre` AS `nombre` from ((`ingrediente` join `uso_ingredientes`) join `surtido_ingredientes`) where ((`ingrediente`.`nombre` = `uso_ingredientes`.`nombre`) or (`ingrediente`.`nombre` = `surtido_ingredientes`.`nombre`)) group by `ingrediente`.`nombre` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `uso_ingredientes`
+--
+DROP TABLE IF EXISTS `uso_ingredientes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `uso_ingredientes`  AS  select `ingrediente`.`nombre` AS `nombre`,sum(`historial_ingredientes`.`cantidad`) AS `suma` from (`historial_ingredientes` join `ingrediente`) where ((`historial_ingredientes`.`ingrediente` = `ingrediente`.`clave`) and (`historial_ingredientes`.`fecha` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`historial_ingredientes`.`fecha` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin'))) and (`historial_ingredientes`.`tipo` = 'uso')) group by `historial_ingredientes`.`ingrediente` order by sum(`historial_ingredientes`.`cantidad`) limit 15 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura para la vista `usuario_ordenes`
 --
 DROP TABLE IF EXISTS `usuario_ordenes`;
@@ -750,6 +895,13 @@ ALTER TABLE `fechas`
 --
 ALTER TABLE `funcion`
   ADD PRIMARY KEY (`clave`);
+
+--
+-- Indices de la tabla `historial_ingredientes`
+--
+ALTER TABLE `historial_ingredientes`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `ingrediente` (`ingrediente`);
 
 --
 -- Indices de la tabla `ingrediente`
@@ -867,6 +1019,12 @@ ALTER TABLE `funcion`
   MODIFY `clave` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `historial_ingredientes`
+--
+ALTER TABLE `historial_ingredientes`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `ingrediente`
 --
 ALTER TABLE `ingrediente`
@@ -876,7 +1034,7 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -888,7 +1046,7 @@ ALTER TABLE `orden`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -930,6 +1088,12 @@ ALTER TABLE `surtidos`
 ALTER TABLE `chefs`
   ADD CONSTRAINT `chefs_ibfk_1` FOREIGN KEY (`cocina`) REFERENCES `cocina` (`clave`),
   ADD CONSTRAINT `chefs_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `historial_ingredientes`
+--
+ALTER TABLE `historial_ingredientes`
+  ADD CONSTRAINT `historial_ingredientes_ibfk_1` FOREIGN KEY (`ingrediente`) REFERENCES `ingrediente` (`clave`);
 
 --
 -- Filtros para la tabla `mensajes`
