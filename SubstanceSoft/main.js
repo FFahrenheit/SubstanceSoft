@@ -8,8 +8,8 @@ app.on('ready', () =>{
     mainWindow = new BrowserWindow(
         {
             titleBarStyle: 'hidden',
-            minWidth: 800,
-            minHeight: 600,
+            minWidth: 1024,
+            minHeight: 768,
             show: false,
             backgroundColor: '#bababa',
             icon: path.join(__dirname, 'images/64x64.png')
