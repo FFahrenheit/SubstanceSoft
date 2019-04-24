@@ -19,7 +19,7 @@
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
-    <a href="../menus/index.php" class="hide nochange">
+      <a href="../menus/index.php" class="hide nochange">
         <div align="center" class="sidebar-heading nochange">
           <i>SubstanceSoft</i>
         </div>
@@ -34,13 +34,14 @@
     </div>
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg ss-nb border-bottom">
-      <button class="btn btn-light" id="menu-toggle">
-              <img src = "../../images/collapse.png">
-            </button>
-            <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <img src = "../../images/collapse2.png">
-            </button>        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
+        <button class="btn btn-light" id="menu-toggle">
+          <img src="../../images/collapse.png">
+        </button>
+        <button class="btn btn-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <img src="../../images/collapse2.png">
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
           <nav class="navbar navbar-expand-lg">
             <?php echo getNavBar(); ?>
           </nav>
@@ -53,62 +54,75 @@
             <h1 class="mt-4"> Estadísticas </h1>
             <p> Aquí consultar las estadisticas actuales</p>
             <div class="card-deck">
-              <div class="card text-center">
-                <div class="card-body">
-                  <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
-                  <div class="card-block">
-                    <h4 class="card-title">Horas de venta</h4>
-                    <p class="card-text">Consulte las horas de venta más populares</p>
-                    <p><a href="charts/horarios.php" class="btn btn-success">Ver</a></p>
+              <a href="charts/horarios.php" class="a-card">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
+                    <div class="card-block">
+                      <h4 class="card-title">Horas de venta</h4>
+                      <p class="card-text">Consulte las horas de venta más populares</p>
+                      <p><a href="charts/horarios.php" class="btn btn-success">Ver</a></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card text-center">
-                <div class="card-body">
-                  <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Cocinas">
-                  <div class="card-block">
-                    <h4 class="card-title">Uso de ingredientes</h4>
-                    <p class="card-text">Consulte el uso y surtido de ingredientes</p>
-                    <p><a href="charts/ingredientes.php" class="btn btn-success">Ver</a></p>
+              </a>
+              <a href="charts/ingredientes.php" class="a-card">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Cocinas">
+                    <div class="card-block">
+                      <h4 class="card-title">Uso de ingredientes</h4>
+                      <p class="card-text">Consulte el uso y surtido de ingredientes</p>
+                      <p><a href="charts/ingredientes.php" class="btn btn-success">Ver</a></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card text-center">
-                <div class="card-body">
-                  <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
-                  <div class="card-block">
-                    <h4 class="card-title">Empleados</h4>
-                    <p class="card-text">Consulte la participación de empleados respecto a ordenes</p>
-                    <p><a href="charts/participacion.php" class="btn btn-success">Ver</a></p>
+              </a>
+              <a href="charts/participacion.php" class="a-card">
+
+                <div class="card text-center">
+                  <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
+                    <div class="card-block">
+                      <h4 class="card-title">Empleados</h4>
+                      <p class="card-text">Consulte la participación de empleados respecto a ordenes</p>
+                      <p><a href="charts/participacion.php" class="btn btn-success">Ver</a></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              </div>
+            </div>
+            </a>
             <p>&nbsp;</p>
             <div class="card-deck">
-              <div class="card text-center">
-                <div class="card-body">
-                  <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
-                  <div class="card-block">
-                    <h4 class="card-title">Montos ganados</h4>
-                    <p class="card-text">Consulte las ganancias de los ultimos 7 días</p>
-                    <p><a href="charts/cortes.php" class="btn btn-success">Ver</a></p>
+              <a href="charts/cortes.php" class="a-card">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
+                    <div class="card-block">
+                      <h4 class="card-title">Montos ganados</h4>
+                      <p class="card-text">Consulte las ganancias de los ultimos 7 días</p>
+                      <p><a href="charts/cortes.php" class="btn btn-success">Ver</a></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card text-center">
-                <div class="card-body">
-                  <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
-                  <div class="card-block">
-                    <h4 class="card-title">Demanda</h4>
-                    <p class="card-text">Consulte los platillos mas populares</p>
-                    <p><a href="charts/demanda.php" class="btn btn-success">Ver</a></p>
+              </a>
+              <a href="charts/demanda.php" class="a-card">
+
+                <div class="card text-center">
+                  <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
+                    <div class="card-block">
+                      <h4 class="card-title">Demanda</h4>
+                      <p class="card-text">Consulte los platillos mas populares</p>
+                      <p><a href="charts/demanda.php" class="btn btn-success">Ver</a></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card text-center" style="visibility: hidden">
-                <div class="card-body"></div>
-              </div>
+                <a href="charts/horarios.php" class="a-card">
+
+                  <div class="card text-center" style="visibility: hidden">
+                    <div class="card-body"></div>
+                  </div>
 
             </div>
             <!-- /BODY -->
