@@ -18,7 +18,7 @@ function getOpenAccounts()
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -37,12 +37,12 @@ function getOpenAccounts()
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                 $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="btn btn-primary">Consultar</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -71,7 +71,7 @@ function getOpenOrders()
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -92,12 +92,12 @@ function getOpenOrders()
                 $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="btn btn-danger">Cancelar</a></p>';
                 $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -124,7 +124,7 @@ function getOpenOrders()
                 for($i=0; $i<$result->num_rows; $i++)
                 {
                     $row = mysqli_fetch_array($result);
-                    if($i%4 == 0)
+                    if($i%3 == 0)
                     {
                         $output .= '<div class="card-deck">';
                     }
@@ -143,12 +143,12 @@ function getOpenOrders()
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="btn btn-danger">Cancelar</a></p>';
                     $output.='</div></div></div>';
-                    if(($i+1)%4==0)
+                    if(($i+1)%3==0)
                     {
                         $output.="</div>";
                     }
                 }
-                $rest = 4- $result->num_rows%4;
+                $rest =3- $result->num_rows%3;
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -176,7 +176,7 @@ function getOpenOrders()
                 for($i=0; $i<$result->num_rows; $i++)
                 {
                     $row = mysqli_fetch_array($result);
-                    if($i%4 == 0)
+                    if($i%3 == 0)
                     {
                         $output .= '<div class="card-deck">';
                     }
@@ -195,12 +195,12 @@ function getOpenOrders()
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="btn btn-success">Imprimir ticket</a></p>';
                     $output.='</div></div></div>';
-                    if(($i+1)%4==0)
+                    if(($i+1)%3==0)
                     {
                         $output.="</div>";
                     }
                 }
-                $rest = 4- $result->num_rows%4;
+                $rest = 3- $result->num_rows%3;
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -228,7 +228,7 @@ function getOpenOrders()
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -247,12 +247,12 @@ function getOpenOrders()
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                 $output.='<p><a href="../functions/forms/pagar.php?clave='.$row['clave'].'" class="btn btn-success">Pagar</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -276,7 +276,7 @@ function getOpenOrders()
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -295,12 +295,12 @@ function getOpenOrders()
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                 $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';

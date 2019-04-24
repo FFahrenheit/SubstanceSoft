@@ -24,7 +24,7 @@
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -36,12 +36,12 @@
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="btn btn-primary">Ver y notificar</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -73,7 +73,7 @@
             for($i=0; $i<$result->num_rows; $i++)
             {
                 $row = mysqli_fetch_array($result);
-                if($i%4 == 0)
+                if($i%3 == 0)
                 {
                     $output .= '<div class="card-deck">';
                 }
@@ -85,12 +85,12 @@
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/ver.php?clave='.$row['pk'].'" class="btn btn-primary">Ver comandas</a></p>';
                 $output.='</div></div></div>';
-                if(($i+1)%4==0)
+                if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
-            $rest = 4- $result->num_rows%4;
+            $rest = 3- $result->num_rows%3;
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
