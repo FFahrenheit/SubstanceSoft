@@ -18,6 +18,7 @@ function getOpenOrdersForClosing()
             {
                 $output .= '<div class="card-deck">';
             }
+            $output.='<a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="a-card">';
             $output.='<div class="card text-center">';
             $output.='<div class="card-body">';
             $output.='<img class="card-img-top img-fluid" src="../../images/orden.png" alt="Orden">';
@@ -32,7 +33,7 @@ function getOpenOrdersForClosing()
             }
             $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
             $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Liberar</a></p>';
-            $output.='</div></div></div>';
+            $output.='</div></div></div></a>';
             if(($i+1)%3==0)
             {
                 $output.="</div>";
@@ -66,6 +67,7 @@ function getOpenOrdersForClosing()
                 {
                     $output .= '<div class="card-deck">';
                 }
+                $output.='<a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="a-card">';
                 $output.='<div class="card text-center">';
                 $output.='<div class="card-body">';
                 $output.='<img class="card-img-top img-fluid" src="../../images/cuenta.png" alt="Cuenta">';
@@ -80,7 +82,7 @@ function getOpenOrdersForClosing()
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                 $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="btn btn-primary">Consultar</a></p>';
-                $output.='</div></div></div>';
+                $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
                     $output.="</div>";
@@ -114,6 +116,7 @@ function getOpenOrdersForClosing()
                     {
                         $output .= '<div class="card-deck">';
                     }
+                    $output.='<a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="a-card">';
                     $output.='<div class="card text-center">';
                     $output.='<div class="card-body">';
                     $output.='<img class="card-img-top img-fluid" src="../../images/cuenta.png" alt="Cuenta">';
@@ -128,7 +131,7 @@ function getOpenOrdersForClosing()
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="btn btn-success">Imprimir ticket</a></p>';
-                    $output.='</div></div></div>';
+                    $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
                         $output.="</div>";

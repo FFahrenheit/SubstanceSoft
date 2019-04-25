@@ -56,7 +56,8 @@
           <!-- /BODY -->
           <div class="col-3">
             <div class="containter text-center">
-            <?php echo getUserStatus(); ?>
+            <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
+            <?php echo getUserStatus(); ?> 
               <a href="../../php/requests/logout.php">
                 <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
                   Salir

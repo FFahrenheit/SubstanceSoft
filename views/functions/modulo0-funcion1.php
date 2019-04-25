@@ -107,7 +107,6 @@
                 </div>
               </a>
               <a href="charts/demanda.php" class="a-card">
-
                 <div class="card text-center">
                   <div class="card-body">
                     <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">

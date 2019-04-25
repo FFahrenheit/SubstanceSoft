@@ -28,6 +28,7 @@
                 {
                     $output .= '<div class="card-deck">';
                 }
+                $output.= '<a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="a-card">';
                 $output.='<div class="card text-center">';
                 $output.='<div class="card-body">';
                 $output.='<img class="card-img-top img-fluid" src="../../images/cocinas.png" alt="Cocina">';
@@ -35,7 +36,7 @@
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="btn btn-primary">Ver y notificar</a></p>';
-                $output.='</div></div></div>';
+                $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
                     $output.="</div>";
@@ -77,6 +78,7 @@
                 {
                     $output .= '<div class="card-deck">';
                 }
+                $output.= '<a href="../functions/forms/ver.php?clave='.$row['pk'].'" class="a-card">';
                 $output.='<div class="card text-center">';
                 $output.='<div class="card-body">';
                 $output.='<img class="card-img-top img-fluid" src="../../images/cocinas.png" alt="Cocina">';
@@ -84,7 +86,7 @@
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/ver.php?clave='.$row['pk'].'" class="btn btn-primary">Ver comandas</a></p>';
-                $output.='</div></div></div>';
+                $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
                     $output.="</div>";

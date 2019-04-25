@@ -76,6 +76,7 @@
                     {
                         $output .= '<div class="card-deck">';
                     }
+                    $output.='<a href="../functions/forms/nueva-comanda.php?clave='.$row['clave'].'" class="a-card">';
                     $output.='<div class="card text-center">';
                     $output.='<div class="card-body">';
                     $output.='<img class="card-img-top img-fluid" src="../../images/orden.png" alt="Orden">';
@@ -90,7 +91,7 @@
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/nueva-comanda.php?clave='.$row['clave'].'" class="btn btn-primary">Agregar</a></p>';
-                    $output.='</div></div></div>';
+                    $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
                         $output.="</div>";
@@ -128,6 +129,7 @@
                     {
                         $output .= '<div class="card-deck">';
                     }
+                    $output.='<a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="a-card">';
                     $output.='<div class="card text-center">';
                     $output.='<div class="card-body">';
                     $output.='<img class="card-img-top img-fluid" src="../../images/orden.png" alt="Orden">';
@@ -142,7 +144,7 @@
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="btn btn-danger">Cancelar</a></p>';
-                    $output.='</div></div></div>';
+                    $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
                         $output.="</div>";
@@ -179,6 +181,7 @@
                     {
                         $output .= '<div class="card-deck">';
                     }
+                    $output.='<a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="a-card">';
                     $output.='<div class="card text-center">';
                     $output.='<div class="card-body">';
                     $output.='<img class="card-img-top img-fluid" src="../../images/orden.png" alt="Orden">';
@@ -193,7 +196,7 @@
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
                     $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
-                    $output.='</div></div></div>';
+                    $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
                         $output.="</div>";
