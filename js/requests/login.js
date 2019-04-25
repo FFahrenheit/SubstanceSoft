@@ -1,27 +1,22 @@
 var formulario = document.getElementById('formulario');
 var formulario2 = document.getElementById('formulario2');
 
-formulario2.addEventListener('submit',function(e)
-{
+formulario2.addEventListener('submit', function (e) {
     e.preventDefault();
     console.log('working!');
 
     var datos = new FormData(formulario2);
 
-    if(formulario2.checkValidity()===true)
-    {
+    if (formulario2.checkValidity() === true) {
         fetch('../../php/requests/login.php',
-        {
-            method: 'POST', 
-            body: datos
-        })
-        .then (res => res.json()) 
-        .then (data => 
             {
+                method: 'POST',
+                body: datos
+            })
+            .then(res => res.json())
+            .then(data => {
                 console.log("aqui llega js");
-                console.log(data);
-                switch(data)
-                {
+                switch (data) {
                     case 'horario':
                         alert("Por el momento no pueden ingresar empleados");
                         formulario2.reset();
@@ -41,7 +36,7 @@ formulario2.addEventListener('submit',function(e)
                         break;
                     case 'success':
                         window.location.pathname = '/substancesoft/views/menus/index.php';
-                    break;
+                        break;
                     default:
                         alert('Error en el sistema');
                 }
@@ -49,27 +44,33 @@ formulario2.addEventListener('submit',function(e)
     }
 })
 
-formulario.addEventListener('submit',function(e)
-{
+formulario.addEventListener('submit', function (e) {
+    var res = '[{"name":"ivan"},{"name":"ivan"}]';
+    var not = JSON.parse(res);
+    console.log(not[0].name);
+    Notification.requestPermission().then(function (result) {
+        var notification = new Notification('Notificación de prueba',
+            {
+                'body': 'Hola',
+                'icon': '../../images/icono.png'
+            });
+    });
     e.preventDefault();
     console.log('working!');
 
     var datos = new FormData(formulario);
 
-    if(formulario.checkValidity()===true)
-    {
+    if (formulario.checkValidity() === true) {
         fetch('../../php/requests/login.php',
-        {
-            method: 'POST', 
-            body: datos
-        })
-        .then (res => res.json())
-        .then (data => 
             {
+                method: 'POST',
+                body: datos
+            })
+            .then(res => 
+                res.json()).then(data => {
                 console.log("aqui llega js");
                 console.log(data);
-                switch(data)
-                {
+                switch (data) {
                     case 'horario':
                         alert("Por el momento no pueden ingresar empleados");
                         formulario2.reset();
@@ -85,7 +86,7 @@ formulario.addEventListener('submit',function(e)
                         break;
                     case 'success':
                         window.location.pathname = '/substancesoft/views/menus/index.php';
-                    break;
+                        break;
                     default:
                         alert("Error en el sistema");
                 }
