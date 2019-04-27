@@ -13,7 +13,7 @@
         <?php include ($_SERVER['DOCUMENT_ROOT'].'/substancesoft/php/charts.php');?>
 
         <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
-        <link href="../../../css/clean-install.css" rel="stylesheet">
+        <link href="../../../css/clean-install.css" rel="stylesheet"><script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
         <script src="../../../js/vendor/Chart.js/Chart.min.css"></script>
         <script src="../../../js/vendor/Chart.js/Chart.js"></script>
         <script src="../../../js/vendor/Chart.js/samples/utils.js"></script>
@@ -97,4 +97,5 @@
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>
     <script src="../../../js/vendor/bootstrap.min.js"></script>
+<script>if (window.module) module = window.module;</script>
 </html>

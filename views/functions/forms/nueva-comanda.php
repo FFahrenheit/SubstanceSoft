@@ -18,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
     <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../css/clean-install.css" rel="stylesheet">
+    <link href="../../../css/clean-install.css" rel="stylesheet"><script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
 </head>
 
 <body class="s-bg">
@@ -133,6 +133,7 @@
 <script src="../../../js/vendor/validate-form.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>
+<script>if (window.module) module = window.module;</script>
 <script src="../../../js/forms/functions/nueva-comanda.js"></script>
 <script>if (window.module) module = window.module;</script>
 
