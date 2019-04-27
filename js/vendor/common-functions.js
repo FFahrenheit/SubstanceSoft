@@ -19,7 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
     datatype: 'html'
   })
     .done(function (respuesta) {
-      console.log(respuesta);
+      ans = JSON.parse(respuesta);
+      var notificacion;
+      for(var i = 0; i < ans.length; i++)
+      {
+        console.log(i);
+        var notificacion = new Notification('Notificación ('+(ans.length-1-i)+' más)',{
+          'body': ans[i].texto,
+          'icon': '../../images/icono.png',
+          'renotify':true,
+          'tag':i,
+          'timestamp': ans[i].hora,
+          'requireInteraction':true
+        });
+        notificacion.onclick = function (event){
+          this.close();
+        };
+      }
     })
     .fail(function () {
       console.log("Error en carga");
