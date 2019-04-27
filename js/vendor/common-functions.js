@@ -19,23 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
     datatype: 'html'
   })
     .done(function (respuesta) {
-      ans = JSON.parse(respuesta);
+      try {
+        ans = JSON.parse(respuesta);
+      } catch (e) {
+        return false;
+      }
       var notificacion;
-      for(var i = 0; i < ans.length; i++)
-      {
+      for (var i = 0; i < ans.length; i++) {
         console.log(i);
-        var notificacion = new Notification('Notificación ('+(ans.length-1-i)+' más)',{
+        var notificacion = new Notification('Notificación (' + (ans.length - 1 - i) + ' más)', {
           'body': ans[i].texto,
           'icon': '../../images/icono.png',
-          'renotify':true,
-          'tag':i,
+          'renotify': true,
+          'tag': i,
           'timestamp': ans[i].hora,
-          'requireInteraction':true
+          'requireInteraction': true
         });
-        notificacion.onclick = function (event){
+        notificacion.onclick = function (event) {
           this.close();
         };
       }
+      return true;
     })
     .fail(function () {
       console.log("Error en carga");

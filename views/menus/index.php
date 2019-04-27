@@ -10,7 +10,7 @@
 
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
-  <link href="../../css/index.css" rel="stylesheet">
+  <link href="../../css/index.css" rel="stylesheet"> <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
   <script>
   if (typeof module === 'object') {window.module = module; module = undefined;}
   </script>
@@ -76,6 +76,7 @@
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>
+<script>if (window.module) module = window.module;</script>
   <script>
     if (window.module) module = window.module;
   </script>

@@ -24,6 +24,7 @@
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/forms/gestionar-preferencia.js"></script>
     <script src="../../js/vendor/common-functions.js"></script>
+<script>if (window.module) module = window.module;</script>
 </head>
 
 <body class="s-bg">

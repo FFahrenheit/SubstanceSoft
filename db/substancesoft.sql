@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2019 a las 08:33:41
+-- Tiempo de generación: 27-04-2019 a las 05:58:59
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -46,6 +46,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerIngredientes` (IN `clavePlat
     recetas.ingrediente = ingrediente.clave
     AND recetas.platillo = clavePlatillo;
     END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerMensajes` (IN `usr` VARCHAR(35))  NO SQL
+BEGIN
+IF(SELECT count(*) FROM mensajes WHERE destinatario = usr AND visto = 0)
+THEN 
+SELECT texto, TIME(fecha) as hora FROM mensajes WHERE destinatario = usr AND visto = 0;
+END IF;
+UPDATE mensajes SET visto = 1 WHERE destinatario = usr AND visto = 0;
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarHorario` ()  NO SQL
 BEGIN
@@ -302,47 +311,48 @@ CREATE TABLE `mensajes` (
   `id` int(11) NOT NULL,
   `destinatario` varchar(30) NOT NULL,
   `texto` text NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `visto` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `mensajes`
 --
 
-INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`) VALUES
-(24, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:33:45'),
-(25, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:34:06'),
-(26, 'Admin100', 'La cuenta en la mesa 2 ha sido pagada', '2019-04-18 00:00:46'),
-(27, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-18 00:00:51'),
-(41, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:07'),
-(42, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:13'),
-(43, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:27'),
-(44, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:58'),
-(45, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:59'),
-(46, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00'),
-(47, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00'),
-(48, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01'),
-(49, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01'),
-(50, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:03'),
-(51, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:05'),
-(52, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:10'),
-(53, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:12'),
-(54, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:13'),
-(55, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:16'),
-(56, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-04-21 04:01:56'),
-(57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40'),
-(58, 'Admin100', 'El platillo Caviar de la mesa 0 esta listo', '2019-04-22 02:48:12'),
-(59, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:18:15'),
-(60, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:20:00'),
-(61, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:48'),
-(62, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:51'),
-(63, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:52'),
-(64, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53'),
-(65, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53'),
-(66, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:54'),
-(67, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:04'),
-(68, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:05'),
-(69, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:51:24');
+INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
+(24, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:33:45', 1),
+(25, 'Admin100', 'El platillo Caviar de la mesa 2 está listo', '2019-04-17 23:34:06', 1),
+(26, 'Admin100', 'La cuenta en la mesa 2 ha sido pagada', '2019-04-18 00:00:46', 1),
+(27, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-18 00:00:51', 1),
+(41, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:07', 1),
+(42, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:13', 1),
+(43, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:27', 1),
+(44, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:58', 1),
+(45, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:38:59', 1),
+(46, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00', 1),
+(47, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:00', 1),
+(48, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01', 1),
+(49, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:01', 1),
+(50, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:03', 1),
+(51, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:05', 1),
+(52, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:10', 1),
+(53, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:12', 1),
+(54, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:13', 1),
+(55, 'Admin100', 'El platillo Caviar de la mesa 2 esta listo', '2019-04-21 03:39:16', 1),
+(56, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-04-21 04:01:56', 1),
+(57, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-04-21 04:03:40', 1),
+(58, 'Admin100', 'El platillo Caviar de la mesa 0 esta listo', '2019-04-22 02:48:12', 1),
+(59, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:18:15', 1),
+(60, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-23 05:20:00', 1),
+(61, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:48', 1),
+(62, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:51', 1),
+(63, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:52', 1),
+(64, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53', 1),
+(65, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:53', 1),
+(66, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:54', 1),
+(67, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:04', 1),
+(68, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:05', 1),
+(69, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:51:24', 1);
 
 -- --------------------------------------------------------
 

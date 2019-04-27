@@ -14,6 +14,7 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
+<script>if (window.module) module = window.module;</script>
     <script src="../../js/forms/generar-codigo.js"></script>
     <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
