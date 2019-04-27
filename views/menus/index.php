@@ -70,7 +70,6 @@
   </div>
   <script src="../../js/vendor/jquery/jquery.min.js"></script>
   <script src="../../js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>

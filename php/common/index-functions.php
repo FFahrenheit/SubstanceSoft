@@ -37,6 +37,11 @@
         return $output;
     }
 
+    function getUser()
+    {
+        echo $_SESSION['username'];
+    }
+
     function getIndividual()
     {
         global $curMod;
@@ -89,7 +94,7 @@
             $output .= "<a class='navbar-brand' href='http://localhost/substancesoft/views/menus/index.php?mod=$val'>";
             $output .=  $current;
             $output .=  "</a>";
-        } 
+        }
         $output .= getIndividuals();
         return $output;
     }
