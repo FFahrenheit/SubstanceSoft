@@ -7,7 +7,7 @@
         <meta http-equiv="refresh" content="5" >
 
         <title>
-            Notificar comandas
+            Marcar comandas
         </title>
         <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
         
@@ -38,11 +38,11 @@
                     $row = mysqli_fetch_array($sql);
                     $nCocina = $row['nombre'];
 
-                    $query = "select pedidos.clave as pk, 
-                    platillo.nombre as platillo, orden.mesa as mesa, pedidos.hora as hora 
-                    from platillo, orden, pedidos 
-                    where platillo.clave = pedidos.platillo and platillo.cocina = $clave
-                    and pedidos.estado = 'pedido' and orden.clave = pedidos.orden order by pedidos.estado";
+                    $query = "SELECT orden.mesa as mesa ,platillo.nombre as platillo, 
+                    pedidos.clave as pk, pedidos.estado as estado, pedidos.hora as hora
+                    from pedidos, orden, platillo 
+                    where platillo.clave = pedidos.platillo and orden=$clave and orden.clave = pedidos.orden
+                    ORDER BY estado DESC, hora DESC";
 
                     $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -73,10 +73,17 @@
                                 <td><?php echo $row['hora'];?></td>
                                 <td>
                                     <?php 
+                                        if($row['estado']!='entrgado')
+                                        {
                                             echo '<a style="color: white;" data-toggle="modal" data-target="#delete"
                                             class="btn btn-success" id="'.$row['pk'].'" onClick="showDetails(this)">
-                                                Lista
+                                                Entregada
                                             </a>';
+                                        }
+                                        else 
+                                        {
+                                            echo '<a style="color: gray" class="btn btn-success">Entregada</a>';
+                                        }
                                     ?>
                                 </td>
                             </tr>
@@ -98,11 +105,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ¿Seguro que desea marcar como lista la comanda?
+                                ¿Seguro que desea marcar como entregada la comanda?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
-                                <button type="button" class="btn btn-success" onClick="confirmDelete()">Marcar como lista</button>
+                                <button type="button" class="btn btn-success" onClick="confirmDelete()">Marcar como entregada</button>
                             </div>
                             </div>
                         </div>

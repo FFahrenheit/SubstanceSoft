@@ -29,24 +29,31 @@
                     $output .= '<div class="card-deck">';
                 }
                 $output.= '<a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="a-card">';
-                $output.='<div class="card text-center">';
+                $output.='<div style class="card text-center">';
                 $output.='<div class="card-body">';
                 $output.='<img class="card-img-top img-fluid" src="../../images/cocinas.png" alt="Cocina">';
                 $output.='<div class="card-block">';
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="btn btn-primary">Ver y notificar</a></p>';
-                $output.='</div></div></div></a>';
+                $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
             $rest = 3- $result->num_rows%3;
-            for($i=0; $i<$rest; $i++)
+            if($rest!=3)
+            {
+                for($i=0; $i<$rest; $i++)
+                {
+                    $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
+                }
+            }
+            /*for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
-            }
+            }*/
             if($rest>0)
             {
                 $output.="</div>";
@@ -92,11 +99,18 @@
                     $output.="</div>";
                 }
             }
-            $rest = 3- $result->num_rows%3;
-            for($i=0; $i<$rest; $i++)
+            $rest = 3 - $result->num_rows%3;
+            if($rest!=3)
+            {
+                for($i=0; $i<$rest; $i++)
+                {
+                    $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
+                }
+            }
+            /*for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
-            }
+            }*/
             if($rest>0)
             {
                 $output.="</div>";

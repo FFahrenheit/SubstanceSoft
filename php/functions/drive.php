@@ -255,11 +255,14 @@ function getOpenOrders()
                     $output.="</div>";
                 }
             }
-            $rest = 3- $result->num_rows%3;
-            for($i=0; $i<$rest; $i++)
-            {
-                $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
-            }
+            $rest = 3 - $result->num_rows%3;
+            //if($rest!=3)
+            //{
+                for($i=0; $i<$rest; $i++)
+                {
+                    $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
+                }
+            //}
             if($rest>0)
             {
                 $output.="</div>";
@@ -305,10 +308,13 @@ function getOpenOrders()
                 }
             }
             $rest = 3- $result->num_rows%3;
-            for($i=0; $i<$rest; $i++)
-            {
-                $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
-            }
+            //if($rest!=3)
+            //{
+                for($i=0; $i<$rest; $i++)
+                {
+                    $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
+                }
+            //}
             if($rest>0)
             {
                 $output.="</div>";

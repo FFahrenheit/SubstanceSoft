@@ -76,7 +76,7 @@
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>
-<script>if (window.module) module = window.module;</script>
+  <script>if (window.module) module = window.module;</script>
 </body>
 
 </html>

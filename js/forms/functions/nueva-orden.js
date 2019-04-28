@@ -20,7 +20,7 @@ formulario.addEventListener('submit',function(e)
                 console.log("aqui llega js");
                 console.log(data);
                 alert(data);
-                window.location.pathname = '/substancesoft/views/menus/index.php';
+                window.history.back();
             })
     }
 })

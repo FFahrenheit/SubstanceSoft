@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,8 +13,8 @@
 <body>
   <?php
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/common/index-functions.php');
-  getLogStatus();
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php');
+  getLogStatus();
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">

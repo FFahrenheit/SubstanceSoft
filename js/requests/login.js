@@ -44,17 +44,8 @@ formulario2.addEventListener('submit', function (e) {
     }
 })
 
-formulario.addEventListener('submit', function (e) {
-    /*var res = '[{"name":"ivan"},{"name":"ivan"}]';
-    var not = JSON.parse(res);
-    console.log(not[0].name);
-    Notification.requestPermission().then(function (result) {
-        var notification = new Notification('Notificación de prueba',
-            {
-                'body': 'Hola',
-                'icon': '../../images/icono.png'
-            });
-    });*/
+formulario.addEventListener('submit', function (e) 
+{
     e.preventDefault();
     console.log('working!');
 
