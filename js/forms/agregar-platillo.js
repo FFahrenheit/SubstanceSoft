@@ -21,9 +21,8 @@ formulario.addEventListener('submit',function(e)
                 console.log(data);
                 if(!isNaN(data))
                 {
-                    var path = '/substancesoft/views/forms/nueva-receta.php?key=';
-                    path.concat(data);
-                    window.location.pathname = path;
+                    var path = '/substancesoft/views/forms/nueva-receta.php?key='+data;
+                    window.location.href = path;
                 }
                 else 
                 {

@@ -33,7 +33,7 @@
             <p class="lead text-center">Por favor, llene los campos con la información requerida. Los campos marcados con <font color="red">*</font> son obligatorios.</p>
             <div class="row">
                 <div class="col-8">
-                    <form id="formulario" novalidate>
+                    <form id="formulario" enctype="multipart/form-data" novalidate>
                         <div class="form-group">
                             <label for="">Nombre del platillo:  </label> <font color="red">*</font>
                             <input name="name" type="text" placeholder="Escriba el nombre del platillo" class="form-control" required>
@@ -85,6 +85,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="">Imagen</label>
+                            <input  type="file" accept="image/*" name="image" id="image" class ="form-control" placeholder="Imagen">  
+                        </div>
+                        <div class="form-group">
                             <label for="">Dificultad</label> <font color="red">*</font>
                             <select class="form-control" name="dif">
                                 <option>1</option>
@@ -95,7 +99,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id ="insert">
                                 Continuar a enlistar ingredientes
                             </button>
                         </div>
@@ -109,4 +113,27 @@
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>
+    <script>  
+ $(document).ready(function(){  
+      $('#insert').click(function(){  
+           var image_name = $('#image').val();  
+           if(image_name == '')  
+           {  
+               console.log("Sin imagen");
+            return true;  
+           }  
+           else  
+           {  
+                var extension = $('#image').val().split('.').pop().toLowerCase();  
+                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
+                {  
+                     alert('Formato inválido');  
+                     $('#image').val('');  
+                     return false;  
+                }  
+           }
+           return true;  
+      });  
+ });  
+ </script>  
 </html>

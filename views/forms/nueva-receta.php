@@ -130,7 +130,7 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../menus/menu-install.html">
+                <a href = "../functions/modulo0-funcion0.php">
                 <button class="btn btn-success">Continuar</button>
                 </a>
             </div>

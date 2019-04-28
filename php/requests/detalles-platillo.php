@@ -9,9 +9,16 @@
 
     if($row = mysqli_fetch_array($result))
     {
-        $output = '<p style="color: #000;">Platillo actual: 
-        '.$row['nombre'].'</p>';
-        $output.='<img width="20%" src="https://sifu.unileversolutions.com/image/es-ES/recipe-topvisual/2/1260-709/hamburguesa-new-york-classic-50243210.jpg">';
+        $output = '<p style="color: #000;">Platillo actual: <strong>
+        '.$row['nombre'].'</strong></p>';
+        if($row['imagen']=='')
+        {
+            $output.='<img height="90" src="/../substancesoft/images/platillo.png">';
+        }
+        else
+        {
+            $output.='<img height="90" src="data:image/jpeg;base64,'.base64_encode($row['imagen'] ).'">';
+        }
         $output.='<p class="comm" style="color: #000;">'.$row['descripcion'].'</p>';
         echo $output;
     }
