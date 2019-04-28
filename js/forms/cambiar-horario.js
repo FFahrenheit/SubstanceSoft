@@ -7,12 +7,7 @@ formulario.addEventListener('submit',function(e)
 
     var apagado = document.getElementById('apagado').value;
     var encendido = document.getElementById('encendido').value;
-    if(apagado < encendido && formulario.checkValidity()===true)
-    {
-        alert("Error, el encendido debe pasar antes que el apagado.");
-        formulario.reset();   
-    }
-    else if(formulario.checkValidity()===true)
+    if(formulario.checkValidity()===true)
     {
         var datos = new FormData();
         datos.append("apagado",apagado);
