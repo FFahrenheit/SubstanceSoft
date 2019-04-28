@@ -42,7 +42,7 @@
                     pedidos.clave as pk, pedidos.estado as estado, pedidos.hora as hora
                     from pedidos, orden, platillo 
                     where platillo.clave = pedidos.platillo and orden=$clave and orden.clave = pedidos.orden
-                    ORDER BY estado DESC, hora DESC";
+                    ORDER BY estado ASC, hora DESC";
 
                     $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -55,6 +55,7 @@
                                 <td>Platillo</td>
                                 <td>Mesa</td>
                                 <td>Hora</td>
+                                <td>Estado</td>
                                 <td>Marcar</td>
                             </tr>
                         </thead>
@@ -71,18 +72,19 @@
                                 <td><?php echo $row['platillo'];?></td>
                                 <td><?php echo $row['mesa'];?></td>
                                 <td><?php echo $row['hora'];?></td>
+                                <td><?php echo $row['estado'];?></td>
                                 <td>
                                     <?php 
-                                        if($row['estado']!='entrgado')
+                                        if($row['estado']!='entregado')
                                         {
                                             echo '<a style="color: white;" data-toggle="modal" data-target="#delete"
                                             class="btn btn-success" id="'.$row['pk'].'" onClick="showDetails(this)">
-                                                Entregada
+                                                Marcar
                                             </a>';
                                         }
                                         else 
                                         {
-                                            echo '<a style="color: gray" class="btn btn-success">Entregada</a>';
+                                            echo '<a style="color: white;" class="btn btn-secondary">Entregada</a>';
                                         }
                                     ?>
                                 </td>
@@ -99,7 +101,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Eliminar registro</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Marcar</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -120,7 +122,7 @@
         </section>
     </body>
     <script src="../../../js/vendor/common-functions.js"></script>
-    <script src="../../../js/forms/functions/notificar-comanda.js"></script>
+    <script src="../../../js/forms/functions/notificar-comanda-mesero.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>
     <script src="../../../js/vendor/bootstrap.min.js"></script>

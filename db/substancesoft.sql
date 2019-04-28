@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2019 a las 05:58:59
+-- Tiempo de generación: 28-04-2019 a las 05:42:38
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -56,27 +56,45 @@ END IF;
 UPDATE mensajes SET visto = 1 WHERE destinatario = usr AND visto = 0;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerTicket` (IN `ord` INT)  BEGIN
+SELECT 
+platillo.nombre as nombre, platillo.precio as precio, count(*) as conteo,
+count(*) * platillo.precio as subtotal
+from platillo, pedidos
+where pedidos.orden = ord
+and pedidos.platillo = platillo.clave group by platillo.clave;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarHorario` ()  NO SQL
 BEGIN
 	IF((SELECT valor FROM preferencias WHERE nombre='apagado_dinamico')=1)
     THEN 
     	IF
         (
-            ((SELECT TIMEDIFF(
+            (((SELECT TIMEDIFF(
                 TIME(NOW()),
                 TIME((SELECT valor FROM fechas WHERE nombre='Encendido'))))
             >= 0) AND 
            ((SELECT TIMEDIFF(
                 TIME(NOW()),
                 TIME((SELECT valor FROM fechas WHERE nombre='Apagado'))))
-            <= 0)
+            <= 0))
+            OR 
+                        (((SELECT TIMEDIFF(
+                TIME(NOW()),
+                TIME((SELECT valor FROM fechas WHERE nombre='Encendido'))))
+            <= 0) AND 
+           ((SELECT TIMEDIFF(
+                TIME(NOW()),
+                TIME((SELECT valor FROM fechas WHERE nombre='Apagado'))))
+            >= 0))
         )
         THEN 
         	    SELECT 'yes' as status;
         ELSE  
             	SELECT 'no' as status;
         END IF;
-        
+
     ELSE  
     	SELECT 'yes' as status;
     END IF;
@@ -196,7 +214,13 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (3, 1, '-10.0000', '2019-04-23 05:24:48', 'uso'),
 (4, 2, '-0.0100', '2019-04-23 05:24:48', 'uso'),
 (5, 4, '1.0000', '2019-04-23 05:41:07', 'surtido'),
-(6, 1, '11.0000', '2019-04-23 06:04:22', 'surtido');
+(6, 1, '11.0000', '2019-04-23 06:04:22', 'surtido'),
+(7, 1, '-10.0000', '2019-04-28 02:30:08', 'uso'),
+(8, 2, '-0.0100', '2019-04-28 02:30:08', 'uso'),
+(9, 1, '-0.5000', '2019-04-28 03:27:11', 'uso'),
+(10, 2, '-100000.0000', '2019-04-28 03:27:11', 'uso'),
+(11, 1, '-0.5000', '2019-04-28 03:32:06', 'uso'),
+(12, 2, '-100000.0000', '2019-04-28 03:32:06', 'uso');
 
 -- --------------------------------------------------------
 
@@ -269,8 +293,8 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', '145.0000', 'kg', 4.0000),
-(2, 'queso', '477.0000', 'lt', 1.0000),
+(1, 'pollo', '134.0000', 'kg', 4.0000),
+(2, 'queso', '-199523.0100', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
 (4, 'Agua', '21.0000', 'lt', 10.0000);
 
@@ -352,7 +376,11 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (66, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:24:54', 1),
 (67, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:04', 1),
 (68, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:25:05', 1),
-(69, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:51:24', 1);
+(69, 'Admin100', 'El platillo Sopa du macaco de la mesa 2 esta listo', '2019-04-23 05:51:24', 1),
+(70, 'Admin100', 'Hey muy buenas a todos, guapísimos', '2019-04-28 02:02:07', 1),
+(71, 'Admin100', 'haha', '2019-04-28 02:03:36', 1),
+(72, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-28 02:30:08', 1),
+(73, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-28 03:02:31', 1);
 
 -- --------------------------------------------------------
 
@@ -408,7 +436,9 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
 (29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 5684),
-(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL);
+(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL),
+(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', NULL),
+(32, '2019-04-28 03:17:49', 'Admin100', 2, 'abierta', 'Q', NULL);
 
 --
 -- Disparadores `orden`
@@ -489,13 +519,13 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (48, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (51, 'entregado', '2019-04-07 22:50:40', 6, 28),
 (52, 'pedido', '2019-04-16 18:00:56', 4, 24),
-(53, 'pedido', '2019-04-18 20:55:40', 3, 29),
+(53, 'entregado', '2019-04-18 20:55:40', 3, 29),
 (54, 'pedido', '2019-04-18 20:55:45', 3, 29),
-(55, 'pedido', '2019-04-21 02:56:35', 3, 29),
+(55, 'entregado', '2019-04-21 02:56:35', 3, 29),
 (56, 'pedido', '2019-04-21 04:03:08', 4, 26),
-(57, 'listo', '2019-04-21 04:32:32', 6, 29),
+(57, 'entregado', '2019-04-21 04:32:32', 6, 29),
 (58, 'listo', '2019-04-22 02:47:47', 3, 26),
-(59, 'pedido', '2019-04-22 02:56:23', 6, 29);
+(59, 'listo', '2019-04-22 02:56:23', 6, 29);
 
 --
 -- Disparadores `pedidos`
@@ -1032,7 +1062,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`
@@ -1044,13 +1074,13 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
