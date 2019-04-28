@@ -1,7 +1,7 @@
 <?php 
     $user = $_SESSION['username'];
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
-    mysqli_set_charset($connection,"utf8");
+    mysqli_set_charset($connection,"utf-8");
 
     function getAvailableKitchens()
     {
@@ -36,20 +36,26 @@
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
                 $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="btn btn-primary">Ver y notificar</a></p>';
-                $output.='</div></div></div>';
+                $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
                     $output.="</div>";
                 }
             }
             $rest = 3- $result->num_rows%3;
-            if($rest!=3)
+            if($rest == 3)
             {
+                $output.='<div class="card-deck">';
+            }
+
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';;
+            }
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
                 }
-            }
             /*for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -100,12 +106,21 @@
                 }
             }
             $rest = 3 - $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
             if($rest!=3)
             {
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
                 }
+            }
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';;
             }
             /*for($i=0; $i<$rest; $i++)
             {

@@ -2,7 +2,7 @@
     session_start();
     header('Content-Type: text/html; charset=utf-8');
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("connection");
-    mysqli_set_charset($connection,"utf8");
+    mysqli_set_charset($connection,"utf-8");
     freeQuery();
     $user = $_SESSION['username'];
     $query = "CALL obtenerMensajes('$user')";

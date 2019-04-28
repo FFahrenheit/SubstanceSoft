@@ -1,6 +1,6 @@
 <?php 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
-    mysqli_set_charset($connection,"utf8");
+    mysqli_set_charset($connection,"utf-8");
 
     function getEstado($preferencia)
     {

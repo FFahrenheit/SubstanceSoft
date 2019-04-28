@@ -1,7 +1,7 @@
 <?php
     $user = $_SESSION['username'];
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
-    mysqli_set_charset($connection,"utf8");
+    mysqli_set_charset($connection,"utf-8");
 
     function getOrderCommands()
     {
@@ -43,6 +43,11 @@
                 }
             }
             $rest = 3- $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -97,6 +102,11 @@
                 }
             }
             $rest = 3- $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
             for($i=0; $i<$rest; $i++)
             {
                 $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -150,6 +160,11 @@
                     }
                 }
                 $rest = 3- $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -203,6 +218,11 @@
                     }
                 }
                 $rest = 3- $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -255,6 +275,11 @@
                     }
                 }
                 $rest = 3- $result->num_rows%3;
+            if($rest == 3)
+            {
+                $output.='<div class="card-deck">';
+            }
+
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
