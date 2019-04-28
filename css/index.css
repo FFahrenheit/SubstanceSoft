@@ -177,3 +177,13 @@ a.hide:hover
     color:inherit;
     text-decoration: none;
 }
+
+.a-pager{
+    text-decoration: none;
+}
+
+.a-selected
+{
+    text-decoration: none;
+    background-color: rgb(56, 56, 56);
+}

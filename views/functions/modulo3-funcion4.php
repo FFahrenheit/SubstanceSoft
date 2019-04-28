@@ -51,7 +51,16 @@
             <!-- BODY -->
             <h1 class="mt-4"> Historial de cuentas </h1>
             <p> Aquí puede encontrar las últimas cuentas cerradas y pagadas</p>
-            <?php echo getClosedAccounts(); ?>
+            <?php
+            if(!isset($_GET['page']))
+            {
+              echo getClosedAccounts();
+            }
+            else
+            {
+              echo getClosedAccounts($_GET['page']);
+            }
+             ?>
             <p> &nbsp;</p>
           </div>
           <!-- /BODY -->

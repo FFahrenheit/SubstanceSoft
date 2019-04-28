@@ -2,6 +2,7 @@
     $user = $_SESSION['username'];
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
     mysqli_set_charset($connection,"utf-8"); 
+    $limit = 3;
 
     function getOpenAccounts()
     {
@@ -162,10 +163,11 @@
         return $output;   
     }
 
-    function getClosedAccounts()
+    function getClosedAccounts($page = 0)
     {
-        global $user, $connection;
-        $query = "select * from orden where ESTADO='pagada'";
+        global $user, $connection, $limit;
+        $off = $page * $limit;
+        $query = "select * from orden where ESTADO='pagada' ORDER BY fecha DESC LIMIT 3 OFFSET $off";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -211,8 +213,33 @@
             {
                 $output.="</div>";
             }
+            $output .= getList($page+1);
         }
         return $output;  
+    }
+
+    function getList($page)
+    {
+        global $connection, $limit;
+        $query = "SELECT count(*) AS conteo FROM orden WHERE ESTADO='pagada'";
+        $result = mysqli_query($connection,$query);
+        $row = mysqli_fetch_array($result);
+        $total = $row['conteo'];
+        $pages = ceil($total / $limit);
+        $output = '<div class="btn-group" role="group">';
+        for($i = 1; $i<=$pages; $i++)
+        {
+            if($i == $page)
+            {
+                $output.='<a  class ="btn btn-secondary a-selected" href="?page='.($i-1).'">'.$i.'</a>';
+            }
+            else 
+            {
+                $output.='<a class ="btn btn-secondary a-pager"href="?page='.($i-1).'">'.$i.'</a>';
+            }
+        }
+        $output .= '</div>';
+        return $output;
     }
 
     function getUnimpressedAcounts()
