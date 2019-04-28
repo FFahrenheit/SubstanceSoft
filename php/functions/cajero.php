@@ -2,7 +2,7 @@
     $user = $_SESSION['username'];
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
     mysqli_set_charset($connection,"utf-8"); 
-    $limit = 3;
+    $limit = 9;
 
     function getOpenAccounts()
     {
@@ -167,7 +167,7 @@
     {
         global $user, $connection, $limit;
         $off = $page * $limit;
-        $query = "select * from orden where ESTADO='pagada' ORDER BY fecha DESC LIMIT 3 OFFSET $off";
+        $query = "select * from orden where ESTADO='pagada' ORDER BY fecha DESC LIMIT $limit OFFSET $off";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -213,15 +213,15 @@
             {
                 $output.="</div>";
             }
-            $output .= getList($page+1);
+            $output .= getList($page+1, "ESTADO='pagada'");
         }
         return $output;  
     }
 
-    function getList($page)
+    function getList($page, $condition)
     {
         global $connection, $limit;
-        $query = "SELECT count(*) AS conteo FROM orden WHERE ESTADO='pagada'";
+        $query = "SELECT count(*) AS conteo FROM orden WHERE $condition";
         $result = mysqli_query($connection,$query);
         $row = mysqli_fetch_array($result);
         $total = $row['conteo'];
