@@ -98,6 +98,22 @@ formulario.addEventListener('submit',function(e)
 
 function updateText(label)
 {
-    $("#actual").html("Platillo actual: ".concat(label.id));   
-    console.log(label.id);
+    //label = '<p class="comm" style="color: #000;">Hola</p>';
+    $.ajax({
+        url:'/substancesoft/php/requests/detalles-platillo.php',
+        type: 'POST',
+        datatype: 'html',
+        data: {nombre:label.id}
+    })
+    .done(function(respuesta)
+    {
+        console.log(respuesta);
+        $("#actual").html(respuesta);   
+    })
+    .fail(function()
+    {
+        console.log("error");
+    })
+
+    //console.log(label.id);
 }
