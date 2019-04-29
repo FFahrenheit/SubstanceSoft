@@ -18,7 +18,7 @@ app.on('ready', () =>{
         }
     );
     mainWindow.setTitle('SubstanceSoft');
-    mainWindow.loadURL('http://192.168.15.174/substancesoft/views/menus/index.php');
+    mainWindow.loadURL('http://localhost/substancesoft/views/menus/index.php');
 
     mainWindow.maximize();
     mainWindow.on('close',()=>

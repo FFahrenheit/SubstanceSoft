@@ -8,7 +8,13 @@
   <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
-  <link href="../../css/index.css" rel="stylesheet"> <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
+  <link href="../../css/index.css" rel="stylesheet">
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
 </head>
 
 <body>
@@ -117,25 +123,30 @@
                     </div>
                   </div>
                 </div>
-                <a href="charts/horarios.php" class="a-card">
-
-                  <div class="card text-center" style="visibility: hidden">
-                    <div class="card-body"></div>
-                  </div>
-
+                <a href="charts/demanda.php" class="a-card">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
+                      <div class="card-block">
+                        <h4 class="card-title">Demanda</h4>
+                        <p class="card-text">Consulte los platillos mas populares</p>
+                        <p><a href="charts/demanda.php" class="btn btn-success">Ver</a></p>
+                      </div>
+                    </div>
+                </a>
             </div>
-            <!-- /BODY -->
           </div>
-          <div class="col-3">
-            <div class="containter text-center">
-              <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
-              <?php echo getUserStatus(); ?>
-              <a href="../../php/requests/logout.php">
-                <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
-                  Salir
-                </button>
-              </a>
-            </div>
+          <!-- /BODY -->
+        </div>
+        <div class="col-3">
+          <div class="containter text-center">
+            <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
+            <?php echo getUserStatus(); ?>
+            <a href="../../php/requests/logout.php">
+              <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
+                Salir
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -146,7 +157,9 @@
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>
-<script>if (window.module) module = window.module;</script>
+  <script>
+    if (window.module) module = window.module;
+  </script>
 </body>
 
 </html>

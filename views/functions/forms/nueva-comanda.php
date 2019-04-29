@@ -79,8 +79,8 @@
                     Agregar platillos: &nbsp;
                     <div id="actual">
                     </div>
-                    <form id="formulario" novalidate>
                         <div class="form-group">
+                        <form id="formulario" novalidate>
                             <label for=""> Platillo: </label>
                             <p class="comm">&nbsp;Elija la categoria:</p>
                             <div class="btn-group" data-toggle="buttons">
@@ -106,7 +106,9 @@
                             <p class="comm">&nbsp;O busque su platillo:</p>
                             <input type="text" name="search" id="search" class="form-control" placeholder="Escriba su busqueda aquí">
                         </div>
-                        <div id="busqueda" align="center" class="form-group">
+                </div>
+                <div class="col-sm">
+                <div id="busqueda" align="center" class="form-group">
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -122,8 +124,8 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Agregar</button>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
             <button class="btn btn-success" onclick="goBack()">Continuar</button>
         </div>
