@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function()
             if(data.type=='central')
             {
                 console.log('Aún no soportado xd');
-                var path = 'http://'+data.IP+'/substancesoft/views/menus/index.php';
+                var path = 'http://localhost/substancesoft/views/menus/index.php';
                 window.location.href = path; 
             }
             else 
