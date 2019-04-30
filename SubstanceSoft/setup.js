@@ -48,10 +48,10 @@ central.addEventListener("click", function () {
     //window.location.href = link;
 });
 
-connect.addEventListener("click", function () {
-    //Patron para verificar si la IP está 
-    //en un patrón correcto
-    if(IP.value.toLowerCase() != "localhost" && !'^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$'.match(IP.value))
+connect.addEventListener("click", function () 
+{
+    var regex = /(^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$)/;
+    if( IP.value.toLowerCase() != 'localhost' && !regex.test(IP.value))
     {
         console.log(IP.value);
         alert('Formato de IP incorrecto');
