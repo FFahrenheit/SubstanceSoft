@@ -49,6 +49,14 @@ central.addEventListener("click", function () {
 });
 
 connect.addEventListener("click", function () {
+    //Patron para verificar si la IP está 
+    //en un patrón correcto
+    if(IP.value.toLowerCase() != "localhost" && !'^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$'.match(IP.value))
+    {
+        console.log(IP.value);
+        alert('Formato de IP incorrecto');
+        return;
+    }
     var testConnection = 'http://' + IP.value + '/substancesoft/php/requests/conectividad.php';
     fetch(testConnection)
         .then(function (resp) {

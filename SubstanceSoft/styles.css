@@ -5,3 +5,30 @@ body
     height: 100%; 
     font-family: "Verdana";
 }
+
+button 
+{
+    border-radius: 10px;
+    color: rgba(236, 236, 236, 0.39);
+    -webkit-text-stroke: 0.2px rgb(49, 49, 49);
+    font-size: 100%;
+    padding: 10px 20px;
+    border: solid rgb(94, 94, 94) 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    /*-webkit-text-stroke: 1px black;*/
+}
+
+.in
+{
+    border-radius: 10px;
+    color: rgba(236, 236, 236, 0);
+    /*-webkit-text-stroke: 0.2px rgb(49, 49, 49);*/
+    font-size: 100%;
+    padding: 10px 20px;
+    border: solid rgb(0, 0, 0) 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+}
