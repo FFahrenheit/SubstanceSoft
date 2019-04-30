@@ -15,7 +15,10 @@ formulario.addEventListener('submit',function(e)
             method: 'POST',
             body: datos
         })
-        .then (res => res.json())
+        .then (res => 
+            
+                res.json()
+            )
         .then (data =>
             {
                 console.log("aqui llega js");
@@ -25,7 +28,6 @@ formulario.addEventListener('submit',function(e)
 
                 //window.location.pathname = '/substancesoft/views/forms/modificar-cocina.php';
                 window.history.back();
-
 
             })
     }

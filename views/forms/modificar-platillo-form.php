@@ -35,12 +35,14 @@
                 $query = "select * from platillo where clave = '$clave'";
                 $sql = mysqli_query($connection, $query) or die("error");
                 $row = mysqli_fetch_array($sql);
+                $actualK = $row['cocina'];
             ?>
             <h1>Modificando <?php printRow($row,'nombre'); ?></h1>
             <p>&nbsp;</p>
             <div class="row">
                 <div class="col -8">
                 <form id="formulario" novalidate>
+                <input name="old" value=" <?php echo $row['clave'];?> " type="hidden">
                     <div class="form-group">
                         <label for="">Nombre del platillo</label> <font color="red">*</font>
                         <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>"" class="form-control" required>
@@ -66,15 +68,23 @@
 
                             $query = "select * from cocina";
 
-                            $sqli = mysqli_query($conexion, $query) or die("error en query");
+                            $sql = mysqli_query($conexion, $query) or die("error en query");
                         ?>
                         <select class="form-control" name="cocina">
                             <?php
                             while($row = mysqli_fetch_array($sql))
                             {
-                            ?>
-                            <option><?php echo $row['nombre'];?></option>
-                            <?php
+                                echo '<option';
+                                if($row['clave']==$actualK)
+                                {
+                                    echo ' selected>';
+                                }
+                                else 
+                                {
+                                    echo '>';
+                                }
+                                echo $row['nombre'];
+                                echo '</option>';
                             }
                                 mysqli_close($conexion);
                             ?>
@@ -108,7 +118,6 @@
                     <div class="form-group">
                         <button type="submit"  class="btn btn-danger">Modificar</button>
                     </div>
-                    <input name="old" value="<?php echo $row['clave'];?>" type="hidden">
                 </form>
                 <?php
                     mysqli_close($connection);

@@ -13,28 +13,24 @@ central.addEventListener("click", function () {
                 var link = 'http://localhost/substancesoft/views/menus/index.html';
                 console.log(link);
 
+                var conf = {
+                    "set":true,
+                    "IP":"localhost",
+                    "type":"central"
+                };
+
+                var stringData = JSON.stringify(conf);
+
                 const fs = require('fs');
 
-                fetch("configuration.json")
-                    .then(function (resp) {
-                        return resp.json();
-                    })
-                    .then(function (data) {
-                        data.set = true;
-                        data.IP = 'localhost';
-                        data.type = "central";
-
-                        stringData = JSON.stringify(data);
-
-                        fs.writeFile("configuration.json", stringData, function (err) {
-                            if (err) {
-                                console.log(err);
-                                return;
-                            }
-                            console.log("Guardado!");
-                        });
-
-                    });
+                fs.writeFile("configuration.json", stringData, function (err) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    console.log("Guardado!");
+                });
+                
                 window.location.href = link;
             }
             else {
@@ -67,28 +63,26 @@ connect.addEventListener("click", function ()
                 var link = 'http://' + IP.value + '/substancesoft/views/menus/index.php';
                 console.log(link);
 
+                var conf = 
+                {
+                    "set":true,
+                    "type":"client",
+                    "IP":IP.value
+                };
+
+                stringConf = JSON.stringify(conf);
+
                 const fs = require('fs');
 
-                fetch("configuration.json")
-                    .then(function (resp) {
-                        return resp.json();
-                    })
-                    .then(function (data) {
-                        data.set = true;
-                        data.IP = IP.value;
-                        data.type = "client";
+                fs.writeFile("configuration.json", stringConf, function (err) {
+                    if (err) {
+                        console.log("Error al escribir");
+                        console.log(err);
+                        return;
+                    }
+                    console.log("Guardado!");
+                });
 
-                        stringData = JSON.stringify(data);
-
-                        fs.writeFile("configuration.json", stringData, function (err) {
-                            if (err) {
-                                console.log(err);
-                                return;
-                            }
-                            console.log("Guardado!");
-                        });
-
-                    });
                 window.location.href = link;
             }
             else {
