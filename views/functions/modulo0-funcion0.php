@@ -86,7 +86,7 @@
                                                 <p class="card-text">Administre los distintos ingredientes usados en el sistema</p>
                                                 <p><a href="../forms/nuevo-ingrediente.html" class="btn btn-primary">Agregar</a></p>
                                                 <p><a href="../lists/listar-ingredientes.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="#" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/modificar-ingredientes.php" class="btn btn-primary">Modificar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -97,8 +97,8 @@
                                                 <h4 class="card-title">Mesas</h4>
                                                 <p class="card-text">Administre las distintas mesas que hay en el sistema.</p>
                                                 <p><a href="../forms/nueva-mesa.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="#" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="#" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-mesas.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/modificar-mesas.php" class="btn btn-primary">Modificar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -111,9 +111,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Roles</h4>
                                                 <p class="card-text">Administre los roles de usuario</p>
-                                                <p><a href="../forms/nuevo-permiso.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="#" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/nuevo-permiso.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/nuevo-permiso.php" class="btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../lists/listar-roles.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +124,7 @@
                                                 <p class="card-text">Administre los platillos en el sistema</p>
                                                 <p><a href="../forms/nuevo-platillo.php" class="btn btn-primary">Agregar</a></p>
                                                 <p><a href="../lists/listar-platillos.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="#" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/modificar-platillos.php" class="btn btn-primary">Modificar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +136,7 @@
                                                 <p class="card-text">Administre el listado de proveedores en el sistema</p>
                                                 <p><a href="../forms/nuevo-proveedor.html" class="btn btn-primary">Agregar</a></p>
                                                 <p><a href="../lists/listar-proveedores.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="#" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/modificar-proveedores.php" class="btn btn-primary">Modificar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -147,9 +146,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Surtidos</h4>
                                                 <p class="card-text">Administre los proveedores automáticos del sistema</p>
-                                                <p><a href="../forms/nuevo-surtido.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="#" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="#" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/nuevo-surtido.php" class="btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -162,9 +160,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Chefs</h4>
                                                 <p class="card-text">Administre las cocinas de los chefs</p>
-                                                <p><a href="../forms/nuevo-chef.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="#" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/nuevo-chef.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../forms/nuevo-chef.php" class="btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../lists/listar-chefs.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>

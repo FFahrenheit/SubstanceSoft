@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, inicial-scale=1">
 
         <title>
-            Mostrar cocinas
+            Mostrar proveedores
         </title>
         <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
 
@@ -30,22 +30,20 @@
 </div>
         <section class="container text-center">
         <p>&nbsp;</p>
-            <h1 class="text-uppercase text-center">Listado de cocinas</h1>
+            <h1 class="text-uppercase text-center">Listado de proveedores</h1>
             <div class="row">
                 <div class="container-fluid">
                     <table class="table table-hover" style="margin: auto">
                     <thead>
                         <tr>
-                            <td>Nombre de cocina</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>Nombre</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
-                            $query = "select nombre from cocina";
+                            $query = "select * from proveedor";
 
                             $sql = mysqli_query($connection, $query) or die("error");
 
@@ -54,10 +52,10 @@
                         ?>
                         <tr>
                             <td><?php echo $row['nombre']; ?></td>
-                            <td> <a href="modificar-cocina-form.php?nombre=<?php echo $row['nombre']?>" class="btn btn-primary">Modificar</a> </td>
+                            <td> <a href="modificar-proveedor-form.php?clave=<?php echo $row['clave']?>" class="btn btn-primary">Modificar</a> </td>
                             <td>
                                 <a style="color: white;"data-toggle="modal" data-target="#delete"
-                                class="btn btn-danger" id="<?php echo $row['nombre']?>" onClick="showDetails(this)">
+                                class="btn btn-danger" id="<?php echo $row['clave']?>" onClick="showDetails(this)">
                                     Eliminar
                                 </a>
                             </td>
@@ -78,9 +76,9 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                ¿Seguro que desea eliminar la cocina?
+                                ¿Seguro que desea eliminar el proveedor?
                                 <br>
-                                Los platillos que estén en esta cocina también serán elimiados
+                                Se removerán los surtidos relacionados
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -93,7 +91,7 @@
             </div>
         </section>
     </body>
-    <script src="../../js/forms/eliminar-cocina.js"></script>
+    <script src="../../js/forms/eliminar-proveedor.js"></script>
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>

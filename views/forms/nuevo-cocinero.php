@@ -33,7 +33,7 @@
 
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-            $query = "select chefs.clave as pk, cocina.nombre as descripcion from usuario, chefs, cocina where 
+            $query = "select chefs.clave as pk, cocina.nombre as descripcion from usuario, chefs, cocina where
             cocina.clave = chefs.cocina and usuario.username = '$user' and usuario.username = chefs.usuario";
 
             $sql = mysqli_query($connection, $query) or die("error en query");
@@ -60,7 +60,7 @@
                                     ?>
                                 <tr>
                                     <td><?php echo $row['descripcion'];?></td>
-                                    <td> 
+                                    <td>
                                     <a style="color: white;"data-toggle="modal" data-target="#delete"
                                 class="btn btn-danger" id="<?php echo $row['pk']?>" onClick="showDetails(this)">
                                     Eliminar
@@ -99,7 +99,7 @@
                                 Ingresa datos
                             </div>
                         </div>
-                        
+
                         <input name="username" value="<?php echo $user;?>" type="hidden">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Agregar</button>
@@ -107,7 +107,7 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../menus/menu-install.html">
+                <a href = "../functions/modulo0-funcion0.php">
                 <button class="btn btn-success">Continuar</button>
                 </a>
             </div>

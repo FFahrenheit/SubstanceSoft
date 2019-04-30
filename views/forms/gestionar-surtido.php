@@ -34,10 +34,10 @@
 
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-            $query = "SELECT surtidos.clave AS pk, ingrediente.nombre AS ingrediente, surtidos.cantidad AS 
+            $query = "SELECT surtidos.clave AS pk, ingrediente.nombre AS ingrediente, surtidos.cantidad AS
             cantidad, surtidos.frecuencia AS frecuencia FROM surtidos, ingrediente WHERE
-            surtidos.ingrediente = ingrediente.clave AND surtidos.proveedor = $key "; 
-        
+            surtidos.ingrediente = ingrediente.clave AND surtidos.proveedor = $key ";
+
 
             $sql = mysqli_query($connection, $query) or die("error en query");
         ?>
@@ -67,7 +67,7 @@
                                     <td><?php echo $row['ingrediente'];?></td>
                                     <td><?php echo $row['cantidad'];?></td>
                                     <td><?php echo $row['frecuencia'];?></td>
-                                    <td> 
+                                    <td>
                                     <a style="color: white;"data-toggle="modal" data-target="#delete"
                                 class="btn btn-danger" id="<?php echo $row['pk']?>" onClick="showDetails(this)">
                                     Eliminar
@@ -127,7 +127,7 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../menus/menu-install.html">
+                <a href = "../functions/modulo0-funcion0.php">
                 <button class="btn btn-success">Continuar</button>
                 </a>
             </div>
