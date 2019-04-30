@@ -1,6 +1,10 @@
 const electron  = require('electron');
 const {app, BrowserWindow, globalShorcut, Menu} = electron;
-var path = require('path')
+var path = require('path');
+var url = require('url');
+
+"use strict";
+const fetch = require("node-fetch");
 
 let mainWindow;
 
@@ -12,13 +16,31 @@ app.on('ready', () =>{
             minHeight: 768,
             //frame: false,
             show: false,
-            backgroundColor: '#bababa',
+            backgroundColor: '#FFFFFF',
             icon: path.join(__dirname, 'images/64x64.png'),
             title: 'SubstanceSoft',
         }
     );
     mainWindow.setTitle('SubstanceSoft');
-    mainWindow.loadURL('http://localhost/substancesoft/views/menus/index.php');
+
+    //mainWindow.loadURL('http://localhost/substancesoft/views/menus/index.php');
+
+    mainWindow.loadURL(url.format(
+      {
+        pathname: path.join(__dirname,'index.html'),
+        protocol: 'file',
+        slashes: true
+      }));
+
+    /*fetch("configuration.json")
+    .then(function (resp)
+    {
+      return resp.json();
+    })
+    .then(function (data)
+    {
+      console.log(data);
+    });*/
 
     mainWindow.maximize();
     mainWindow.on('close',()=>
@@ -46,7 +68,7 @@ app.on('ready', () =>{
           submenu: [
             { role: 'reload' },
             { role: 'forcereload' },
-            //{ role: 'toggledevtools' },
+            { role: 'toggledevtools' },
             { type: 'separator' },
             { role: 'resetzoom' },
             { role: 'zoomin' },
