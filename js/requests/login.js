@@ -42,7 +42,7 @@ formulario2.addEventListener('submit', function (e) {
                 }
             })
     }
-})
+});
 
 formulario.addEventListener('submit', function (e) 
 {

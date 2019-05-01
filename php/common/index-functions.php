@@ -156,7 +156,14 @@
 
         while($row = mysqli_fetch_array($result))
         {
-            $out .= '<div class="chat">';
+            if($row['visto']==1)
+            {
+                $out .= '<div class="chat">';
+            }
+            else 
+            {
+                $out .= '<div class="chat darker">';
+            }
             $out .= "<p>".$row['texto']."</p>";
             $out .= '<span class="time-right">'.$row['fecha'].'</span>';
             $out .= "</div>";

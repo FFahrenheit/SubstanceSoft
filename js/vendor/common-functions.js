@@ -11,7 +11,7 @@ function refreshPage() {
   window.location.reload(true);
 }
 
-function checkNotify()
+/*function checkNotify()
 {
     console.log('Cargado');
     $.ajax({
@@ -27,6 +27,7 @@ function checkNotify()
         }
         var notificacion;
         for (var i = 0; i < ans.length; i++) {
+          alert(ans)
           console.log(i);
           var notificacion = new Notification('Notificación (' + (ans.length - 1 - i) + ' más)', {
             'body': ans[i].texto,
@@ -49,4 +50,4 @@ function checkNotify()
 
 document.addEventListener("DOMContentLoaded",checkNotify);
 
-var constantNotification = setInterval(checkNotify,3000);
+var constantNotification = setInterval(checkNotify,3000);*/

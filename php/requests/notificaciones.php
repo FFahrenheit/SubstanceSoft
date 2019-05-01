@@ -4,10 +4,15 @@
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("connection");
     mysqli_set_charset($connection,"utf-8");
     freeQuery();
+    if(!isset($_SESSION['username']))
+    {
+        echo json_encode("unlogged");
+        return"unlogged";
+    }
     $user = $_SESSION['username'];
     $query = "CALL obtenerMensajes('$user')";
-    $result = mysqli_query($connection,$query) or die("query");
-    if($result)
+    $result = mysqli_query($connection,$query) or die("'Query'");
+    if(!is_bool($result))
     {
         $out = array();
         while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
@@ -19,7 +24,7 @@
     }
     else
     {
-        echo 'void';
+        echo json_encode("void");
         freeQuery();
         mysqli_close($connection);
         return "void";

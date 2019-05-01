@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function()
 {
+    
+    /*const Push = require('push.js');
+
+    Push.Permission.request(function()
+    {
+        console.log("Si aceptó");
+    }, 
+    function()
+    {
+        console.log("No aceptó");
+    });
+
+    console.log("Notificación de prueba");
+
+    console.log(Push.Permission.has());
+    Push.create("Hello!");*/
+
     fetch("configuration.json")
     .then(function (resp) {
         return resp.json();
