@@ -91,7 +91,7 @@
             $var = "valuefunction".$i;
             $current = $_SESSION[$desc];
             $val = $_SESSION[$var];
-            $output .= "<a class='navbar-brand' href='./index.php?mod=$val'>";
+            $output .= "<a class='navbar-brand' href='../../views/menus/index.php?mod=$val'>";
             $output .=  $current;
             $output .=  "</a>";
         }

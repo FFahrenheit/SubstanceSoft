@@ -13,21 +13,21 @@
 
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
+    <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
     <script src="../../js/vendor/common-functions.js"></script>
-<script>if (window.module) module = window.module;</script>
     <script src="../../js/forms/generar-codigo.js"></script>
     <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()"   style="float: left;">
+        <a onclick="goBack()" style="float: left;">
             <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../views/menus/index.php">
             <h1>SubstanceSoft</h1>
         </a>
-        <a onclick="refreshPage()"   style="float: left;">
+        <a onclick="refreshPage()" style="float: left;">
             <img src="../../images/reload.png" alt="Recargar">
         </a>
     </div>
@@ -38,20 +38,19 @@
             <div class="container-fluid">
 
                 <?php
-                    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
+                $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
-                    $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
+                $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
 
-                    $result = mysqli_query($connection, $query) or die('"error al ejecutar"');
+                $result = mysqli_query($connection, $query) or die('"error al ejecutar"');
 
-                    $row = mysqli_fetch_array($result);
+                $row = mysqli_fetch_array($result);
 
-                if (!isset($row['valor']) || $row['valor'] == 0) 
-                {
+                if (!isset($row['valor']) || $row['valor'] == 0) {
                     echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
                     echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
                     echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true,'."'acceso_codigo'".')" class="btn btn-success">Habilitar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,' . "'acceso_codigo'" . ')" class="btn btn-success">Habilitar</button> ';
                     die();
                 }
                 ?>
@@ -87,7 +86,7 @@
                     ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "setCodeStatus(false,'acceso_codigo')" class="btn btn-danger">Deshabilitar</button>
+                <button type="button" onclick="setCodeStatus(false,'acceso_codigo')" class="btn btn-danger">Deshabilitar</button>
                 <p>&nbsp;</p>
 
                 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -116,5 +115,5 @@
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
-  
+<script>if (window.module) module = window.module;</script>
 </html>

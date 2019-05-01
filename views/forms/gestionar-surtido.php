@@ -13,8 +13,7 @@
 <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
 <link href="../../css/clean-install.css" rel="stylesheet">
 <script src="../../js/vendor/common-functions.js"></script>
-<script>if (window.module) module = window.module;</script>
-</head>
+<script>if (typeof module === 'object') {window.module = module;module = undefined;}</script></head>
 
 <body class="s-bg">
 <div class="s-nb">
@@ -157,4 +156,5 @@
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
 </html>
