@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2019 a las 02:57:06
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.10
+-- Tiempo de generación: 02-05-2019 a las 04:10:45
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,10 +38,19 @@ update orden set total = (select sum(platillo.precio) from platillo, (select * f
 CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerIngredientes` (IN `clavePlatillo` INT)  BEGIN
 
     SELECT 
-    recetas.cantidad * (1+ (
+    recetas.cantidad * (1+(
         (SELECT valor FROM preferencias WHERE nombre = 'razon_desperdicio')
-        /100) ) AS necesario, 
-    ingrediente.cantidad AS existencia 
+        /100)) 
+   	 AS necesario,
+    (
+        (SELECT COALESCE(SUM(recetas.cantidad),0)*
+		(-1 - (SELECT valor from preferencias where nombre = 					'razon_desperdicio')/100)
+	FROM recetas, pedidos 
+	WHERE pedidos.estado = 'pedido'
+	AND recetas.platillo = clavePlatillo
+	AND pedidos.platillo = recetas.platillo
+     ) + ingrediente.cantidad
+    )AS existencia 
     FROM recetas, ingrediente WHERE 
     recetas.ingrediente = ingrediente.clave
     AND recetas.platillo = clavePlatillo;
@@ -708,7 +717,7 @@ CREATE TABLE `recetas` (
 
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 (1, '0.5000', 1, 3),
-(3, '100000.0000', 2, 3),
+(3, '50.0000', 2, 3),
 (4, '10.0000', 1, 6),
 (5, '0.0100', 2, 6);
 

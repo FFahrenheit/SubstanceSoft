@@ -6,17 +6,17 @@
 
     $clave = $_POST['clave'];
 
-    $query = "SELECT clave FROM platillo WHERE nombre = '$nombre_platillo'";
+    /*$query = "SELECT clave FROM platillo WHERE nombre = '$nombre_platillo'";
     $result = mysqli_query($connection,$query) or die("'Error nombre platillo'");
 
     $row = mysqli_fetch_array($result);
 
-    $platillo = $row['clave'];
+    $platillo = $row['clave'];*/
 
     for($i = 0; $i<$qty ;$i++)
     {
         freeQuery();
-        $req = "CALL obtenerIngredientes($platillo)";
+        $req = "CALL obtenerIngredientes((SELECT clave FROM platillo WHERE nombre = '$nombre_platillo')";
         $result = mysqli_query($connection,$req) or die('"Error en llamada"');
         $isPossible = true;
         if($result->num_rows>0)
