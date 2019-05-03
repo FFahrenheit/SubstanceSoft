@@ -167,7 +167,9 @@
     {
         global $user, $connection, $limit;
         $off = $page * $limit;
-        $query = "select * from orden where ESTADO='pagada' ORDER BY fecha DESC LIMIT $limit OFFSET $off";
+        $query = "select * from orden where ESTADO='pagada' 
+        AND fecha > (SELECT valor from fechas where nombre='fecha_fin') ORDER BY fecha 
+        DESC LIMIT $limit OFFSET $off";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)

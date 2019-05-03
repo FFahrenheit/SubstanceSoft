@@ -11,6 +11,38 @@ function refreshPage() {
   window.location.reload(true);
 }
 
+function updateChat()
+{
+  console.log("Actualizando chat");
+  $.ajax(
+    {
+      url: '/substancesoft/php/requests/chat.php',
+      type: 'POST',
+      datatype: 'html'
+    }
+  )
+  .done((resp)=>
+  {
+    console.log(resp);
+    if(resp!="void")
+    {
+      $("#chat").empty();
+      $("#chat").html(resp);
+      console.log("Hecho");
+    }
+    else 
+    {
+      console.log("No hay nuevos mensajes");
+    }
+  })
+  .fail((e)=>
+  {
+    console.log("Error: "+e);
+  })
+}
+
+var constantNotification = setInterval(updateChat,1000);
+
 /*function checkNotify()
 {
     console.log('Cargado');
