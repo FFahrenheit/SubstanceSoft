@@ -3,7 +3,6 @@
     "main": "./main.js",
     "version": "1.0.0",
     "dependencies": {
-        "node-fetch": "^2.4.1",
-        "push.js": "^1.0.9"
+        "node-fetch": "^2.4.1"
     }
 }
