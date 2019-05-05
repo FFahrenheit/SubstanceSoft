@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2019 a las 04:10:45
+-- Tiempo de generación: 05-05-2019 a las 06:08:23
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -279,7 +279,7 @@ INSERT INTO `horarios` (`nombre`, `venta`) VALUES
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `horarios_venta` (
-`SUM(total)` double
+`SUM(total)` decimal(32,4)
 ,`hour(fecha)` int(2)
 );
 
@@ -337,6 +337,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `login_automatico`
+--
+
+CREATE TABLE `login_automatico` (
+  `clave` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usado` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mensajes`
 --
 
@@ -389,7 +402,8 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (70, 'Admin100', 'Hey muy buenas a todos, guapísimos', '2019-04-28 02:02:07', 1),
 (71, 'Admin100', 'haha', '2019-04-28 02:03:36', 1),
 (72, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-28 02:30:08', 1),
-(73, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-28 03:02:31', 1);
+(73, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-28 03:02:31', 1),
+(74, 'Admin100', 'holaaa', '2019-05-03 01:25:11', 1);
 
 -- --------------------------------------------------------
 
@@ -423,8 +437,8 @@ CREATE TABLE `orden` (
   `usuario` varchar(30) NOT NULL,
   `mesa` int(11) NOT NULL,
   `estado` enum('abierta','cerrada','pagada') NOT NULL,
-  `descripcion` varchar(20) NOT NULL,
-  `total` float DEFAULT NULL
+  `descripcion` varchar(30) NOT NULL,
+  `total` decimal(10,4) DEFAULT '0.0000'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -433,18 +447,18 @@ CREATE TABLE `orden` (
 
 INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`) VALUES
 (1, '2019-03-05 04:52:39', 'Admin100', 1, 'pagada', '', NULL),
-(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', 8132.2),
-(19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', 240),
-(20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', 2048.2),
-(21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', 360),
-(22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', 5484),
-(23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', 1928),
-(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', 240),
-(25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', 240),
-(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', 120),
-(27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', 360),
-(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', 100),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', 5684),
+(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', '8132.2002'),
+(19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', '240.0000'),
+(20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', '2048.2000'),
+(21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', '360.0000'),
+(22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', '5484.0000'),
+(23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', '1928.0000'),
+(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', '240.0000'),
+(25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', '240.0000'),
+(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000'),
+(27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000'),
+(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000'),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '5684.0000'),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL),
 (31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', NULL),
 (32, '2019-04-28 03:17:49', 'Admin100', 2, 'abierta', 'Q', NULL);
@@ -808,6 +822,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`) VALUES
+('', '', '', '', '', 40, '', 'administrador', 3774),
 ('admin', '102', 'Uma delisia', '', '', 0, '', 'administrador', 2893),
 ('Admin100', 'Ivan', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994),
 ('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado', 9425),
@@ -964,6 +979,13 @@ ALTER TABLE `ingrediente`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `login_automatico`
+--
+ALTER TABLE `login_automatico`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `usuario` (`usuario`);
+
+--
 -- Indices de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
@@ -1084,10 +1106,16 @@ ALTER TABLE `ingrediente`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `login_automatico`
+--
+ALTER TABLE `login_automatico`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -1149,6 +1177,12 @@ ALTER TABLE `historial_ingredientes`
   ADD CONSTRAINT `historial_ingredientes_ibfk_1` FOREIGN KEY (`ingrediente`) REFERENCES `ingrediente` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `login_automatico`
+--
+ALTER TABLE `login_automatico`
+  ADD CONSTRAINT `login_automatico_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
 -- Filtros para la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
@@ -1199,6 +1233,9 @@ DELIMITER $$
 --
 -- Eventos
 --
+CREATE DEFINER=`root`@`localhost` EVENT `borrar_login` ON SCHEDULE EVERY 10 MINUTE STARTS '2019-05-05 00:00:00' ON COMPLETION PRESERVE DISABLE DO DELETE FROM login_automatico WHERE 
+(SELECT TIMESTAMPDIFF(SECOND,login_automatico.hora,NOW())) > 600$$
+
 CREATE DEFINER=`root`@`localhost` EVENT `update_stats` ON SCHEDULE EVERY 1 WEEK STARTS '2019-04-07 23:59:59' ON COMPLETION PRESERVE ENABLE DO BEGIN
 UPDATE fechas SET valor = NOW() where nombre='fecha_fin';
 UPDATE fechas SET valor = DATE_SUB(NOW(), INTERVAL 7 DAY) where nombre='fecha_in';
