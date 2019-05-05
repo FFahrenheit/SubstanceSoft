@@ -1,5 +1,5 @@
 <?php
-    $pass = $_POST['password'];
+    $pass = $_POST['pass'];
     session_start();
     $user = $_SESSION['username'];
 

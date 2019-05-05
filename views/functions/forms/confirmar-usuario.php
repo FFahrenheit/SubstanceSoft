@@ -42,10 +42,10 @@
             <img width="200" src="../../../images/confirmar.png" alt="Recargar">
             <h3><strong>Ingrese su contraseña para proseguir:</strong></h3>
             <div class="containter-fluid">
-                <form action = ""id = "password" class="form-horizontal form-inline justify-content-center">
+                <form action = "" id= "password" class="form-horizontal form-inline justify-content-center">
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <input id="pass" width="100" type="password" placeholder="Ingrese su contraseña" class="form-control" required>
+                            <input name = "pass" id="pass" width="100" type="password" placeholder="Ingrese su contraseña" class="form-control" required>
                         </div>
                         <input id="ref"hidden value="<?php echo $reference; ?>">
                         <div class="col-sm-9">
