@@ -25,7 +25,7 @@
         <h1>SubstanceSoft</h1>
     </a>
     <a onclick="refreshPage()"   style="float: left;">
-        <img src="../../images/reload.png" alt="Recargar">
+        <img src="../../images/reload.png" alt="Recargar"> 
     </a>
 </div>
         <section class="container text-center">
@@ -47,6 +47,7 @@
                     <tbody>
                         <?php
                             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
+                            mysqli_set_charset($connection,"utf8");
 
                             $query = "select * from usuario";
 

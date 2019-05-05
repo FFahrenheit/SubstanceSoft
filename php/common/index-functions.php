@@ -1,7 +1,7 @@
 <?php
     session_start();
     $permisos = array(
-        array("Administrar base", "Estadísticas", "Inventario", "Preferencias"),
+        array("Administrar base", "Estadísticas", "Inventario", "Preferencias","Extras"),
         array( "Asignar mesa", "Crear orden", "Cancelar","Liberar", "Marcar comanda"),
         array( "Recibir comandas", "Inventario", "Notificar comanda lista"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
@@ -91,7 +91,7 @@
             $var = "valuefunction".$i;
             $current = $_SESSION[$desc];
             $val = $_SESSION[$var];
-            $output .= "<a class='navbar-brand' href='./index.php?mod=$val'>";
+            $output .= "<a class='navbar-brand' href='../../views/menus/index.php?mod=$val'>";
             $output .=  $current;
             $output .=  "</a>";
         }
@@ -138,15 +138,16 @@
         $output .= '<h4 class="mt4">';
         $output .= $_SESSION['username'];
         $output .= "</h4>";
-        $output .= getChat();
+        $output .= '<div id="chat">'.getChat().' </div>';
         $output.='<p><a href="../functions/forms/mensajes.php?clave='.$_SESSION['username'].'" class="btn btn-link">Ver últimos mensajes</a></p>';
         return $output;
     }
 
-    function getChat()
+    function getChat($option = false)
     {
         $user  =  $_SESSION['username'];
         $out = "";
+        $new = false;
         $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
         mysqli_set_charset($connection,"utf8");
 
@@ -156,11 +157,33 @@
 
         while($row = mysqli_fetch_array($result))
         {
-            $out .= '<div class="chat">';
+            if($row['visto']==1)
+            {
+                $out .= '<div class="chat">';
+            }
+            else 
+            {
+                $new = true;
+                $out .= '<div class="chat darker">';
+            }
             $out .= "<p>".$row['texto']."</p>";
             $out .= '<span class="time-right">'.$row['fecha'].'</span>';
             $out .= "</div>";
         }
-        return $out;
+        if(!$option) //Si no es update
+        {
+            return $out;
+        }
+        else 
+        {
+            if($new)
+            {
+                return $out;
+            }
+            else 
+            {
+                return "void";
+            }
+        }
     }
 ?>

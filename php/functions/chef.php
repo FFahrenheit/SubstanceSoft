@@ -47,11 +47,6 @@
             {
                 $output.='<div class="card-deck">';
             }
-
-            if($rest == 3)
-            {
-                $output.='<div class="card-deck">';;
-            }
                 for($i=0; $i<$rest; $i++)
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
@@ -117,10 +112,6 @@
                 {
                     $output.='<div class="card text-center" style="visibility: hidden"> <div class="card-body"></div></div>';
                 }
-            }
-            if($rest == 3)
-            {
-                $output.='<div class="card-deck">';;
             }
             /*for($i=0; $i<$rest; $i++)
             {

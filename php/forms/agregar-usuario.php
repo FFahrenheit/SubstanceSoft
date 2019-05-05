@@ -14,11 +14,25 @@
     {
         $tel=0;
     }
+    if($tip == 'administrador')
+    {
+        $query = "SELECT COUNT(*) as conteo FROM usuario WHERE tipo = 'administrador'";
+        $result = mysqli_query($connection,$query);
+        $row = mysqli_fetch_assoc($result);
+        {
+            if($row['conteo']>=5)
+            {
+                echo "'Error, solo pueden haber 5 administradores'";
+                mysqli_close($connection);
+                die();
+            }
+        }
+    }
 
-    $query = "INSERT INTO usuario (username, password, nombre, apellido_p, apellido_m,
+    $query = "INSERT INTO usuario (username, AES_ENCRYPT('$pas','Sub5t4nc3S0Ft'), nombre, apellido_p, apellido_m,
     telefono, direccion, tipo) VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', $tel, '$dir', '$tip')";
 
-    $result = mysqli_query($connection, $query);
+    $result = mysqli_query($connection, $query) or die("'Error al ingresar, datos inválidos'");
 
     echo json_encode("Exito!");
 

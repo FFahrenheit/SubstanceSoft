@@ -50,15 +50,26 @@ $(document).on('keyup','#search',function(){
 })
 
 var formulario = document.getElementById('formulario');
+var formulario2 = document.getElementById('formulario2');
 
 formulario.addEventListener('submit',function(e)
 {
+    var clave = document.getElementById('clave').value;
+    var qty = document.getElementById('qty').value;
+    var platillo = document.getElementById('platillo').value;
     e.preventDefault();
     console.log('working!');
 
-    var datos = new FormData(formulario);
+    var datos = new FormData();
+    datos.append("clave",clave);
+    datos.append("qty",qty);
+    datos.append("platillo",platillo);
 
-    if(formulario.checkValidity()===true)
+    console.log(clave+qty+platillo);
+
+ 
+    if(formulario.checkValidity() &&
+    formulario2.checkValidity() && clave!='' && qty!='' && platillo!='')
     {
         fetch('../../../php/forms/functions/agregar-comanda.php', 
         {
@@ -94,11 +105,18 @@ formulario.addEventListener('submit',function(e)
                 window.location.reload(false); 
             })
     }
+    else 
+    {
+        alert('Rellene todos los campos');
+        console.log("Rellene todos los campos");
+        return;
+    }
 })
 
 function updateText(label)
 {
     //label = '<p class="comm" style="color: #000;">Hola</p>';
+    console.log(label.id);
     $.ajax({
         url:'/substancesoft/php/requests/detalles-platillo.php',
         type: 'POST',
@@ -107,13 +125,14 @@ function updateText(label)
     })
     .done(function(respuesta)
     {
-        console.log(respuesta);
-        $("#actual").html(respuesta);   
+        $("#actual").html(respuesta);
+        var platillo = '<input name="platillo" id="platillo" hidden value="'+label.id+'"></input>'; 
+        $("#plato").html(platillo);
     })
     .fail(function()
     {
         console.log("error");
-    })
+    });
 
     //console.log(label.id);
 }

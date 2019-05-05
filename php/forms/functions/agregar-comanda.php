@@ -2,13 +2,21 @@
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"conexion"');
     
     $qty = $_POST['qty'];
-    $platillo  = $_POST['platillo'];
+    $nombre_platillo  = $_POST['platillo'];
+
     $clave = $_POST['clave'];
+
+    /*$query = "SELECT clave FROM platillo WHERE nombre = '$nombre_platillo'";
+    $result = mysqli_query($connection,$query) or die("'Error nombre platillo'");
+
+    $row = mysqli_fetch_array($result);
+
+    $platillo = $row['clave'];*/
 
     for($i = 0; $i<$qty ;$i++)
     {
         freeQuery();
-        $req = "CALL obtenerIngredientes($platillo)";
+        $req = "CALL obtenerIngredientes((SELECT clave FROM platillo WHERE nombre = '$nombre_platillo')";
         $result = mysqli_query($connection,$req) or die('"Error en llamada"');
         $isPossible = true;
         if($result->num_rows>0)
@@ -16,7 +24,7 @@
             for($j = 0; $j<$result->num_rows; $j++)
             {
                 $row = mysqli_fetch_array($result);
-                if($row['necesario'] > $row['existencia'])
+                if(($i+1)*$row['necesario'] > $row['existencia'])
                 {
                     $isPossible = false;
                     break;

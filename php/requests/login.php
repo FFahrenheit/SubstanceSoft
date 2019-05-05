@@ -32,7 +32,7 @@
     }
 
 
-    $query = "SELECT password, username,nombre , apellido_p, apellido_m, tipo from usuario where".$sub; 
+    $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo from usuario where".$sub; 
 
     freeQuery(); 
 

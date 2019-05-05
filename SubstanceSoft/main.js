@@ -3,9 +3,9 @@ const { app, BrowserWindow, globalShorcut, Menu } = electron;
 const fs = require('fs');
 var path = require('path');
 var url = require('url');
+var closeAll = false;
 
 "use strict";
-const fetch = require("node-fetch");
 
 let mainWindow;
 
@@ -25,9 +25,7 @@ app.on('ready', () => {
       }
     }
   );
-  mainWindow.setTitle('SubstanceSoft');
-
-  //mainWindow.loadURL('http://localhost/substancesoft/views/menus/index.php');
+  //mainWindow.setTitle('SubstanceSoft');
 
   mainWindow.loadURL(url.format(
     {
@@ -36,20 +34,7 @@ app.on('ready', () => {
       slashes: true
     }));
 
-  /*fetch("configuration.json")
-  .then(function (resp)
-  {
-    return resp.json();
-  })
-  .then(function (data)
-  {
-    console.log(data);
-  });*/
-
   mainWindow.maximize();
-  mainWindow.on('close', () => {
-    mainWindow = null;
-  })
 
   const template = [
     {
@@ -161,4 +146,47 @@ app.on('ready', () => {
 
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+
+  var notificationService = new BrowserWindow(
+      {
+        titleBarStyle: 'hidden',
+        //frame: false,
+        show: false,
+        backgroundColor: '#FFFFFF',
+        webpreferences:{
+          nodeIntegration: true
+        }
+      }
+    );
+
+    notificationService.loadURL(url.format(
+      {
+        pathname: path.join(__dirname, 'service.html'),
+        protocol: 'file',
+        slashes: true
+      }));
+
+    notificationService.maximize();
+
+    notificationService.hide();
+
+    notificationService.on('close',(event)=>
+    {
+      if(closeAll)
+      {
+        notificationService = null;
+      }
+      else
+      {
+        event.preventDefault();
+        notificationService.hide();
+      }
+    });
+
+    mainWindow.on('close', () => {
+      mainWindow = null;
+      closeAll = true;
+      notificationService.close();
+    })
+
 });
