@@ -4,6 +4,7 @@ const fs = require('fs');
 var path = require('path');
 var url = require('url');
 var closeAll = false;
+var IPdialog;
 
 "use strict";
 
@@ -104,7 +105,7 @@ app.on('ready', () => {
         },
         {
           label: 'Obtener mi IP', click() {
-            var IPdialog  = new BrowserWindow(
+            IPdialog  = new BrowserWindow(
               {
                 titleBarStyle: 'hidden',
                 maxWidth: 800, //400
@@ -130,7 +131,7 @@ app.on('ready', () => {
               IPdialog.on('close',(event)=>
               {
                 IPdialog = null;
-              })
+              });
             //require('dns').lookup(require('os').hostname(), function (err, add, fam) {
               //alert('Dirección IP: '+add);
             //})
@@ -218,10 +219,7 @@ app.on('ready', () => {
     mainWindow = null;
     closeAll = true;
     notificationService.close();
-    if(IPdialog)
-    {
-      IPdialog = null;
-    }
+    IPdialog.close();
   })
 
 });

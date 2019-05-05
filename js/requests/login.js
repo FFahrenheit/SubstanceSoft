@@ -62,6 +62,10 @@ formulario.addEventListener('submit', function (e)
                 console.log("aqui llega js");
                 console.log(data);
                 switch (data) {
+                    case 'new':
+                        alert("Debe elegir una nueva contraseña");
+                        window.location.pathname = '/substancesoft/views/functions/forms/cambiar-pass.php';
+                        break;
                     case 'horario':
                         alert("Por el momento no pueden ingresar empleados");
                         formulario2.reset();

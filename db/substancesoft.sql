@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2019 a las 20:29:43
+-- Tiempo de generación: 05-05-2019 a las 22:45:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -815,21 +815,22 @@ CREATE TABLE `usuario` (
   `telefono` bigint(11) DEFAULT NULL,
   `direccion` varchar(40) DEFAULT NULL,
   `tipo` enum('administrador','empleado') DEFAULT NULL,
-  `codigo` int(10) UNSIGNED NOT NULL
+  `codigo` int(10) UNSIGNED NOT NULL,
+  `login` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`) VALUES
-('', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774),
-('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893),
-('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994),
-('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425),
-('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056),
-('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872),
-('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423);
+INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`, `login`) VALUES
+('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, '0000-00-00 00:00:00'),
+('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994, '2019-05-05 20:44:59'),
+('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, '0000-00-00 00:00:00'),
+('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, '0000-00-00 00:00:00'),
+('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, '0000-00-00 00:00:00'),
+('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423, '0000-00-00 00:00:00'),
+('yo', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774, '0000-00-00 00:00:00');
 
 --
 -- Disparadores `usuario`
