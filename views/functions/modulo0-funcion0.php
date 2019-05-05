@@ -145,7 +145,7 @@
                                                 <p class="card-text">Administre el listado de proveedores en el sistema</p>
                                                 <p><a href="../forms/nuevo-proveedor.html" class="btn btn-primary">Agregar</a></p>
                                                 <p><a href="../forms/modificar-proveedores.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-proveedores.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
