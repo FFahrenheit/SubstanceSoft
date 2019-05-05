@@ -16,7 +16,8 @@
     for($i = 0; $i<$qty ;$i++)
     {
         freeQuery();
-        $req = "CALL obtenerIngredientes((SELECT clave FROM platillo WHERE nombre = '$nombre_platillo')";
+        freeQuery();
+        $req = "CALL obtenerIngredientes((SELECT clave FROM platillo WHERE nombre = '$nombre_platillo'))";
         $result = mysqli_query($connection,$req) or die('"Error en llamada"');
         $isPossible = true;
         if($result->num_rows>0)
@@ -34,7 +35,9 @@
         if($isPossible)
         {
             freeQuery();
-            $query = "insert into pedidos(platillo, orden, estado) values ($platillo, $clave, 'pedido')";
+            $query = "insert into pedidos(platillo, orden, estado) values (
+                (SELECT clave FROM platillo WHERE nombre = '$nombre_platillo')
+                , $clave, 'pedido')";
             $result = mysqli_query($connection, $query) or die ('"query"');
         }
         else 

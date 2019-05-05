@@ -40,6 +40,14 @@
         </a>
     </div>
     <?php
+    if(isset($_GET['drive']) && $_GET['drive']==1)
+    {
+        $drive = $_GET['drive'];
+    }
+    else 
+    {
+        $drive = 0;
+    }
     $clave  = $_GET['clave'];
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
@@ -133,12 +141,13 @@
                             Ingresa datos
                         </div>
                     </div>
-                    <input name="clave" id="clave" hidden value="<?php echo $clave ?>">
+                    <input name="clave" id="clave" hidden value="<?php echo $clave; ?>">
+                    <input name="drive" id="drive" hidden value="<?php echo $drive; ?>">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
-                    <button class="btn btn-success" onclick="goBack()">Continuar</button>
                 </form>
+                <button class="btn btn-success" onclick="goBackDrive()">Continuar</button>
             </div>
         </div>
         </div>

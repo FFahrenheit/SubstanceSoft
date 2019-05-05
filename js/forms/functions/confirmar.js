@@ -54,6 +54,7 @@ function validate(e) {
         })
         .catch((e)=>
         {
+            console.log(e);
             alert("Error en el servidor");
             formulario.reset();
         })

@@ -68,7 +68,18 @@
                                 ?>
                             <tr>
                                 <td><?php echo $row['platillo'];?></td>
-                                <td><?php echo $row['mesa'];?></td>
+                                <td><?php switch($row['mesa'])
+                                {
+                                    case 0:
+                                        echo "Para llevar";
+                                        break;
+                                    case -1:
+                                        echo "Sin mesa asignada";
+                                        break;
+                                    default:
+                                        echo $row['mesa'];
+                                        break;
+                                }?></td>
                                 <td><?php echo $row['hora'];?></td>
                                 <td>
                                     <?php 

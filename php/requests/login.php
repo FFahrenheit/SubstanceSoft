@@ -23,7 +23,7 @@
             echo json_encode("unable");
             die();
         }
-    }
+    } 
     else 
     {
         $username = $_POST['username'];
@@ -32,7 +32,7 @@
     }
 
 
-    $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo from usuario where".$sub; 
+    $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo, login from usuario where ".$sub; 
 
     freeQuery(); 
 
@@ -49,8 +49,10 @@
         echo json_encode("user");
         die;
     }
-
+    
+    $username = $row['username'];
     $tipo = $row['tipo'];
+    $nuevo = $row['login'];
 
     if($tipo != 'administrador' && !$available)
     {
@@ -115,7 +117,15 @@
         }
         //$row = mysqli_fetch_array($result); 
 
-        echo json_encode("success");
+        if($nuevo=='0000-00-00 00:00:00')
+        {
+            echo json_encode("new");
+        }
+        else
+        {
+            $query = "UPDATE usuario SET login = NOW() WHERE username = '$username' ";
+            echo json_encode("success");
+        }
     }
     else
     {

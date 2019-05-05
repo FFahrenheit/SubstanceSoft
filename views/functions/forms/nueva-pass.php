@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, inicial-scale=1">
 
         <title>
-            Modificar contraseña
+            Nueva contraseña
         </title>
         <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
 
@@ -30,8 +30,7 @@
 </div>
         <section class="container text-center">
             <?php
-                session_start();
-                $user = $_SESSION['username'];
+                $user = $_GET['user'];
                 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
                 $query = "SELECT *, AES_DECRYPT(password,'Sub5t4nc3S0Ft') AS pass from usuario where username = '$user'";
                 $sql = mysqli_query($connection, $query) or die("error");
@@ -79,7 +78,7 @@
         </section>
     </body>
     <script src="../../../js/vendor/validate-form.js"></script>
-    <script src="../../../js/forms/nueva-pass.js"></script>
+    <script src="../../../js/forms/modificar-pass.js"></script>
     <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>
     <script src="../../../js/vendor/bootstrap.min.js"></script>

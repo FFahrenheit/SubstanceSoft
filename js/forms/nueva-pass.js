@@ -37,7 +37,7 @@ formulario.addEventListener('submit',function(e)
                 if(data=='Exito')
                 {
                     alert('Modificado correctamente');
-                    window.location.pathname = '/SubstanceSoft/views/functions/forms/passwords.php'
+                    window.location.pathname = '/SubstanceSoft/views/menus/index.php'
                 }
                 else 
                 {

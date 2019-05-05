@@ -38,7 +38,7 @@
                             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
 
                             $query = "select * from mesa where numero not in (select mesa from orden where estado
-                                ='abierta') and numero!=0";
+                                ='abierta') and numero>0";
 
                             $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -50,9 +50,15 @@
                                 <?php
                                 while ($row = mysqli_fetch_array($sql)) {
                                         ?>
-                                    <option><?php echo $row['numero']; ?></option>
+                                    <option><?php echo $row['numero']; 
+                                    ?></option>
+                                    
                                 <?php
-                            }
+                        }
+                        if ($sql->num_rows == 0)
+                        {
+                            echo '<option value="-1">Sin mesa</option>';
+                        }
                         mysqli_close($connection);
                         ?>
                             </select>
@@ -61,6 +67,7 @@
                             <label for="">Breve descripción: </label>
                             <input name="desc" type="text" placeholder="Escriba una descripción para la orden" class="form-control">
                         </div>
+                        <input id="drive" name="drive" value="0" hidden>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">
                                 Agregar
