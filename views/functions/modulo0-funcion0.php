@@ -8,7 +8,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
-    <link href="../../css/index.css" rel="stylesheet"> <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
+    <link href="../../css/index.css" rel="stylesheet">
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
 </head>
 
 <body>
@@ -90,6 +96,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <p>&nbsp;</p>
+                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/mesas.png" alt="Mesas">
@@ -102,9 +111,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <p>&nbsp;</p>
-                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/roles.png" alt="Roles">
@@ -128,6 +134,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
+                                <p>&nbsp;</p>
+                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/proveedores.png" alt="Proveedores">
@@ -151,9 +160,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <p>&nbsp;</p>
-                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/chef.png" alt="Chefs">
@@ -165,6 +171,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
+                                <p>&nbsp;</p>
+                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/code.png" alt="Codigos">
@@ -213,7 +222,9 @@
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>
     <script src="../../js/vendor/common-functions.js"></script>
-<script>if (window.module) module = window.module;</script>
+    <script>
+        if (window.module) module = window.module;
+    </script>
 </body>
 
 </html>

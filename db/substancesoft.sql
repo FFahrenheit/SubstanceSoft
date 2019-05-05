@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2019 a las 06:08:23
+-- Tiempo de generación: 05-05-2019 a las 20:29:43
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -229,7 +229,8 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (9, 1, '-0.5000', '2019-04-28 03:27:11', 'uso'),
 (10, 2, '-100000.0000', '2019-04-28 03:27:11', 'uso'),
 (11, 1, '-0.5000', '2019-04-28 03:32:06', 'uso'),
-(12, 2, '-100000.0000', '2019-04-28 03:32:06', 'uso');
+(12, 2, '-100000.0000', '2019-04-28 03:32:06', 'uso'),
+(13, 4, '100.0000', '2019-05-05 15:39:11', 'surtido');
 
 -- --------------------------------------------------------
 
@@ -305,7 +306,7 @@ INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `exi
 (1, 'pollo', '134.0000', 'kg', 4.0000),
 (2, 'queso', '-199523.0100', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
-(4, 'Agua', '21.0000', 'lt', 10.0000);
+(4, 'Agua', '121.0000', 'lt', 10.0000);
 
 --
 -- Disparadores `ingrediente`
@@ -822,13 +823,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`) VALUES
-('', '', '', '', '', 40, '', 'administrador', 3774),
-('admin', '102', 'Uma delisia', '', '', 0, '', 'administrador', 2893),
-('Admin100', 'Ivan', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994),
-('chef1', 'chef', 'Chef', '', '', 0, '', 'empleado', 9425),
-('chef2', 'chef', 'Chef 2', '', '', 0, '', 'empleado', 2056),
-('DAADSDA', 'da', '', '', '', 0, '', 'administrador', 1872),
-('IVX', 'NNNN', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423);
+('', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774),
+('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893),
+('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994),
+('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425),
+('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056),
+('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872),
+('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423);
 
 --
 -- Disparadores `usuario`
@@ -1097,7 +1098,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`
