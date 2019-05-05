@@ -20,7 +20,7 @@ app.on('ready', () => {
       backgroundColor: '#FFFFFF',
       icon: path.join(__dirname, 'images/64x64.png'),
       title: 'SubstanceSoft',
-      webPreferences: {
+      webpreferences: {
         nodeIntegration: true
       }
     }
@@ -84,7 +84,7 @@ app.on('ready', () => {
           click() {
             var reconf =
             {
-              "set":false
+              "set": false
             };
             reconfJSON = JSON.stringify(reconf);
             fs.writeFile("configuration.json", reconfJSON, function (err) {
@@ -100,6 +100,40 @@ app.on('ready', () => {
                 protocol: 'file',
                 slashes: true
               }));
+          }
+        },
+        {
+          label: 'Obtener mi IP', click() {
+            var IPdialog  = new BrowserWindow(
+              {
+                titleBarStyle: 'hidden',
+                maxWidth: 800, //400
+                maxHeight: 200, //200
+                show: false,
+                backgroundColor: '#FFFFFF',
+                icon: path.join(__dirname, 'images/64x64.png'),
+                title: 'SubstanceSoft',
+                webpreferences: {
+                  nodeIntegration: true
+                }
+              }
+            );
+            IPdialog.loadURL(url.format(
+              {
+                pathname: path.join(__dirname, 'ip.html'),
+                protocol: 'file',
+                slashes: true
+              }));
+
+              IPdialog.maximize();
+
+              IPdialog.on('close',(event)=>
+              {
+                IPdialog = null;
+              })
+            //require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+              //alert('Dirección IP: '+add);
+            //})
           }
         }
       ]
@@ -148,45 +182,46 @@ app.on('ready', () => {
   Menu.setApplicationMenu(menu);
 
   var notificationService = new BrowserWindow(
-      {
-        titleBarStyle: 'hidden',
-        //frame: false,
-        show: false,
-        backgroundColor: '#FFFFFF',
-        webpreferences:{
-          nodeIntegration: true
-        }
-      }
-    );
-
-    notificationService.loadURL(url.format(
-      {
-        pathname: path.join(__dirname, 'service.html'),
-        protocol: 'file',
-        slashes: true
-      }));
-
-    notificationService.maximize();
-
-    notificationService.hide();
-
-    notificationService.on('close',(event)=>
     {
-      if(closeAll)
-      {
-        notificationService = null;
+      titleBarStyle: 'hidden',
+      //frame: false,
+      show: false,
+      backgroundColor: '#FFFFFF',
+      webpreferences: {
+        nodeIntegration: true
       }
-      else
-      {
-        event.preventDefault();
-        notificationService.hide();
-      }
-    });
+    }
+  );
 
-    mainWindow.on('close', () => {
-      mainWindow = null;
-      closeAll = true;
-      notificationService.close();
-    })
+  notificationService.loadURL(url.format(
+    {
+      pathname: path.join(__dirname, 'service.html'),
+      protocol: 'file',
+      slashes: true
+    }));
+
+  notificationService.maximize();
+
+  notificationService.hide();
+
+  notificationService.on('close', (event) => {
+    if (closeAll) {
+      notificationService = null;
+    }
+    else {
+      event.preventDefault();
+      notificationService.hide();
+    }
+  });
+
+  mainWindow.on('close', () => {
+    mainWindow = null;
+    closeAll = true;
+    notificationService.close();
+    if(IPdialog)
+    {
+      IPdialog = null;
+    }
+  })
 
 });
