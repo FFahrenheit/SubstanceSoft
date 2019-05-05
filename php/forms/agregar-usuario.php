@@ -29,7 +29,7 @@
         }
     }
 
-    $query = "INSERT INTO usuario (username, password, nombre, apellido_p, apellido_m,
+    $query = "INSERT INTO usuario (username, AES_ENCRYPT('$pas','Sub5t4nc3S0Ft'), nombre, apellido_p, apellido_m,
     telefono, direccion, tipo) VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', $tel, '$dir', '$tip')";
 
     $result = mysqli_query($connection, $query) or die("'Error al ingresar, datos inválidos'");

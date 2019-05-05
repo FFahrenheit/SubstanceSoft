@@ -15,7 +15,7 @@
         $tel=0;
     }
 
-    $query = "UPDATE usuario SET username='$usu', password='$pas', nombre='$nom', apellido_p='$pat', apellido_m='$mat',
+    $query = "UPDATE usuario SET username='$usu', password=AES_ENCRYPT('$pas','Sub5t4nc3S0Ft'), nombre='$nom', apellido_p='$pat', apellido_m='$mat',
     telefono=$tel, direccion='$dir' WHERE username ='$old'";
 
     $result = mysqli_query($connection, $query) or die (' "Usuario repetido o campos invalidos. Reintente"');

@@ -32,7 +32,7 @@
             <?php
                 $user = $_GET['user'];
                 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
-                $query = "select * from usuario where username = '$user'";
+                $query = "SELECT *, AES_DECRYPT(password,'Sub5t4nc3S0Ft') AS pass from usuario where username = '$user'";
                 $sql = mysqli_query($connection, $query) or die("error");
                 $row = mysqli_fetch_array($sql);
             ?>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Contraseña: </label> <font color="red">*</font>
-                        <input type="password" name="pas" value="<?php printRow($row, 'password');?>" class="form-control" required>
+                        <input type="password" name="pas" value="<?php printRow($row, 'pass');?>" class="form-control" required>
                         <div class="invalid-feedback">
                             Ingresa datos
                         </div>
