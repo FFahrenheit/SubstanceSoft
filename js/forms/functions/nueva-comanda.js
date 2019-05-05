@@ -1,3 +1,6 @@
+var drive = document.getElementById('drive');
+var clave = document.getElementById('clave');
+
 $(buscarPlatillo());
 
 function buscarPlatillo(consulta)
@@ -135,4 +138,17 @@ function updateText(label)
     });
 
     //console.log(label.id);
+}
+
+function goBackDrive()
+{
+    if(drive.value == 1)
+    {
+        var path = '/substancesoft/views/functions/forms/ticket.php?clave='+clave.value+'&drive=1';
+        window.location.href = path;
+    }
+    else 
+    {
+        window.history.back();
+    }
 }

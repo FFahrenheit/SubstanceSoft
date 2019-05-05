@@ -4,7 +4,7 @@ const fs = require('fs');
 var path = require('path');
 var url = require('url');
 var closeAll = false;
-var IPdialog;
+var IPdialog = null;
 
 "use strict";
 
@@ -219,7 +219,9 @@ app.on('ready', () => {
     mainWindow = null;
     closeAll = true;
     notificationService.close();
-    IPdialog.close();
+    if(IPdialog!=null){
+      IPdialog.close();
+    }
   })
 
 });

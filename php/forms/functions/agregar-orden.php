@@ -10,7 +10,14 @@
 
     $result = mysqli_query($connection, $query) or die ('"Error al agregar"');
 
-    echo json_encode("Exito");
+    if(isset($_POST['drive']) && $_POST['drive']==1)
+    {
+        echo json_encode( mysqli_insert_id($connection));
+    }
+    else 
+    {
+        echo json_encode("Exito");
+    }
 
     mysqli_close($connection);
 ?>
