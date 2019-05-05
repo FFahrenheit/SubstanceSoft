@@ -67,8 +67,8 @@
                                                 <h4 class="card-title">Usuarios</h4>
                                                 <p class="card-text">Administre las credenciales con las que se usa el sistema</p>
                                                 <p><a href="../forms/nuevo-usuario.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-usuarios.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-usuario.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-usuarios.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,8 +79,8 @@
                                                 <h4 class="card-title">Cocinas</h4>
                                                 <p class="card-text">Administre las múlltiples zonas de cocina en el sistema</p>
                                                 <p><a href="../forms/nueva-cocina.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-cocinas.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-cocina.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-cocinas.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -91,8 +91,8 @@
                                                 <h4 class="card-title">Ingredientes</h4>
                                                 <p class="card-text">Administre los distintos ingredientes usados en el sistema</p>
                                                 <p><a href="../forms/nuevo-ingrediente.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-ingredientes.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-ingredientes.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-ingredientes.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -106,8 +106,8 @@
                                                 <h4 class="card-title">Mesas</h4>
                                                 <p class="card-text">Administre las distintas mesas que hay en el sistema.</p>
                                                 <p><a href="../forms/nueva-mesa.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-mesas.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-mesas.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-mesas.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -129,8 +129,8 @@
                                                 <h4 class="card-title">Platillos</h4>
                                                 <p class="card-text">Administre los platillos en el sistema</p>
                                                 <p><a href="../forms/nuevo-platillo.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-platillos.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-platillos.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-platillos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -144,12 +144,12 @@
                                                 <h4 class="card-title">Proveedores</h4>
                                                 <p class="card-text">Administre el listado de proveedores en el sistema</p>
                                                 <p><a href="../forms/nuevo-proveedor.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-proveedores.php" class="btn btn-primary">Ver</a></p>
                                                 <p><a href="../forms/modificar-proveedores.php" class="btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-proveedores.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card text-center">
+                                    <!--<div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/surtidos.png" alt="Surtido fijo">
                                             <div class="card-block">
@@ -160,7 +160,7 @@
                                                 <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/chef.png" alt="Chefs">
@@ -172,9 +172,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
-                                <p>&nbsp;</p>
-                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/code.png" alt="Codigos">
@@ -186,6 +183,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </div>
+                                <p>&nbsp;</p>
+                                <div class="card-deck">
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/receta.png" alt="Recetas">
@@ -195,6 +195,9 @@
                                                 <p><a href="../forms/gestionar-recetas.php" class="btn btn-primary">Administrar</a></p>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="card text-center" style="visibility: hidden">
+                                        <div class="card-body"></div>
                                     </div>
                                     <div class="card text-center" style="visibility: hidden">
                                         <div class="card-body"></div>

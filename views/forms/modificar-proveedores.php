@@ -51,7 +51,8 @@
                         ?>
                         <tr>
                             <td><?php echo $row['nombre']; ?></td>
-                            <td> <a href="modificar-proveedor-form.php?clave=<?php echo $row['clave']?>" class="btn btn-primary">Modificar</a> </td>
+                            <td> <a href="gestionar-surtido.php?key=<?php echo $row['clave']?>&name=<?php echo $row['nombre']?>" class="btn btn-primary">Gestionar surtidos</a> </td>
+                            <td> <a href="modificar-proveedor-form.php?clave=<?php echo $row['clave']?>" class="btn btn-primary">Cambiar nombre</a> </td>
                             <td>
                                 <a style="color: white;"data-toggle="modal" data-target="#delete"
                                 class="btn btn-danger" id="<?php echo $row['clave']?>" onClick="showDetails(this)">
