@@ -20,6 +20,9 @@ app.on('ready', () => {
       backgroundColor: '#FFFFFF',
       icon: path.join(__dirname, 'images/64x64.png'),
       title: 'SubstanceSoft',
+      webPreferences: {
+        nodeIntegration: true
+      }
     }
   );
   mainWindow.setTitle('SubstanceSoft');
@@ -94,7 +97,7 @@ app.on('ready', () => {
         {
           label: 'Reconfigurar',
           click() {
-            var reconf = 
+            var reconf =
             {
               "set":false
             };

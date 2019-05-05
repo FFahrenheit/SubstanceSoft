@@ -147,6 +147,7 @@
                                                 <h4 class="card-title">Surtidos</h4>
                                                 <p class="card-text">Administre los proveedores automáticos del sistema</p>
                                                 <p><a href="../forms/nuevo-surtido.php" class="btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../forms/modificar-surtidos.php" class="btn btn-primary">Modificar</a></p>
                                                 <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>

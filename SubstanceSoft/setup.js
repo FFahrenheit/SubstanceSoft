@@ -30,7 +30,7 @@ central.addEventListener("click", function () {
                     }
                     console.log("Guardado!");
                 });
-                
+
                 window.location.href = link;
             }
             else {
@@ -44,7 +44,7 @@ central.addEventListener("click", function () {
     //window.location.href = link;
 });
 
-connect.addEventListener("click", function () 
+connect.addEventListener("click", function ()
 {
     var regex = /(^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$)/;
     if( IP.value.toLowerCase() != 'localhost' && !regex.test(IP.value))
@@ -63,7 +63,7 @@ connect.addEventListener("click", function ()
                 var link = 'http://' + IP.value + '/substancesoft/views/menus/index.php';
                 console.log(link);
 
-                var conf = 
+                var conf =
                 {
                     "set":true,
                     "type":"client",
@@ -89,7 +89,8 @@ connect.addEventListener("click", function ()
                 alert('No hay respuesta por parte del servidor o aún no está configurado correctamente');
             }
         })
-        .catch(function () {
+        .catch(function (e) {
+            console.log(e);
             alert('No hay respuesta por parte del servidor');
             console.log("catch");
         })
