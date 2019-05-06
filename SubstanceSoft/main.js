@@ -21,7 +21,7 @@ app.on('ready', () => {
       backgroundColor: '#FFFFFF',
       icon: path.join(__dirname, 'images/64x64.png'),
       title: 'SubstanceSoft',
-      webpreferences: {
+      webPreferences: {
         nodeIntegration: true
       }
     }
@@ -107,6 +107,9 @@ app.on('ready', () => {
           label: 'Obtener mi IP', click() {
             IPdialog  = new BrowserWindow(
               {
+                webPreferences: {
+                  nodeIntegration: true
+                },
                 titleBarStyle: 'hidden',
                 maxWidth: 800, //400
                 maxHeight: 200, //200
@@ -114,9 +117,6 @@ app.on('ready', () => {
                 backgroundColor: '#FFFFFF',
                 icon: path.join(__dirname, 'images/64x64.png'),
                 title: 'SubstanceSoft',
-                webpreferences: {
-                  nodeIntegration: true
-                }
               }
             );
             IPdialog.loadURL(url.format(
@@ -188,7 +188,7 @@ app.on('ready', () => {
       //frame: false,
       show: false,
       backgroundColor: '#FFFFFF',
-      webpreferences: {
+      webPreferences: {
         nodeIntegration: true
       }
     }
