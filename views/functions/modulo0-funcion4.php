@@ -74,15 +74,14 @@
                                             </a>
 
                                         </div>
-                                    <div class="card text-center">
+                                        <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/cocinas.png" alt="Cocinas">
+                                            <img class="card-img-top img-fluid" src="../../images/code.png" alt="Codigos">
                                             <div class="card-block">
-                                                <h4 class="card-title">Cocinas</h4>
-                                                <p class="card-text">Administre las múlltiples zonas de cocina en el sistema</p>
-                                                <p><a href="../forms/nueva-cocina.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-cocinas.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/modificar-cocina.php" class="btn btn-primary">Modificar</a></p>
+                                                <h4 class="card-title">Codigos</h4>
+                                                <p class="card-text">Administre el inicio de sesión mediante codigos</p>
+                                                <p><a href="../forms/gestionar-codigos.php" class="btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-codigos.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>

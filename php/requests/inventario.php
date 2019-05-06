@@ -25,9 +25,9 @@
         $output = '<table class="table table-hover">';
         $output .= '<thead> <tr>
         <td>Nombre</td>
-        <td>Cantidad</td>
-        <td>Especificación</td>
-        <td>Crítico</td>
+        <td>Cantidad</td>'.
+        //<td>Especificación</td>
+        '<td>Crítico</td>
         <td>Agregar</td>
         </tr></thead>';
         $output.= '<tbody>';
@@ -35,14 +35,15 @@
         {
             $row = mysqli_fetch_array($result);
             $id = $row['clave'];
+            $esp = $row['especificacion'];
             $critica = $row['existencia_critica'];
             $cantidad = $row['cantidad'];
-            $existencia = ($critica > $row['cantidad']) ? "<td> <font color='red'>$cantidad<font> </td>" : "<td>$cantidad</td>"; 
+            $existencia = ($critica > $row['cantidad']) ? "<td> <font color='red'>$cantidad $esp<font> </td>" : "<td>$cantidad $esp</td>"; 
             $output .= "<tr>";
             $output .= "<td>".$row['nombre']."</td>";
             $output .= $existencia;
-            $output .= "<td>".$row['especificacion']."</td>";
-            $output .= "<td>$critica</td>";
+            //$output .= "<td>".$row['especificacion']."</td>";
+            $output .= "<td>$critica $esp</td>";
             $btnid = "button".$id;
             $output .= "<td>
             <div class='form-inline'>

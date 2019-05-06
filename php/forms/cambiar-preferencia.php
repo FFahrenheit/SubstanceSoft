@@ -13,9 +13,10 @@
             $query = "UPDATE preferencias SET valor = 0 WHERE nombre = '$codigo'";
         }
         $result = mysqli_query($connection, $query) or die('"Fallo"');
-        if($codigo == 'desperdicio_diario' && $_POST['new'] != 'true')
+        if($codigo == 'desperdicio_diario')
         {
-            $query = "UPDATE preferencias SET valor = 0 WHERE nombre = 'razon_desperdicio'";
+            $valor = ($_POST['new']=='true')? 5 : 0;
+            $query = "UPDATE preferencias SET valor = $valor WHERE nombre = 'razon_desperdicio'";
             $result = mysqli_query($connection,$query) or die("'error al actualizar a 0'");
         }
         echo json_encode($_POST['new']);

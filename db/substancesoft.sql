@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2019 a las 22:45:25
+-- Tiempo de generación: 06-05-2019 a las 00:17:36
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -404,7 +404,11 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (71, 'Admin100', 'haha', '2019-04-28 02:03:36', 1),
 (72, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-28 02:30:08', 1),
 (73, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-28 03:02:31', 1),
-(74, 'Admin100', 'holaaa', '2019-05-03 01:25:11', 1);
+(74, 'Admin100', 'holaaa', '2019-05-03 01:25:11', 1),
+(75, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:29:30', 0),
+(76, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:39:38', 0),
+(77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 0),
+(78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 0);
 
 -- --------------------------------------------------------
 
@@ -422,6 +426,7 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`numero`, `capacidad`) VALUES
+(-1, -1),
 (0, 0),
 (1, 10),
 (2, 10);
@@ -459,17 +464,26 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000'),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000'),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000'),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '5684.0000'),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '669.2000'),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', NULL),
-(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', NULL),
-(32, '2019-04-28 03:17:49', 'Admin100', 2, 'abierta', 'Q', NULL);
+(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000'),
+(32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', NULL),
+(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '1164.0000'),
+(34, '2019-05-05 21:42:54', 'Admin100', 0, 'abierta', 'Juan', '0.0000'),
+(35, '2019-05-05 21:43:41', 'Admin100', 0, 'abierta', 'juanito', '0.0000'),
+(36, '2019-05-05 21:44:18', 'Admin100', 0, 'abierta', 'El queso', '0.0000'),
+(37, '2019-05-05 21:45:03', 'Admin100', 0, 'abierta', 'queso', '0.0000'),
+(38, '2019-05-05 21:45:17', 'Admin100', 0, 'abierta', 'queso', '0.0000'),
+(39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000'),
+(40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000'),
+(41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000');
 
 --
 -- Disparadores `orden`
 --
 DELIMITER $$
 CREATE TRIGGER `notificacion_orden` BEFORE UPDATE ON `orden` FOR EACH ROW BEGIN
-	IF (NEW.estado = 'cerrada')
+	IF (OLD.estado = 'abierta' AND NEW.estado = 'cerrada')
 	THEN
 		INSERT INTO mensajes(destinatario, texto) VALUES 
 		(
@@ -549,7 +563,14 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (56, 'pedido', '2019-04-21 04:03:08', 4, 26),
 (57, 'entregado', '2019-04-21 04:32:32', 6, 29),
 (58, 'listo', '2019-04-22 02:47:47', 3, 26),
-(59, 'listo', '2019-04-22 02:56:23', 6, 29);
+(59, 'listo', '2019-04-22 02:56:23', 6, 29),
+(60, 'pedido', '2019-05-05 21:39:38', 9, 31),
+(61, 'pedido', '2019-05-05 21:41:44', 9, 33),
+(62, 'pedido', '2019-05-05 21:41:48', 18, 33),
+(63, 'pedido', '2019-05-05 21:41:52', 7, 33),
+(64, 'entregado', '2019-05-05 21:45:31', 1, 39),
+(65, 'entregado', '2019-05-05 21:45:36', 18, 39),
+(66, 'pedido', '2019-05-05 21:51:07', 1, 29);
 
 --
 -- Disparadores `pedidos`
@@ -1117,19 +1138,19 @@ ALTER TABLE `login_automatico`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

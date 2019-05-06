@@ -50,7 +50,8 @@
             <!-- BODY -->
             <h1 class="mt-4">Inventario</h1>
             <p> Aquí pueden consultar el inventario.</p>
-            <?php echo getInventory(); ?>
+            <div id="tabla">
+            </div>
             <p> &nbsp;</p>
           </div>
           <!-- /BODY -->
@@ -74,6 +75,8 @@
   <script src="../../js/vendor/popper.min.js"></script>
   <script src="../../js/vendor/bootstrap.min.js"></script>
   <script src="../../js/vendor/common-functions.js"></script>
+  <script src="../../js/forms/functions/inventario.js"></script>  
+
 <script>if (window.module) module = window.module;</script>
 </body>
 

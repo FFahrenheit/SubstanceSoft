@@ -3,7 +3,7 @@
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"No se ha podido conectar"');
 
-    $query = "SELECT nombre_trigger FROM surtidos WHERE clave=$key";
+    /*$query = "SELECT nombre_trigger FROM surtidos WHERE clave=$key";
 
     $result = mysqli_query($connection, $query) or die('"Query trigger"');
 
@@ -15,6 +15,8 @@
 
     $result = mysqli_query($connection, $query) or die('"Query drop trigger"');
 
+    */
+    
     $query = "DELETE FROM surtidos WHERE clave=$key";
 
     $result = mysqli_query($connection, $query) or die('"Query"');
