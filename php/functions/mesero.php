@@ -7,7 +7,7 @@
     {
         global $user, $connection;
         $query = "select * from orden where ESTADO='ABIERTA'";
-        if($_SESSION['tipo']!='administrador')
+        if($_SESSION['tipo']=='empleado')
         {
             $query.= " and usuario = '$user'";
         }

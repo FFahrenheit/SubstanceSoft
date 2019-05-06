@@ -15,7 +15,7 @@
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"No se pudo conectar a la base de datos"');
 
     $query = "INSERT INTO usuario (username, password, nombre, apellido_p, apellido_m,
-    telefono, direccion, tipo) VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', $tel, '$dir', 'administrador')";
+    telefono, direccion, tipo) VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', $tel, '$dir', 'admin')";
 
     $result = mysqli_query($connection, $query) or die('"El nombre de usuario ya existe"');
 

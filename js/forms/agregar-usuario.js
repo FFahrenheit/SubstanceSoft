@@ -22,7 +22,7 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                //window.location.pathname = '/substancesoft/views/forms/nuevo-usuario.html';
+                //window.location.pathname = '/substancesoft/views/forms/nuevo-usuario.php';
                 window.history.back();
 
             })
