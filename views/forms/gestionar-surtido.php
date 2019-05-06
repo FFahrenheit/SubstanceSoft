@@ -33,12 +33,13 @@
 
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
-            $query = "SELECT surtidos.clave AS pk, ingrediente.nombre AS ingrediente, surtidos.cantidad AS
+            $query = "SELECT ingrediente AS ing, surtidos.clave AS pk, ingrediente.nombre AS ingrediente, surtidos.cantidad AS
             cantidad, surtidos.frecuencia AS frecuencia FROM surtidos, ingrediente WHERE
             surtidos.ingrediente = ingrediente.clave AND surtidos.proveedor = $key ";
 
 
             $sql = mysqli_query($connection, $query) or die("error en query");
+
         ?>
         <section class="container">
             <div class="text-center">
@@ -66,6 +67,13 @@
                                     <td><?php echo $row['ingrediente'];?></td>
                                     <td><?php echo $row['cantidad'];?></td>
                                     <td><?php echo $row['frecuencia'];?></td>
+                                    <td>
+                                    <a style="color: white;"data-toggle="modal" data-target="#modify"
+                                class="btn btn-primary" id="<?php echo $row['pk']?>" onClick="showDetailsModify(this)"
+                                data-qty="<?php echo $row['cantidad'];?>" data-frc=<?php echo $row['frecuencia'];?>
+                                data-ing=<?php echo $row['ing']?>>
+                                    Modificar
+                                </a></td>
                                     <td>
                                     <a style="color: white;"data-toggle="modal" data-target="#delete"
                                 class="btn btn-danger" id="<?php echo $row['pk']?>" onClick="showDetails(this)">
@@ -106,15 +114,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">Frecuencia (días): </label> <font color="red">*</font>
-                            <input name="frec" type="number" placeholder="Escriba la frecuencia del surtido fijo" class="form-control" required>
+                            <label for="">Cantidad a agregar: </label> <font color="red">*</font>
+                            <input name="qty" type="number" step = "0.01" placeholder="Escriba la cantidad del ingrediente que se agregará" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="">Cantidad a agregar: </label> <font color="red">*</font>
-                            <input name="qty" type="number" step = "0.01" placeholder="Escriba la cantidad del ingrediente que se agregará" class="form-control" required>
+                            <label for="">Frecuencia (días): </label> <font color="red">*</font>
+                            <input name="frec" type="number" placeholder="Escriba la frecuencia del surtido fijo" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -149,6 +157,38 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modificar surtido fijo</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                      <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="">Cantidad a agregar: </label> <font color="red">*</font>
+                                            <input id="modqty"name="qty" type="number" step = "0.01" placeholder="Escriba la cantidad del ingrediente que se agregará" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                Ingresa datos
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Frecuencia (días): </label> <font color="red">*</font>
+                                            <input id="modfrc"name="frec" type="number" placeholder="Escriba la frecuencia del surtido fijo" class="form-control" required>
+                                            <div class="invalid-feedback">
+                                                Ingresa datos
+                                            </div>
+                                        </div>
+                                      </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" onClick="confirmModify()">Modificar</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
         </section>
     </body>
     <script src="../../js/forms/agregar-surtido.js"></script>

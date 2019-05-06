@@ -7,7 +7,13 @@
 
     $result = mysqli_query($connection, $query);
 
-    echo json_encode("Exito!");
+    $query = "SELECT * FROM proveedor WHERE nombre = '$nom'";
+
+    $select = mysqli_query($connection, $query);
+
+    $row = mysqli_fetch_array($select);
+
+    echo json_encode($row);
 
     mysqli_close($connection);
 ?>

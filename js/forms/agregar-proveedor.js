@@ -9,7 +9,7 @@ formulario.addEventListener('submit',function(e)
 
     if(formulario.checkValidity()===true)
     {
-        fetch('../../php/forms/agregar-proveedor.php', 
+        fetch('../../php/forms/agregar-proveedor.php',
         {
             method: 'POST',
             body: datos
@@ -20,9 +20,15 @@ formulario.addEventListener('submit',function(e)
                 console.log("aqui llega js");
                 console.log(data);
                 alert(data);
-                //window.location.pathname = '/substancesoft/views/menus/menu-install.html';
-                window.history.back();
-
+                if(!isNaN(data.clave))
+                {
+                    var path = '/substancesoft/views/forms/gestionar-surtido.php?key='+data.clave+'&name='+data.nombre;
+                    window.location.href = path;
+                }
+                else
+                {
+                    alert(data);
+                }
             })
     }
 })

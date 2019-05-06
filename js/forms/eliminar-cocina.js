@@ -25,7 +25,7 @@ function confirmDelete()
         console.log(data);
         alert(data);
         //window.location.pathname = '/substancesoft/views/forms/modificar-cocina.php';
-        window.history.back();
+        window.location.reload(true);
 
     })
 }
