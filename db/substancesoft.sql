@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2019 a las 00:17:36
+-- Tiempo de generación: 07-05-2019 a las 02:20:05
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -169,8 +169,8 @@ CREATE TABLE `fechas` (
 --
 
 INSERT INTO `fechas` (`clave`, `nombre`, `valor`) VALUES
-(1, 'fecha_in', '2019-04-07 23:59:59'),
-(2, 'fecha_fin', '2019-04-30 23:59:59'),
+(1, 'fecha_in', '2019-04-28 23:59:59'),
+(2, 'fecha_fin', '2019-05-05 23:59:59'),
 (3, 'Encendido', '2019-04-21 00:00:00'),
 (4, 'Apagado', '2019-04-21 00:00:00');
 
@@ -230,7 +230,9 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (10, 2, '-100000.0000', '2019-04-28 03:27:11', 'uso'),
 (11, 1, '-0.5000', '2019-04-28 03:32:06', 'uso'),
 (12, 2, '-100000.0000', '2019-04-28 03:32:06', 'uso'),
-(13, 4, '100.0000', '2019-05-05 15:39:11', 'surtido');
+(13, 4, '100.0000', '2019-05-05 15:39:11', 'surtido'),
+(14, 2, '199523.1000', '2019-05-06 17:25:36', 'surtido'),
+(15, 2, '1.0000', '2019-05-06 17:27:00', 'surtido');
 
 -- --------------------------------------------------------
 
@@ -269,7 +271,7 @@ INSERT INTO `horarios` (`nombre`, `venta`) VALUES
 ('18:00 a 19:00', NULL),
 ('19:00 a 20:00', NULL),
 ('20:00 a 21:00', NULL),
-('21:00 a 22:00', NULL),
+('21:00 a 22:00', 2364.2),
 ('22:00 a 23:00', NULL),
 ('23:00 a 24:00', NULL);
 
@@ -304,7 +306,7 @@ CREATE TABLE `ingrediente` (
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
 (1, 'pollo', '134.0000', 'kg', 4.0000),
-(2, 'queso', '-199523.0100', 'lt', 1.0000),
+(2, 'queso', '1.0900', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
 (4, 'Agua', '121.0000', 'lt', 10.0000);
 
@@ -405,10 +407,10 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (72, 'Admin100', 'El platillo Sopa du macaco de la mesa 0 esta listo', '2019-04-28 02:30:08', 1),
 (73, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-04-28 03:02:31', 1),
 (74, 'Admin100', 'holaaa', '2019-05-03 01:25:11', 1),
-(75, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:29:30', 0),
-(76, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:39:38', 0),
-(77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 0),
-(78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 0);
+(75, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:29:30', 1),
+(76, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:39:38', 1),
+(77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 1),
+(78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 1);
 
 -- --------------------------------------------------------
 
@@ -731,7 +733,6 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`clave`, `nombre`) VALUES
-(1, 'Fedex'),
 (2, 'Navarro');
 
 -- --------------------------------------------------------
@@ -771,13 +772,6 @@ CREATE TABLE `surtidos` (
   `proveedor` int(11) NOT NULL,
   `nombre_trigger` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `surtidos`
---
-
-INSERT INTO `surtidos` (`clave`, `cantidad`, `frecuencia`, `ingrediente`, `proveedor`, `nombre_trigger`) VALUES
-(1, '100.0000', 1, 4, 1, 'triggerIng4Prov1');
 
 -- --------------------------------------------------------
 
@@ -835,7 +829,7 @@ CREATE TABLE `usuario` (
   `apellido_m` varchar(30) DEFAULT NULL,
   `telefono` bigint(11) DEFAULT NULL,
   `direccion` varchar(40) DEFAULT NULL,
-  `tipo` enum('administrador','empleado') DEFAULT NULL,
+  `tipo` enum('administrador','empleado','admin') DEFAULT NULL,
   `codigo` int(10) UNSIGNED NOT NULL,
   `login` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -846,9 +840,9 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`, `login`) VALUES
 ('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, '0000-00-00 00:00:00'),
-('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'administrador', 2994, '2019-05-05 20:44:59'),
+('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'admin', 2994, '2019-05-05 20:44:59'),
 ('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, '0000-00-00 00:00:00'),
-('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, '0000-00-00 00:00:00'),
+('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, '2019-05-05 22:21:43'),
 ('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, '0000-00-00 00:00:00'),
 ('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423, '0000-00-00 00:00:00'),
 ('yo', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774, '0000-00-00 00:00:00');
@@ -1120,7 +1114,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`
@@ -1168,7 +1162,7 @@ ALTER TABLE `platillo`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
@@ -1386,9 +1380,6 @@ fecha >= (SELECT valor from fechas where nombre='fecha_in') AND fecha<= (SELECT 
 ,'23:00 a 24:00');
 
 END$$
-
-CREATE DEFINER=`root`@`localhost` EVENT `triggerIng4Prov1` ON SCHEDULE EVERY 1 DAY STARTS '2019-04-07 15:39:11' ON COMPLETION PRESERVE ENABLE DO UPDATE ingrediente SET cantidad = cantidad + 100 WHERE 
-    clave = 4$$
 
 DELIMITER ;
 COMMIT;

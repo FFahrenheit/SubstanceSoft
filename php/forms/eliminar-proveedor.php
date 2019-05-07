@@ -1,5 +1,5 @@
 <?php
-    $clave = $_GET['clave'];
+    $clave = $_POST['clave'];
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"No se ha conectar"');
 
