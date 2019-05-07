@@ -68,6 +68,7 @@
                                                     <h4 class="card-title">Contraseñas</h4>
                                                     <p class="card-text">Consulte y cambie las contraseñas de sus usuarios</p>
                                                     <strong>Requiere confirmación de administrador</strong>
+                                                    <br></br>
                                                     <p class="btn btn-primary">Administrar</p>
                                                 </div>
                                             </div>

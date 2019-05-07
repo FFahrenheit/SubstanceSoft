@@ -1,3 +1,4 @@
+const fs = require('fs');
 var central = document.getElementById('setup');
 var IP = document.getElementById('ip');
 var connect = document.getElementById('connect');
@@ -21,7 +22,6 @@ central.addEventListener("click", function () {
 
                 var stringData = JSON.stringify(conf);
 
-                const fs = require('fs');
 
                 fs.writeFile("configuration.json", stringData, function (err) {
                     if (err) {
@@ -37,7 +37,8 @@ central.addEventListener("click", function () {
                 alert('El servidor no está configurado correctamente');
             }
         })
-        .catch(function () {
+        .catch( (e) => {
+          console.log(e)
             alert('No hay respuesta por parte del servidor');
             console.log("catch");
         })
@@ -72,7 +73,6 @@ connect.addEventListener("click", function ()
 
                 stringConf = JSON.stringify(conf);
 
-                const fs = require('fs');
 
                 fs.writeFile("configuration.json", stringConf, function (err) {
                     if (err) {

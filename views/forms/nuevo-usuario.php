@@ -80,8 +80,18 @@
                         <div class="form-group">
                             <label for="">Tipo de usuario</label> <font color="red">*</font>
                             <select class="form-control" name="tip">
-                                <option>administrador</option>
-                                <option>empleado</option>
+                                <?php
+                                    session_start();
+                                    if($_SESSION['tipo']=='admin')
+                                    {
+                                        echo '<option>administrador</option>
+                                        <option>empleado</option>';
+                                    }
+                                    else 
+                                    {
+                                        echo '<option>empleado</option>';
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group">

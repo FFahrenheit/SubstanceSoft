@@ -54,7 +54,7 @@
     $tipo = $row['tipo'];
     $nuevo = $row['login'];
 
-    if($tipo != 'administrador' && !$available)
+    if($tipo == 'empleado' && !$available)
     {
         echo json_encode("horario");
         die;
@@ -76,12 +76,12 @@
         $n_rows = $result->num_rows;
         $_SESSION['functions'] = $result->num_rows;
 
-        if($tipo == 'administrador')
+        if($tipo == 'administrador'||$tipo == 'admin')
         {
             $query = "SELECT descripcion, clave as permiso from funcion where
             funcion.clave<=4";
 
-            $_SESSION['tipo'] = 'administrador';
+            $_SESSION['tipo'] = $tipo;
             
             freeQuery(); 
 
@@ -108,7 +108,7 @@
             $_SESSION[$index] = $row['descripcion'];
             $_SESSION[$index2] = $row['permiso'];
         }
-        if($tipo == 'administrador')
+        if($tipo == 'administrador' || $tipo == 'admin')
         {
             $index = "function".$n_rows;
             $index2 = "valuefunction".$n_rows;

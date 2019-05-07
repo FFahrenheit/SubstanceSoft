@@ -14,9 +14,9 @@
     {
         $tel=0;
     }
-    if($tip == 'administrador')
+    if($tip == 'administrador'|| $tip == 'admin')
     {
-        $query = "SELECT COUNT(*) as conteo FROM usuario WHERE tipo = 'administrador'";
+        $query = "SELECT COUNT(*) as conteo FROM usuario WHERE tipo = 'administrador' OR tipo = 'admin'";
         $result = mysqli_query($connection,$query);
         $row = mysqli_fetch_assoc($result);
         {
@@ -29,8 +29,8 @@
         }
     }
 
-    $query = "INSERT INTO usuario (username, AES_ENCRYPT('$pas','Sub5t4nc3S0Ft'), nombre, apellido_p, apellido_m,
-    telefono, direccion, tipo) VALUES ('$usu', '$pas', '$nom', '$pat', '$mat', $tel, '$dir', '$tip')";
+    $query = "INSERT INTO usuario (username, password , nombre, apellido_p, apellido_m,
+    telefono, direccion, tipo) VALUES ('$usu', AES_ENCRYPT('$pas','Sub5t4nc3S0Ft') , '$nom', '$pat', '$mat', $tel, '$dir', '$tip')";
 
     $result = mysqli_query($connection, $query) or die("'Error al ingresar, datos inválidos'");
 

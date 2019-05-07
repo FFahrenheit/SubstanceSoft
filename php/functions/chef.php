@@ -7,7 +7,7 @@
     {
         global $user, $connection;
 
-        if($_SESSION['tipo']=='administrador')
+        if($_SESSION['tipo']=='administrador' || $_SESSION['tipo']=='admin')
         {
             $query = "select nombre, clave as pk from cocina";
         }
@@ -66,7 +66,7 @@
     function getKitchens()
     {
         global $user, $connection;
-        if($_SESSION['tipo']=='administrador')
+        if($_SESSION['tipo']=='administrador'|| || $_SESSION['tipo']=='admin')
         {
             $query = "select nombre, clave as pk from cocina";
         }

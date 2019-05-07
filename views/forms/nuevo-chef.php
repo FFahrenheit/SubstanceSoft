@@ -58,7 +58,7 @@
                             <td><?php echo $row['username']; ?></td>
                             <td><?php echo $row['tipo'];?></td>
                             <?php 
-                                if($row['tipo']=='administrador')
+                                if($row['tipo']=='administrador'||$row['tipo']=='admin')
                                 {
                                     echo "<td>No gestionable</td>";
                                 }

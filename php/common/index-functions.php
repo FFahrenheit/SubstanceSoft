@@ -2,7 +2,7 @@
     session_start();
     $permisos = array(
         array("Administrar base", "Estadísticas", "Inventario", "Preferencias","Extras"),
-        array( "Asignar mesa", "Crear orden", "Cancelar","Liberar", "Marcar comanda"),
+        array( "Asignar mesa", "Crear comanda", "Cancelar","Liberar", "Marcar comanda"),
         array( "Recibir comandas", "Inventario", "Notificar comanda lista"),
         array("Consultar","Ticket","Cobro","Liberar","Historial"),
         array("Crear","Cancelar","Consultar","Cerrar","Ticket","Cobro"),
@@ -52,7 +52,7 @@
         $result = mysqli_query($connection, $query) or die ('"query fallida"');
         for($i=0; $i<$result->num_rows; $i++)
         {
-            $row = mysqli_fetch_array($result); 
+            $row = mysqli_fetch_array($result);
             $path = "modulo".$curMod."-funcion".$i.".php";
             $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
         }
@@ -66,10 +66,10 @@
             header("Location: /substancesoft/views/menus/login.html");
             exit();
         }
-        else 
+        else
         {
             global $curMod;
-            $curMod = $module; 
+            $curMod = $module;
             $_SESSION['actual'] = $module;
         }
     }
@@ -79,14 +79,14 @@
         if(!isset($_SESSION['username']))
         {
             header("Location: /substancesoft/views/menus/login.html");
-            exit();   
+            exit();
         }
     }
     function getNavBar()
     {
         $output="";
         for($i=0; $i<$_SESSION['functions'];$i++)
-        { 
+        {
             $desc = "function".$i;
             $var = "valuefunction".$i;
             $current = $_SESSION[$desc];
@@ -123,9 +123,9 @@
             return "Administración del sistema";
         }
         $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
-        $query = "SELECT descripcion FROM FUNCION WHERE CLAVE = $curMod"; 
+        $query = "SELECT descripcion FROM FUNCION WHERE CLAVE = $curMod";
         $result = mysqli_query($connection, $query) or die ('"query"');
-        $row = mysqli_fetch_array($result); 
+        $row = mysqli_fetch_array($result);
         return $row['descripcion'];
     }
 
@@ -161,7 +161,7 @@
             {
                 $out .= '<div class="chat">';
             }
-            else 
+            else
             {
                 $new = true;
                 $out .= '<div class="chat darker">';
@@ -174,13 +174,13 @@
         {
             return $out;
         }
-        else 
+        else
         {
             if($new)
             {
                 return $out;
             }
-            else 
+            else
             {
                 return "void";
             }

@@ -7,7 +7,7 @@ function getOpenAccounts()
     {
         global $user, $connection;
         $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
-        if($_SESSION['tipo']!='administrador')
+        if($_SESSION['tipo']=='empleado')
         {
             $query.= " and usuario = '$user'";
         }
@@ -66,7 +66,7 @@ function getOpenOrders()
     {
         global $user, $connection;
         $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
-        if($_SESSION['tipo']!='administrador')
+        if($_SESSION['tipo']=='empleado')
         {
             $query.= " and usuario = '$user'";
         }
@@ -124,7 +124,7 @@ function getOpenOrders()
         {
             global $user, $connection;
             $query = "select * from orden where ESTADO='ABIERTA' and mesa=0";
-            if($_SESSION['tipo']!='administrador')
+            if($_SESSION['tipo']=='empleado')
             {
                 $query.= " and usuario = '$user'";
             }
@@ -181,7 +181,7 @@ function getOpenOrders()
     {
             global $user, $connection;
             $query = "select * from orden where ESTADO='cerrada' and mesa=0";
-            if($_SESSION['tipo']!='administrador')
+            if($_SESSION['tipo']=='empleado')
             {
                 $query.= " and usuario = '$user'";
             }
@@ -239,7 +239,7 @@ function getOpenOrders()
     {
         global $user, $connection;
         $query = "select * from orden where ESTADO='cerrada' and mesa=0";
-        if($_SESSION['tipo']!='administrador')
+        if($_SESSION['tipo']=='empleado')
         {
             $query.= " and usuario = '$user'";
         }

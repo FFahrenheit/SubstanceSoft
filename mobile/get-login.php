@@ -12,7 +12,7 @@
     {
         $row = mysqli_fetch_array($result); 
         $nombre = $row['x']." ".$row['y']." ".$row['z'];
-        if($row['password']==$pass && $row['tipo']=='administrador')
+        if($row['password']==$pass && $row['tipo']=='admin')
         {
             echo '{"error":0,';
             echo '"nombre": "'.$nombre.'"}';
