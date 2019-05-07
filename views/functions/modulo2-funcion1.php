@@ -49,7 +49,9 @@
           <div class="col-9 text-center">
             <!-- BODY -->
             <h1 class="mt-4">Inventario</h1>
-            <p> Aquí pueden consultar el inventario.</p>
+            <p> Aquí pueden consultar el inventario y modificar surtiores</p>
+            <a class="btn btn-primary" href="../forms/modificar-proveedores.php">Modificar surtidores</a>
+            <br></br>
             <div id="tabla">
             <!--Tabla autogenerada-->
             </div>

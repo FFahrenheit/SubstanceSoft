@@ -22,9 +22,8 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                //window.location.pathname = '/substancesoft/views/forms/nueva-cocina.html';
-                window.history.back();
-
+                 var path = window.location.pathname = '/substancesoft/views/forms/nuevo-chef.php';
+                window.location.pathname = path; 
             })
     }
 })

@@ -134,8 +134,8 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../functions/modulo0-funcion0.php">
-                <button class="btn btn-success">Continuar</button>
+                <a href = "../menus/index.php">
+                <button class="btn btn-success">Volver a inicio</button>
                 </a>
             </div>
             <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
