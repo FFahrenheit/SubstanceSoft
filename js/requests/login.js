@@ -44,7 +44,7 @@ formulario2.addEventListener('submit', function (e) {
     }
 });
 
-formulario.addEventListener('submit', function (e) 
+formulario.addEventListener('submit',  (e) => 
 {
     e.preventDefault();
     console.log('working!');
@@ -59,7 +59,6 @@ formulario.addEventListener('submit', function (e)
             })
             .then(res => 
                 res.json()).then(data => {
-                console.log("aqui llega js");
                 console.log(data);
                 switch (data) {
                     case 'new':
@@ -68,7 +67,7 @@ formulario.addEventListener('submit', function (e)
                         break;
                     case 'horario':
                         alert("Por el momento no pueden ingresar empleados");
-                        formulario2.reset();
+                        formulario.reset();
                         break;
                     case 'user':
                     case 'password':
