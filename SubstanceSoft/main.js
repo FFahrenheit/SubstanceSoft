@@ -132,9 +132,6 @@ app.on('ready', () => {
               {
                 IPdialog = null;
               });
-            //require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-              //alert('Dirección IP: '+add);
-            //})
           }
         }
       ]
