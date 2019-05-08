@@ -44,10 +44,10 @@
         $query = "update orden set estado='cerrada' where clave = $clave ";
 
         $result = mysqli_query($connection, $query) or die ("Error al cerrar platillos");
-    
+
         $query = "update pedidos set estado='entregado' where orden = $clave ";
-    
-        $result = mysqli_query($connection, $query) or die ('"Error al cerrar platillos"');    
+
+        $result = mysqli_query($connection, $query) or die ('"Error al cerrar platillos"');
     }
 
     $query = "select platillo.nombre as name, platillo.precio as price, pedidos.estado as status
@@ -98,9 +98,9 @@
                     <p> Descripción: <?php echo $row['descripcion']; ?></p>
                     <h3> Total: <?php echo $row['total']; ?></h3>
                     <p>&nbsp;</p>
-                    <a style="color: white;" class="btn btn-primary" id="<?php echo $clave; ?>" onClick="showDetails(this)">
+                    <button type="submit" onclick="printOrder(<?php echo $clave ?>)" class="btn btn-primary">
                         Imprimir (on construction)
-                    </a>
+                    </button>
                 </div>
             </div>
             <button onclick="goBackDrive()" class="btn btn-success">Regresar</button>
@@ -109,7 +109,7 @@
 </body>
 <script src="../../../js/vendor/common-functions.js"></script>
 <script>
- function goBackDrive()
+function goBackDrive()
  {
      if(<?php echo $drive;?> === 1)
      {
@@ -117,14 +117,14 @@
          var path = '/substancesoft/views/menus/index.php';
          window.location.pathname = path;
      }
-     else 
+     else
      {
          console.log("No es drive");
          window.history.back();
      }
  }
 </script>
-
+<script src="../../../js/forms/functions/ticket.js"></script>
 <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>

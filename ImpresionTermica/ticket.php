@@ -1,10 +1,13 @@
 ﻿<?php
+	if(isset($_POST['order']))
+	{
+		$order = $_POST['order'];
+	}
+	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
+	use Mike42\Escpos\Printer;
+	use Mike42\Escpos\EscposImage;
+	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
-
-require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
-use Mike42\Escpos\Printer;
-use Mike42\Escpos\EscposImage;
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 /*
 	Este ejemplo imprime un
@@ -18,13 +21,12 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 	desde el panel de control
 */
 
-$nombre_impresora = "PROYECTO"; 
-
+$nombre_impresora = "PROYECTO";
 
 $connector = new WindowsPrintConnector($nombre_impresora);
 $printer = new Printer($connector);
 #Mando un numero de respuesta para saber que se conecto correctamente.
-echo 1;
+echo json_encode($order);
 /*
 	Vamos a imprimir un logotipo
 	opcional. Recuerda que esto
@@ -45,7 +47,7 @@ $printer->setJustification(Printer::JUSTIFY_CENTER);
 	el logo
 */
 try{
-	$logo = EscposImage::load("JajaTraje.png", false);
+	$logo = EscposImage::load("128x128.png", false);
     $printer->bitImage($logo);
 }catch(Exception $e){/*No hacemos nada si hay error*/}
 
@@ -53,44 +55,49 @@ try{
 	Ahora vamos a imprimir un encabezado
 */
 
-$printer->text("\n"."Nombre de la Empresa" . "\n");
-$printer->text("Direccion: Orquídeas #151" . "\n");
-$printer->text("Tel: 454664544" . "\n");
+$printer->text("\n"."SubstanceSoft" . "\n");
+$printer->text("Direccion: CETI COLOMOS" . "\n");
+$printer->text("Tel: 3310146661" . "\n");
+$printer->text("Orden #".$order."\n");
 #La fecha también
 date_default_timezone_set("America/Mexico_City");
 $printer->text(date("Y-m-d H:i:s") . "\n");
-$printer->text("-----------------------------" . "\n");
+$printer->text("" . "\n");
 $printer->setJustification(Printer::JUSTIFY_LEFT);
-$printer->text("CANT  DESCRIPCION    P.U   IMP.\n");
-$printer->text("-----------------------------"."\n");
+$printer->text("------------------------------------------"."\n");
+$printer->text("CANT                 P.U        IMP.\n");
+$printer->text("------------------------------------------"."\n");
 /*
 	Ahora vamos a imprimir los
 	productos
 */
+$connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("'error'");
+$query = "CALL obtenerTicket($order)";
+	$result = mysqli_query($connection,$query);
 	/*Alinear a la izquierda para la cantidad y el nombre*/
+	$total=0;
 	$printer->setJustification(Printer::JUSTIFY_LEFT);
-    $printer->text("Producto Galletas\n");
-    $printer->text( "2  pieza    10.00 20.00   \n");
-    $printer->text("Sabrtitas \n");
-    $printer->text( "3  pieza    10.00 30.00   \n");
-    $printer->text("Doritos \n");
-    $printer->text( "5  pieza    10.00 50.00   \n");
+		while($row = mysqli_fetch_array($result))
+		{ 
+			$esp = ($row['conteo']==1)? "pieza  " : "piezas";
+			$printer->text($row['nombre']."\n");
+			$printer->text($row['conteo']." $esp          ".$row['precio']."       ".$row['subtotal']."\n");
+			$total += $row['subtotal'];
+		}
 /*
 	Terminamos de imprimir
 	los productos, ahora va el total
 */
-$printer->text("-----------------------------"."\n");
+$printer->text("------------------------------------------"."\n");
 $printer->setJustification(Printer::JUSTIFY_RIGHT);
-$printer->text("SUBTOTAL: $100.00\n");
-$printer->text("IVA: $16.00\n");
-$printer->text("TOTAL: $116.00\n");
+$printer->text("TOTAL: $".$total."\n");
 
 
 /*
 	Podemos poner también un pie de página
 */
 $printer->setJustification(Printer::JUSTIFY_CENTER);
-$printer->text("Muchas gracias por su compra\n");
+$printer->text("Muchas gracias por su compra(empa es gei)\n");
 
 
 
