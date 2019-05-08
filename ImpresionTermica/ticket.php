@@ -3,6 +3,7 @@
 	{
 		$order = $_POST['order'];
 	}
+	$order = 33;
 	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 	use Mike42\Escpos\Printer;
 	use Mike42\Escpos\EscposImage;
@@ -20,8 +21,9 @@
 	escribe el nombre de la tuya. Recuerda que debes compartirla
 	desde el panel de control
 */
-
-$nombre_impresora = "PROYECTO";
+$user = "ivan_mente_poder_619@hotmail.com";
+$password = "Carcamo2k15";
+$nombre_impresora = "smb://LAPTOP-1N4BGTT0/Substance";
 
 $connector = new WindowsPrintConnector($nombre_impresora);
 $printer = new Printer($connector);
@@ -78,7 +80,7 @@ $query = "CALL obtenerTicket($order)";
 	$total=0;
 	$printer->setJustification(Printer::JUSTIFY_LEFT);
 		while($row = mysqli_fetch_array($result))
-		{ 
+		{
 			$esp = ($row['conteo']==1)? "pieza  " : "piezas";
 			$printer->text($row['nombre']."\n");
 			$printer->text($row['conteo']." $esp          ".$row['precio']."       ".$row['subtotal']."\n");
@@ -109,7 +111,6 @@ $printer->feed(3);
 	no tiene soporte para ello, no generará
 	ningún error
 */
-$printer->cut();
 
 /*
 	Por medio de la impresora mandamos un pulso.

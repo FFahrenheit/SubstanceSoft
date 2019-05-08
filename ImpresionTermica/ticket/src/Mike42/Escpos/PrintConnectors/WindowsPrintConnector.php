@@ -242,7 +242,7 @@ class WindowsPrintConnector implements PrintConnector
     {
         throw new Exception("Mac printing not implemented.");
     }
-    
+
     /**
      * Send data to printer -- platform-specific Windows code.
      *
@@ -298,7 +298,7 @@ class WindowsPrintConnector implements PrintConnector
             }
         }
     }
-    
+
     /**
      * @return string Current platform. Separated out for testing purposes.
      */
@@ -312,7 +312,7 @@ class WindowsPrintConnector implements PrintConnector
         }
         return self::PLATFORM_LINUX;
     }
-    
+
     /* (non-PHPdoc)
 	 * @see PrintConnector::read()
 	 */
@@ -321,7 +321,7 @@ class WindowsPrintConnector implements PrintConnector
         /* Two-way communication is not supported */
         return false;
     }
-    
+
     /**
      * Run a command, pass it data, and retrieve its return value, standard output, and standard error.
      *
@@ -359,7 +359,7 @@ class WindowsPrintConnector implements PrintConnector
             return -1;
         }
     }
-    
+
     /**
      * Copy a file. Separated out so that nothing is actually printed during test runs.
      *
@@ -371,7 +371,7 @@ class WindowsPrintConnector implements PrintConnector
     {
         return copy($from, $to);
     }
-    
+
     /**
      * Write data to a file. Separated out so that nothing is actually printed during test runs.
      *
