@@ -52,8 +52,8 @@
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
 
-    $query = "select platillo.nombre as name, platillo.precio as price, pedidos.estado as status
-            from platillo, pedidos where pedidos.orden=$clave and platillo.clave = pedidos.platillo";
+    $query = "select platillo.nombre as name, platillo.precio as price, pedidos.estado as status, count(*) as conteo
+    from platillo, pedidos where pedidos.orden=$clave and platillo.clave = pedidos.platillo GROUP BY name, status";
 
     $sql = mysqli_query($connection, $query) or die("error en query");
     ?>
@@ -71,6 +71,7 @@
                                     <td>Platillo</td>
                                     <td>Precio</td>
                                     <td>Estado</td>
+                                    <td>Total</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,6 +82,7 @@
                                         <td><?php echo $row['name']; ?></td>
                                         <td><?php echo $row['price']; ?></td>
                                         <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['conteo']; ?></td>
                                     </tr>
                                 <?php
                             }
