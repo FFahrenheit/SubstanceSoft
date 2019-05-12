@@ -88,15 +88,14 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/ingredientes.png" alt="Ingredientes">
+                                            <img class="card-img-top img-fluid" src="../../images/import-export.png" alt="Ingredientes">
                                             <div class="card-block">
-                                                <h4 class="card-title">Ingredientes</h4>
-                                                <p class="card-text">Administre los distintos ingredientes usados en el sistema</p>
-                                                <p><a href="../forms/nuevo-ingrediente.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../lists/listar-ingredientes.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/modificar-ingredientes.php" class="btn btn-primary">Modificar</a></p>
-                                            </div>
-                                        </div>
+                                                <h4 class="card-title">Migración de datos</h4>
+                                                <p class="card-text">Exporte o importe la información actual de su sistema</p>
+                                                <strong>Requiere confirmación de administrador</strong>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=export" class="btn btn-primary">Exportar</a></p>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=import" class="btn btn-primary">Importar</a></p>
+                                          </div>
                                     </div>
                                 </div>
                                 <p>&nbsp;</p>
