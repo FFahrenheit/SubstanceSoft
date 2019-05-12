@@ -18,7 +18,7 @@ function validate(e) {
             body: datos
         })
         .then(res => {
-            try 
+            try
             {
                 return res.json();
             }
@@ -35,8 +35,14 @@ function validate(e) {
                     switch(reference)
                     {
                         case 'pass':
-                            
+
                             window.location.pathname = '/SubstanceSoft/views/functions/forms/passwords.php'
+                            break;
+                        case 'export':
+                            window.location.pathname = '/SubstanceSoft/views/functions/forms/export.php'
+                            break;
+                        case 'import':
+                            window.location.pathname = '/SubstanceSoft/views/functions/forms/import.php'
                             break;
                         default:
                             console.log("no soportado aún");

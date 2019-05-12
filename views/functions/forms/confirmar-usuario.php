@@ -41,17 +41,19 @@
             <h1>Confirme su identidad</h1>
             <img width="200" src="../../../images/confirmar.png" alt="Recargar">
             <h3><strong>Ingrese su contraseña para proseguir:</strong></h3>
+            <br>
             <div class="containter-fluid">
                 <form action = "" id= "password" class="form-horizontal form-inline justify-content-center">
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <input name = "pass" id="pass" width="100" type="password" placeholder="Ingrese su contraseña" class="form-control" required>
+                            <input name = "pass" id="pass" value = "" width="100" type="password" class="form-control" required>
                         </div>
-                        <input id="ref"hidden value="<?php echo $reference; ?>">
                         <div class="col-sm-9">
                             <label><br></label>
+                            <br>
                             <button class="btn btn-success">Confirmar</button>
                         </div>
+                        <input id="ref" hidden value="<?php echo $reference; ?>">
                     </div>
                 </form>
             </div>
