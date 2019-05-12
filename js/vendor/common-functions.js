@@ -7,6 +7,11 @@ function goBack() {
   window.history.back();
 }
 
+function goBack(n)
+{
+  window.history.go(-1*n);
+}
+
 function refreshPage() {
   window.location.reload(true);
 }

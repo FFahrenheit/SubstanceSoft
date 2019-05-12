@@ -16,14 +16,14 @@
     <script>
         if (typeof module === 'object') {
             window.module = module;
-            module = undefined;
+            module = undefined;    
         }
     </script>
 </head>
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()" style="float: left;">
+        <a onclick="goBack(5);" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
