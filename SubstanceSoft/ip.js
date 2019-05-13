@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 address !== '127.0.0.1'
         })
         .map(({ address }) => address);
+    for(var i=0; i<networkInterfaces.length; i++)
+    {
+        if(networkInterfaces[i] == '192.168.137.1')
+        {
+            networkInterfaces[i]+=' (Solo por hotspot)';
+        }
+    }
     var ipAddresses = networkInterfaces.join(', ')
     console.log(ipAddresses);
     document.getElementById('ip').innerHTML = ipAddresses;
