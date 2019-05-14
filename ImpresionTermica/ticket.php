@@ -1,7 +1,10 @@
 ﻿<?php
-	if(isset($_POST['order']))
+	if(isset($_POST['order']) && isset($_POST['type']) && isset($_POST['com']) && isset($_POST['imp']))
 	{
 		$order = $_POST['order'];
+		$type = $_POST['type'];
+		$com = $_POST['com'];
+		$imp = $_POST['imp'];
 	}
 	$order = 33;
 	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
@@ -21,14 +24,24 @@
 	escribe el nombre de la tuya. Recuerda que debes compartirla
 	desde el panel de control
 */
-$user = "ivan_mente_poder_619@hotmail.com";
-$password = "Carcamo2k15";
-$nombre_impresora = "smb://LAPTOP-1N4BGTT0/Substance";
+if($imp == "")
+{
+	echo json_encode('"Configura una impresora"');
+	die;
+}
+if($type == "Remota")
+{
+	$nombre_impresora = "smb://".$com."/".$imp;
+}
+else
+{
+	$nombre_impresora = $imp;
+}
+
 
 $connector = new WindowsPrintConnector($nombre_impresora);
 $printer = new Printer($connector);
 #Mando un numero de respuesta para saber que se conecto correctamente.
-echo json_encode($order);
 /*
 	Vamos a imprimir un logotipo
 	opcional. Recuerda que esto
@@ -124,5 +137,4 @@ $printer->pulse();
 	la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
 */
 $printer->close();
-
 ?>

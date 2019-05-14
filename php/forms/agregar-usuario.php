@@ -22,7 +22,7 @@
         {
             if($row['conteo']>=5)
             {
-                echo "'Error, solo pueden haber 5 administradores'";
+                echo json_encode( "'Error, solo pueden haber 5 administradores'");
                 mysqli_close($connection);
                 die();
             }

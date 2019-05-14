@@ -4,7 +4,7 @@ $("#menu-toggle").click(function (e) {
 });
 
 function goBack() {
-  window.history.back();
+  window.history.go(-1);
 }
 
 function goBack(n)
@@ -35,7 +35,7 @@ function updateChat()
       $("#chat").html(resp);
       console.log("Hecho");
     }
-    else 
+    else
     {
       console.log("No hay nuevos mensajes");
     }

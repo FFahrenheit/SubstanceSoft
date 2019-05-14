@@ -45,7 +45,7 @@
                 <input name="old" value=" <?php echo $row['clave'];?> " type="hidden">
                     <div class="form-group">
                         <label for="">Nombre del platillo</label> <font color="red">*</font>
-                        <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>"" class="form-control" required>
+                        <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>" class = "form-control" required>
                         <div class="invalid-feedback">
                             Ingresa datos
                         </div>
@@ -79,7 +79,7 @@
                                 {
                                     echo ' selected>';
                                 }
-                                else 
+                                else
                                 {
                                     echo '>';
                                 }
