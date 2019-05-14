@@ -35,14 +35,13 @@ function validate(e) {
                     switch(reference)
                     {
                         case 'pass':
-
                             window.location.pathname = '/SubstanceSoft/views/functions/forms/passwords.php'
                             break;
                         case 'export':
-                            window.location.pathname = '/SubstanceSoft/views/functions/forms/export.php'
+                            window.location.pathname = '/SubstanceSoft/views/functions/forms/export.html'
                             break;
                         case 'import':
-                            window.location.pathname = '/SubstanceSoft/views/functions/forms/import.php'
+                            window.location.pathname = '/SubstanceSoft/views/functions/forms/import.html'
                             break;
                         default:
                             console.log("no soportado aún");

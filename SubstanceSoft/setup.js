@@ -5,7 +5,14 @@ var connect = document.getElementById('connect');
 
 central.addEventListener("click", function () {
     var testConnection = 'http://localhost/substancesoft/php/requests/conectividad.php';
-    fetch(testConnection)
+    var datos = new FormData();
+    var ip = getIp();
+    datos.append("ip",ip);
+    fetch(testConnection, 
+        {
+            method: 'POST',
+            body: datos
+        })
         .then(function (resp) {
             return resp.json();
         })
@@ -55,7 +62,14 @@ connect.addEventListener("click", function ()
         return;
     }
     var testConnection = 'http://' + IP.value + '/substancesoft/php/requests/conectividad.php';
-    fetch(testConnection)
+    var datos = new FormData();
+    var ip = getIp();
+    datos.append("ip",ip);
+    fetch(testConnection, 
+        {
+            method: 'POST',
+            body: datos
+        })
         .then(function (resp) {
             return resp.json();
         })
@@ -86,7 +100,7 @@ connect.addEventListener("click", function ()
                 window.location.href = link;
             }
             else {
-                alert('No hay respuesta por parte del servidor o aún no está configurado correctamente');
+                alert('No hay respuesta por parte del servidor o aun no esta configurado correctamente');
             }
         })
         .catch(function (e) {
@@ -96,3 +110,25 @@ connect.addEventListener("click", function ()
         })
     //window.location.href = link;
 });
+
+
+function getIp() {
+    var os = require('os');
+    var networkInterfaces = Object.values(os.networkInterfaces())
+        .reduce((r, a) => {
+            r = r.concat(a)
+            return r;
+        }, [])
+        .filter(({ family, address }) => {
+            return family.toLowerCase().indexOf('v4') >= 0 &&
+                address !== '127.0.0.1'
+        })
+        .map(({ address }) => address);
+    for (var i = 0; i < networkInterfaces.length; i++) {
+        if (networkInterfaces[i] != '192.168.137.1') {
+            return networkInterfaces[i];
+        }
+    }
+    var ipAddresses = networkInterfaces.join(', ')
+    console.log(ipAddresses);
+}
