@@ -78,6 +78,8 @@
         </div>
     </section>
 </body>
+<script src="../../js/vendor/common-functions.js"></script>
+
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>

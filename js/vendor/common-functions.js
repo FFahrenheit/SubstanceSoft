@@ -4,10 +4,10 @@ $("#menu-toggle").click(function (e) {
 });
 
 function goBack() {
-  window.history.go(-1);
+  window.history.back();
 }
 
-function goBack(n)
+function goBack(n=1)
 {
   window.history.go(-1*n);
 }

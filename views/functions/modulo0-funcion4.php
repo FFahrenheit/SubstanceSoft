@@ -60,7 +60,7 @@
                             <p>&nbsp;</p>
                             <h1 class="text-uppercase text-center">Opciones extra</h2>
                                 <div class="card-deck">
-                                        <div class="card text-center">
+                                    <div class="card text-center">
                                         <a href="./forms/confirmar-usuario.php?ref=pass" class="a-card">
                                             <div class="card-body">
                                                 <img class="card-img-top img-fluid" src="../../images/password.png" alt="Contraseñas">
@@ -72,10 +72,9 @@
                                                     <p class="btn btn-primary">Administrar</p>
                                                 </div>
                                             </div>
-                                            </a>
-
-                                        </div>
-                                        <div class="card text-center">
+                                        </a>
+                                    </div>
+                                    <div class="card text-center">
                                         <div class="card-body">
                                             <img class="card-img-top img-fluid" src="../../images/code.png" alt="Codigos">
                                             <div class="card-block">
@@ -95,20 +94,35 @@
                                                 <strong>Requiere confirmación de administrador</strong>
                                                 <p><a href="./forms/confirmar-usuario.php?ref=export" class="btn btn-primary">Exportar</a></p>
                                                 <p><a href="./forms/confirmar-usuario.php?ref=import" class="btn btn-primary">Importar</a></p>
-                                          </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <img class="card-img-top img-fluid" src="../../images/print.png" alt="Ingredientes">
-                                        <div class="card-block">
-                                            <h4 class="card-title">Configuración de impresión</h4>
-                                            <p class="card-text">Administre la impresora del equipo</p>
-                                            <p><a href="./forms/configurar-impresion.html" class="btn btn-primary">Administrar</a></p>
-                                      </div>
-                                </div>
-                            </div>
-                                <p>&nbsp;</p>
+                                <div class="card-deck">
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img class="card-img-top img-fluid" src="../../images/print.png" alt="Ingredientes">
+                                            <div class="card-block">
+                                                <h4 class="card-title">Configuración de impresión</h4>
+                                                <p class="card-text">Administre la impresora del equipo</p>
+                                                <p><a href="./forms/configurar-impresion.html" class="btn btn-primary">Administrar</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img class="card-img-top img-fluid" src="../../images/clientes.png" alt="Ingredientes">
+                                            <div class="card-block">
+                                                <h4 class="card-title">Equipos conectados</h4>
+                                                <p class="card-text">Consulte la lista de equipos conocidos conectados</p>
+                                                <p><a href="../lists/listar-equipos.php" class="btn btn-primary">Consultar</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card text-center" style="visibility: hidden">
+                                        <div class="card-body"></div>
+                                    </div>
+                                    <p>&nbsp;</p>
                         </section>
                     </div>
                     <!-- /BODY -->

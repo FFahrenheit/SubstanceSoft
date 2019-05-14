@@ -37,7 +37,6 @@
                     <thead>
                         <tr>
                             <td>Username</td>
-                            <td>Contraseña</td>
                             <td>Tipo</td>
                             <td>Nombre</td>
                             <td>Dirección</td>
@@ -58,7 +57,6 @@
                         ?>
                         <tr>
                             <td><?php echo $row['username']; ?></td>
-                            <td><?php echo $row['password']; ?></td>
                             <td><?php echo $row['tipo']; ?></td>
                             <td><?php echo $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m']; ?> </td>
                             <td><?php echo $row['direccion']; ?></td>
@@ -75,7 +73,6 @@
             </div>
         </section>
     </body>
-    <script src="js/agregar-usuario.js"></script>
     <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
     <script src="../../js/vendor/popper.min.js"></script>
     <script src="../../js/vendor/bootstrap.min.js"></script>
