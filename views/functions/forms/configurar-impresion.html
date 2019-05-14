@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, inicial-scale=1">
+
+    <title>
+        Administrar impresoras
+    </title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../images/icono.png" />
+
+    <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/clean-install.css" rel="stylesheet">
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+</head>
+
+<body class="s-bg">
+    <div class="s-nb">
+        <a onclick="goBack(1)" style="float: left;">
+            <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
+        </a>
+        <a href="../../../views/menus/index.php">
+            <h1>SubstanceSoft</h1>
+        </a>
+        <a onclick="refreshPage()" style="float: left;">
+            <img src="../../../images/reload.png" alt="Recargar">
+        </a>
+    </div>
+    <section class="container text-center">
+        <h1 class="text-uppercase text-center">Administrar impresión</h2>
+          <br>
+          <br>
+            <p class="lead text-center">Aquí puede modificar la configuración de la impresora </p>
+            <p class="lead text-center">asociada con este equipo</p>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="">Ubicaci&oacute;n de la impresora</label> <font color="red">*</font>
+                <select class="form-control" id="type" onchange="display()"placeholder="Escoja si la impresora es remota o local">
+                   <option hidden selected>Seleccione si la impresora es local o remota</option>
+                    <option>Local</option>
+                    <option>Remota</option>';
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="" id="label" hidden="true">Nombre de computadora</label> <font id="label2" hidden="true" color="red">*</font>
+                <input name="nombre" id="com" type="text" value = "" hidden="true" placeholder="Escriba el nombre de la computadora que tiene la impresora" class = "form-control" required>
+                <div class="invalid-feedback">
+                    Ingresa datos
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Nombre de impresora</label> <font color="red">*</font>
+                <input name="nombre" id="imp" type="text" value="" placeholder="Escriba el nombre de la impresora" class = "form-control" required>
+                <div class="invalid-feedback">
+                    Ingresa datos
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="setData()" class="btn btn-success">Aceptar</button>
+            </div>
+    </section>
+</body>
+<script src="../../../js/forms/functions/localStorage.js"></script>
+<script src="../../../js/vendor/common-functions.js"></script>
+<script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
+<script src="../../../js/vendor/popper.min.js"></script>
+<script src="../../../js/vendor/bootstrap.min.js"></script>
+<script>
+    if (window.module) module = window.module;
+</script>
+
+</html>

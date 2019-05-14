@@ -98,6 +98,16 @@
                                           </div>
                                     </div>
                                 </div>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <img class="card-img-top img-fluid" src="../../images/print.png" alt="Ingredientes">
+                                        <div class="card-block">
+                                            <h4 class="card-title">Configuración de impresión</h4>
+                                            <p class="card-text">Administre la impresora del equipo</p>
+                                            <p><a href="./forms/configurar-impresion.html" class="btn btn-primary">Administrar</a></p>
+                                      </div>
+                                </div>
+                            </div>
                                 <p>&nbsp;</p>
                         </section>
                     </div>
