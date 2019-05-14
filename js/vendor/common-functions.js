@@ -9,7 +9,8 @@ function goBack() {
 
 function goBack(n=1)
 {
-  window.history.go(-1*n);
+  window.history.go(-1*n
+  );
 }
 
 function refreshPage() {

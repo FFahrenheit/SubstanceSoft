@@ -37,6 +37,25 @@
         return $output;
     }
 
+    function getFunctions()
+    {
+        global $permisos;
+        global $curMod;
+
+        if($curMod==5)
+        {
+            return getIndividual();
+        }
+        $output ='<div class="list-group">';
+        for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
+        {
+            $path = "../functions/modulo".$curMod."-funcion".$i.".php";
+            $output.= '<a href='.$path.' class="list-group-item list-group-item-action">'.$permisos[$curMod][$i].'</a>';
+        }
+        $output.= '</div>';
+        return $output;
+    }
+
     function getUser()
     {
         echo $_SESSION['username'];

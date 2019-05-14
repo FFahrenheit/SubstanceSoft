@@ -74,16 +74,26 @@
                         <h4> Mesa: <?php echo $row['mesa']; ?></h4> 
                         <p> Abierta por: <?php echo $row['usuario']; ?></p> 
                         <p> Descripción: <?php echo $row['descripcion']; ?></p> 
-                        <h3> Total: <?php echo $row['total']; ?></h3> 
+                        <h3> Total: <?php echo "$".$row['total']; ?></h3> 
 
-                        <a style="color: white;" data-toggle="modal" data-target="#delete"
-                        class="btn btn-success" id="<?php echo $clave;?>" onClick="showDetails(this)">
-                                                Marcar como pagado
-                        </a>
+                        <?php 
+                            if($row['impresiones']>0)
+                            {
+                                echo '                        <a style="color: white;" data-toggle="modal" data-target="#delete"
+                                class="btn btn-success" id="<?php echo $clave;?>" onClick="showDetails(this)">
+                                                        Marcar como pagado
+                                </a>';
+                            }
+                            else 
+                            {
+                                echo '<br></br><strong><font color="red">Debe imprimir primero la cuenta.</font><br></br></strong>';
+                                echo '<button style="color: white;" class="btn btn-success" 
+                                onclick="printOrder('.$clave.')" 
+                                >Imprimir</button>';
+                            }
+                        ?>
                         <p>&nbsp;</p>
-                        <a href = "../../menus/index.php">
-                        <button class="btn btn-primary">Cancelar</button>
-                        </a>
+                        <button class="btn btn-primary" onclick="goBack()">Cancelar</button>
                         </a>
                     </div>
                 </div>
@@ -98,7 +108,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div>
+                            </div> 
                             <div class="modal-body">
                                 ¿Marcar como pagado?
                             </div>
@@ -111,6 +121,7 @@
                     </div>
         </div>
     </body>
+    <script src="../../../js/forms/functions/ticket.js"></script>
     <script src="../../../js/vendor/common-functions.js"></script>
     <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
     <script src="../../../js/vendor/popper.min.js"></script>

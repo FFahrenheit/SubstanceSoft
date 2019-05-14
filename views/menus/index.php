@@ -10,10 +10,8 @@
 
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
-  <link href="../../css/index.css" rel="stylesheet"> <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
-  <script>
-  if (typeof module === 'object') {window.module = module; module = undefined;}
-  </script>
+  <link href="../../css/index.css" rel="stylesheet"> 
+  <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
 </head>
 
 <body>
@@ -55,7 +53,9 @@
         <div class="row">
           <div class="col-9 text-center">
             <h1 class="mt-4"><?php echo getModuleDescription(); ?></h1>
-            <p> Bienvenido al sistema. Por favor, elija la función correspondiente a lo que desea hacer en el modulo en el lado derecho.</p>
+            <p> Bienvenido al sistema. Por favor, elija la función correspondiente a lo que desea hacer en el modulo en el lado derecho
+            o en la siguiente lista.</p>
+            <?php echo getFunctions()?>
           </div>
           <div class="col-3">
             <div class="containter text-center">

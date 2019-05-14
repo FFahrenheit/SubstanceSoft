@@ -68,4 +68,5 @@ function getIp() {
     }
     var ipAddresses = networkInterfaces.join(', ')
     console.log(ipAddresses);
+    return '0.0.0.0';
 }

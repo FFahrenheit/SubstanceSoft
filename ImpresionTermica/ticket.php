@@ -1,13 +1,16 @@
 ﻿<?php
+	$connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("'error'");
 	if(isset($_POST['order']) && isset($_POST['type']) && isset($_POST['com']) && isset($_POST['imp']))
 	{
 		$order = $_POST['order'];
 		$type = $_POST['type'];
 		$com = $_POST['com'];
 		$imp = $_POST['imp'];
+		$query ="UPDATE orden SET impresiones = impresiones + 1 WHERE clave = $order";
+		$result = mysqli_query($connection,$query);
 	}
-	$order = 33;
-	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
+	//$order = 33; R U SURE? 
+ 	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 	use Mike42\Escpos\Printer;
 	use Mike42\Escpos\EscposImage;
 	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
@@ -86,7 +89,6 @@ $printer->text("------------------------------------------"."\n");
 	Ahora vamos a imprimir los
 	productos
 */
-$connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("'error'");
 $query = "CALL obtenerTicket($order)";
 	$result = mysqli_query($connection,$query);
 	/*Alinear a la izquierda para la cantidad y el nombre*/

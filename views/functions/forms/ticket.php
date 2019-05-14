@@ -99,7 +99,16 @@
                     <h3> Total: <?php echo $row['total']; ?></h3>
                     <p>&nbsp;</p>
                     <button type="submit" onclick="printOrder(<?php echo $clave ?>)" class="btn btn-primary">
-                        Imprimir (on construction)
+                        <?php
+                            if($row['impresiones']==0)
+                            {
+                                echo 'Imprimir';
+                            } 
+                            else 
+                            {
+                                echo 'Reimprimir';
+                            }
+                        ?>
                     </button>
                 </div>
             </div>
