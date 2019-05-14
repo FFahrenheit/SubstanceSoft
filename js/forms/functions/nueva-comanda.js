@@ -20,7 +20,7 @@ function buscarPlatillo(consulta)
         console.log("error");
     })
 }
-
+ 
 function buscarCategoria(category)
 {
     console.log(category);
