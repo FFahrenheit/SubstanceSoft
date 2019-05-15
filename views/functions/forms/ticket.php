@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -103,8 +103,8 @@
                             if($row['impresiones']==0)
                             {
                                 echo 'Imprimir';
-                            } 
-                            else 
+                            }
+                            else
                             {
                                 echo 'Reimprimir';
                             }
