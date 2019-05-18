@@ -52,9 +52,7 @@
             <!-- BODY -->
             <h1 class="mt-4"> Comandas </h1>
             <p> Aquí puede marcar como entregada la comanda para un mejor control</p>
-            <?php
-              echo getOrderCommands();
-            ?>
+            <?php echo  getOrderCommands(); ?>
           </div>
           <!-- /BODY -->
           <div class="col-3">
