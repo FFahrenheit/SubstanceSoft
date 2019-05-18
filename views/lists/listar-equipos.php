@@ -40,6 +40,7 @@
                     <thead>
                         <tr>
                             <td>Dirección IP</td>
+                            <td>Alias</td>
                             <td>Última sesión</td>
                         </tr>
                     </thead>
@@ -56,6 +57,7 @@
                             ?>
                             <tr>
                                 <td><?php echo $row['ip']; ?></td>
+                                <td><?php echo $row['alias']?></td>
                                 <td><?php echo $row['conexion']; ?></td>
                             </tr>
                         <?php

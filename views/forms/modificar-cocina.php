@@ -92,9 +92,9 @@
                                 Puede elegir borrar los platillos también o migrarlos de cocina
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-primary" onClick="confirmMigrate()">Migrar</button>
-                                <button type="button" class="btn btn-danger" onClick="confirmDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-danger" onClick="confirmWarning()">Eliminar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -116,8 +116,29 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" onClick="confirmMigrateManually()">Migrar manualmente</button>
-                                <button type="button" class="btn btn-secondary" onClick="cancelAll()">Cancelar</button>
                                 <button type="button" class="btn btn-success" onClick="confirmMigrateAll()">Migrar todos</button>
+                                <button type="button" class="btn btn-secondary" onClick="cancelAll()">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="confirmar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar cocina</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está completamente seguro que quiere eliminar la cocina?
+                                <br>
+                                Se perderán todos los platillos en ella.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" onClick="confirmDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-secondary" onClick="cancelAll()">Cancelar</button>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@
             }
             else 
             {
-                $output .= '<label title = "'.$row['descripcion'].'" onclick= "alert('."'Platillo inhabilitado'".')" id ="'.$row['nombre'].'" class = "btn btn-secondary">';
+                $output .= '<label title = "'.$row['descripcion'].'" onclick= "alert('."'No hay suficientes ingredientes'".')" id ="'.$row['nombre'].'" class = "btn btn-secondary">';
                 $output.='<input type="radio" class="hide" name="platillo" value="'.$row['clave'].'" required checked>'.$row['nombre'].' (no disponible)<br>';
                 $output .= '</label>';
             }
