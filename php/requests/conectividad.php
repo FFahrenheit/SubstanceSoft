@@ -5,11 +5,19 @@
         die();
     }
     $ip = $_POST['ip'];
-    //Condiciones de listo
-    //Por mientras se prueba la conexión a la base de datos
-    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"error"');
 
-    $query = "INSERT INTO equipos(ip) VALUES ('$ip') ON DUPLICATE KEY UPDATE conexion = NOW()";
+    if(isset($_POST['alias']))
+    {
+        $alias = $_POST['alias'];
+        $query = "INSERT INTO equipos(ip, alias) VALUES ('$ip','$alias') 
+        ON DUPLICATE KEY UPDATE conexion = NOW(), alias = '$alias'";
+    }
+    else 
+    {
+        $query = "INSERT INTO equipos(ip) VALUES ('$ip') ON DUPLICATE KEY UPDATE conexion = NOW()";
+    }
+
+    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"error"');
 
     $result = mysqli_query($connection,$query) or die('"error"');
 

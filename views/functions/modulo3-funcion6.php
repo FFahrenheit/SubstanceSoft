@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Marcar comandas</title>
+  <title>Consultar cuentas</title>
   <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
@@ -15,12 +15,11 @@
   <?php
   include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/common/index-functions.php');
   getLogStatus();
-
-  include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/mesero.php');
+  include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/cajero.php');
   ?>
   <div class="d-flex" id="wrapper">
     <div class="ss-sb border-right" id="sidebar-wrapper">
-      <a href="../menus/index.php" class="hide nochange">
+    <a href="../menus/index.php" class="hide nochange">
         <div align="center" class="sidebar-heading nochange">
           <i>SubstanceSoft</i>
         </div>
@@ -50,17 +49,17 @@
         <div class="row">
           <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Comandas </h1>
-            <p> Aquí puede marcar como entregada la comanda para un mejor control</p>
-            <?php
-              echo getOrderCommands();
-            ?>
+            <h1 class="mt-4"> Liberaciones </h1>
+            <p> Aquí puede liberar las cuentas.</p>
+            <?php echo getClaims(); ?>
+            <p> &nbsp;</p>
           </div>
           <!-- /BODY -->
           <div class="col-3">
             <div class="containter text-center">
               <img src="../../images/users.png" style="width: 50%; margin-top: 20px;">
               <?php echo getUserStatus(); ?>
+
               <a href="../../php/requests/logout.php">
                 <button type="button" class="align-self-end btn btn-danger" style="margin-top: auto;">
                   Salir

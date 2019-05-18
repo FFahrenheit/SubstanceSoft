@@ -2,6 +2,7 @@ const fs = require('fs');
 var central = document.getElementById('setup');
 var IP = document.getElementById('ip');
 var connect = document.getElementById('connect');
+var alias = document.getElementById('alias');
 
 central.addEventListener("click", function () {
     var testConnection = 'http://localhost/substancesoft/php/requests/conectividad.php';
@@ -65,6 +66,7 @@ connect.addEventListener("click", function ()
     var datos = new FormData();
     var ip = getIp();
     datos.append("ip",ip);
+    datos.append("alias", alias.value);
     fetch(testConnection, 
         {
             method: 'POST',

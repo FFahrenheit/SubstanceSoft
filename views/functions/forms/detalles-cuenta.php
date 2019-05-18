@@ -24,39 +24,53 @@
                     </a>
                 </div>
         <?php
+            function freeQuery()
+            {
+                global $connection;
+                do 
+                {
+                    if ($res = $connection->store_result()) {
+                      $res->free();
+                    }
+                } while ($connection->more_results() && $connection->next_result()); 
+            }
             $clave  = $_GET['clave'];
 
             $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die ("error en BD");
 
             $query = "select platillo.nombre as name, platillo.precio as price, pedidos.estado as status
             from platillo, pedidos where pedidos.orden=$clave and platillo.clave = pedidos.platillo";
+$query = "CALL obtenerTicket($clave)";
 
-            $sql = mysqli_query($connection, $query) or die("error en query");
-        ?>
-        <section class="container">
-            <div class="text-center">
-                <h1>Resumen de platillos pedidos</h1>
-                &nbsp;
-                <div class="row">
-                    <div class="col-sm">
-                        Platillos pedidos:
-                        <div class="containter-fluid">
-                            <table class="table table-hover">
+    $sql = mysqli_query($connection, $query) or die("error en query");
+    ?>
+    <section class="container">
+        <div class="text-center">
+            <h1>Resumen de platillos pedidos</h1>
+            &nbsp;
+            <div class="row">
+                <div class="col-sm">
+                    Platillos pedidos:
+                    <div class="containter-fluid">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <td>Platillo</td>
-                                    <td>Precio</td>
+                                    <td>Precio unitario</td>
+                                    <td>Pedidos</td>
+                                    <td>Subtotal</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                   while($row = mysqli_fetch_array($sql))
-                                    {
+                                while ($row = mysqli_fetch_array($sql)) {
                                     ?>
-                                <tr>
-                                    <td><?php echo $row['name'];?></td>
-                                    <td><?php echo $row['price'];?></td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $row['nombre']; ?></td>
+                                        <td><?php echo $row['precio']; ?></td>
+                                        <td><?php echo $row['conteo']; ?></td>
+                                        <td><?php echo $row['subtotal']; ?></td>
+                                    </tr>
                                 <?php
                                     }
                                 ?>
@@ -68,7 +82,7 @@
                         <h1> Resumen de cuenta: &nbsp; </h1>
                         <?php
                             $query = "select * from orden where clave = $clave";
-
+                            freeQuery();
                             $sql = mysqli_query($connection, $query) or die("error en query");
                             $row = mysqli_fetch_array($sql);
                         ?>

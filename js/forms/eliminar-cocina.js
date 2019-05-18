@@ -5,7 +5,7 @@ function showDetails(button)
     nombre = button.id;
     console.log(nombre);
 }
-
+ 
 function confirmDelete()
 {
     var datos = new FormData();
@@ -87,4 +87,11 @@ function cancelAll()
 {
     $('#delete').modal('hide');
     $('#update').modal('hide');
+    $('#confirmar').modal('hide');
+}
+
+function confirmWarning()
+{
+    console.log("Se supone que se muestra la confirmación????")
+    $('#confirmar').modal();
 }

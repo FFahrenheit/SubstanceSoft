@@ -6,10 +6,10 @@
     function getOrderCommands()
     {
         global $user, $connection;
-        $query = "select * from orden where ESTADO='ABIERTA'";
+        $query = "select * from orden where ESTADO='ABIERTA' ";
         if($_SESSION['tipo']=='empleado')
         {
-            $query.= " and usuario = '$user'";
+            $query.= " AND usuario = '$user'";
         }
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
