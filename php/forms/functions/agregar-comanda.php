@@ -6,12 +6,12 @@
 
     $clave = $_POST['clave'];
 
-    /*$query = "SELECT clave FROM platillo WHERE nombre = '$nombre_platillo'";
-    $result = mysqli_query($connection,$query) or die("'Error nombre platillo'");
+    $query = "SELECT valor FROM preferencias WHERE nombre = 'notificacion_chef'";
+    $result = mysqli_query($connection,$query) or die("'Error en modo de notificación'");
 
     $row = mysqli_fetch_array($result);
 
-    $platillo = $row['clave'];*/
+    $type = $row['valor'];
 
     for($i = 0; $i<$qty ;$i++)
     {
@@ -35,10 +35,16 @@
         if($isPossible)
         {
             freeQuery();
-            $query = "insert into pedidos(platillo, orden, estado) values (
+            $query = "INSERT INTO pedidos(platillo, orden, estado) values (
                 (SELECT clave FROM platillo WHERE nombre = '$nombre_platillo')
                 , $clave, 'pedido')";
             $result = mysqli_query($connection, $query) or die ('"query"');
+            if($type==1)
+            {
+                $id = mysqli_insert_id($connection);
+                $query = "UPDATE pedidos SET estado = 'listo' WHERE clave = $id";
+                $result = mysqli_query($connection,$query) or die ('"Error en modo de notificación"');
+            }
         }
         else 
         {

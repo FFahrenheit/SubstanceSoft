@@ -39,7 +39,7 @@
 
                     $query = "select pedidos.clave as pk, pedidos.estado as estado,
                     platillo.nombre as platillo, orden.mesa as mesa, pedidos.hora as hora 
-                    from platillo, orden, pedidos 
+                    from platillo, orden, pedidos  
                     where platillo.clave = pedidos.platillo and platillo.cocina = $clave
                     and pedidos.estado != 'entregado' and orden.clave = pedidos.orden order by pedidos.estado";
 
