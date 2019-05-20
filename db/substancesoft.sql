@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2019 a las 06:24:18
+-- Tiempo de generación: 20-05-2019 a las 03:52:40
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -429,7 +429,8 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (76, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-05 21:39:38', 1),
 (77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 1),
 (78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 1),
-(79, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-05-14 04:19:15', 1);
+(79, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-05-14 04:19:15', 1),
+(80, 'Admin100', 'El platillo pizza de la mesa 0 esta listo', '2019-05-20 01:49:47', 0);
 
 -- --------------------------------------------------------
 
@@ -466,39 +467,41 @@ CREATE TABLE `orden` (
   `estado` enum('abierta','cerrada','pagada') NOT NULL,
   `descripcion` varchar(30) NOT NULL,
   `total` decimal(10,4) DEFAULT '0.0000',
-  `impresiones` tinyint(4) NOT NULL DEFAULT '0'
+  `impresiones` tinyint(4) NOT NULL DEFAULT '0',
+  `clientes` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `orden`
 --
 
-INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`, `impresiones`) VALUES
-(1, '2019-03-05 04:52:39', 'Admin100', 1, 'pagada', '', '0.0000', 0),
-(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', '8132.2002', 0),
-(19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', '240.0000', 0),
-(20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', '2048.2000', 0),
-(21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', '360.0000', 0),
-(22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', '5484.0000', 0),
-(23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', '1928.0000', 0),
-(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', '240.0000', 1),
-(25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', '240.0000', 0),
-(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000', 0),
-(27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000', 0),
-(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000', 0),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '669.2000', 0),
-(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0),
-(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2),
-(32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1),
-(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '1164.0000', 0),
-(34, '2019-05-05 21:42:54', 'Admin100', 0, 'abierta', 'Juan', '0.0000', 0),
-(35, '2019-05-05 21:43:41', 'Admin100', 0, 'abierta', 'juanito', '0.0000', 0),
-(36, '2019-05-05 21:44:18', 'Admin100', 0, 'abierta', 'El queso', '0.0000', 0),
-(37, '2019-05-05 21:45:03', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0),
-(38, '2019-05-05 21:45:17', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0),
-(39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 2),
-(40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000', 0),
-(41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000', 1);
+INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion`, `total`, `impresiones`, `clientes`) VALUES
+(1, '2019-03-05 04:52:39', 'Admin100', 1, 'pagada', '', '0.0000', 0, 1),
+(18, '2019-03-10 10:09:58', 'Admin100', 2, 'pagada', 'Mesa cool', '8132.2002', 0, 1),
+(19, '2019-03-12 05:23:44', 'Admin100', 1, 'pagada', 'Mesa mÃ¡s cool aÃºn', '240.0000', 0, 1),
+(20, '2019-03-17 20:09:59', 'admin', 1, 'pagada', 'Prueba comandas', '2048.2000', 0, 1),
+(21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', '360.0000', 0, 1),
+(22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', '5484.0000', 0, 1),
+(23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', '1928.0000', 0, 1),
+(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', '240.0000', 1, 1),
+(25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', '240.0000', 0, 1),
+(26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000', 0, 1),
+(27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000', 0, 1),
+(28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000', 0, 1),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '669.2000', 0, 1),
+(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0, 1),
+(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2, 1),
+(32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1, 1),
+(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '1164.0000', 0, 1),
+(34, '2019-05-05 21:42:54', 'Admin100', 0, 'abierta', 'Juan', '0.0000', 0, 1),
+(35, '2019-05-05 21:43:41', 'Admin100', 0, 'abierta', 'juanito', '0.0000', 0, 1),
+(36, '2019-05-05 21:44:18', 'Admin100', 0, 'abierta', 'El queso', '0.0000', 0, 1),
+(37, '2019-05-05 21:45:03', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
+(38, '2019-05-05 21:45:17', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
+(39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 2, 1),
+(40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000', 0, 1),
+(41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000', 1, 1),
+(42, '2019-05-20 01:35:37', 'admin', 0, 'abierta', 'jjajaj', '0.0000', 0, 0);
 
 --
 -- Disparadores `orden`
@@ -582,7 +585,7 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (53, 'entregado', '2019-04-18 20:55:40', 3, 29),
 (54, 'pedido', '2019-04-18 20:55:45', 3, 29),
 (55, 'entregado', '2019-04-21 02:56:35', 3, 29),
-(56, 'pedido', '2019-04-21 04:03:08', 4, 26),
+(56, 'listo', '2019-04-21 04:03:08', 4, 26),
 (57, 'entregado', '2019-04-21 04:32:32', 6, 29),
 (58, 'listo', '2019-04-22 02:47:47', 3, 26),
 (59, 'listo', '2019-04-22 02:56:23', 6, 29),
@@ -727,6 +730,9 @@ INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
 ('acceso_codigo', 0),
 ('apagado_dinamico', 0),
 ('desperdicio_diario', 0),
+('forma_impresa', 1),
+('forma_visual', 0),
+('notificacion_chef', 0),
 ('razon_desperdicio', 0);
 
 -- --------------------------------------------------------
@@ -1150,13 +1156,13 @@ ALTER TABLE `login_automatico`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
