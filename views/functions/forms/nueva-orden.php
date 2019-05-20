@@ -67,6 +67,10 @@
                             <label for="">Breve descripción: </label>
                             <input name="desc" type="text" placeholder="Escriba una descripción para la orden" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="">Cantidad comensales: </label>
+                            <input name="clientes" type="number" placeholder="Escriba la cantidad de clientes en la mesa" class="form-control">
+                        </div>
                         <input id="drive" name="drive" value="0" hidden>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">

@@ -74,7 +74,8 @@
                         <h4> Mesa: <?php echo $row['mesa']; ?></h4> 
                         <p> Abierta por: <?php echo $row['usuario']; ?></p> 
                         <p> Descripción: <?php echo $row['descripcion']; ?></p> 
-                        <h3> Total: <?php echo $row['total']; ?></h3> 
+                        <p> Clientes: <?php echo $row['clientes']; ?> </p>
+                        <h3> Total: <?php echo "$".$row['total']; ?></h3> 
 
                         <a style="color: white;" data-toggle="modal" data-target="#delete"
                         class="btn btn-success" id="<?php echo $clave;?>" onClick="showDetails(this)">

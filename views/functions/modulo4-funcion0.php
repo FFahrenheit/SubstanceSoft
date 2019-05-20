@@ -51,6 +51,10 @@
             <!-- BODY -->
             <h1 class="mt-4"> Órdenes drive through abiertas </h1>
             <p> Aquí puede agregar pedidos a las ordenes drive through abiertas y crear nuevas ordenes.</p>
+            <button type="button" class="btn btn-success" style="margin-top: auto">
+                Nueva orden
+              </button>
+              <br></br>
             <?php echo getOpenOrders(); ?>
             <p> &nbsp;</p>
             <a href="forms/nueva-orden-drive.html" class="foot">

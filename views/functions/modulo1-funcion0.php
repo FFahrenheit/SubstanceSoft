@@ -51,6 +51,10 @@
             <!-- BODY -->
             <h1 class="mt-4"> Mesas disponibles </h1>
             <p> Aquí puede agregar y administrar las mesas actuales.</p>
+            <button type="button" class="btn btn-success" style="margin-top: auto">
+                Nueva mesa
+              </button>
+              <br></br>
             <?php echo getOpenOrders(); ?>
             <p> &nbsp;</p>
             <a href="forms/nueva-orden.php" class="foot">
