@@ -133,38 +133,6 @@ app.on('ready', () => {
                 IPdialog = null;
               });
           }
-        },
-        {
-          label: 'Configurar módulo de empleados', click()
-          {
-            Arduino  = new BrowserWindow(
-              {
-                webPreferences: {
-                  nodeIntegration: true
-                },
-                titleBarStyle: 'hidden',
-                maxWidth: 1024, //400
-                maxHeight: 768, //200
-                show: false,
-                backgroundColor: '#FFFFFF',
-                icon: path.join(__dirname, 'images/64x64.png'),
-                title: 'SubstanceSoft',
-              }
-            );
-            Arduino.loadURL(url.format(
-              {
-                pathname: path.join(__dirname, 'arduino/setup.html'),
-                protocol: 'file',
-                slashes: true
-              }));
-
-              Arduino.maximize();
-
-              Arduino.on('close',(event)=>
-              {
-                Arduino = null;
-              });
-          }
         }
       ]
     }
