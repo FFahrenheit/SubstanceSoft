@@ -87,13 +87,12 @@
                                     </div>
                                     <div class="card text-center">
                                         <div class="card-body">
-                                            <img class="card-img-top img-fluid" src="../../images/import-export.png" alt="Ingredientes">
+                                            <img class="card-img-top img-fluid" src="../../images/tarjeta.png" alt="Tarjetas">
                                             <div class="card-block">
-                                                <h4 class="card-title">Migración de datos</h4>
-                                                <p class="card-text">Exporte o importe la información actual de su sistema</p>
-                                                <strong>Requiere confirmación de administrador</strong>
-                                                <p><a href="./forms/confirmar-usuario.php?ref=export" class="btn btn-primary">Exportar</a></p>
-                                                <p><a href="./forms/confirmar-usuario.php?ref=import" class="btn btn-primary">Importar</a></p>
+                                                <h4 class="card-title">Sistema de empleados</h4>
+                                                <p class="card-text">Asigne una tarjeta a usuarios para usar en el sistema de empleados</p>
+                                                <p><a href="../forms/gestionar-tarjetas.php" class="btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-tarjetas.php" class="btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -119,10 +118,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card text-center" style="visibility: hidden">
-                                        <div class="card-body"></div>
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <img class="card-img-top img-fluid" src="../../images/import-export.png" alt="Ingredientes">
+                                            <div class="card-block">
+                                                <h4 class="card-title">Migración de datos</h4>
+                                                <p class="card-text">Exporte o importe la información actual de su sistema</p>
+                                                <strong>Requiere confirmación de administrador</strong>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=export" class="btn btn-primary">Exportar</a></p>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=import" class="btn btn-primary">Importar</a></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p>&nbsp;</p>
+                                </div>
+                                <p>&nbsp;</p>
                         </section>
                     </div>
                     <!-- /BODY -->

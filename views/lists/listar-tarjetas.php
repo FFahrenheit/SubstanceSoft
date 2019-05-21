@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, inicial-scale=1">
 
     <title>
-        Mostrar códigos de acceso
+        Tarjetas en el sistema
     </title>
     <link rel="shortcut icon" type="image/x-icon" href="../../images/icono.png" />
     <script>if (window.module) module = window.module;</script>
@@ -34,35 +34,22 @@
     </div>
     <section class="container text-center">
         <p>&nbsp;</p>
-        <h1 class="text-uppercase text-center">Listado de códigos</h1>
+        <h1 class="text-uppercase text-center">Listado de tarjetas habilitadas</h1>
         <div class="row">
             <div class="container-fluid">
                 <?php 
                     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
-
-                    $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
-
-                    $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
-
-                    $row = mysqli_fetch_array($result); 
-                    if(!isset($row['valor']) || $row['valor']==0)
-                    {
-                        echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
-                        echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                        echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
-                        die();
-                    }
                 ?>
                 <table class="table table-hover" style="margin: auto">
                     <thead>
                         <tr>
                             <td>Nombre</td>
-                            <td>Código</td>
+                            <td>Código tarjeta</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $query = "select * from usuario";
+                        $query = "SELECT username, tarjeta FROM usuario WHERE tarjeta IS NOT NULL ORDER BY username";
 
                         $sql = mysqli_query($connection, $query) or die("error");
 
@@ -70,7 +57,7 @@
                                 ?>
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
-                                <td><?php echo $row['codigo']; ?></td>
+                                <td><?php echo $row['tarjeta']; ?></td>
                             </tr>
                         <?php
                     }

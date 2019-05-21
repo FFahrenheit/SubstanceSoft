@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2019 a las 03:52:40
+-- Tiempo de generación: 21-05-2019 a las 08:25:56
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -114,6 +114,63 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `asistencia`
+--
+
+CREATE TABLE `asistencia` (
+  `clave` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `entrada` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `salida` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `asistencia`
+--
+
+INSERT INTO `asistencia` (`clave`, `usuario`, `entrada`, `salida`) VALUES
+(1, 'Admin100', '2019-05-21 05:03:40', '2019-05-21 05:05:10'),
+(2, 'Admin100', '2019-05-21 05:03:56', '2019-05-21 05:05:16'),
+(4, 'Admin100', '2019-05-21 05:12:38', '2019-05-21 05:13:13'),
+(5, 'Admin100', '2019-05-21 05:14:22', '2019-05-21 05:18:42'),
+(6, 'Admin100', '2019-05-21 05:20:41', '2019-05-21 05:20:47'),
+(7, 'Admin100', '2019-05-21 05:21:22', '2019-05-21 05:21:57'),
+(8, 'Admin100', '2019-05-21 05:22:16', '2019-05-21 05:22:27'),
+(9, 'Admin100', '2019-05-21 05:44:16', '2019-05-21 05:50:41'),
+(10, 'Admin100', '2019-05-21 05:50:49', '2019-05-21 05:50:57'),
+(11, 'Admin100', '2019-05-21 05:51:05', '2019-05-21 05:51:12'),
+(12, 'Admin100', '2019-05-21 05:55:34', '2019-05-21 05:55:53'),
+(13, 'Admin100', '2019-05-21 05:56:03', '2019-05-21 05:57:33'),
+(14, 'Admin100', '2019-05-21 05:58:02', NULL),
+(15, 'chef1', '2019-05-21 06:25:31', NULL);
+
+--
+-- Disparadores `asistencia`
+--
+DELIMITER $$
+CREATE TRIGGER `mensaje-entrada` AFTER INSERT ON `asistencia` FOR EACH ROW BEGIN
+		INSERT INTO mensajes(destinatario, texto) VALUES 
+		(
+			(SELECT username FROM usuario WHERE tipo = 'admin'),
+			(SELECT CONCAT('El usuario ', NEW.usuario, ' ha registrado\r\n                           su entrada'))
+        );
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `mensaje-salida` AFTER UPDATE ON `asistencia` FOR EACH ROW BEGIN
+		INSERT INTO mensajes(destinatario, texto) VALUES 
+		(
+			(SELECT username FROM usuario WHERE tipo = 'admin'),
+			(SELECT CONCAT('El usuario ', NEW.usuario, ' ha registrado su salida'))
+        );
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `chefs`
 --
 
@@ -166,7 +223,7 @@ CREATE TABLE `equipos` (
 --
 
 INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
-('192.168.15.174', 'Mi equipo cool', '2019-05-18 03:19:20'),
+('192.168.15.174', 'Mi equipo cool', '2019-05-21 02:41:12'),
 ('192.168.84.147', 'Equipo conectado', '2019-05-14 17:50:34');
 
 -- --------------------------------------------------------
@@ -430,7 +487,14 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 1),
 (78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 1),
 (79, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-05-14 04:19:15', 1),
-(80, 'Admin100', 'El platillo pizza de la mesa 0 esta listo', '2019-05-20 01:49:47', 0);
+(80, 'Admin100', 'El platillo pizza de la mesa 0 esta listo', '2019-05-20 01:49:47', 0),
+(81, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:41', 0),
+(82, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:57', 0),
+(83, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:51:12', 0),
+(84, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:55:53', 0),
+(85, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 05:57:33', 0),
+(86, 'Admin100', 'El usuario Admin100 ha registrado\r\n                           su entrada', '2019-05-21 05:58:02', 0),
+(87, 'Admin100', 'El usuario chef1 ha registrado\r\n                           su entrada', '2019-05-21 06:25:31', 0);
 
 -- --------------------------------------------------------
 
@@ -727,7 +791,7 @@ CREATE TABLE `preferencias` (
 --
 
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
-('acceso_codigo', 0),
+('acceso_codigo', 1),
 ('apagado_dinamico', 0),
 ('desperdicio_diario', 0),
 ('forma_impresa', 1),
@@ -849,6 +913,7 @@ CREATE TABLE `usuario` (
   `direccion` varchar(40) DEFAULT NULL,
   `tipo` enum('administrador','empleado','admin') DEFAULT NULL,
   `codigo` int(10) UNSIGNED NOT NULL,
+  `tarjeta` int(11) DEFAULT NULL,
   `login` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -856,14 +921,14 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`, `login`) VALUES
-('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, '0000-00-00 00:00:00'),
-('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'admin', 2994, '2019-05-05 20:44:59'),
-('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, '0000-00-00 00:00:00'),
-('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, '2019-05-05 22:21:43'),
-('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, '0000-00-00 00:00:00'),
-('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423, '0000-00-00 00:00:00'),
-('yo', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774, '0000-00-00 00:00:00');
+INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`, `tarjeta`, `login`) VALUES
+('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, NULL, '0000-00-00 00:00:00'),
+('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'admin', 2994, 10999, '2019-05-05 20:44:59'),
+('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, 26976, '0000-00-00 00:00:00'),
+('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, NULL, '2019-05-05 22:21:43'),
+('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, NULL, '0000-00-00 00:00:00'),
+('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423, NULL, '0000-00-00 00:00:00'),
+('yo', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774, NULL, '0000-00-00 00:00:00');
 
 --
 -- Disparadores `usuario`
@@ -970,6 +1035,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  ADD PRIMARY KEY (`clave`);
 
 --
 -- Indices de la tabla `chefs`
@@ -1104,11 +1175,18 @@ ALTER TABLE `surtidos`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`username`);
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `tarjeta` (`tarjeta`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `asistencia`
+--
+ALTER TABLE `asistencia`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `chefs`
@@ -1156,7 +1234,7 @@ ALTER TABLE `login_automatico`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`

@@ -29,6 +29,25 @@ String _SSID="RED";
 String _PASS="41472021";
 String _SERVER="192.168.15.174";
 
+void readyBeep()
+{
+  for(int i=0; i<256;i++)
+  {
+    analogWrite(BUZZ,i);
+    delay(2);
+  }
+  analogWrite(BUZZ,0);
+}
+
+void readBeep()
+{
+  analogWrite(BUZZ,100);
+  delay(150);
+  analogWrite(BUZZ,200);
+  delay(350);
+  analogWrite(BUZZ,0);
+}
+
 void okBeep()
 {
   analogWrite(BUZZ,120);
@@ -64,12 +83,12 @@ void setup()
 {
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT);
-  errorBeep();
   wifi.begin(115200);
   Serial.begin(9600);
   nfc.begin();
   startNFC();
   connectWifi();
+  readyBeep();
 }
 
 void loop() 
@@ -77,7 +96,7 @@ void loop()
   if(Serial.available())
   {
     char menu = Serial.read();
-    okBeep();
+    readBeep();
     switch(menu)
     {
       case 'a': 
@@ -103,7 +122,7 @@ void loop()
     digitalWrite(LED_BUILTIN,LOW);
      if (success) 
      {
-      okBeep();
+      readBeep();
       //Serial.print("UID Length: ");
       //Serial.print(uidLength, DEC);Serial.println(" bytes");
       //Serial.print("UID Value: ");
@@ -122,26 +141,25 @@ void loop()
       {
         registerCard(counter);
       }
-      delay(1000);
     }
     else
     {
       errorBeep();
-      Serial.println("Timed out waiting for a card");
     }
   }
 }
 
 boolean registerCard(int card)
 {
+    Serial.println("Tarjeta: "+(String)card);
    String command = "AT+CIPSTART=\"TCP\",\""+_SERVER+"\",80\r\n";
    wifi.print(command);
-   waitResponse();
+   waitResponse(1200);
    command = "GET /SubstanceSoft/php/requests/read.php?code="+(String)card+"\r\n";
    wifi.print("AT+CIPSEND="+(String)command.length()+"\r\n");
    waitResponse();
    wifi.print(command);
-   String statusCode = waitResponse();
+   String statusCode = waitResponse(2000);
    Serial.println("Status code: "+statusCode);
    if(statusCode.indexOf("1:1")>0)
    {
@@ -171,7 +189,7 @@ void innitConnection()
   waitResponse();
   String command = "AT+CWJAP=\""+_SSID+"\",\""+_PASS+"\"\r\n";
   wifi.print(command);
-  waitResponse();
+  waitResponse(1500);
 }
 
 void connectWifi()
@@ -184,6 +202,19 @@ String waitResponse()
 {
   String response;
   delay(1000); //Aguantame las carnes
+  while(!wifi.available());
+  while(wifi.available())
+  {
+    response = wifi.readStringUntil('\n');
+    Serial.println(response);
+  }
+  return response;
+}
+
+String waitResponse(int timeout)
+{
+  String response;
+  delay(timeout); //Aguantame las carnes
   while(!wifi.available());
   while(wifi.available())
   {

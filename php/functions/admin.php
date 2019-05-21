@@ -39,13 +39,6 @@
         $output.=  '</tr>';
 
         $output.= '<tr>';
-        $output.=  "<td>Desperdicio de ingredientes</td>";
-        $output.=  "<td>".getEstado("desperdicio_diario");
-        $output.=  '<td><a href="../forms/gestionar-desperdicio.php" class="btn btn-primary">Administrar</a></td>';
-        $output.=  '</tr>';
-
-
-        $output.= '<tr>';
         $output.=  "<td>Modo de notificación chef</td>";
         if(getEstado("notificacion_chef")=="<font color='red'>Deshabilitado</font>")
         {
