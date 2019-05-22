@@ -11,7 +11,7 @@
  */
 
 boolean debug = false; //True para entrar a modo configuración, en esencia no importa
-boolean configure = true; //Es un switch, si está en alto significa que abre el serial
+boolean configure = false; //Es un switch, si está en alto significa que abre el serial
 
 const byte TX_WIFI = 11;
 const byte RX_WIFI = 12;
@@ -93,6 +93,7 @@ void setup()
     wifi.begin(115200);
     nfc.begin();
     startNFC();
+    innitConnection();
     connectWifi();
     Serial.println("Listo para recibir");
   }
@@ -103,9 +104,19 @@ void loop()
 {
   if(Serial.available() && configure)
   {
-    char menu = Serial.read();
-    readBeep();
-    switch(menu)
+    analogWrite(BUZZ,200);
+    String menu = Serial.readStringUntil('\n');
+    //readBeep();
+    if(menu=="b")
+    {
+      showCredentials();
+    }
+    else if (menu=="a")
+    {
+      setCredentials();
+    }
+    okBeep();
+    /*switch(menu)
     {
       case 'a': 
         setCredentials();
@@ -118,8 +129,7 @@ void loop()
       case 'd':
         connectWifi();
         break;
-    }
-    okBeep();
+    }*/
   }
   else if(!configure)
   {
@@ -235,20 +245,19 @@ String waitResponse(int timeout)
 
 bool setCredentials()
 {
+  analogWrite(BUZZ,0);
   String ssid,pass="",ip;
   do
   {
     if(Serial.available())
     {
-      ssid = Serial.readStringUntil('\n');      
+      ssid = Serial.readStringUntil('\n');
     }
   }while(ssid.length()<=0);
-  readyBeep();
-  writeValue(SSID_ADD, ssid);
+  //readyBeep();
   while(Serial.available()<=0);
   pass =  Serial.readStringUntil('\n');
-    readyBeep();
-  writeValue(PASS_ADD, pass); 
+  //readyBeep();
   do
   {
     if(Serial.available())
@@ -256,9 +265,11 @@ bool setCredentials()
       ip = Serial.readStringUntil('\n');      
     }
   }while(ip.length()<=0);
-  writeValue(ADD_ADD, ip);
-  readyBeep();
+  //readyBeep();
   //Serial.println("Credenciales guardadas\n");
+  writeValue(PASS_ADD, pass); 
+  writeValue(SSID_ADD, ssid);
+  writeValue(ADD_ADD, ip);
   readCredentials();
 }
 
