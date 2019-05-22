@@ -62,7 +62,7 @@ function addInventory(btn)
                 
                 alert(data);
 
-                window.location.reaload\(true); 
+                window.location.reload(true); 
             })
     }
 }

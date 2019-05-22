@@ -9,7 +9,7 @@ function showDetails(button)
 
 function cont()
 {
-    window.location.reaload\(true); 
+    window.location.reload(true); 
 }
 
 function confirmDelete()
@@ -30,7 +30,7 @@ function confirmDelete()
         console.log("aqui llega js");
         console.log(data);
         alert(data);
-        window.location.reaload\(true); 
+        window.location.reload(true); 
 
     })
 }

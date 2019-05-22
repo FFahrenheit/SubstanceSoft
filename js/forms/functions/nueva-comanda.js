@@ -105,7 +105,7 @@ formulario.addEventListener('submit',function(e)
                 
                 //alert(data);
 
-                window.location.reaload\(true); 
+                window.location.reload(true); 
             })
     }
     else 
