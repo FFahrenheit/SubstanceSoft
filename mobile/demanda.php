@@ -7,6 +7,6 @@
     	$json['demanda'][]=$row;
     }
     mysqli_close($connection);
-    echo $json['demanda'][0]['nombre'];
+    //echo $json['demanda'][0]['nombre'];
     echo json_encode($json);
 ?>

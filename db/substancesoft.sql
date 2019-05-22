@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2019 a las 08:25:56
+-- Tiempo de generación: 22-05-2019 a las 20:33:01
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -141,8 +141,24 @@ INSERT INTO `asistencia` (`clave`, `usuario`, `entrada`, `salida`) VALUES
 (11, 'Admin100', '2019-05-21 05:51:05', '2019-05-21 05:51:12'),
 (12, 'Admin100', '2019-05-21 05:55:34', '2019-05-21 05:55:53'),
 (13, 'Admin100', '2019-05-21 05:56:03', '2019-05-21 05:57:33'),
-(14, 'Admin100', '2019-05-21 05:58:02', NULL),
-(15, 'chef1', '2019-05-21 06:25:31', NULL);
+(14, 'Admin100', '2019-05-21 05:58:02', '2019-05-21 13:17:17'),
+(15, 'chef1', '2019-05-21 06:25:31', '2019-05-21 13:17:31'),
+(16, 'chef1', '2019-05-21 13:18:51', '2019-05-21 13:21:08'),
+(17, 'Admin100', '2019-05-21 13:20:56', '2019-05-21 13:24:37'),
+(18, 'chef1', '2019-05-21 13:21:36', '2019-05-21 17:32:41'),
+(19, 'Admin100', '2019-05-21 17:22:58', '2019-05-21 17:26:03'),
+(20, 'Admin100', '2019-05-21 17:30:34', '2019-05-21 17:47:26'),
+(21, 'chef1', '2019-05-21 17:32:55', '2019-05-21 17:40:26'),
+(22, 'chef1', '2019-05-21 17:46:30', '2019-05-21 17:47:13'),
+(23, 'Admin100', '2019-05-21 17:47:49', '2019-05-21 17:48:39'),
+(24, 'Admin100', '2019-05-21 17:49:05', '2019-05-21 18:06:22'),
+(25, 'chef1', '2019-05-21 18:06:05', '2019-05-21 18:11:53'),
+(26, 'Admin100', '2019-05-21 18:07:04', '2019-05-21 18:09:03'),
+(27, 'Admin100', '2019-05-21 18:09:19', '2019-05-21 18:36:54'),
+(28, 'chef1', '2019-05-21 18:16:32', '2019-05-21 18:19:39'),
+(29, 'chef1', '2019-05-21 18:19:54', '2019-05-21 18:20:09'),
+(30, 'chef1', '2019-05-21 18:23:37', '2019-05-21 18:39:47'),
+(31, 'Admin100', '2019-05-21 18:37:10', '2019-05-21 18:46:53');
 
 --
 -- Disparadores `asistencia`
@@ -152,7 +168,7 @@ CREATE TRIGGER `mensaje-entrada` AFTER INSERT ON `asistencia` FOR EACH ROW BEGIN
 		INSERT INTO mensajes(destinatario, texto) VALUES 
 		(
 			(SELECT username FROM usuario WHERE tipo = 'admin'),
-			(SELECT CONCAT('El usuario ', NEW.usuario, ' ha registrado\r\n                           su entrada'))
+			(SELECT CONCAT('El usuario ', NEW.usuario, ' ha registrado su entrada'))
         );
 END
 $$
@@ -223,8 +239,10 @@ CREATE TABLE `equipos` (
 --
 
 INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
-('192.168.15.174', 'Mi equipo cool', '2019-05-21 02:41:12'),
-('192.168.84.147', 'Equipo conectado', '2019-05-14 17:50:34');
+('192.168.0.100', 'COcinita', '2019-05-21 17:29:11'),
+('192.168.15.174', 'Mi equipo cool', '2019-05-22 04:34:49'),
+('192.168.84.123', 'Equipo conectado', '2019-05-21 17:48:08'),
+('192.168.84.147', 'Equipo conectado', '2019-05-21 18:05:03');
 
 -- --------------------------------------------------------
 
@@ -487,14 +505,48 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (77, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:45:41', 1),
 (78, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-05 21:46:17', 1),
 (79, 'Admin100', 'La cuenta en la mesa 1 ha sido pagada', '2019-05-14 04:19:15', 1),
-(80, 'Admin100', 'El platillo pizza de la mesa 0 esta listo', '2019-05-20 01:49:47', 0),
-(81, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:41', 0),
-(82, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:57', 0),
-(83, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:51:12', 0),
-(84, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:55:53', 0),
-(85, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 05:57:33', 0),
-(86, 'Admin100', 'El usuario Admin100 ha registrado\r\n                           su entrada', '2019-05-21 05:58:02', 0),
-(87, 'Admin100', 'El usuario chef1 ha registrado\r\n                           su entrada', '2019-05-21 06:25:31', 0);
+(80, 'Admin100', 'El platillo pizza de la mesa 0 esta listo', '2019-05-20 01:49:47', 1),
+(81, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:41', 1),
+(82, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:50:57', 1),
+(83, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:51:12', 1),
+(84, 'Admin100', 'El usuario Admin100 se\r\n             ha registrado una su salida', '2019-05-21 05:55:53', 1),
+(85, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 05:57:33', 1),
+(86, 'Admin100', 'El usuario Admin100 ha registrado\r\n                           su entrada', '2019-05-21 05:58:02', 1),
+(87, 'Admin100', 'El usuario chef1 ha registrado\r\n                           su entrada', '2019-05-21 06:25:31', 1),
+(88, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 13:17:17', 1),
+(89, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 13:17:31', 1),
+(90, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 13:18:51', 1),
+(91, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 13:20:56', 1),
+(92, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 13:21:08', 1),
+(93, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 13:21:36', 1),
+(94, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 13:24:37', 1),
+(95, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 17:22:58', 1),
+(96, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 17:26:03', 1),
+(97, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 17:30:34', 1),
+(98, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 17:32:41', 1),
+(99, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 17:32:55', 1),
+(100, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 17:40:26', 1),
+(101, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 17:46:30', 1),
+(102, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 17:47:13', 1),
+(103, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 17:47:26', 1),
+(104, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 17:47:49', 1),
+(105, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 17:48:39', 1),
+(106, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 17:49:05', 1),
+(107, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 18:06:05', 1),
+(108, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:06:22', 1),
+(109, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 18:07:04', 1),
+(110, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:09:03', 1),
+(111, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 18:09:19', 1),
+(112, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:11:53', 1),
+(113, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 18:16:32', 1),
+(114, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:19:39', 1),
+(115, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 18:19:54', 1),
+(116, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:20:09', 1),
+(117, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-21 18:23:37', 1),
+(118, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:36:54', 1),
+(119, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 18:37:10', 1),
+(120, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:39:47', 1),
+(121, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:46:53', 1);
 
 -- --------------------------------------------------------
 
@@ -556,7 +608,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0, 1),
 (31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2, 1),
 (32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1, 1),
-(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '1164.0000', 0, 1),
+(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '14.0000', 0, 1),
 (34, '2019-05-05 21:42:54', 'Admin100', 0, 'abierta', 'Juan', '0.0000', 0, 1),
 (35, '2019-05-05 21:43:41', 'Admin100', 0, 'abierta', 'juanito', '0.0000', 0, 1),
 (36, '2019-05-05 21:44:18', 'Admin100', 0, 'abierta', 'El queso', '0.0000', 0, 1),
@@ -773,6 +825,7 @@ INSERT INTO `platillo` (`clave`, `nombre`, `precio`, `dificultad`, `descripcion`
 CREATE TABLE `platillos_populares` (
 `suma` bigint(21)
 ,`nombre` varchar(35)
+,`cocina` varchar(50)
 );
 
 -- --------------------------------------------------------
@@ -976,7 +1029,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `platillos_populares`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `platillos_populares`  AS  select count(`pedidos`.`clave`) AS `suma`,`platillo`.`nombre` AS `nombre` from (`pedidos` join `platillo`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by `pedidos`.`platillo` order by count(`pedidos`.`clave`) desc limit 10 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `platillos_populares`  AS  select count(`pedidos`.`clave`) AS `suma`,`platillo`.`nombre` AS `nombre`,`cocina`.`nombre` AS `cocina` from ((`pedidos` join `platillo`) join `cocina`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin'))) and (`platillo`.`cocina` = `cocina`.`clave`)) group by `pedidos`.`platillo` order by count(`pedidos`.`clave`) desc limit 10 ;
 
 -- --------------------------------------------------------
 
@@ -1186,7 +1239,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `chefs`
@@ -1234,7 +1287,7 @@ ALTER TABLE `login_automatico`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`

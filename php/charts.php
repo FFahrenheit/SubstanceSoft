@@ -46,7 +46,7 @@
         for($i = 0; $i<$result->num_rows; $i++)
         {
             $row = mysqli_fetch_array($result);
-            $output .= "'".$row['nombre']."'";
+            $output .= "'".$row['nombre']." (".$row['cocina'].")'";
             if($i != $result->num_rows - 1)
             {
                 $output.=",";
