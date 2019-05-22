@@ -35,10 +35,11 @@
         <h1 class="text-uppercase text-center">Configurar modulo sistema de empleados</h2>
             <div class="lead text-center">
                 <strong>Continúe bajo su propio riesgo (Solo personal capacitado)</strong>
+                <strong><p>Solo disponible desde el equipo central</p></strong>
                 <p>Bienvenido, aquí configura las credenciales de SSID, contraseña y
-                    <br> dirección del servidor en el módulo de Arduino. Conecte el módulo a
-                    <br> su computadora, seleccione el puerto y coloque el switch en modo configuración
-                    <br>Si escucha tres pitidos tras configurar, se ha completado el proceso con éxito
+                     dirección del servidor en el módulo de Arduino. Conecte el módulo a
+                     su computadora, seleccione el puerto y coloque el switch en modo configuración
+                    <br><i>Si escucha tres pitidos en el módulo físico tras configurar, se ha completado el proceso con éxito</i>
                 </p>
             </div>
             <div class="row">
@@ -47,7 +48,8 @@
                         <div class="form-group">
                             <label for="">Puerto: </label>
                             <font color="red">*</font>
-                            <input id="ss" name="port" type="text" placeholder="Puerto del módulo" class="form-control" required>
+                            <input id="ss" name="port" type="text" placeholder="Puerto del módulo (COM1, COM2, COM3...)" class="form-control"
+                                required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -56,7 +58,8 @@
                         <div class="form-group">
                             <label for="">SSID: </label>
                             <font color="red">*</font>
-                            <input id="ss" name="ssid" type="text" placeholder="SSID del WiFi" class="form-control" required>
+                            <input id="ss" name="ssid" type="text" placeholder="SSID del WiFi" class="form-control"
+                                required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -65,7 +68,8 @@
                         <div class="form-group">
                             <label for="">Contraseña: </label>
                             <font color="red">*</font>
-                            <input id="ss" name="password" type="text" placeholder="Contraseña del WiFi" class="form-control">
+                            <input id="ss" name="password" type="text" placeholder="Contraseña del WiFi"
+                                class="form-control">
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -74,7 +78,8 @@
                         <div class="form-group">
                             <label for="">IP del servidor: </label>
                             <font color="red">*</font>
-                            <input id="ss" name="server" type="text" placeholder="IP del equipo central" class="form-control" required>
+                            <input id="ss" name="server" type="text" placeholder="IP del equipo central"
+                                class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa datos
                             </div>
@@ -93,3 +98,5 @@
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
+
+</html>

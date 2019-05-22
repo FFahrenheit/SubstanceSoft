@@ -26,7 +26,7 @@ function confirmDelete()
         console.log("aqui llega js");
         console.log(data);
         alert(data);
-        window.location.reload(false); 
+        window.location.reload(true); 
     })
 }
 
@@ -52,7 +52,7 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                window.location.reload(false); 
+                window.location.reaload\(true); 
                 
             })
     }

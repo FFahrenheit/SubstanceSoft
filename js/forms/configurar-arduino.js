@@ -1,6 +1,6 @@
 var formulario = document.getElementById('formulario');
 
-formulario.addEventListener('submit',function(e)
+formulario.addEventListener('submit',(e)=>
 {
     e.preventDefault();
     console.log('working!');
@@ -28,4 +28,4 @@ formulario.addEventListener('submit',function(e)
                 }
             })
     }
-})
+});

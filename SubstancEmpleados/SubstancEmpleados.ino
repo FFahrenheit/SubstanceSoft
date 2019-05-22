@@ -87,7 +87,7 @@ void setup()
   pinMode(BUZZ,OUTPUT);
   Serial.begin(9600);
   readCredentials();
-  //configure = digitalRead(CONFIGURE_SW);
+  configure = !digitalRead(CONFIGURE_SW); //Logica inversa porque es más fácil si no está conectado 1=>0
   if(!configure)
   {
     wifi.begin(115200);
@@ -107,7 +107,7 @@ void loop()
     analogWrite(BUZZ,200);
     String menu = Serial.readStringUntil('\n');
     //readBeep();
-    if(menu=="b")
+    if(menu=="b") //No se puede con el switch :(((
     {
       showCredentials();
     }

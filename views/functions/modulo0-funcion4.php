@@ -93,7 +93,7 @@
                                                 <p class="card-text">Asigne una tarjeta a usuarios para usar en el sistema de empleados</p>
                                                 <p><a href="../forms/gestionar-tarjetas.php" class="btn btn-primary">Administrar</a></p>
                                                 <p><a href="../lists/listar-tarjetas.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/configurar-arduino.php" class="btn btn-primary">Configurar</a></p>
+                                                <p><a href="../forms/configurar-arduino.html" class="btn btn-primary">Configurar</a></p>
                                             </div>
                                         </div>
                                     </div>
