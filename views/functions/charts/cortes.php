@@ -58,8 +58,17 @@
                     data: [
                        <?php echo getDailyEarningData(); ?> 
                     ]
-                }]
-    
+                },
+                {
+                    label: 'Clientes',
+                    backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.blue,
+                    borderWidth: 1,
+                    data: [
+                       <?php echo getDailyClients(); ?> 
+                    ]
+                } 
+            ]
             };
     
             window.onload = function() {

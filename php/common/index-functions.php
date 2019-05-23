@@ -46,7 +46,7 @@
         {
             return getIndividual();
         }
-        $output ='<div class="list-group">';
+        $output ='<div class="list-group" style="display:inline-block;">';
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
             $path = "../functions/modulo".$curMod."-funcion".$i.".php";
