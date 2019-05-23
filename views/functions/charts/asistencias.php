@@ -50,7 +50,7 @@
     </div>
     <section class="container">
         <div align="center">
-            <h1 class="text-uppercase text-center">Asistencias por usuario</h2>
+            <h1 class="text-uppercase text-center">Asistencias de <?php echo $user; ?></h2>
                 <p class="lead text-center">A continuación puede consultar las entradas y salidas del usuario, además de una gráfica significativa</p>
                 <div class="row">
                     <div class="col-sm">
@@ -114,7 +114,7 @@
                 ]
             },
             {
-                label: 'Entrada',
+                label: 'Salida',
                 fill: false,
                 borderColor: window.chartColors.red,
                 backgroundColor: window.chartColors.red,

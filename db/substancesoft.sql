@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2019 a las 20:33:01
+-- Tiempo de generación: 23-05-2019 a las 06:36:35
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -604,7 +604,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000', 0, 1),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000', 0, 1),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000', 0, 1),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '669.2000', 0, 1),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '323.2000', 0, 1),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0, 1),
 (31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2, 1),
 (32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1, 1),
@@ -617,7 +617,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 2, 1),
 (40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000', 0, 1),
 (41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000', 1, 1),
-(42, '2019-05-20 01:35:37', 'admin', 0, 'abierta', 'jjajaj', '0.0000', 0, 0);
+(42, '2019-05-20 01:35:37', 'admin', 0, 'abierta', 'jjajaj', '0.0000', 0, 1);
 
 --
 -- Disparadores `orden`
@@ -698,13 +698,10 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (48, 'entregado', '2019-04-02 03:00:16', 4, 27),
 (51, 'entregado', '2019-04-07 22:50:40', 6, 28),
 (52, 'pedido', '2019-04-16 18:00:56', 4, 24),
-(53, 'entregado', '2019-04-18 20:55:40', 3, 29),
-(54, 'pedido', '2019-04-18 20:55:45', 3, 29),
 (55, 'entregado', '2019-04-21 02:56:35', 3, 29),
 (56, 'listo', '2019-04-21 04:03:08', 4, 26),
 (57, 'entregado', '2019-04-21 04:32:32', 6, 29),
 (58, 'listo', '2019-04-22 02:47:47', 3, 26),
-(59, 'listo', '2019-04-22 02:56:23', 6, 29),
 (60, 'pedido', '2019-05-05 21:39:38', 9, 31),
 (61, 'pedido', '2019-05-05 21:41:44', 9, 33),
 (64, 'entregado', '2019-05-05 21:45:31', 1, 39),
@@ -1009,8 +1006,11 @@ CREATE TABLE `usuario_ordenes` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `ventas_dia` (
-`suma` double
+`suma` double(19,2)
+,`clientes` decimal(25,0)
 ,`dia` date
+,`densidad` decimal(24,4)
+,`media` double(23,6)
 );
 
 -- --------------------------------------------------------
@@ -1083,7 +1083,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ventas_dia`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ventas_dia`  AS  select sum(`platillo`.`precio`) AS `suma`,cast(`pedidos`.`hora` as date) AS `dia` from (`pedidos` join `platillo`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by dayofmonth(`pedidos`.`hora`) order by `pedidos`.`hora` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ventas_dia`  AS  select round(sum(`platillo`.`precio`),2) AS `suma`,sum(`orden`.`clientes`) AS `clientes`,cast(`pedidos`.`hora` as date) AS `dia`,(select (count(`pedidos`.`clave`) / count(`orden`.`clave`))) AS `densidad`,(round(sum(`platillo`.`precio`),2) / count(`orden`.`clave`)) AS `media` from ((`pedidos` join `platillo`) join `orden`) where ((`platillo`.`clave` = `pedidos`.`platillo`) and (`pedidos`.`orden` = `orden`.`clave`) and (`pedidos`.`hora` >= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_in'))) and (`pedidos`.`hora` <= (select `fechas`.`valor` from `fechas` where (`fechas`.`nombre` = 'fecha_fin')))) group by dayofmonth(`pedidos`.`hora`) order by `pedidos`.`hora` ;
 
 --
 -- Índices para tablas volcadas
