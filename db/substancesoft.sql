@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2019 a las 06:36:35
+-- Tiempo de generación: 24-05-2019 a las 08:17:33
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -242,7 +242,7 @@ INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
 ('192.168.0.100', 'COcinita', '2019-05-21 17:29:11'),
 ('192.168.15.174', 'Mi equipo cool', '2019-05-22 04:34:49'),
 ('192.168.84.123', 'Equipo conectado', '2019-05-21 17:48:08'),
-('192.168.84.147', 'Equipo conectado', '2019-05-21 18:05:03');
+('192.168.84.147', '123', '2019-05-23 12:27:52');
 
 -- --------------------------------------------------------
 
@@ -263,8 +263,8 @@ CREATE TABLE `fechas` (
 INSERT INTO `fechas` (`clave`, `nombre`, `valor`) VALUES
 (1, 'fecha_in', '2019-04-01 23:59:59'),
 (2, 'fecha_fin', '2019-06-05 23:59:59'),
-(3, 'Encendido', '2019-04-21 00:00:00'),
-(4, 'Apagado', '2019-04-21 00:00:00');
+(3, 'Encendido', '2019-05-23 23:55:00'),
+(4, 'Apagado', '2019-05-23 02:00:59');
 
 -- --------------------------------------------------------
 
@@ -433,19 +433,6 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `login_automatico`
---
-
-CREATE TABLE `login_automatico` (
-  `clave` int(11) NOT NULL,
-  `usuario` varchar(30) NOT NULL,
-  `hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `usado` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mensajes`
 --
 
@@ -546,7 +533,15 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (118, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:36:54', 1),
 (119, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 18:37:10', 1),
 (120, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:39:47', 1),
-(121, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:46:53', 1);
+(121, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:46:53', 1),
+(122, 'Admin100', 'El platillo Hamburguesa Ranch de la mesa 0 esta listo', '2019-05-24 04:28:03', 0),
+(123, 'admin', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:00', 0),
+(124, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:06', 0),
+(125, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-24 06:08:11', 0),
+(126, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:16', 0),
+(127, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:22', 0),
+(128, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:28', 0),
+(129, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-05-24 06:10:51', 0);
 
 -- --------------------------------------------------------
 
@@ -604,20 +599,20 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000', 0, 1),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000', 0, 1),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000', 0, 1),
-(29, '2019-04-16 18:26:26', 'Admin100', 0, 'abierta', 'Hola', '323.2000', 0, 1),
+(29, '2019-04-16 18:26:26', 'Admin100', 0, 'pagada', 'Hola', '323.2000', 1, 1),
 (30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0, 1),
 (31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2, 1),
 (32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1, 1),
-(33, '2019-05-05 21:29:51', 'Admin100', 2, 'abierta', 'Prueba drive', '14.0000', 0, 1),
-(34, '2019-05-05 21:42:54', 'Admin100', 0, 'abierta', 'Juan', '0.0000', 0, 1),
-(35, '2019-05-05 21:43:41', 'Admin100', 0, 'abierta', 'juanito', '0.0000', 0, 1),
-(36, '2019-05-05 21:44:18', 'Admin100', 0, 'abierta', 'El queso', '0.0000', 0, 1),
+(33, '2019-05-05 21:29:51', 'Admin100', 2, 'cerrada', 'Prueba drive', '14.0000', 0, 1),
+(34, '2019-05-05 21:42:54', 'Admin100', 0, 'cerrada', 'Juan', '0.0000', 0, 1),
+(35, '2019-05-05 21:43:41', 'Admin100', 0, 'cerrada', 'juanito', '0.0000', 0, 1),
+(36, '2019-05-05 21:44:18', 'Admin100', 0, 'cerrada', 'El queso', '0.0000', 0, 1),
 (37, '2019-05-05 21:45:03', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
 (38, '2019-05-05 21:45:17', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
 (39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 2, 1),
 (40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000', 0, 1),
 (41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000', 1, 1),
-(42, '2019-05-20 01:35:37', 'admin', 0, 'abierta', 'jjajaj', '0.0000', 0, 1);
+(42, '2019-05-20 01:35:37', 'admin', 0, 'cerrada', 'jjajaj', '0.0000', 0, 1);
 
 --
 -- Disparadores `orden`
@@ -703,9 +698,9 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 (57, 'entregado', '2019-04-21 04:32:32', 6, 29),
 (58, 'listo', '2019-04-22 02:47:47', 3, 26),
 (60, 'pedido', '2019-05-05 21:39:38', 9, 31),
-(61, 'pedido', '2019-05-05 21:41:44', 9, 33),
+(61, 'entregado', '2019-05-05 21:41:44', 9, 33),
 (64, 'entregado', '2019-05-05 21:45:31', 1, 39),
-(66, 'pedido', '2019-05-05 21:51:07', 1, 29);
+(66, 'entregado', '2019-05-05 21:51:07', 1, 29);
 
 --
 -- Disparadores `pedidos`
@@ -843,10 +838,11 @@ CREATE TABLE `preferencias` (
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
 ('acceso_codigo', 1),
 ('apagado_dinamico', 0),
+('ayuda_chefs', 0),
 ('desperdicio_diario', 0),
 ('forma_impresa', 1),
 ('forma_visual', 0),
-('notificacion_chef', 0),
+('notificacion_chef', 1),
 ('razon_desperdicio', 0);
 
 -- --------------------------------------------------------
@@ -886,7 +882,6 @@ CREATE TABLE `recetas` (
 
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 (1, '0.5000', 1, 3),
-(3, '50.0000', 2, 3),
 (4, '10.0000', 1, 6),
 (5, '0.0100', 2, 6);
 
@@ -956,7 +951,7 @@ CREATE TABLE `uso_ingredientes` (
 CREATE TABLE `usuario` (
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `nombre` varchar(40) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT ' ',
   `apellido_p` varchar(30) DEFAULT NULL,
   `apellido_m` varchar(30) DEFAULT NULL,
   `telefono` bigint(11) DEFAULT NULL,
@@ -977,7 +972,7 @@ INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido
 ('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, 26976, '0000-00-00 00:00:00'),
 ('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, NULL, '2019-05-05 22:21:43'),
 ('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, NULL, '0000-00-00 00:00:00'),
-('IVX', 'œw·{bÝþiWƒ·®P@M', NULL, NULL, NULL, NULL, NULL, 'administrador', 3423, NULL, '0000-00-00 00:00:00'),
+('IVX', 'œw·{bÝþiWƒ·®P@M', ' ', NULL, NULL, NULL, NULL, 'administrador', 3423, NULL, '0000-00-00 00:00:00'),
 ('yo', 'ÕYÃRm³÷ËÁl—\nj_', '', '', '', 40, '', 'administrador', 3774, NULL, '0000-00-00 00:00:00');
 
 --
@@ -1144,13 +1139,6 @@ ALTER TABLE `ingrediente`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `login_automatico`
---
-ALTER TABLE `login_automatico`
-  ADD PRIMARY KEY (`clave`),
-  ADD KEY `usuario` (`usuario`);
-
---
 -- Indices de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
@@ -1278,16 +1266,10 @@ ALTER TABLE `ingrediente`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `login_automatico`
---
-ALTER TABLE `login_automatico`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -1347,12 +1329,6 @@ ALTER TABLE `chefs`
 --
 ALTER TABLE `historial_ingredientes`
   ADD CONSTRAINT `historial_ingredientes_ibfk_1` FOREIGN KEY (`ingrediente`) REFERENCES `ingrediente` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `login_automatico`
---
-ALTER TABLE `login_automatico`
-  ADD CONSTRAINT `login_automatico_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `mensajes`

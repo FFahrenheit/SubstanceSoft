@@ -24,8 +24,7 @@ function confirmDelete()
         console.log("aqui llega js");
         console.log(data);
         alert(data);
-        window.location.pathname = '/substancesoft/views/functions/modulo3-funcion2.php';
-
+        window.location.reaload(true);
     })
 }
 
