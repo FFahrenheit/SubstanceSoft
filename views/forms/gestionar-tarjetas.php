@@ -89,8 +89,8 @@
                                 <input id="codigo" placeholder="ID" type="number" value="0">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-primary" onClick="confirmDelete()">Registrar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>

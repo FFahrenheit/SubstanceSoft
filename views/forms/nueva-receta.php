@@ -37,13 +37,13 @@
             }
             else
             {
-                $query = "select max(clave) as pk from platillo";
+                $query = "SELECT max(clave) as pk from platillo";
                 $sql = mysqli_query($connection, $query) or die("error en query");
                 $row = mysqli_fetch_array($sql);
                 $pk = $row['pk'];
             }
 
-            $query = "select nombre from platillo where clave=$pk";
+            $query = "SELECT nombre from platillo where clave=$pk";
 
             $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -65,11 +65,13 @@
                                     <td>Ingrediente</td>
                                     <td>Cantidad</td>
                                     <td>Especificacion</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                    $query = "select recetas.cantidad as qty, ingrediente.nombre as name , ingrediente.especificacion as esp
+                                    $query = "SELECT recetas.cantidad as qty, ingrediente.nombre as name , 
+                                    ingrediente.especificacion as esp, recetas.clave as pk
                                     from ingrediente, recetas where ingrediente.clave = recetas.ingrediente and
                                     recetas.platillo = $pk group by name asc";
 
@@ -82,6 +84,12 @@
                                     <td><?php echo $row['name'];?></td>
                                     <td><?php echo $row['qty'];?></td>
                                     <td><?php echo $row['esp'];?></td>
+                                    <td>
+                                        <a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-danger" 
+                                        id="<?php echo $row['pk'] ?>" onClick="showDetails(this)">
+                                            Borrar
+                                        </a>
+                                    </td>
                                 </tr>
                                 <?php
                                     }
@@ -135,6 +143,25 @@
                 </a>
             </div>
         </section>
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar ingrediente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Desea eliminar el ingrediente de la receta del platillo?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" onClick="confirmDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </body>
     <script src="../../js/vendor/validate-form.js"></script>
     <script src="../../js/forms/agregar-receta.js"></script>

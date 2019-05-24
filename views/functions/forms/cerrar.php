@@ -104,8 +104,8 @@
                                 ¿Seguro que desea cerrar la orden y liberar la mesa?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-success" onClick="confirmDelete()">Liberar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                             </div>
                         </div>

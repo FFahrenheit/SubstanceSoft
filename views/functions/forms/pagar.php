@@ -114,9 +114,10 @@
                                 ¿Marcar como pagado?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-success" onClick="confirmDelete()">Pagado</button>
-                            </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>
