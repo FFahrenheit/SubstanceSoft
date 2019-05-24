@@ -34,8 +34,8 @@
         <h1 class="text-uppercase text-center">Método de notificación chef</h1>
         <p>
             Puede elegir el método de notificación de platillo listo en el módulo chef.
-            <br>El modo dependiente permite que avisa el mesero mediante una notifiación.
-            <br>El modo independiente deja el trabajo a su método de notificación de preferencia.
+            <br>El modo dependiente permite avisar al mesero mediante una notifiación cuando esté listo el platillo.
+            <br>El modo independiente deja el trabajo de notificación a su método de preferencia, sin avisar mediante el sistema.
         </p>
         <div class="row">
             <div class="container-fluid">
@@ -50,19 +50,19 @@
 
                 if (!isset($row['valor']) || $row['valor'] == 0) 
                 {
-                    echo '<h2>Actualmente se encuentra en modo dependiente</h2>';
-                    echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
+                    echo '<h2>Actualmente se encuentra en modo <strong>dependiente</strong></h2>';
+                    echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(true,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
                 }
                 else 
                 {
-                    echo '<h2>Actualmente se encuentra en modo independiente</h2>';
-                    echo '<img height = "35%" src="../../images/advertencia.png" alt="Advertencia">';
+                    echo '<h2>Actualmente se encuentra en modo <strong>independiente</strong></h2>';
+                    echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(false,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
                 }
-
+                mysqli_close($connection);
                 ?>
             </div>
         </div>

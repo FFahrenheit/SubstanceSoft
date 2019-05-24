@@ -26,7 +26,7 @@
             <h1 class="text-uppercase text-center">Ver comandas</h2>
             <p class="lead text-center">Aquí puede ver las comandas.</p>
             <div class="row">
-                <div class="col-sm">
+                <div align="center" class="col-sm">
                 <?php
                     $clave  = $_GET['clave'];
 
@@ -37,15 +37,22 @@
                     $row = mysqli_fetch_array($sql);
                     $nCocina = $row['nombre'];
 
-                    $query = "select pedidos.clave as pk, pedidos.estado as estado,
-                    platillo.nombre as platillo, orden.mesa as mesa, pedidos.hora as hora 
-                    from platillo, orden, pedidos  
-                    where platillo.clave = pedidos.platillo and platillo.cocina = $clave
-                    and pedidos.estado != 'entregado' and orden.clave = pedidos.orden order by pedidos.estado";
+                    $query = "SELECT valor FROM preferencias WHERE nombre='notificacion_chef'";
+                    $sql = mysqli_query($connection, $query);
+                    $row = mysqli_fetch_array($sql);
+                    $tipo = $row['valor'];
+
+
+                    $query = "SELECT pedidos.clave AS pk, pedidos.estado AS estado,
+                    platillo.nombre AS platillo, orden.mesa AS mesa, pedidos.hora AS hora 
+                    FROM platillo, orden, pedidos  
+                    WHERE platillo.clave = pedidos.platillo AND platillo.cocina = $clave
+                    AND pedidos.estado != 'entregado' AND orden.clave = pedidos.orden 
+                    ORDER BY pedidos.estado, pedidos.hora DESC";
 
                     $sql = mysqli_query($connection, $query) or die("error en query");
 
-                    echo "Comandas para la cocina $nCocina";
+                    echo "<h1>Comandas para la cocina $nCocina</h1>";
                 ?>                    
                     <div class="containter-fluid">
                         <table class="table table-hover">
@@ -54,7 +61,7 @@
                                 <td>Platillo</td>
                                 <td>Mesa</td>
                                 <td>Hora</td>
-                                <td>Estado</td>
+                                <?php if(!$tipo || !isset($tipo)) echo '<td>Estado</td>'; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,11 +88,10 @@
                                         break;
                                 }?></td>
                                 <td><?php echo $row['hora'];?></td>
-                                <td>
-                                    <?php 
-                                    echo $row['estado'];
+                                <?php
+                                    if(!$tipo || !isset($tipo))
+                                    echo "<td>".$row['estado']."</td>";
                                     ?>
-                                </td>
                             </tr>
                             <?php
                                 }

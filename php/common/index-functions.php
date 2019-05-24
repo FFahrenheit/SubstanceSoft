@@ -46,13 +46,14 @@
         {
             return getIndividual();
         }
-        $output ='<div class="list-group" style="display:inline-block;">';
+        $output = '<div align="center">';
+        $output .='<div class="list-group" style="max-width: 60%;">';
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
             $path = "../functions/modulo".$curMod."-funcion".$i.".php";
             $output.= '<a href='.$path.' class="list-group-item list-group-item-action">'.$permisos[$curMod][$i].'</a>';
         }
-        $output.= '</div>';
+        $output.= '</div></div>';
         return $output;
     }
 
