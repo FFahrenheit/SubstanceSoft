@@ -1,3 +1,4 @@
+#include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include <EEPROM.h>
 #include <Wire.h>
@@ -22,6 +23,7 @@ const byte CONFIGURE_SW = 9;
 
 SoftwareSerial wifi(TX_WIFI, RX_WIFI);
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
+//LiquidCrystal lcd();
 
 const byte SSID_ADD=0x00;
 const byte PASS_ADD=0x40;
@@ -155,6 +157,11 @@ void loop()
       if(debug)
       {
         Serial.println("\nValor: "+String(counter));
+        //lcd.clear();
+        //lcd.home();
+        //lcd.write("Tarjeta: ");
+        //lcd.setCursor(0,1);
+        //lcd.write(String(counter));
       }
       else 
       {
