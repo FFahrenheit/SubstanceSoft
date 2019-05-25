@@ -79,7 +79,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Generar nuevo código</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Registrar tarjeta</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -89,8 +89,8 @@
                                 <input id="codigo" placeholder="ID" type="number" value="0">
                             </div>
                             <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onClick="confirmDelete()">Registrar</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" onClick="confirmDelete()">Generar</button>
                             </div>
                         </div>
                     </div>

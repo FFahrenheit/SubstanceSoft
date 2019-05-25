@@ -1,3 +1,4 @@
+#include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 #include <EEPROM.h>
 #include <Wire.h>
@@ -10,24 +11,26 @@
  * en un sistema de restaurante.
  */
 
-boolean debug = false; //True para entrar a modo configuración
-boolean configure = false;
+boolean debug = false; //True para entrar a modo configuración, en esencia no importa
+boolean configure = false; //Es un switch, si está en alto significa que abre el serial
 
 const byte TX_WIFI = 11;
 const byte RX_WIFI = 12;
 const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
+const byte CONFIGURE_SW = 9;
 
 SoftwareSerial wifi(TX_WIFI, RX_WIFI);
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
+//LiquidCrystal lcd();
 
 const byte SSID_ADD=0x00;
 const byte PASS_ADD=0x40;
 const byte ADD_ADD=0x80;
-String _SSID="RED"; 
-String _PASS="41472021";
-String _SERVER="192.168.15.174";
+String _SSID; 
+String _PASS;
+String _SERVER;
 
 void readyBeep()
 {
@@ -76,28 +79,46 @@ void startNFC()
   }
   nfc.setPassiveActivationRetries(0xFF);
   nfc.SAMConfig();
-  Serial.println("Esperando...");
+  Serial.println("NFC listo");
 }
 
 void setup() 
 {
+  pinMode(CONFIGURE_SW, INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT);
-  wifi.begin(115200);
   Serial.begin(9600);
-  nfc.begin();
-  startNFC();
-  connectWifi();
+  readCredentials();
+  configure = !digitalRead(CONFIGURE_SW); //Logica inversa porque es más fácil si no está conectado 1=>0
+  if(!configure)
+  {
+    wifi.begin(115200);
+    nfc.begin();
+    startNFC();
+    innitConnection();
+    connectWifi();
+    Serial.println("Listo para recibir");
+  }
   readyBeep();
 }
 
 void loop() 
 {
-  if(Serial.available())
+  if(Serial.available() && configure)
   {
-    char menu = Serial.read();
-    readBeep();
-    switch(menu)
+    analogWrite(BUZZ,200);
+    String menu = Serial.readStringUntil('\n');
+    //readBeep();
+    if(menu=="b") //No se puede con el switch :(((
+    {
+      showCredentials();
+    }
+    else if (menu=="a")
+    {
+      setCredentials();
+    }
+    okBeep();
+    /*switch(menu)
     {
       case 'a': 
         setCredentials();
@@ -110,14 +131,14 @@ void loop()
       case 'd':
         connectWifi();
         break;
-    }
+    }*/
   }
   else if(!configure)
   {
     boolean success;
     uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  
     uint8_t uidLength;
-    digitalWrite(LED_BUILTIN, HIGH);       
+    digitalWrite(LED_BUILTIN, HIGH);
     success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
     digitalWrite(LED_BUILTIN,LOW);
      if (success) 
@@ -136,6 +157,11 @@ void loop()
       if(debug)
       {
         Serial.println("\nValor: "+String(counter));
+        //lcd.clear();
+        //lcd.home();
+        //lcd.write("Tarjeta: ");
+        //lcd.setCursor(0,1);
+        //lcd.write(String(counter));
       }
       else 
       {
@@ -151,7 +177,7 @@ void loop()
 
 boolean registerCard(int card)
 {
-    Serial.println("Tarjeta: "+(String)card);
+   Serial.println("Tarjeta: "+(String)card);
    String command = "AT+CIPSTART=\"TCP\",\""+_SERVER+"\",80\r\n";
    wifi.print(command);
    waitResponse(1200);
@@ -226,18 +252,19 @@ String waitResponse(int timeout)
 
 bool setCredentials()
 {
-  String ssid,pass,ip;
+  analogWrite(BUZZ,0);
+  String ssid,pass="",ip;
   do
   {
     if(Serial.available())
     {
-      ssid = Serial.readStringUntil('\n');      
+      ssid = Serial.readStringUntil('\n');
     }
   }while(ssid.length()<=0);
-  writeValue(SSID_ADD, ssid);
+  //readyBeep();
   while(Serial.available()<=0);
   pass =  Serial.readStringUntil('\n');
-  writeValue(PASS_ADD, pass); 
+  //readyBeep();
   do
   {
     if(Serial.available())
@@ -245,16 +272,19 @@ bool setCredentials()
       ip = Serial.readStringUntil('\n');      
     }
   }while(ip.length()<=0);
+  //readyBeep();
+  //Serial.println("Credenciales guardadas\n");
+  writeValue(PASS_ADD, pass); 
+  writeValue(SSID_ADD, ssid);
   writeValue(ADD_ADD, ip);
-  Serial.println("Credenciales guardadas\n");
   readCredentials();
 }
 
 void showCredentials()
 {
-  Serial.println("SSID: "+_SSID);
-  Serial.println("Contraseña: "+_PASS);
-  Serial.println("IP servidor: "+_SERVER);
+  Serial.print("SSID: "+_SSID);
+  Serial.print(" | Password: "+_PASS);
+  Serial.println(" | Server IP: "+_SERVER);
 }
 
 void writeValue(char add,String data)

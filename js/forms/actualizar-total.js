@@ -1,5 +1,6 @@
 var form = document.getElementById('reclamo');
 var upd = document.getElementById('again');
+var clave;
 
 again.addEventListener('click', (e)=>
 {
@@ -47,3 +48,38 @@ form.addEventListener('submit', (e) =>
 
         })
 });
+
+function showDetails(button)
+{
+    clave = button.id;
+    console.log(clave);
+}
+
+function confirmDelete()
+{
+    var dat = new FormData();
+
+    dat.append("user", clave);
+
+    console.log("Si se envía la información " + dat.get("user"))
+
+    console.log(clave);
+
+    fetch('../../../php/forms/functions/cancelar-comanda.php',
+    {
+        method: 'POST',
+        body: dat
+    })
+    .then (res => res.json())
+    .then (data =>
+    {
+        console.log("aqui llega js");
+        console.log(data);
+        alert(data);
+        //window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
+        //window.history.back();
+        window.location.reload(true);
+
+    })
+
+}

@@ -81,8 +81,8 @@
                                 Se removerán los surtidos relacionados
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-danger" onClick="confirmDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                             </div>
                         </div>

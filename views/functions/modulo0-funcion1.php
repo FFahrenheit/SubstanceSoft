@@ -128,9 +128,9 @@
                     <div class="card-body">
                       <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
                       <div class="card-block">
-                        <h4 class="card-title">Demanda</h4>
-                        <p class="card-text">Consulte los platillos mas populares</p>
-                        <p><a href="charts/demanda.php" class="btn btn-success">Ver</a></p>
+                        <h4 class="card-title">Asistencia</h4>
+                        <p class="card-text">Consulte la asistencia de los usuarios</p>
+                        <p><a href="charts/asistencia.php" class="btn btn-success">Ver</a></p>
                       </div>
                     </div>
                 </a>

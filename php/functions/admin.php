@@ -38,6 +38,12 @@
         $output.=  '<td><a href="../forms/gestionar-desperdicio.php" class="btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
+        $output.=  '<tr>';
+        $output.=  "<td>Sistema de ayuda entre chefs</td>";
+        $output.=  "<td>".getEstado("ayuda_chefs");
+        $output.=  '<td><a href="../forms/ayuda-chefs.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '</tr>';
+        
         $output.= '<tr>';
         $output.=  "<td>Modo de notificación chef</td>";
         if(getEstado("notificacion_chef")=="<font color='red'>Deshabilitado</font>")
@@ -52,6 +58,7 @@
         $output.=  '<td><a href="../forms/gestionar-modo.php" class="btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
         $output.= '</tbody></table>';
+
 
         return $output;
     }

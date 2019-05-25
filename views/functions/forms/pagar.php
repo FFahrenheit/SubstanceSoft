@@ -81,9 +81,11 @@
                             if($row['impresiones']>0)
                             {
                                 echo '                        <a style="color: white;" data-toggle="modal" data-target="#delete"
-                                class="btn btn-success" id="<?php echo $clave;?>" onClick="showDetails(this)">
+                                class="btn btn-success" id="'.$clave.'" onClick="showDetails(this)">
                                                         Marcar como pagado
                                 </a>';
+                                echo '<br></br>';
+                                echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
                             }
                             else 
                             {
@@ -94,8 +96,6 @@
                             }
                         ?>
                         <p>&nbsp;</p>
-                        <button class="btn btn-primary" onclick="goBack()">Cancelar</button>
-                        </a>
                     </div>
                 </div>
                 <button onclick="goBack()" class="btn btn-success">Regresar</button>
@@ -114,9 +114,10 @@
                                 ¿Marcar como pagado?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-success" onClick="confirmDelete()">Pagado</button>
-                            </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>

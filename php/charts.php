@@ -46,7 +46,7 @@
         for($i = 0; $i<$result->num_rows; $i++)
         {
             $row = mysqli_fetch_array($result);
-            $output .= "'".$row['nombre']."'";
+            $output .= "'".$row['nombre']." (".$row['cocina'].")'";
             if($i != $result->num_rows - 1)
             {
                 $output.=",";
@@ -91,6 +91,24 @@
         return $output;
     }
 
+    function getDailyClients()
+    {
+        global $connection;
+        $query = "SELECT * FROM ventas_dia";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $output .= $row['clientes'];
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;
+    }
+
     function getDailyEarningData()
     {
         global $connection;
@@ -101,6 +119,40 @@
         {
             $row = mysqli_fetch_array($result);
             ($row['suma']=="") ? $output .= "0" : $output.= $row['suma'];
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;   
+    }
+    function getDailyAverage()
+    {
+        global $connection;
+        $query = "SELECT * FROM ventas_dia";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            ($row['media']=="") ? $output .= "0" : $output.= $row['media'];
+            if($i != $result->num_rows - 1)
+            {
+                $output.=",";
+            }
+        }
+        return $output;   
+    }
+    function getDailyDensity()
+    {
+        global $connection;
+        $query = "SELECT * FROM ventas_dia";
+        $result = mysqli_query($connection,$query);
+        $output = "";
+        for($i = 0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            ($row['densidad']=="") ? $output .= "0" : $output.= $row['densidad'];
             if($i != $result->num_rows - 1)
             {
                 $output.=",";
@@ -256,6 +308,69 @@
             $row = mysqli_fetch_array($result);
             $array[$i] = $row['nombre'];
         } 
+        return $array;
+    }
+
+    function getEntryTitle($user)
+    {
+        global $connection;
+        $query = "SELECT date(entrada) AS dia, TIME_TO_SEC(time(entrada)) as entrada, TIME_TO_SEC(time(salida)) as salida 
+        FROM asistencia WHERE usuario = '$user' AND 
+        entrada >= (SELECT valor from fechas where nombre='fecha_in') 
+        AND entrada <= (SELECT valor from fechas where nombre='fecha_fin') ";
+        $result = mysqli_query($connection,$query);
+        $array = "";
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $array .= "'".$row['dia']."'";
+            if($i != $result->num_rows - 1)
+            {
+                $array.=",";
+            }   
+        }
+        return $array;
+    }
+
+    function getEntryData($user)
+    {
+        global $connection;
+        $query = "SELECT date(entrada) AS dia, TIME_TO_SEC(time(entrada)) as entrada, TIME_TO_SEC(time(salida)) as salida 
+        FROM asistencia WHERE usuario = '$user' AND 
+        entrada >= (SELECT valor from fechas where nombre='fecha_in') 
+        AND entrada <= (SELECT valor from fechas where nombre='fecha_fin') ";
+        $result = mysqli_query($connection,$query);
+        $array = "";
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $array .= $row['entrada'];
+            if($i != $result->num_rows - 1)
+            {
+                $array.=",";
+            }   
+        }
+        return $array;
+    }
+
+    function getExitData($user)
+    {
+        global $connection;
+        $query = "SELECT date(entrada) AS dia, TIME_TO_SEC(time(entrada)) as entrada, TIME_TO_SEC(time(salida)) as salida 
+        FROM asistencia WHERE usuario = '$user' AND 
+        entrada >= (SELECT valor from fechas where nombre='fecha_in') 
+        AND entrada <= (SELECT valor from fechas where nombre='fecha_fin') ";
+        $result = mysqli_query($connection,$query);
+        $array = "";
+        for($i=0; $i<$result->num_rows; $i++)
+        {
+            $row = mysqli_fetch_array($result);
+            $array .= $row['salida'];
+            if($i != $result->num_rows - 1)
+            {
+                $array.=",";
+            }   
+        }
         return $array;
     }
 ?>

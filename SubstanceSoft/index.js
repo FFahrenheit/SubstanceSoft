@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         else {
                             alert('No se pudo conectar al servidor');
-                            window.location.reload(false);
+                            window.location.reload(true);
                         }
                     })
                     .catch((e) => {
                         console.log(e);
                         alert('No se pudo conectar al servidor');
-                        window.location.reload(false);
+                        window.location.reload(true);
                     });
             }
         });

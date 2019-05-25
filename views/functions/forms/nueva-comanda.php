@@ -138,9 +138,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Cantidad: </label>
-                        <input name="qty" id = "qty" type="number" value="1" class="form-control" required>
+                        <input name="qty" id = "qty" type="number" value="1" max="30" min="1" class="form-control" required>
                         <div class="invalid-feedback">
-                            Ingresa datos
+                            Ingresa datos, máximo 30 platillos por pedido
                         </div>
                     </div>
                     <input name="clave" id="clave" hidden value="<?php echo $clave; ?>">

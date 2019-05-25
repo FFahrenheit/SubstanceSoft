@@ -25,7 +25,7 @@ formulario.addEventListener('submit',function(e)
     
                 alert(data);
     
-                window.location.reload(false); 
+                window.location.reload(true); 
                     
             })
     }

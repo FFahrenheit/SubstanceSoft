@@ -110,8 +110,9 @@
                                 ¿Seguro que desea marcar como entregada la comanda?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
+                            
                                 <button type="button" class="btn btn-success" onClick="confirmDelete()">Marcar como entregada</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
                             </div>
                             </div>
                         </div>

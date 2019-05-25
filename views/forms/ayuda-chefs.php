@@ -14,6 +14,7 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
+    <script src="../../js/forms/gestionar-preferencia.js"></script>
     <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>    <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
   
@@ -31,18 +32,20 @@
     </div>
     <section class="container text-center">
         <p>&nbsp;</p>
-        <h1 class="text-uppercase text-center">Método de notificación chef</h1>
+        <h1 class="text-uppercase text-center">Sistema de ayuda chefs</h1>
         <p>
-            Puede elegir el método de notificación de platillo listo en el módulo chef.
-            <br>El modo dependiente permite avisar al mesero mediante una notifiación cuando esté listo el platillo.
-            <br>El modo independiente deja el trabajo de notificación a su método de preferencia, sin avisar mediante el sistema.
+            Active esta preferencia para permitir a sus chefs pedir ayuda cuando la demanda sea exigente.
+            <br>El sistema de ayuda tomará en cuenta los chefs trabajando en el momento para decidir si es conveniente 
+            solicitar la ayuda a otras cocinas.
+            <br>La alerta sólo se enviará a las cocinas si, basado en el trabajo actual, es más demandante el trabajo
+            de la cocina solicitante.
         </p>
         <div class="row">
             <div class="container-fluid">
                 <?php
                 $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
 
-                $query = "SELECT valor FROM preferencias WHERE nombre='notificacion_chef'";
+                $query = "SELECT valor FROM preferencias WHERE nombre='ayuda_chefs'";
 
                 $result = mysqli_query($connection, $query) or die('"error al ejecutar"');
 
@@ -50,17 +53,17 @@
 
                 if (!isset($row['valor']) || $row['valor'] == 0) 
                 {
-                    echo '<h2>Actualmente se encuentra en modo <strong>dependiente</strong></h2>';
+                    echo '<h2>Actualmente la ayuda se encuentra <strong>deshabilitada</strong></h2>';
                     echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(true,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(true,'."'ayuda_chefs'".')" class="btn btn-primary">Cambiar</button> ';
                 }
                 else 
                 {
-                    echo '<h2>Actualmente se encuentra en modo <strong>independiente</strong></h2>';
+                    echo '<h2>Actualmente la ayuda se encuentra <strong>habilitada</strong></h2>';
                     echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
-                    echo '<button type="button" onclick = "setCodeStatus(false,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
+                    echo '<button type="button" onclick = "setCodeStatus(false,'."'ayuda_chefs'".')" class="btn btn-primary">Cambiar</button> ';
                 }
                 mysqli_close($connection);
                 ?>
