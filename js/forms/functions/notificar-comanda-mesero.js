@@ -31,7 +31,5 @@ function confirmDelete()
         console.log(data);
         alert(data);
         window.location.reload(true); 
-
     })
 }
-

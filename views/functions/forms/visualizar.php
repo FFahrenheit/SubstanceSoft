@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, inicial-scale=1">
-    <meta http-equiv="refresh" content="5">
 
     <title>
         Notificar comandas
@@ -121,12 +120,13 @@
                     if($ayuda)
                     {
                         echo '<div class="col-3" align="center">';
-                        echo '<button class="btn btn-success value=".'.$clave.'"> Pedir ayuda </button>';
+                        echo '<button class="btn btn-primary" value="'.$clave.'" onclick="askForHelp(this)"> Pedir ayuda </button>';
                         echo '<div>';
                         echo getMessages($clave);
                         echo '</div>';
                         echo '</div>';
                     }
+                    mysqli_close($connection);
                 ?>
             </div>
             <div class="text-center">
@@ -138,7 +138,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Marcar</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -153,10 +153,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="ayuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ayuda</h5>
+                                        <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="cocinas" align="center">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 </body>
+<script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
 <script src="../../../js/vendor/common-functions.js"></script>
 <script src="../../../js/forms/functions/notificar-comanda.js"></script>
-<script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>
 <script>

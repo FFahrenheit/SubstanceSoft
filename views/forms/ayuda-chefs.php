@@ -39,6 +39,7 @@
             solicitar la ayuda a otras cocinas.
             <br>La alerta sólo se enviará a las cocinas si, basado en el trabajo actual, es más demandante el trabajo
             de la cocina solicitante.
+            <br><strong>El modo de notificación deberá estar configurado como dependiente</strong>
         </p>
         <div class="row">
             <div class="container-fluid">

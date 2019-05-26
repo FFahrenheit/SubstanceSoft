@@ -1,4 +1,8 @@
 <?php 
+    if(session_id() == '' || !isset($_SESSION))
+    {
+        session_start();
+    }
     $user = $_SESSION['username'];
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
     mysqli_set_charset($connection,"utf-8");
@@ -153,6 +157,30 @@
 
     function getMessages($clave)
     {
-        
+        global $connection;
+
+        $query = "SELECT * FROM mensajes_ayuda WHERE destinatario = $clave ORDER BY fecha DESC LIMIT 5";
+        $result = mysqli_query($connection,$query);
+        $out = "";
+
+        while($row = mysqli_fetch_array($result))
+        {
+            if($row['tipo']=='aviso')
+            {
+                $out .= '<div class="chat">';
+                $out .= '<p>'.$row['mensaje'].'</p>';
+                $out .= '<span class="time-right">'.$row['fecha'].'</span>';
+            }
+            else 
+            {
+                $out .= '<div class="chat darker">';
+                $out .= '<p>'.$row['mensaje'].'</p><p>&nbsp;</p>';
+                $out .= '<button class="btn btn-success" onclick="response(true,\''.$row['ayuda'].'\')">Aceptar</button><p>&nbsp;</p>';
+                $out .= '<button class="btn btn-danger" onclick="response(false, \''.$row['ayuda'].'\')">Rechazar</button><br>';
+                $out .= '<span class="time-right">'.$row['fecha'].'</span>';
+            }
+            $out .= '</div>';
+        }
+        return $out;
     }
 ?>
