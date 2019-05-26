@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2019 a las 08:17:33
+-- Tiempo de generación: 26-05-2019 a las 03:47:58
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -187,6 +187,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ayuda`
+--
+
+CREATE TABLE `ayuda` (
+  `clave` int(11) NOT NULL,
+  `solicitante` int(11) NOT NULL,
+  `solicitado` int(11) NOT NULL,
+  `estado` enum('enviado','rechazado','aceptado','') NOT NULL DEFAULT 'enviado'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `chefs`
 --
 
@@ -240,7 +253,7 @@ CREATE TABLE `equipos` (
 
 INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
 ('192.168.0.100', 'COcinita', '2019-05-21 17:29:11'),
-('192.168.15.174', 'Mi equipo cool', '2019-05-22 04:34:49'),
+('192.168.15.174', 'Mi equipo cool', '2019-05-26 00:47:51'),
 ('192.168.84.123', 'Equipo conectado', '2019-05-21 17:48:08'),
 ('192.168.84.147', '123', '2019-05-23 12:27:52');
 
@@ -534,14 +547,29 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (119, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-21 18:37:10', 1),
 (120, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-21 18:39:47', 1),
 (121, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-21 18:46:53', 1),
-(122, 'Admin100', 'El platillo Hamburguesa Ranch de la mesa 0 esta listo', '2019-05-24 04:28:03', 0),
+(122, 'Admin100', 'El platillo Hamburguesa Ranch de la mesa 0 esta listo', '2019-05-24 04:28:03', 1),
 (123, 'admin', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:00', 0),
-(124, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:06', 0),
-(125, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-24 06:08:11', 0),
-(126, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:16', 0),
-(127, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:22', 0),
-(128, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:28', 0),
-(129, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-05-24 06:10:51', 0);
+(124, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:06', 1),
+(125, 'Admin100', 'La cuenta en la mesa 2 ha sido cerrada', '2019-05-24 06:08:11', 1),
+(126, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:16', 1),
+(127, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:22', 1),
+(128, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-24 06:08:28', 1),
+(129, 'Admin100', 'La cuenta en la mesa 0 ha sido pagada', '2019-05-24 06:10:51', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes_ayuda`
+--
+
+CREATE TABLE `mensajes_ayuda` (
+  `clave` int(11) NOT NULL,
+  `destinatario` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `mensaje` varchar(100) NOT NULL DEFAULT 'Mensaje vacío',
+  `ayuda` int(11) DEFAULT NULL,
+  `tipo` enum('solicitud','aviso') NOT NULL DEFAULT 'solicitud'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -838,7 +866,7 @@ CREATE TABLE `preferencias` (
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
 ('acceso_codigo', 1),
 ('apagado_dinamico', 0),
-('ayuda_chefs', 0),
+('ayuda_chefs', 1),
 ('desperdicio_diario', 0),
 ('forma_impresa', 1),
 ('forma_visual', 0),
@@ -1091,6 +1119,14 @@ ALTER TABLE `asistencia`
   ADD PRIMARY KEY (`clave`);
 
 --
+-- Indices de la tabla `ayuda`
+--
+ALTER TABLE `ayuda`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `solicitante` (`solicitante`),
+  ADD KEY `solicitado` (`solicitado`);
+
+--
 -- Indices de la tabla `chefs`
 --
 ALTER TABLE `chefs`
@@ -1144,6 +1180,14 @@ ALTER TABLE `ingrediente`
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `destinatario` (`destinatario`);
+
+--
+-- Indices de la tabla `mensajes_ayuda`
+--
+ALTER TABLE `mensajes_ayuda`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `destinatario` (`destinatario`),
+  ADD KEY `ayuda` (`ayuda`);
 
 --
 -- Indices de la tabla `mesa`
@@ -1230,6 +1274,12 @@ ALTER TABLE `asistencia`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT de la tabla `ayuda`
+--
+ALTER TABLE `ayuda`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `chefs`
 --
 ALTER TABLE `chefs`
@@ -1270,6 +1320,12 @@ ALTER TABLE `ingrediente`
 --
 ALTER TABLE `mensajes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes_ayuda`
+--
+ALTER TABLE `mensajes_ayuda`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -1318,6 +1374,13 @@ ALTER TABLE `surtidos`
 --
 
 --
+-- Filtros para la tabla `ayuda`
+--
+ALTER TABLE `ayuda`
+  ADD CONSTRAINT `ayuda_ibfk_1` FOREIGN KEY (`solicitante`) REFERENCES `cocina` (`clave`),
+  ADD CONSTRAINT `ayuda_ibfk_2` FOREIGN KEY (`solicitado`) REFERENCES `cocina` (`clave`);
+
+--
 -- Filtros para la tabla `chefs`
 --
 ALTER TABLE `chefs`
@@ -1335,6 +1398,13 @@ ALTER TABLE `historial_ingredientes`
 --
 ALTER TABLE `mensajes`
   ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`destinatario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `mensajes_ayuda`
+--
+ALTER TABLE `mensajes_ayuda`
+  ADD CONSTRAINT `mensajes_ayuda_ibfk_1` FOREIGN KEY (`ayuda`) REFERENCES `ayuda` (`clave`),
+  ADD CONSTRAINT `mensajes_ayuda_ibfk_2` FOREIGN KEY (`destinatario`) REFERENCES `cocina` (`clave`);
 
 --
 -- Filtros para la tabla `orden`
