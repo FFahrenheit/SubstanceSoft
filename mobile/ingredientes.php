@@ -28,7 +28,7 @@
         $row['suma_uso'] = $suma['uso'][$i]['suma'];
       }
     }
-    for ($i = 0; $i < $times; $i++)
+    for ($i = 0; $i < $times2; $i++)
     {
       if($surtido['sum'][$i]['nombre'] == $cut)
       {
