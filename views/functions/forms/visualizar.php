@@ -37,16 +37,16 @@
     <section class="container">
         <h1 class="text-uppercase text-center">Ver comandas</h2>
             <p class="lead text-center">Aquí puede ver las comandas.</p>
-            <?php 
-                include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php');
-                $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
-                $query = "SELECT valor FROM preferencias WHERE nombre = 'ayuda_chefs'";
-                $result = mysqli_query($connection,$query);
-                $row = mysqli_fetch_array($result);
-                $ayuda = $row['valor'];
+            <?php
+            include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php');
+            $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
+            $query = "SELECT valor FROM preferencias WHERE nombre = 'ayuda_chefs'";
+            $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($result);
+            $ayuda = $row['valor'];
 
-                $class = $ayuda? "col-9" : "col-sm";
-                ?>
+            $class = $ayuda ? "col-9" : "col-sm";
+            ?>
             <div class="row">
                 <div class="<?php echo $class; ?>">
                     <?php
@@ -117,61 +117,60 @@
                     </div>
                 </div>
                 <?php
-                    if($ayuda)
-                    {
-                        echo '<div class="col-3" align="center">';
-                        echo '<button class="btn btn-primary" value="'.$clave.'" onclick="askForHelp(this)"> Pedir ayuda </button>';
-                        echo '<div>';
-                        echo getMessages($clave);
-                        echo '</div>';
-                        echo '</div>';
-                    }
-                    mysqli_close($connection);
+                if ($ayuda) {
+                    echo '<div class="col-3" align="center">';
+                    echo '<button class="btn btn-primary" value="' . $clave . '" onclick="askForHelp(this)"> Pedir ayuda </button>';
+                    echo '<div>';
+                    echo getMessages($clave);
+                    echo '</div>';
+                    echo '</div>';
+                }
+                mysqli_close($connection);
                 ?>
             </div>
             <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
-                        </div>
+                <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
+            </div>
     </section>
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Marcar</h5>
-                                        <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Seguro que desea marcar como lista la comanda?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" onClick="confirmDelete()">Marcar como lista</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Marcar</h5>
+                    <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que desea marcar como lista la comanda?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onClick="confirmDelete()">Marcar como lista</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="ayuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ayuda</h5>
-                                        <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div id="cocinas" align="center">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ayuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ayuda</h5>
+                    <button type="button" onclick="cont()" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cocinas" align="center">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="cont()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
 <script src="../../../js/vendor/common-functions.js"></script>

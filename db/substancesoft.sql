@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2019 a las 07:00:26
+-- Tiempo de generación: 26-05-2019 a las 07:21:20
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -228,11 +228,35 @@ CREATE TABLE `ayuda` (
 --
 
 INSERT INTO `ayuda` (`clave`, `solicitante`, `solicitado`, `estado`) VALUES
-(12, 4, 1, 'enviado');
+(12, 4, 1, 'aceptado'),
+(13, 4, 1, 'rechazado');
 
 --
 -- Disparadores `ayuda`
 --
+DELIMITER $$
+CREATE TRIGGER `actualizar-mensajes` AFTER UPDATE ON `ayuda` FOR EACH ROW BEGIN 
+IF(NEW.estado = 'aceptado')
+	THEN
+    	INSERT INTO mensajes_ayuda (destinatario, mensaje, tipo)
+        VALUES
+        (
+            NEW.solicitante, (SELECT CONCAT('La cocina ', (SELECT nombre FROM cocina WHERE clave = NEW.solicitado), ' ha enviado ayuda')), 'aviso'
+        );
+        UPDATE mensajes_ayuda SET mensaje = (SELECT concat(mensaje, ' (aceptada)')), tipo = 'aviso' WHERE ayuda = NEW.clave AND tipo != 'aviso';
+	END IF;
+IF(NEW.estado = 'rechazado')
+	THEN
+        	INSERT INTO mensajes_ayuda (destinatario, mensaje, tipo)
+        VALUES
+        (
+            NEW.solicitante, (SELECT CONCAT('La cocina ', (SELECT nombre FROM cocina WHERE clave = NEW.solicitado), ' ha rechazado la peticion de ayuda')),'aviso'
+        );
+        UPDATE mensajes_ayuda SET mensaje = concat(mensaje, ' (rechazada)'), tipo = 'aviso' WHERE ayuda = NEW.clave AND tipo = 'solicitud';
+   END IF;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `mensaje_ayuda` AFTER INSERT ON `ayuda` FOR EACH ROW BEGIN
 INSERT INTO mensajes_ayuda (destinatario, mensaje, ayuda,tipo)
@@ -637,7 +661,11 @@ CREATE TABLE `mensajes_ayuda` (
 
 INSERT INTO `mensajes_ayuda` (`clave`, `destinatario`, `fecha`, `mensaje`, `ayuda`, `tipo`) VALUES
 (1, 4, '2019-05-26 04:34:20', 'Se ha pedido ayuda a la cocina Mexicana', 12, 'aviso'),
-(2, 1, '2019-05-26 04:34:20', 'La cocina Bebidas le solicita ayuda', 12, 'solicitud');
+(2, 1, '2019-05-26 04:34:20', 'La cocina Bebidas le solicita ayuda (aceptada)', 12, 'aviso'),
+(3, 4, '2019-05-26 05:15:18', 'La cocina Mexicana ha enviado ayuda', NULL, 'aviso'),
+(4, 4, '2019-05-26 05:15:34', 'Se ha pedido ayuda a la cocina Mexicana', 13, 'aviso'),
+(5, 1, '2019-05-26 05:15:34', 'La cocina Bebidas le solicita ayuda (rechazada)', 13, 'aviso'),
+(6, 4, '2019-05-26 05:15:39', 'La cocina Mexicana ha rechazado la peticion de ayuda', NULL, 'aviso');
 
 -- --------------------------------------------------------
 
@@ -1349,7 +1377,7 @@ ALTER TABLE `asistencia`
 -- AUTO_INCREMENT de la tabla `ayuda`
 --
 ALTER TABLE `ayuda`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `chefs`
@@ -1397,7 +1425,7 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `mensajes_ayuda`
 --
 ALTER TABLE `mensajes_ayuda`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
