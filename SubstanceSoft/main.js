@@ -57,7 +57,7 @@ app.on('ready', () => {
       submenu: [
         { role: 'reload' },
         { role: 'forcereload' },
-        { role: 'toggledevtools' },
+        { role: 'toggledevtools' },  //NO OLVIDAR DESCOMENTAR ALV MVL VRG
         { type: 'separator' },
         { role: 'resetzoom' },
         { role: 'zoomin' },

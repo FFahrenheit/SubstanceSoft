@@ -196,14 +196,7 @@
         }
         else
         {
-            if($new)
-            {
-                return $out;
-            }
-            else
-            {
-                return "void";
-            }
+            return ($new) ? $out : "void";
         }
     }
 ?>

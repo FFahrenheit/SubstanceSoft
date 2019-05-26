@@ -150,4 +150,9 @@
         $output .= '</tbody> </table>';
         return $output;
     }
+
+    function getMessages($clave)
+    {
+        
+    }
 ?>

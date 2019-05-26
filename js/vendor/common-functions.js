@@ -45,7 +45,7 @@ function updateChat()
   {
     console.log("Error: "+e);
   })
-}
+}  
 
 var constantNotification = setInterval(updateChat,1000);
 

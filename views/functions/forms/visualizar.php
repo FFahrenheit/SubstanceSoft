@@ -14,6 +14,7 @@
 
     <link href="../../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/clean-install.css" rel="stylesheet">
+    <link href="../../../css/index.css" rel="stylesheet">
     <script>
         if (typeof module === 'object') {
             window.module = module;
@@ -37,8 +38,18 @@
     <section class="container">
         <h1 class="text-uppercase text-center">Ver comandas</h2>
             <p class="lead text-center">Aquí puede ver las comandas.</p>
+            <?php 
+                include($_SERVER['DOCUMENT_ROOT'] . '/substancesoft/php/functions/chef.php');
+                $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
+                $query = "SELECT valor FROM preferencias WHERE nombre = 'ayuda_chefs'";
+                $result = mysqli_query($connection,$query);
+                $row = mysqli_fetch_array($result);
+                $ayuda = $row['valor'];
+
+                $class = $ayuda? "col-9" : "col-sm";
+                ?>
             <div class="row">
-                <div class="col-sm">
+                <div class="<?php echo $class; ?>">
                     <?php
                     $clave  = $_GET['clave'];
 
@@ -104,14 +115,23 @@
                             ?>
                             </tbody>
                         </table>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
-                        </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                </div>
+                <?php
+                    if($ayuda)
+                    {
+                        echo '<div class="col-3" align="center">';
+                        echo '<button class="btn btn-success value=".'.$clave.'"> Pedir ayuda </button>';
+                        echo '<div>';
+                        echo getMessages($clave);
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                ?>
             </div>
+            <div class="text-center">
+                            <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
+                        </div>
     </section>
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
