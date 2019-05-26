@@ -190,13 +190,17 @@ boolean registerCard(int card)
    wifi.print(command);
    String statusCode = waitResponse(2000);
    Serial.println("Status code: "+statusCode);
-   if(statusCode.indexOf("1:1")>0)
+   if(statusCode.indexOf("1:0")>0 || statuscode.indexOf("0:0")>0)
    {
-    okBeep();
+    errorBeep();
    }
    else 
    {
-    errorBeep();
+        //lcd.clear();
+        //lcd.home();
+        //lcd.write("Bienvenido: ");
+        //lcd.setCursor(0,1);
+        //lcd.write(statuscCode.substring(indexOf(":")));
    }
 }
 
