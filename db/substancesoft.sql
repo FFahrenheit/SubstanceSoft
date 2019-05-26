@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2019 a las 07:21:20
+-- Tiempo de generación: 26-05-2019 a las 07:30:30
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -229,7 +229,8 @@ CREATE TABLE `ayuda` (
 
 INSERT INTO `ayuda` (`clave`, `solicitante`, `solicitado`, `estado`) VALUES
 (12, 4, 1, 'aceptado'),
-(13, 4, 1, 'rechazado');
+(13, 4, 1, 'rechazado'),
+(14, 4, 1, 'enviado');
 
 --
 -- Disparadores `ayuda`
@@ -665,7 +666,9 @@ INSERT INTO `mensajes_ayuda` (`clave`, `destinatario`, `fecha`, `mensaje`, `ayud
 (3, 4, '2019-05-26 05:15:18', 'La cocina Mexicana ha enviado ayuda', NULL, 'aviso'),
 (4, 4, '2019-05-26 05:15:34', 'Se ha pedido ayuda a la cocina Mexicana', 13, 'aviso'),
 (5, 1, '2019-05-26 05:15:34', 'La cocina Bebidas le solicita ayuda (rechazada)', 13, 'aviso'),
-(6, 4, '2019-05-26 05:15:39', 'La cocina Mexicana ha rechazado la peticion de ayuda', NULL, 'aviso');
+(6, 4, '2019-05-26 05:15:39', 'La cocina Mexicana ha rechazado la peticion de ayuda', NULL, 'aviso'),
+(7, 4, '2019-05-26 05:25:53', 'Se ha pedido ayuda a la cocina Mexicana', 14, 'aviso'),
+(8, 1, '2019-05-26 05:25:53', 'La cocina Bebidas le solicita ayuda', 14, 'solicitud');
 
 -- --------------------------------------------------------
 
@@ -1377,7 +1380,7 @@ ALTER TABLE `asistencia`
 -- AUTO_INCREMENT de la tabla `ayuda`
 --
 ALTER TABLE `ayuda`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `chefs`
@@ -1425,7 +1428,7 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `mensajes_ayuda`
 --
 ALTER TABLE `mensajes_ayuda`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`

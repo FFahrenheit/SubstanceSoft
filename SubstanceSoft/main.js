@@ -219,6 +219,7 @@ app.on('ready', () => {
     if(IPdialog!=null){
       IPdialog.close();
     }
+    app.quit();
   })
 
 });
