@@ -20,6 +20,7 @@ const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
 const byte CONFIGURE_SW = 9;
+const byte DEBUG_SW = 8;
 
 SoftwareSerial wifi(TX_WIFI, RX_WIFI);
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
@@ -85,10 +86,12 @@ void startNFC()
 void setup() 
 {
   pinMode(CONFIGURE_SW, INPUT_PULLUP);
+  pinMode(DEBUG_SW,INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT);
   Serial.begin(9600);
   readCredentials();
+  debug = !digitalRead(DEBUG_SW);
   configure = !digitalRead(CONFIGURE_SW); //Logica inversa porque es más fácil si no está conectado 1=>0
   if(!configure)
   {
