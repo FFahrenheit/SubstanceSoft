@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2019 a las 07:35:24
+-- Tiempo de generación: 27-05-2019 a las 09:09:42
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -998,7 +998,9 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (51, 2, '1.0000', '2019-05-26 21:49:37', 'surtido'),
 (52, 2, '20.0000', '2019-05-26 21:51:21', 'surtido'),
 (53, 6, '1.0000', '2019-05-26 21:52:16', 'surtido'),
-(54, 4, '1.0000', '2019-05-26 21:55:08', 'surtido');
+(54, 4, '1.0000', '2019-05-26 21:55:08', 'surtido'),
+(55, 6, '-82.5000', '2019-05-27 06:31:55', 'uso'),
+(56, 6, '-0.4000', '2019-05-27 07:08:48', 'uso');
 
 -- --------------------------------------------------------
 
@@ -1075,7 +1077,7 @@ INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `exi
 (2, 'queso', '40.0900', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
 (4, 'Agua', '162.0000', 'lt', 10.0000),
-(6, 'Otro mas', '83.0000', 'kg', 1.0000),
+(6, 'Otro mas', '0.1000', 'kg', 1.0000),
 (7, 'Anda', '26.0000', 'kg', 1.0000);
 
 --
@@ -1177,6 +1179,24 @@ CREATE TRIGGER `historial_de_ingrediente` BEFORE UPDATE ON `ingrediente` FOR EAC
 
 
 
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `notificacion-ingrediente` AFTER UPDATE ON `ingrediente` FOR EACH ROW BEGIN 
+IF(NEW.cantidad <= NEW.existencia_critica*0.2)
+THEN 
+	INSERT INTO notificaciones(texto) VALUES (
+    (SELECT CONCAT(
+    'El ingrediente ', NEW.nombre, ' se ha acabado. Se han inhabilitado ',
+        (SELECT COALESCE((SELECT COUNT(*) FROM recetas WHERE ingrediente = NEW.clave),0)), ' platillos.'
+    )));
+END IF;
+IF(OLD.cantidad >= OLD.existencia_critica AND NEW.cantidad < OLD.existencia_critica)
+	THEN
+    	INSERT INTO notificaciones(texto) VALUES (
+        (SELECT CONCAT('El ingrediente ', NEW.nombre, ' esta en existencia critica')));
+    END IF;
 END
 $$
 DELIMITER ;
@@ -1350,6 +1370,30 @@ INSERT INTO `mesa` (`numero`, `capacidad`) VALUES
 (23, 12),
 (50, 0),
 (122, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notificaciones`
+--
+
+CREATE TABLE `notificaciones` (
+  `clave` int(11) NOT NULL,
+  `texto` text NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notificaciones`
+--
+
+INSERT INTO `notificaciones` (`clave`, `texto`, `fecha`) VALUES
+(1, 'El ingrediente Otro mas esta en existencia critica', '2019-05-27 06:31:55'),
+(2, 'hola', '2019-05-27 06:40:18'),
+(3, 'holamundo', '2019-05-27 06:48:36'),
+(4, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:00'),
+(5, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:10'),
+(6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48');
 
 -- --------------------------------------------------------
 
@@ -2192,6 +2236,12 @@ ALTER TABLE `mesa`
   ADD PRIMARY KEY (`numero`);
 
 --
+-- Indices de la tabla `notificaciones`
+--
+ALTER TABLE `notificaciones`
+  ADD PRIMARY KEY (`clave`);
+
+--
 -- Indices de la tabla `orden`
 --
 ALTER TABLE `orden`
@@ -2303,7 +2353,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`
@@ -2322,6 +2372,12 @@ ALTER TABLE `mensajes`
 --
 ALTER TABLE `mensajes_ayuda`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `notificaciones`
+--
+ALTER TABLE `notificaciones`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -2453,12 +2509,19 @@ DELIMITER $$
 --
 -- Eventos
 --
-CREATE DEFINER=`root`@`localhost` EVENT `borrar_login` ON SCHEDULE EVERY 10 MINUTE STARTS '2019-05-05 00:00:00' ON COMPLETION PRESERVE DISABLE DO DELETE FROM login_automatico WHERE 
-
-
-
-
-(SELECT TIMESTAMPDIFF(SECOND,login_automatico.hora,NOW())) > 600$$
+CREATE DEFINER=`root`@`localhost` EVENT `corte` ON SCHEDULE EVERY 1 DAY STARTS '2019-05-26 23:59:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN 
+	IF((SELECT valor FROM preferencias WHERE nombre='apagado_dinamico') = 0)
+    THEN 
+     INSERT INTO notificaciones(texto) VALUES (
+     (SELECT CONCAT
+         (
+          'El corte del día ', 
+          (SELECT DATE(NOW()) as fecha),
+          ' es de $',
+            (SELECT COALESCE((select sum(total) from orden where date(fecha) = date(now())),0))
+         )));
+    END IF;
+END$$
 
 CREATE DEFINER=`root`@`localhost` EVENT `update_stats` ON SCHEDULE EVERY 1 WEEK STARTS '2019-04-07 23:59:59' ON COMPLETION PRESERVE ENABLE DO BEGIN
 
