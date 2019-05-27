@@ -1,10 +1,7 @@
 var ip = document.getElementById("ip");
 
-document.addEventListener('DOMContentLoaded', () => {
-    /*require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-        console.log('addr: ' + add);
-        document.getElementById('ip').innerHTML = add;
-    });*/
+document.addEventListener('DOMContentLoaded', () => 
+{
     var os = require('os');
     var networkInterfaces = Object.values(os.networkInterfaces())
         .reduce((r, a) => {
@@ -25,5 +22,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     var ipAddresses = networkInterfaces.join(', ')
     console.log(ipAddresses);
-    document.getElementById('ip').innerHTML = ipAddresses;
+    ip.innerHTML = ipAddresses;
 });

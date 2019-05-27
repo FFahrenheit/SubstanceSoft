@@ -1,54 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetch("configuration.json")
-        .then((resp) => {
-            return resp.json();
-        })
-        .then((dat) => {
-            data = JSON.parse(localStorage.getItem('configuration'));
-            console.log(data);
-            if (!data.set) {
-                console.log("Not set yet");
-                window.location.pathname = 'setup.html'
-            }
-            else {
-                var datos = new FormData();
-                var ip = getIp();
-                datos.append("ip",ip);
-                var link = 'http://' + data.IP + '/substancesoft/php/requests/conectividad.php';
-                fetch(link,
+document.addEventListener('DOMContentLoaded', () => 
+{
+    var data = JSON.parse(localStorage.getItem('configuration'));
+    console.log(data);
+    if (!data.set) 
+    {
+        console.log("Not set yet");
+        window.location.pathname = 'setup.html'
+    }
+    else 
+    {
+        var datos = new FormData();
+        var ip = getIp();
+        datos.append("ip", ip);
+        var link = 'http://' + data.IP + '/substancesoft/php/requests/conectividad.php';
+        fetch(link,
+            {
+                method: 'POST',
+                body: datos
+            })
+            .then(function (resp) 
+            {
+                return resp.json();
+            })
+            .then(function (response) 
+            {
+                if (response == 'success') 
+                {
+                    if (data.type == 'central') 
                     {
-                        method: 'POST',
-                        body: datos
-                    })
-                    .then(function (resp) {
-                        return resp.json();
-                    })
-                    .then(function (response) {
-                        if (response == 'success') {
-                            if (data.type == 'central') {
-                                console.log('Aún no soportado xd');
-                                var path = 'http://localhost/substancesoft/views/menus/index.php';
-                                window.location.href = path;
-                            }
-                            else {
-                                var path = 'http://' + data.IP + '/substancesoft/views/menus/index.php';
-                                window.location.href = path;
-                            }
-                        }
-                        else {
-                            alert('No se pudo conectar al servidor');
-                            window.location.reload(true);
-                        }
-                    })
-                    .catch((e) => {
-                        console.log(e);
-                        alert('No se pudo conectar al servidor');
-                        window.location.reload(true);
-                    });
-            }
-        });
-}
-    , false);
+                        console.log('Aún no soportado xd');
+                        var path = 'http://localhost/substancesoft/views/menus/index.php';
+                        window.location.href = path;
+                    }
+                    else 
+                    {
+                        var path = 'http://' + data.IP + '/substancesoft/views/menus/index.php';
+                        window.location.href = path;
+                    }
+                }
+                else 
+                {
+                    alert('No se pudo conectar al servidor');
+                    window.location.reload(true);
+                }
+            })
+            .catch((e) => 
+            {
+                console.log(e);
+                alert('No se pudo conectar al servidor');
+                window.location.reload(true);
+            });
+    }
+}, false);
 
 function getIp() {
     var os = require('os');
