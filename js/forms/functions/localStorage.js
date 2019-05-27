@@ -36,3 +36,8 @@ function display()
       document.getElementById("com").value = "";
     }
 }
+
+function getBD()
+{
+  localStorage.getItem("bd");
+}

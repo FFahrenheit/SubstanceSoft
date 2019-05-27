@@ -44,12 +44,18 @@ formulario2.addEventListener('submit', function (e) {
     }
 });
 
-formulario.addEventListener('submit',  (e) => 
+formulario.addEventListener('submit',  (e) =>
 {
     e.preventDefault();
     console.log('working!');
 
     var datos = new FormData(formulario);
+
+    if(localStorage.getItem("bd") === null)
+    {
+      localStorage.setItem("bd", "localhost");
+    }
+    datos.append("bd", localStorage.getItem("bd"));
 
     if (formulario.checkValidity() === true) {
         fetch('../../php/requests/login.php',
@@ -57,7 +63,7 @@ formulario.addEventListener('submit',  (e) =>
                 method: 'POST',
                 body: datos
             })
-            .then(res => 
+            .then(res =>
                 res.json()).then(data => {
                 console.log(data);
                 switch (data) {
