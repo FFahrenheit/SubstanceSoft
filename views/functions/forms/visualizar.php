@@ -129,6 +129,7 @@
                 ?>
             </div>
             <div class="text-center">
+                <button type="button" class="btn btn-success" onclick="printOrder(<?php echo $clave; ?>)">Imprimir comandas</button><br><br>
                 <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
             </div>
     </section>
@@ -175,6 +176,7 @@
 <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
 <script src="../../../js/vendor/common-functions.js"></script>
 <script src="../../../js/forms/functions/notificar-comanda.js"></script>
+<script src="../../../js/forms/functions/imprimir-comandas.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>
 <script>

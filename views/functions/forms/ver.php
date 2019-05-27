@@ -119,20 +119,21 @@
                         </table>
                     </div>
                 </div>
-            <?php
-            if ($ayuda) {
-                echo '<div class="col-3" align="center">';
-                echo '<button class="btn btn-primary" value="' . $clave . '" onclick="askForHelp(this)"> Pedir ayuda </button>';
-                echo '<div>';
-                echo getMessages($clave);
-                echo '</div>';
-                echo '</div>';
-            }
-            mysqli_close($connection);
-            ?>
+                <?php
+                if ($ayuda) {
+                    echo '<div class="col-3" align="center">';
+                    echo '<button class="btn btn-primary" value="' . $clave . '" onclick="askForHelp(this)"> Pedir ayuda </button>';
+                    echo '<div>';
+                    echo getMessages($clave);
+                    echo '</div>';
+                    echo '</div>';
+                }
+                mysqli_close($connection);
+                ?>
             </div>
-            
+
             <div class="text-center">
+                <button type="button" class="btn btn-success" onclick="printOrder(<?php echo $clave; ?>)">Imprimir comandas pendientes</button><br><br>
                 <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
             </div>
     </section>
@@ -179,6 +180,7 @@
 <script src="../../../js/vendor/jquery-3.1.1.min.js"></script>
 <script src="../../../js/vendor/common-functions.js"></script>
 <script src="../../../js/forms/functions/notificar-comanda.js"></script>
+<script src="../../../js/forms/functions/imprimir-comandas.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>
 <script>
