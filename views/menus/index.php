@@ -10,7 +10,7 @@
 
   <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
   <link href="../../css/simple-sidebar.css" rel="stylesheet">
-  <link href="../../css/index.css" rel="stylesheet"> 
+  <link href="../../css/index.css" rel="stylesheet">
   <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
 </head>
 

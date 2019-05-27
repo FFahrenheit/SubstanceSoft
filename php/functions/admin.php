@@ -1,4 +1,4 @@
-<?php 
+<?php
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
     mysqli_set_charset($connection,"utf-8");
 
@@ -43,14 +43,20 @@
         $output.=  "<td>".getEstado("ayuda_chefs");
         $output.=  '<td><a href="../forms/ayuda-chefs.php" class="btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
-        
+
+        $output.=  '<tr>';
+        $output.=  "<td>Uso de la aplicación móvil (Requiere internet)</td>";
+        $output.=  "<td>".getEstado("aplicacion_movil");
+        $output.=  '<td><a href="../forms/aplicacion-movil.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '</tr>';
+
         $output.= '<tr>';
         $output.=  "<td>Modo de notificación chef</td>";
         if(getEstado("notificacion_chef")=="<font color='red'>Deshabilitado</font>")
         {
             $show = "<font color = 'green'>Modo con sistema</font>";
         }
-        else 
+        else
         {
             $show = "<font color = 'red'>Modo independiente</font>";
         }

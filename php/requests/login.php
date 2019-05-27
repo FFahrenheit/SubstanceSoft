@@ -1,9 +1,23 @@
 <?php
-    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"connection"');
+    $bd = $_POST['bd'];
+    $user;
+    $pass;
+
+    if($bd == "localhost")
+    {
+      $user = "root";
+      $pass = "";
+    }
+    else
+    {
+      $user = "remote";
+      $pass = "1234";
+    }
+    $connection = mysqli_connect($bd , $user, $pass, "substancesoft") or die('"connection"');
 
     $query = "CALL verificarHorario()";
 
-    freeQuery(); 
+    freeQuery();
 
     $result = mysqli_query($connection,$query);
     $row = mysqli_fetch_array($result);
@@ -15,16 +29,16 @@
         $code = $_POST['code'];
         $sub = " codigo = $code ";
         $query = "SELECT valor FROM preferencias WHERE nombre='acceso_codigo'";
-        freeQuery(); 
+        freeQuery();
         $result = mysqli_query($connection, $query) or die ('"error al ejecutar1"');
-        $row = mysqli_fetch_array($result); 
+        $row = mysqli_fetch_array($result);
         if(!isset($row['valor']) || $row['valor']==0)
         {
             echo json_encode("unable");
             die();
         }
-    } 
-    else 
+    }
+    else
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -32,13 +46,13 @@
     }
 
 
-    $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo, login from usuario where ".$sub; 
+    $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo, login from usuario where ".$sub;
 
-    freeQuery(); 
+    freeQuery();
 
     $result = mysqli_query($connection, $query) or die ('"error al ejecutar"');
 
-    $row = mysqli_fetch_array($result); 
+    $row = mysqli_fetch_array($result);
 
     if(isset($row['password']))
     {
@@ -49,7 +63,7 @@
         echo json_encode("user");
         die;
     }
-    
+
     $username = $row['username'];
     $tipo = $row['tipo'];
     $nuevo = $row['login'];
@@ -66,10 +80,10 @@
         $_SESSION['username'] = $row['username'];
         //$_SESSION['password'] = $password; // why tho
         $_SESSION['name'] = $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m'];
-        $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion 
-        where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave"; 
+        $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion
+        where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave";
 
-        freeQuery(); 
+        freeQuery();
 
         $result = mysqli_query($connection, $query) or die ('"query"');
 
@@ -82,8 +96,8 @@
             funcion.clave<=4";
 
             $_SESSION['tipo'] = $tipo;
-            
-            freeQuery(); 
+
+            freeQuery();
 
             $result = mysqli_query($connection, $query) or die ('"query admin"');
 
@@ -96,7 +110,7 @@
         }
         for($i=0; $i<$n_rows; $i++)
         {
-            $row = mysqli_fetch_array($result);    
+            $row = mysqli_fetch_array($result);
 
             if($i==0)
             {
@@ -115,7 +129,7 @@
             $_SESSION[$index] = "Administración";
             $_SESSION[$index2] = "0";
         }
-        //$row = mysqli_fetch_array($result); 
+        //$row = mysqli_fetch_array($result);
 
         if($nuevo=='0000-00-00 00:00:00' || ($tipo == 'admin') && $password=='SubstanceSoft123147')
         {
@@ -135,11 +149,11 @@
     function freeQuery()
     {
         global $connection;
-        do 
+        do
         {
             if ($res = $connection->store_result()) {
               $res->free();
             }
-        } while ($connection->more_results() && $connection->next_result()); 
+        } while ($connection->more_results() && $connection->next_result());
     }
 ?>
