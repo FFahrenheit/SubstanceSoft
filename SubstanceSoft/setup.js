@@ -1,8 +1,18 @@
-const fs = require('fs');
 var central = document.getElementById('setup');
 var IP = document.getElementById('ip');
 var connect = document.getElementById('connect');
 var alias = document.getElementById('alias');
+
+document.addEventListener("DOMContentLoaded", ()=>
+{
+    var reconf =
+            {
+              "set": false
+            };
+
+    reconfJSON = JSON.stringify(reconf);
+    localStorage.setItem('configuration', reconfJSON);
+});
 
 central.addEventListener("click", function () {
     var testConnection = 'http://localhost/substancesoft/php/requests/conectividad.php';
@@ -14,10 +24,12 @@ central.addEventListener("click", function () {
             method: 'POST',
             body: datos
         })
-        .then(function (resp) {
+        .then(function (resp) 
+        {
             return resp.json();
         })
-        .then(function (data) {
+        .then(function (data) 
+        {
             if (data == 'success') {
                 var link = 'http://localhost/substancesoft/views/menus/index.html';
                 console.log(link);
@@ -30,15 +42,8 @@ central.addEventListener("click", function () {
 
                 var stringData = JSON.stringify(conf);
 
-
-                fs.writeFile("configuration.json", stringData, function (err) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    console.log("Guardado!");
-                });
-
+                localStorage.setItem('configuration', stringData);
+                
                 window.location.href = link;
             }
             else {
@@ -89,15 +94,7 @@ connect.addEventListener("click", function ()
 
                 stringConf = JSON.stringify(conf);
 
-
-                fs.writeFile("configuration.json", stringConf, function (err) {
-                    if (err) {
-                        console.log("Error al escribir");
-                        console.log(err);
-                        return;
-                    }
-                    console.log("Guardado!");
-                });
+                localStorage.setItem('configuration', stringConf);
 
                 window.location.href = link;
             }
@@ -111,6 +108,7 @@ connect.addEventListener("click", function ()
             console.log("catch");
         })
     //window.location.href = link;
+
 });
 
 

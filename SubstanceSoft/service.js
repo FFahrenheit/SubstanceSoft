@@ -3,11 +3,13 @@
 function checkNotify() {
     console.log('Cargado');
 
-    fetch("configuration.json")
+    fetch("configuration.json") //alv esto ya ni se usa xD
         .then(function (resp) {
             return resp.json();
         })
-        .then(function (data) {
+        .then(function (uselessShit) {
+            data = localStorage.getItem('configuration');
+            data = JSON.parse(data);
             console.log(data);
             if (!data.set) {
                 console.log("No configurado para notificaciones");

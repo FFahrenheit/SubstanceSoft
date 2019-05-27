@@ -1,6 +1,5 @@
 const electron = require('electron');
 const { app, BrowserWindow, globalShorcut, Menu } = electron;
-const fs = require('fs');
 var path = require('path');
 var url = require('url');
 var closeAll = false;
@@ -26,7 +25,6 @@ app.on('ready', () => {
       }
     }
   );
-  //mainWindow.setTitle('SubstanceSoft');
 
   mainWindow.loadURL(url.format(
     {
@@ -83,21 +81,9 @@ app.on('ready', () => {
         {
           label: 'Reconfigurar',
           click() {
-            var reconf =
-            {
-              "set": false
-            };
-            reconfJSON = JSON.stringify(reconf);
-            fs.writeFile("configuration.json", reconfJSON, function (err) {
-              if (err) {
-                console.log(err);
-                return;
-              }
-              console.log("Guardado!");
-            });
             mainWindow.loadURL(url.format(
               {
-                pathname: path.join(__dirname, 'index.html'),
+                pathname: path.join(__dirname, 'setup.html'),
                 protocol: 'file',
                 slashes: true
               }));
@@ -200,7 +186,7 @@ app.on('ready', () => {
 
   notificationService.maximize();
 
-  notificationService.hide();
+  notificationService.hide();   //Comentar para fines debuggescos
 
   notificationService.on('close', (event) => {
     if (closeAll) {

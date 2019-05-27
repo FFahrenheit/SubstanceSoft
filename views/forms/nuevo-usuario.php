@@ -28,6 +28,14 @@
         <img src="../../images/reload.png" alt="Recargar">
     </a>
 </div>
+<?php
+
+    if(session_id() == '' || !isset($_SESSION))
+    {
+        session_start();
+    }
+    $tipo = $_SESSION['tipo'];
+?>
         <section class="container">
             <h1 class="text-uppercase text-center">Agregar usuario</h2>
             <p class="lead text-center">Por favor, llene los campos con la información requerida. Los campos marcados con <font color="red">*</font> son obligatorios.</p>
@@ -81,8 +89,8 @@
                             <label for="">Tipo de usuario</label> <font color="red">*</font>
                             <select class="form-control" name="tip">
                                 <?php
-                                    session_start();
-                                    if($_SESSION['tipo']=='admin')
+
+                                    if($tipo=='admin')
                                     {
                                         echo '<option>administrador</option>
                                         <option>empleado</option>';

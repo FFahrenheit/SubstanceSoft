@@ -149,6 +149,11 @@
         return $row['descripcion'];
     }
 
+    function getTipo()
+    {
+        return $_SESSION['tipo'];
+    }
+
     function getUserStatus()
     {
         $output = "";
@@ -157,6 +162,7 @@
         $output .= '</h3>';
         $output .= '<h4 class="mt4">';
         $output .= $_SESSION['username'];
+        $output .= $_SESSION['tipo']; //borrar
         $output .= "</h4>";
         $output .= '<div id="chat">'.getChat().' </div>';
         $output.='<p><a href="../functions/forms/mensajes.php?clave='.$_SESSION['username'].'" class="btn btn-link">Ver últimos mensajes</a></p>';

@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .then((resp) => {
             return resp.json();
         })
-        .then((data) => {
+        .then((dat) => {
+            data = JSON.parse(localStorage.getItem('configuration'));
             console.log(data);
             if (!data.set) {
                 console.log("Not set yet");
