@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2019 a las 09:09:42
+-- Tiempo de generación: 27-05-2019 a las 09:16:52
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -881,7 +881,7 @@ CREATE TABLE `equipos` (
 
 INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
 ('192.168.0.100', 'COcinita', '2019-05-27 00:44:25'),
-('192.168.15.174', 'Mi equipo cool', '2019-05-26 02:04:49'),
+('192.168.15.174', 'ivancin', '2019-05-27 07:15:22'),
 ('192.168.15.195', 'Equipo conectado', '2019-05-27 03:08:13'),
 ('192.168.84.123', 'Equipo conectado', '2019-05-21 17:48:08'),
 ('192.168.84.147', '123', '2019-05-23 12:27:52');
@@ -1184,7 +1184,7 @@ $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `notificacion-ingrediente` AFTER UPDATE ON `ingrediente` FOR EACH ROW BEGIN 
-IF(NEW.cantidad <= NEW.existencia_critica*0.2)
+IF(NEW.cantidad <= NEW.existencia_critica*0.2 AND NEW.cantidad != OLD.cantidad)
 THEN 
 	INSERT INTO notificaciones(texto) VALUES (
     (SELECT CONCAT(
@@ -1393,7 +1393,20 @@ INSERT INTO `notificaciones` (`clave`, `texto`, `fecha`) VALUES
 (3, 'holamundo', '2019-05-27 06:48:36'),
 (4, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:00'),
 (5, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:10'),
-(6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48');
+(6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48'),
+(7, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:55'),
+(8, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:56'),
+(9, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:57'),
+(10, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:03'),
+(11, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:06'),
+(12, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:07'),
+(13, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:11'),
+(14, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:15'),
+(15, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:18'),
+(16, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:21'),
+(17, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:24'),
+(18, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:25'),
+(19, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:26');
 
 -- --------------------------------------------------------
 
@@ -2377,7 +2390,7 @@ ALTER TABLE `mensajes_ayuda`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -2510,7 +2523,7 @@ DELIMITER $$
 -- Eventos
 --
 CREATE DEFINER=`root`@`localhost` EVENT `corte` ON SCHEDULE EVERY 1 DAY STARTS '2019-05-26 23:59:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN 
-	IF((SELECT valor FROM preferencias WHERE nombre='apagado_dinamico') = 0)
+	IF((SELECT valor FROM preferencias WHERE nombre='apagado_dinamico') != 3)
     THEN 
      INSERT INTO notificaciones(texto) VALUES (
      (SELECT CONCAT
