@@ -38,7 +38,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()" style="float: left;">
+        <a href="./asistencia.php" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="goBack()" class="btn btn-success">Regresar</button>
+                <!--button onclick="goBack()" class="btn btn-success">Regresar</button-->
         </div>
     </section>
 </body>

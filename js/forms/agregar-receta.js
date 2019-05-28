@@ -22,8 +22,7 @@ formulario.addEventListener('submit',function(e)
 
                 alert(data);
 
-                //window.location.pathname = '/substancesoft/views/forms/nueva-receta.php';
-                window.history.reload(true);
+                window.location.reload(true);
             })
     }
 })
@@ -55,7 +54,7 @@ function confirmDelete()
         console.log(data);
         alert(data);
         //window.location.pathname = '/substancesoft/views/forms/modificar-usuario.php';
-        window.location.reload();
+        window.location.reload(true);
 
     })
     

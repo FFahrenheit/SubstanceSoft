@@ -2,7 +2,6 @@
     $bd = $_POST['bd'];
     $user;
     $pass;
-
     if($bd == "localhost")
     {
       $user = "root";
@@ -80,6 +79,10 @@
         $_SESSION['username'] = $row['username'];
         //$_SESSION['password'] = $password; // why tho
         $_SESSION['name'] = $row['nombre']." ".$row['apellido_p']." ".$row['apellido_m'];
+        if(!isset($_SESSION['name']) || $_SESSION['name']=='')
+        {
+            $_SESSION['name'] = "Sin nombre";
+        }
         $query = "SELECT funcion.descripcion as descripcion, permiso from permisos, funcion
         where username = '".$row['username']."' and permisos.permiso<=4 and permisos.permiso = funcion.clave";
 
@@ -131,7 +134,7 @@
         }
         //$row = mysqli_fetch_array($result);
 
-        if($nuevo=='0000-00-00 00:00:00' || ($tipo == 'admin') && $password=='SubstanceSoft123147')
+        if($nuevo=='0000-00-00 00:00:00' || ($tipo == 'admin' && $password=='SubstanceSoft123147'))
         {
             echo json_encode("new");
         }

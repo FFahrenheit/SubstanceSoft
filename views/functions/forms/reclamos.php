@@ -23,7 +23,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()" style="float: left;">
+        <a href="./../modulo3-funcion6.php" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
@@ -124,7 +124,9 @@
                     <p>&nbsp;</p>
                 </div>
             </div>
-            <button class="btn btn-primary" onclick="goBack()">Regresar</button>
+            <a href="./../modulo3-funcion6.php">
+            <button class="btn btn-primary">Regresar</button>
+                        </a>
             <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

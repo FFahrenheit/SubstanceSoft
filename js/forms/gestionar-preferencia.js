@@ -30,6 +30,6 @@ function setCodeStatus(new_status,preference)
         console.log("aqui llega js");
         console.log(data);
         //alert(data);
-        window.location.reload();
+        window.location.reload(true);
     })
 }

@@ -23,18 +23,28 @@ formulario2.addEventListener('submit', function (e) {
             })
             .then(res => {
                 console.log("respuesta: "+res);
-                return res.json()
+                try
+                {
+                    res = res.json();
+                }
+                catch(e)
+                {
+                    console.log("Parser error");
+                    res = ' ';
+                    return res;
+                }
+                return res;
             })
             .then(data => {
                 console.log("aqui llega js");
                 switch (data) {
                     case 'horario':
                         alert("Por el momento no pueden ingresar empleados");
-                        formulario2.reset();
+                        window.location.reload(true);
                         break;
                     case 'unable':
                         alert("El acceso por código está deshabilitado");
-                        formulario2.reset();
+                        window.location.reload(true);
                         break;
                     case 'user':
                     case 'password':
@@ -66,7 +76,9 @@ formulario.addEventListener('submit',  (e) =>
     {
       localStorage.setItem("bd", "localhost");
     }
+
     datos.append("bd", localStorage.getItem("bd"));
+    localStorage.setItem("bd","localhost");
 
     if (formulario.checkValidity() === true) 
     {
@@ -78,7 +90,17 @@ formulario.addEventListener('submit',  (e) =>
             .then(res =>
                 {
                     console.log("Respuesta: "+res);
-                    return res.json();
+                    try
+                    {
+                        res = res.json();
+                    }
+                    catch(e)
+                    {
+                        console.log("Parser error");
+                        res = ' ';
+                        return res;
+                    }
+                    return res;
                 })
                 .then(data => {
                 console.log(data);

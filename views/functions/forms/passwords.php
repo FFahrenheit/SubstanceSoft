@@ -23,7 +23,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack(2);" style="float: left;">
+        <a href="./../modulo0-funcion4.php" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
@@ -72,9 +72,6 @@
                                 ?>
                             </tbody>
                         </table>
-                        <div class="text-center">
-                            <button type="button" onclick="goBack()" class="btn btn-primary">Regresar</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +79,6 @@
     </section>
 </body>
 <script src="../../../js/vendor/common-functions.js"></script>
-<script src="../../../js/forms/functions/notificar-comanda.js"></script>
 <script src="../../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../../js/vendor/popper.min.js"></script>
 <script src="../../../js/vendor/bootstrap.min.js"></script>

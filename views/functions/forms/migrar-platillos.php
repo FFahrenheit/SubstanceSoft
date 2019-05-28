@@ -23,7 +23,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()" style="float: left;">
+        <a href="./../modulo0-funcion0.php" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
@@ -111,7 +111,9 @@
                 </div>
             </div>
             <br>
-            <button class="btn btn-success" onclick="goBack()">Regresar</button>
+            <a href="./../modulo0-funcion0.php">
+            <button class="btn btn-success">Regresar</button>
+                    </a>
         </div>
     </section>
 </body>

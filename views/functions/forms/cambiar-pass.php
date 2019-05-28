@@ -18,7 +18,7 @@
 
 <body class="s-bg">
 <div class="s-nb">
-    <a onclick="goBack()"   style="float: left;">
+    <a href="./../../menus/login.html" style="float: left;">
         <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
     </a>
     <a href="../../../views/menus/index.php">
@@ -58,7 +58,7 @@
                     </div>
                     <input name="user" value="<?php echo $row['username'];?>" type="hidden">
                     <div class="form-group">
-                        <button type="submit"  class="btn btn-danger">Modificar</button>
+                        <button type="submit"  class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
                 <?php
