@@ -22,7 +22,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()"   style="float: left;">
+        <a href="./../functions/modulo0-funcion0.php" style="float: left;">
             <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../views/menus/index.php">
@@ -49,7 +49,7 @@
                     {
                         echo '<h2>El acceso por código está deshabilitado&nbsp;</h2>';
                         echo '<h3>Presione el botón para habilitarlo&nbsp;</h3>';
-                        echo '<button type="button" onclick = "setCodeStatus(true)" class="btn btn-success">Habilitar</button> ';
+                        echo '<button type="button" onclick = "setCodeStatus(true,\'acceso_codigo\')" class="btn btn-success">Habilitar</button> ';
                         die();
                     }
                 ?>
@@ -79,7 +79,7 @@
                 ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button>
+                <!--button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button-->
 
             </div>
         </div>

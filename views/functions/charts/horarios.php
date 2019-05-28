@@ -27,7 +27,7 @@
     </head>
     <body class="s-bg">
             <div class = "s-nb"> 
-                    <a onclick = "goBack()"   style="float: left;">
+                    <a href="./../modulo0-funcion1.php"   style="float: left;">
                             <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
                     </a>
                     <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
@@ -41,7 +41,7 @@
                 <div id="container" style="width: 75%;">
                         <canvas id="canvas"></canvas>
                 </div>
-                    <button onclick="goBack()"class="btn btn-success">Regresar</button>
+                    <!--button onclick="goBack()"class="btn btn-success">Regresar</button-->
             </div>
         </section>
     </body>

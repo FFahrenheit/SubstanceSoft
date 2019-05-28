@@ -24,7 +24,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()" style="float: left;">
+        <a href="./../modulo2-funcion0.php" style="float: left;">
             <img src="../../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../../views/menus/index.php">
@@ -134,7 +134,9 @@
 
             <div class="text-center">
                 <button type="button" class="btn btn-success" onclick="printOrder(<?php echo $clave; ?>)">Imprimir comandas pendientes</button><br><br>
-                <button type="button" class="btn btn-primary" onclick="goBack()">Regresar</button>
+                <a href="./../modulo2-funcion0.php">
+                <button type="button" class="btn btn-primary" >Regresar</button>
+        </a>
             </div>
     </section>
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

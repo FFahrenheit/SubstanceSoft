@@ -22,7 +22,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a onclick="goBack()"   style="float: left;">
+        <a href="./../functions/modulo0-funcion0.php"  style="float: left;">
             <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../views/menus/index.php">
@@ -66,7 +66,7 @@
                 ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button>
+                <!--button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button-->
 
             </div>
         </div>

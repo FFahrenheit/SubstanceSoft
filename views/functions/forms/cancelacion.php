@@ -16,7 +16,7 @@
     </head>
     <body class="s-bg">
             <div class = "s-nb"> 
-                    <a onclick = "goBack()"   style="float: left;">
+                    <a href="./../modulo1-funcion2.php"  style="float: left;">
                             <img src="../../../images/back.png" style = "width: 50px;"alt="Regresar">
                     </a>
                     <a href="../../../views/menus/index.php"><h1>SubstanceSoft</h1></a>
@@ -82,7 +82,7 @@
                         </tbody>
                         </table>
                        <div  class="text-center"> 
-                        <button type="button" onclick="goBack()" class="btn btn-success">Regresar</button>
+                        <!--button type="button" onclick="goBack()" class="btn btn-success">Regresar</button-->
                         </div>
                         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

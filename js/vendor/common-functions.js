@@ -3,17 +3,13 @@ $("#menu-toggle").click(function (e) {
   $("#wrapper").toggleClass("toggled");
 });
 
-function goBack() {
-  window.history.back();
-}
-
 function goBack(n=1)
 {
-  window.history.go(-1*n
-  );
+  window.history.go(-1*n);
 }
 
-function refreshPage() {
+function refreshPage() 
+{
   window.location.reload(true);
 }
 

@@ -17,7 +17,7 @@
 
 <body class="s-bg">
 <div class="s-nb">
-    <a onclick="goBack()"   style="float: left;">
+    <a href="./nuevo-permiso.php"  style="float: left;">
         <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
     </a>
     <a href="../../views/menus/index.php">
@@ -107,7 +107,7 @@
                     </form>
                     </div>
                 </div>
-                <a href = "../menus/menu-install.html">
+                <a href="./nuevo-permiso.php">
                 <button class="btn btn-success">Continuar</button>
                 </a>
             </div>
