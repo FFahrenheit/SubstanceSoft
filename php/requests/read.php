@@ -18,11 +18,13 @@
     
     if(isset($row['clave'])) //Si es salida 
     {
+        $salida = true;
         $query = "UPDATE asistencia SET salida = NOW() WHERE clave = ".$row['clave'];
         $result = mysqli_query($connection,$query);
     }
     else //Es entrada
     {
+        $salida = false;
         $query = "INSERT INTO asistencia(usuario) VALUES (
             (SELECT username FROM usuario WHERE tarjeta = $code))";
         $result = mysqli_query($connection,$query) or die("0");
@@ -32,6 +34,7 @@
     $result = mysqli_query($connection, $query) or die("1");
     $row = mysqli_fetch_array($result);
 
-    echo $row['username'];
+    $tipo = $salida ? "<1" : "<0";
+    echo $row['username'].$tipo;
     mysqli_close($connection);
 ?>

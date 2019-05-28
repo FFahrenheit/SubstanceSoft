@@ -210,10 +210,11 @@ boolean registerCard(int card)
    else 
    {
     okBeep();
-    String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("CLOS"));
+    String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
+    String tipo = statusCode.substring(statusCode.indexOf("<")+1,statusCode.indexOf("CLOS"));
     Serial.println(username);
     lcd.clear();
-    lcd.print("Bienvenido   ");
+    (tipo == "1") ? lcd.print("  Hasta  luego") : lcd.print("   Bienvenido"); //salida
     lcd.setCursor(0,1);
     lcd.print(username);
    }
@@ -239,7 +240,7 @@ void innitConnection()
   waitResponse(1500);
 }
 
-void connectWifi()
+bool connectWifi()
 {
   wifi.print("AT+CIPSTATUS\r\n");
   delay(1500);
@@ -256,14 +257,12 @@ void connectWifi()
     lcd.print("    Error en");
     lcd.setCursor(0,1);
     lcd.print(" conexion Wi-Fi");
-    while(true)
-    {
-      errorBeep();
-      delay(500);
-    }
+    errorBeep();
+    return connectWifi();
   }
   lcd.clear();
   lcd.print("    Correcto");
+  return true;
 }
 
 String getStatus()

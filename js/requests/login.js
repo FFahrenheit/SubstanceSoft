@@ -7,13 +7,24 @@ formulario2.addEventListener('submit', function (e) {
 
     var datos = new FormData(formulario2);
 
+    
+    if(localStorage.getItem("bd") === null)
+    {
+      localStorage.setItem("bd", "localhost");
+    }
+    datos.append("bd", localStorage.getItem("bd"));
+    
+
     if (formulario2.checkValidity() === true) {
         fetch('../../php/requests/login.php',
             {
                 method: 'POST',
                 body: datos
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log("respuesta: "+res);
+                return res.json()
+            })
             .then(data => {
                 console.log("aqui llega js");
                 switch (data) {
@@ -57,14 +68,19 @@ formulario.addEventListener('submit',  (e) =>
     }
     datos.append("bd", localStorage.getItem("bd"));
 
-    if (formulario.checkValidity() === true) {
+    if (formulario.checkValidity() === true) 
+    {
         fetch('../../php/requests/login.php',
             {
                 method: 'POST',
                 body: datos
             })
             .then(res =>
-                res.json()).then(data => {
+                {
+                    console.log("Respuesta: "+res);
+                    return res.json();
+                })
+                .then(data => {
                 console.log(data);
                 switch (data) {
                     case 'new':
