@@ -4,7 +4,7 @@ function setCodeStatus(new_status,preference)
 
     console.log(preference);
 
-    if(preference === "aplicacion_movil")
+    /*if(preference === "aplicacion_movil")
     {
       if(localStorage.getItem("bd") === "localhost")
       {
@@ -14,7 +14,7 @@ function setCodeStatus(new_status,preference)
       {
         localStorage.setItem("bd", "localhost")
       }
-    }
+    }*/
 
     var datos = new FormData();
     datos.append("new",new_status);

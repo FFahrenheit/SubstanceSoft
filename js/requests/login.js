@@ -7,14 +7,6 @@ formulario2.addEventListener('submit', function (e) {
 
     var datos = new FormData(formulario2);
 
-    
-    if(localStorage.getItem("bd") === null)
-    {
-      localStorage.setItem("bd", "localhost");
-    }
-    datos.append("bd", localStorage.getItem("bd"));
-    
-
     if (formulario2.checkValidity() === true) {
         fetch('../../php/requests/login.php',
             {
@@ -62,13 +54,7 @@ formulario.addEventListener('submit',  (e) =>
 
     var datos = new FormData(formulario);
 
-    if(localStorage.getItem("bd") === null)
-    {
-      localStorage.setItem("bd", "localhost");
-    }
-    datos.append("bd", localStorage.getItem("bd"));
-
-    if (formulario.checkValidity() === true) 
+    if (formulario.checkValidity() === true)
     {
         fetch('../../php/requests/login.php',
             {

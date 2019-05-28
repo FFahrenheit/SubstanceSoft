@@ -9,7 +9,7 @@
         {
             return $connection;
         }
-        else 
+        else
         {
             $query = "SELECT ip FROM equipos WHERE alias = 'remote'";
             $result = mysqli_query($connection,$query);
@@ -18,5 +18,4 @@
             return $newConnection;
         }
     }
-
 ?>

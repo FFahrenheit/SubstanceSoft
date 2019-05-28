@@ -1,19 +1,6 @@
 <?php
-    $bd = $_POST['bd'];
-    $user;
-    $pass;
-
-    if($bd == "localhost")
-    {
-      $user = "root";
-      $pass = "";
-    }
-    else
-    {
-      $user = "remote";
-      $pass = "1234";
-    }
-    $connection = mysqli_connect($bd , $user, $pass, "substancesoft") or die('"connection"');
+    require '../connection.php';
+    $connection = getConnection();
 
     $query = "CALL verificarHorario()";
 

@@ -14,7 +14,8 @@
     <link href="../../css/bs/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/clean-install.css" rel="stylesheet">
     <script src="../../js/vendor/common-functions.js"></script>
-    <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>    <script src="../../js/forms/gestionar-preferencia.js"></script>
+    <script>if (typeof module === 'object') {window.module = module;module = undefined;}</script>
+    <script src="../../js/forms/gestionar-preferencia.js"></script>
 </head>
 
 <body class="s-bg">
