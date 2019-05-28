@@ -70,7 +70,7 @@
             </div>
         </div>
         <br> </br>
-        <button type="button" onclick="goBack()" class="btn btn-primary">Ok</button>
+        <!--button type="button" onclick="goBack()" class="btn btn-primary">Ok</button-->
 
     </section>
 </body>

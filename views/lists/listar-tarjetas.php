@@ -66,7 +66,7 @@
                 ?>
                     </tbody>
                 </table>
-                <button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button>
+                <!--button type="button" onclick = "goBack()" class="btn btn-primary">Regresar</button-->
 
             </div>
         </div>

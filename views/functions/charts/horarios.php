@@ -41,7 +41,7 @@
                 <div id="container" style="width: 75%;">
                         <canvas id="canvas"></canvas>
                 </div>
-                    <button onclick="goBack()"class="btn btn-success">Regresar</button>
+                    <!--button onclick="goBack()"class="btn btn-success">Regresar</button-->
             </div>
         </section>
     </body>

@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="goBack()" class="btn btn-success">Regresar</button>
+                <!--button onclick="goBack()" class="btn btn-success">Regresar</button-->
         </div>
     </section>
 </body>
