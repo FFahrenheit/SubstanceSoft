@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2019 a las 09:16:52
+-- Tiempo de generación: 28-05-2019 a las 00:06:38
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -750,7 +750,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `mensaje_ayuda` AFTER INSERT ON `ayuda` FOR EACH ROW BEGIN
+CREATE TRIGGER `mensaje-ayuda` AFTER INSERT ON `ayuda` FOR EACH ROW BEGIN
 
 
 
@@ -1000,7 +1000,8 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (53, 6, '1.0000', '2019-05-26 21:52:16', 'surtido'),
 (54, 4, '1.0000', '2019-05-26 21:55:08', 'surtido'),
 (55, 6, '-82.5000', '2019-05-27 06:31:55', 'uso'),
-(56, 6, '-0.4000', '2019-05-27 07:08:48', 'uso');
+(56, 6, '-0.4000', '2019-05-27 07:08:48', 'uso'),
+(57, 1, '1.0000', '2019-05-27 08:10:43', 'surtido');
 
 -- --------------------------------------------------------
 
@@ -1073,7 +1074,7 @@ CREATE TABLE `ingrediente` (
 --
 
 INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `existencia_critica`) VALUES
-(1, 'pollo', '180.0000', 'kg', 4.0000),
+(1, 'pollo', '181.0000', 'kg', 4.0000),
 (2, 'queso', '40.0900', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
 (4, 'Agua', '162.0000', 'lt', 10.0000),
@@ -1084,7 +1085,7 @@ INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `exi
 -- Disparadores `ingrediente`
 --
 DELIMITER $$
-CREATE TRIGGER `historial_de_ingrediente` BEFORE UPDATE ON `ingrediente` FOR EACH ROW BEGIN
+CREATE TRIGGER `historial-de-ingrediente` BEFORE UPDATE ON `ingrediente` FOR EACH ROW BEGIN
 
 
 
@@ -1393,20 +1394,7 @@ INSERT INTO `notificaciones` (`clave`, `texto`, `fecha`) VALUES
 (3, 'holamundo', '2019-05-27 06:48:36'),
 (4, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:00'),
 (5, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:10'),
-(6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48'),
-(7, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:55'),
-(8, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:56'),
-(9, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:11:57'),
-(10, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:03'),
-(11, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:06'),
-(12, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:07'),
-(13, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:11'),
-(14, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:15'),
-(15, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:18'),
-(16, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:21'),
-(17, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:24'),
-(18, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:25'),
-(19, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado 0 platillos.', '2019-05-27 07:12:26');
+(6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48');
 
 -- --------------------------------------------------------
 
@@ -1462,7 +1450,7 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 -- Disparadores `orden`
 --
 DELIMITER $$
-CREATE TRIGGER `notificacion_orden` BEFORE UPDATE ON `orden` FOR EACH ROW BEGIN
+CREATE TRIGGER `notificacion-orden` BEFORE UPDATE ON `orden` FOR EACH ROW BEGIN
 
 
 
@@ -1633,7 +1621,7 @@ INSERT INTO `pedidos` (`clave`, `estado`, `hora`, `platillo`, `orden`) VALUES
 -- Disparadores `pedidos`
 --
 DELIMITER $$
-CREATE TRIGGER `notifiacion_platillo` BEFORE UPDATE ON `pedidos` FOR EACH ROW BEGIN
+CREATE TRIGGER `notifiacion-platillo` BEFORE UPDATE ON `pedidos` FOR EACH ROW BEGIN
 
 
 
@@ -2366,7 +2354,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`

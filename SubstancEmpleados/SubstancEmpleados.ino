@@ -1,30 +1,39 @@
-#include <LiquidCrystal.h>
-#include <SoftwareSerial.h>
-#include <EEPROM.h>
-#include <Wire.h>
-#include <Adafruit_PN532.h>
-
 /*
  * Este sketch maneja el sistema de 
  * empleados, haciendo requests HTTP
  * y un módulo RFID para iniciar sesión
  * en un sistema de restaurante.
+ * @author: ivxn :)
  */
 
-boolean debug = false; //True para entrar a modo configuración, en esencia no importa
-boolean configure = false; //Es un switch, si está en alto significa que abre el serial
+#include <LiquidCrystal.h>
+#include <EEPROM.h>
+#include <Wire.h>
+#include <Adafruit_PN532.h>
 
-const byte TX_WIFI = 11;
-const byte RX_WIFI = 12;
+boolean debug = false; 
+boolean configure = false; 
+
+/**
+ * configure tiene prioridad
+ * true => El módulo será cargado con credenciales, solo abre el puerto 
+ * serie, bloquea debug.
+ * false => El módulo funciona de forma correcta
+ * 
+ * debug define si se quiere saber el código de una tarjeta o usar el módulo
+ * true => El módulo imprimirá el número de tarjeta al pasarla
+ * false => El módulo registra salidas y entradas
+ */
+
 const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
-const byte CONFIGURE_SW = 9;
-const byte DEBUG_SW = 8;
+const byte CONFIGURE_SW = 11;
+const byte DEBUG_SW = 12;
 
-SoftwareSerial wifi(TX_WIFI, RX_WIFI);
+#define wifi Serial3
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
-//LiquidCrystal lcd();
+LiquidCrystal lcd(4,5,6,7,8,9);  //RS, EN, DATA
 
 const byte SSID_ADD=0x00;
 const byte PASS_ADD=0x40;
@@ -76,6 +85,8 @@ void startNFC()
   if (! versiondata) 
   {
     Serial.print("Error, no hay lector");
+    lcd.clear();
+    lcd.print("Error con lector");
     while (true);
   }
   nfc.setPassiveActivationRetries(0xFF);
@@ -83,22 +94,30 @@ void startNFC()
   Serial.println("NFC listo");
 }
 
-void setup() 
+void configurePins()
 {
   pinMode(CONFIGURE_SW, INPUT_PULLUP);
   pinMode(DEBUG_SW,INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(BUZZ,OUTPUT);
+  pinMode(BUZZ,OUTPUT); 
+}
+
+void setup() 
+{
+  configurePins();
   Serial.begin(9600);
-  readCredentials();
-  debug = !digitalRead(DEBUG_SW);
-  configure = !digitalRead(CONFIGURE_SW); //Logica inversa porque es más fácil si no está conectado 1=>0
+  //debug = !digitalRead(DEBUG_SW);
+  //configure = !digitalRead(CONFIGURE_SW); 
+  //Logica inversa porque es más fácil si no está conectado 1=>0
+  lcd.begin(16,2);
+  lcd.print("</SubstanceSoft>");
   if(!configure)
   {
+    readCredentials();
+    showCredentials();
     wifi.begin(115200);
     nfc.begin();
     startNFC();
-    innitConnection();
     connectWifi();
     Serial.println("Listo para recibir");
   }
@@ -111,33 +130,23 @@ void loop()
   {
     analogWrite(BUZZ,200);
     String menu = Serial.readStringUntil('\n');
-    //readBeep();
-    if(menu=="b") //No se puede con el switch :(((
+    if(menu=="b") //No se puede con el switch, sorry mom. :(((
     {
       showCredentials();
     }
     else if (menu=="a")
     {
       setCredentials();
+      innitConnection();
+      connectWifi();
     }
     okBeep();
-    /*switch(menu)
-    {
-      case 'a': 
-        setCredentials();
-        break;
-      case 'b':
-        showCredentials();
-        break;
-      case 'c':
-        innitConnection();
-      case 'd':
-        connectWifi();
-        break;
-    }*/
   }
   else if(!configure)
   {
+    Serial.println("Espero tu NFC");
+    lcd.clear();
+    lcd.print("  Esperando...");
     boolean success;
     uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  
     uint8_t uidLength;
@@ -147,34 +156,34 @@ void loop()
      if (success) 
      {
       readBeep();
-      //Serial.print("UID Length: ");
-      //Serial.print(uidLength, DEC);Serial.println(" bytes");
-      //Serial.print("UID Value: ");
       int counter = 0;
       for (uint8_t i=0; i < uidLength; i++) 
       {
-        //Serial.print(" 0x");
-        //Serial.print(uid[i], HEX); 
         counter+=pow(uid[i],i);
       }
       if(debug)
       {
         Serial.println("\nValor: "+String(counter));
-        //lcd.clear();
-        //lcd.home();
-        //lcd.write("Tarjeta: ");
-        //lcd.setCursor(0,1);
-        //lcd.write(String(counter));
+        lcd.clear();
+        lcd.home();
+        lcd.print("    Tarjeta:");
+        lcd.setCursor(0,1);
+        lcd.print("     *"+String(counter));
       }
-      else 
+      else
       {
+        lcd.clear();
+        lcd.print("   Procesando");
         registerCard(counter);
       }
     }
     else
     {
+      lcd.clear();
+      lcd.print("Error en lector");
       errorBeep();
     }
+    (debug) ? delay(5000) : delay(3500);
   }
 }
 
@@ -190,17 +199,23 @@ boolean registerCard(int card)
    wifi.print(command);
    String statusCode = waitResponse(2000);
    Serial.println("Status code: "+statusCode);
-   if(statusCode.indexOf("1:0")>0 || statuscode.indexOf("0:0")>0)
+   if(statusCode.indexOf("1:0")>0 || statusCode.indexOf("0:0")>0)
    {
     errorBeep();
+    lcd.clear();
+    lcd.print("   Tarjeta no");
+    lcd.setCursor(0,1);
+    lcd.print("   registrada");
    }
    else 
    {
-        //lcd.clear();
-        //lcd.home();
-        //lcd.write("Bienvenido: ");
-        //lcd.setCursor(0,1);
-        //lcd.write(statuscCode.substring(indexOf(":")));
+    okBeep();
+    String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("CLOS"));
+    Serial.println(username);
+    lcd.clear();
+    lcd.print("Bienvenido   ");
+    lcd.setCursor(0,1);
+    lcd.print(username);
    }
 }
 
@@ -213,7 +228,6 @@ void readCredentials()
 
 void innitConnection()
 {
-  //readCredentials();    //descomentar para usar credenciales de la EEPROM
   wifi.print("AT\r\n");
   waitResponse();
   wifi.print("AT+RST\r\n");
@@ -228,7 +242,46 @@ void innitConnection()
 void connectWifi()
 {
   wifi.print("AT+CIPSTATUS\r\n");
-  Serial.println(waitResponse());
+  delay(1500);
+  String response = getStatus();
+  Serial.println(response);
+  Serial.println("Index: "+(String)response.indexOf(":"));
+  String _statusCode = response.substring(response.indexOf(":")+1);
+  Serial.println("Estado: "+_statusCode);
+  int statusCode = _statusCode.toInt();
+  Serial.println("Status: "+(String)statusCode);
+  if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+  {
+    lcd.clear();
+    lcd.print("    Error en");
+    lcd.setCursor(0,1);
+    lcd.print(" conexion Wi-Fi");
+    while(true)
+    {
+      errorBeep();
+      delay(500);
+    }
+  }
+  lcd.clear();
+  lcd.print("    Correcto");
+}
+
+String getStatus()
+{
+  String response, ans;
+  delay(1000); //Aguantame las carnes
+  while(!wifi.available());
+  while(wifi.available())
+  {
+    response = wifi.readStringUntil('\n');
+    if(response.indexOf(":")>0)
+    {
+      ans = response;
+      Serial.println("Status: "+ans);
+    }
+    Serial.println(response);
+  }
+  return ans;
 }
 
 String waitResponse()
@@ -268,10 +321,8 @@ bool setCredentials()
       ssid = Serial.readStringUntil('\n');
     }
   }while(ssid.length()<=0);
-  //readyBeep();
   while(Serial.available()<=0);
   pass =  Serial.readStringUntil('\n');
-  //readyBeep();
   do
   {
     if(Serial.available())
@@ -279,8 +330,6 @@ bool setCredentials()
       ip = Serial.readStringUntil('\n');      
     }
   }while(ip.length()<=0);
-  //readyBeep();
-  //Serial.println("Credenciales guardadas\n");
   writeValue(PASS_ADD, pass); 
   writeValue(SSID_ADD, ssid);
   writeValue(ADD_ADD, ip);

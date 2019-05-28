@@ -28,6 +28,10 @@
         $result = mysqli_query($connection,$query) or die("0");
     }
 
-    echo "1";
+    $query = "SELECT username FROM usuario WHERE tarjeta = $code";
+    $result = mysqli_query($connection, $query) or die("1");
+    $row = mysqli_fetch_array($result);
+
+    echo $row['username'];
     mysqli_close($connection);
 ?>
