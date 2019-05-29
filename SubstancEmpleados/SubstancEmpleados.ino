@@ -11,8 +11,9 @@
 #include <Wire.h>
 #include <Adafruit_PN532.h>
 
-boolean debug = false; 
+//boolean debug = false; 
 boolean configure = false; 
+boolean gotIP = false;
 
 /**
  * configure tiene prioridad
@@ -29,7 +30,7 @@ const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
 const byte CONFIGURE_SW = 11;
-const byte DEBUG_SW = 12;
+//const byte DEBUG_SW = 12;
 
 #define wifi Serial3
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
@@ -97,7 +98,7 @@ void startNFC()
 void configurePins()
 {
   pinMode(CONFIGURE_SW, INPUT_PULLUP);
-  pinMode(DEBUG_SW,INPUT_PULLUP);
+  //pinMode(DEBUG_SW,INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT); 
 }
@@ -106,20 +107,22 @@ void setup()
 {
   configurePins();
   Serial.begin(9600);
-  //debug = !digitalRead(DEBUG_SW);
-  //configure = !digitalRead(CONFIGURE_SW);   //Logica inversa porque es más fácil si no está conectado 1=>0
   lcd.begin(16,2);
+  configure = !digitalRead(CONFIGURE_SW);
+  Serial.println("Estado de configure: " + (String)configure);
   lcd.print("</SubstanceSoft>");
   if(!configure)
   {
-    readCredentials();
-    showCredentials();
-    wifi.begin(115200);
-    nfc.begin();
-    innitConnection();
-    connectWifi();
-    startNFC();
-    connectWifi();
+    readCredentials(); //Lee las credenciales de la EEPROM
+    showCredentials(); //Muestra las credenciales
+    wifi.begin(115200); //Inicializa la velocidad del ESP8266
+    if(!gotIP && !tryWifi())
+    {
+      innitConnection(); //Hace la conexión al WiFi
+      connectWifi(); //Conecta al WiFi 
+    }
+    nfc.begin();  //Inicializa la comunicación con el módulo
+    startNFC(); //Inicia el NFC
     Serial.println("Listo para recibir");
   }
   readyBeep();
@@ -139,6 +142,8 @@ void loop()
     {
       setCredentials();
     }
+    lcd.clear();
+    lcd.print("  Configurado.");
     okBeep();
   }
   else if(!configure)
@@ -160,21 +165,9 @@ void loop()
       {
         counter+=pow(uid[i],i);
       }
-      if(debug)
-      {
-        Serial.println("\nValor: "+String(counter));
-        lcd.clear();
-        lcd.home();
-        lcd.print("    Tarjeta:");
-        lcd.setCursor(0,1);
-        lcd.print("     *"+String(counter));
-      }
-      else
-      {
-        lcd.clear();
-        lcd.print("   Procesando");
-        registerCard(counter);
-      }
+      lcd.clear();
+      lcd.print("   Procesando");
+      registerCard(counter);
     }
     else
     {
@@ -182,7 +175,7 @@ void loop()
       lcd.print("Error en lector");
       errorBeep();
     }
-    (debug) ? delay(5000) : delay(3500);
+    delay(3000);
   }
 }
 
@@ -200,7 +193,15 @@ boolean registerCard(int card)
    Serial.println("Status code: "+statusCode);
    if(statusCode.indexOf("CLOSED")>0)
    {
-     if(statusCode.indexOf("1:0")>0 || statusCode.indexOf("0:0")>0)
+     if(statusCode.indexOf("1:0")>0)
+     {
+        errorBeep();
+        lcd.clear();
+        lcd.print("  Error en la");
+        lcd.setCursor(0,1);
+        lcd.print("    peticion");
+     }
+     else if(statusCode.indexOf("1:3")>0)
      {
       errorBeep();
       lcd.clear();
@@ -208,7 +209,7 @@ boolean registerCard(int card)
       lcd.setCursor(0,1);
       lcd.print("   registrada");
      }
-     else if(statusCode.indexOf("1:2")||statusCode.indexOf("0:2"))
+     else if(statusCode.indexOf("1:2")>0)
      {
         errorBeep();
         lcd.clear();
@@ -216,7 +217,7 @@ boolean registerCard(int card)
         lcd.setCursor(0,1);
         lcd.print("   registrada");
      }
-     else 
+     else
      {
       okBeep();
       String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
@@ -258,13 +259,56 @@ void innitConnection()
   waitResponse(1500);
 }
 
-bool connectWifi()
+bool tryWifi()
 {
   wifi.print("AT+CIPSTATUS\r\n");
   delay(1500);
   String response = getStatus();
   if(!response.equals("Error"))
   {
+    Serial.print("Aqui si jaló");
+    Serial.println(response);
+    String _statusCode = response.substring(response.indexOf(":")+1);
+    Serial.println("Estado: "+_statusCode);
+    int statusCode = _statusCode.toInt();
+    Serial.println("Status: "+(String)statusCode);
+    if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+    {
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print(" conexion Wi-Fi");
+      errorBeep();
+      return false;
+    }
+    lcd.clear();
+    lcd.print("    Correcto");
+    return true; 
+  }
+  else 
+  {
+    Serial.println("Es un error");
+    lcd.clear();
+    lcd.print("    Error en");
+    lcd.setCursor(0,1);
+    lcd.print(" conexion Wi-Fi");
+    errorBeep();
+    return false;
+  }
+}
+
+bool connectWifi()
+{
+  wifi.print("AT+CIPSTATUS\r\n");
+  delay(1500);
+  String response = getStatus();
+  if(gotIP)
+  {
+    return true;
+  }
+  if(!response.equals("Error"))
+  {
+    Serial.print("Aqui si jaló");
     Serial.println(response);
     String _statusCode = response.substring(response.indexOf(":")+1);
     Serial.println("Estado: "+_statusCode);
@@ -285,6 +329,7 @@ bool connectWifi()
   }
   else 
   {
+    Serial.println("Es un error");
     lcd.clear();
     lcd.print("    Error en");
     lcd.setCursor(0,1);
@@ -302,10 +347,15 @@ String getStatus()
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
-    if(response.indexOf("STATUS:")>0)
+    if(response.indexOf("US:")>0)
     {
       ans = response;
       Serial.println("Status: "+ans);
+    }
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
     }
     Serial.println(response);
   }
@@ -320,6 +370,11 @@ String waitResponse()
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
+    }
     Serial.println(response);
   }
   return response;
@@ -333,6 +388,11 @@ String waitResponse(int timeout)
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
+    }
     Serial.println(response);
   }
   return response;

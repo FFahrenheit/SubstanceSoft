@@ -11,7 +11,7 @@
 
     $query = "SELECT username FROM usuario WHERE tarjeta = $code";
     $result = mysqli_query($connection,$query) or die("0");
-    if($row  = mysqli_fetch_array($result))  //SI la tarjeta está registrada
+    if($row  = mysqli_fetch_array($result))  //Si la tarjeta está registrada
     {
         $user = $row['username'];
 
@@ -39,7 +39,7 @@
         }
 
         $query = "SELECT username FROM usuario WHERE tarjeta = $code";
-        $result = mysqli_query($connection, $query) or die("1");
+        $result = mysqli_query($connection, $query) or die("0");
         $row = mysqli_fetch_array($result);
 
         $tipo = $salida ? "<1" : "<0";
@@ -47,10 +47,20 @@
     }
     else 
     {
-        $query = "UPDATE usuario SET tarjeta = $code WHERE tarjeta = 0";
-        mysqli_query($connection,$query) or die("0");
-        echo "2";
-    }
+        $query = "SELECT username FROM usuario WHERE tarjeta = 0 LIMIT 1";
+        $result = mysqli_query($connection,$query) or die("0");
 
+        if($row = mysqli_fetch_array($result))
+        {
+            $user = $row['username'];
+            $query = "UPDATE usuario SET tarjeta = $code WHERE username = '$user'";
+            mysqli_query($connection,$query) or die("0");
+            echo "2";
+        }
+        else 
+        {
+            echo "3";         //No hay ninguna tarjeta esperando
+        }
+    }
     mysqli_close($connection);
 ?>

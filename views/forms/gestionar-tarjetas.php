@@ -46,6 +46,7 @@
                             <td>Nombre de usuario</td>
                             <td>Estado</td>
                             <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,7 @@
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
                                 <td><?php 
+                                        $asig = false;
                                             if($row['tarjeta']=="0")
                                             {
                                                 echo "Esperando tarjeta";
@@ -67,6 +69,7 @@
                                             else if($row['tarjeta'])
                                             {
                                                 echo "Tarjeta asignada"; 
+                                                $asig = true;
                                             }
                                             else 
                                             {
@@ -77,6 +80,16 @@
                                     <a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-primary" id="<?php echo $row['username'] ?>" onClick="showDetails(this)">
                                     Asignar nuevo
                                     </a>
+                                </td>
+                                <td>
+                                <?php
+                                    if($asig)
+                                    {
+                                        echo '<a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-danger" id="'.$row['username'].'" onClick="showDetails(this)">
+                                        Desvincular
+                                        </a>';
+                                    } 
+                                ?>
                                 </td>
                             </tr>
                         <?php
@@ -120,11 +133,15 @@
                             </div>
                             <div class="modal-body">
                                 <p>En el modulo empleados, pase una tarjeta no registrada para asignar a este usuario.</p>
-                                <img src="../../images/load.gif" height="80" alt="Cargando">
+                                <div id="imagen">
+                                    <img src="../../images/load.gif" height="80" alt="Cargando">
+                                </div>
                                 <div id="status">
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <div id="ok">
+                                </div>
                                 <button type="button" class="btn btn-secondary" onclick="closeAll()" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>

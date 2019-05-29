@@ -88,7 +88,7 @@
                                 ¿Está seguro que quiere desvincular la tarjeta del usuario?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onClick="confirmReasign()">Desvincular</button>
+                                <button type="button" class="btn btn-danger" onClick="confirmReasign()">Desvincular</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
@@ -96,7 +96,6 @@
                 </div>
 </body>
 <script src="../../js/vendor/common-functions.js"></script>
-<script src="../../js/forms/generar-codigo.js"></script>
 <script src="../../js/vendor/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/vendor/popper.min.js"></script>
 <script src="../../js/vendor/bootstrap.min.js"></script>
