@@ -1,6 +1,5 @@
 <?php
-    require '../connection.php';
-    $connection = getConnection();
+    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"error"');
 
     $query = "CALL verificarHorario()";
 

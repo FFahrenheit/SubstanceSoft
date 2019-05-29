@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(isset($_POST['new']))
     {
         $codigo = $_POST['preferencia'];
@@ -19,10 +19,15 @@
             $query = "UPDATE preferencias SET valor = $valor WHERE nombre = 'razon_desperdicio'";
             $result = mysqli_query($connection,$query) or die("'error al actualizar a 0'");
         }
+        if($codigo == 'aplicacion_movil' && $_POST['new'] == 'true')
+        {
+          exec('md %userprofile%\Documents\SubstanceSoft_Backup');
+          exec('"C:\xampp\mysql\bin\mysqldump.exe" -v --opt --events --routines --triggers --default-character-set=utf8 -u root substancesoft > %userprofile%/Documents/SubstanceSoft_Backup/backup.sql');
+        }
         echo json_encode($_POST['new']);
     }
-    else 
-    { 
+    else
+    {
         echo json_encode("estado invalido");
     }
 ?>

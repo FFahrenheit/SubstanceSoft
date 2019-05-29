@@ -1,20 +1,5 @@
 function setCodeStatus(new_status,preference)
 {
-    console.log(new_status);
-
-    console.log(preference);
-
-    /*if(preference === "aplicacion_movil")
-    {
-      if(localStorage.getItem("bd") === "localhost")
-      {
-        localStorage.setItem("bd", "23.99.135.168")
-      }
-      else
-      {
-        localStorage.setItem("bd", "localhost")
-      }
-    }*/
 
     var datos = new FormData();
     datos.append("new",new_status);
@@ -27,9 +12,24 @@ function setCodeStatus(new_status,preference)
     .then (res => res.json())
     .then (data =>
     {
-        console.log("aqui llega js");
-        console.log(data);
+        if(datos.get("new") && datos.get("preferencia")==="aplicacion_movil")
+        {
+          var fs = require('fs');
+          var file = fs.readFileSync('C:/users/%userprofile%/Documents/SubstanceSoft_Backup/backup.sql');
+          var datos = new FormData();
+          datos.append("sql", file);
+          fetch('23.99.135.168/substancesoft/php/requests/recieveVM.php',
+          {
+              method: 'POST',
+              body: datos
+          })
+          .then (res => res.json())
+          .then (data =>
+          {
+            console.log(data);
+          })
+        }
         //alert(data);
-        window.location.reload(true);
+        window.location.reload(true); 
     })
 }
