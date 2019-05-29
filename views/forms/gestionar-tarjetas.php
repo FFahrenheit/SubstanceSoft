@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <td>Nombre de usuario</td>
-                            <td>Tarjeta asignada</td>
+                            <td>Estado</td>
                             <td>&nbsp;</td>
                         </tr>
                     </thead>
@@ -64,9 +64,13 @@
                                             {
                                                 echo "Esperando tarjeta";
                                             }
+                                            else if($row['tarjeta'])
+                                            {
+                                                echo "Tarjeta asignada"; 
+                                            }
                                             else 
                                             {
-                                                echo $row['tarjeta']; 
+                                                echo "Sin tarjeta";
                                             }
                                             ?></td>
                                 <td>

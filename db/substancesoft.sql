@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2019 a las 04:59:18
+-- Tiempo de generación: 29-05-2019 a las 05:17:32
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -559,7 +559,12 @@ INSERT INTO `asistencia` (`clave`, `usuario`, `entrada`, `salida`) VALUES
 (39, 'Admin100', '2019-05-28 00:35:32', '2019-05-28 00:57:09'),
 (40, 'Admin100', '2019-05-28 01:17:40', '2019-05-28 01:23:11'),
 (41, 'Admin100', '2019-05-28 01:23:22', '2019-05-28 01:42:45'),
-(42, 'Admin100', '2019-05-28 01:42:57', NULL);
+(42, 'Admin100', '2019-05-28 01:42:57', '2019-05-28 15:51:56'),
+(43, 'Admin100', '2019-05-28 15:52:48', '2019-05-28 15:53:54'),
+(44, 'chef1', '2019-05-28 16:00:50', NULL),
+(45, 'Admin100', '2019-05-28 19:43:18', '2019-05-28 19:43:39'),
+(46, 'admin', '2019-05-29 02:33:21', '2019-05-29 02:39:36'),
+(47, 'Admin100', '2019-05-29 02:40:42', NULL);
 
 --
 -- Disparadores `asistencia`
@@ -869,7 +874,8 @@ CREATE TABLE `cocina` (
 
 INSERT INTO `cocina` (`clave`, `nombre`) VALUES
 (4, 'Bebidas'),
-(1, 'Mexicana');
+(1, 'Mexicana'),
+(5, 'Nueva');
 
 -- --------------------------------------------------------
 
@@ -891,8 +897,9 @@ INSERT INTO `equipos` (`ip`, `alias`, `conexion`) VALUES
 ('192.168.0.100', 'COcinita', '2019-05-27 00:44:25'),
 ('192.168.15.174', 'hoy', '2019-05-28 02:12:54'),
 ('192.168.15.195', 'Equipo conectado', '2019-05-27 03:08:13'),
-('192.168.84.123', 'Equipo conectado', '2019-05-21 17:48:08'),
-('192.168.84.147', '123', '2019-05-23 12:27:52');
+('192.168.84.123', 'otro', '2019-05-28 19:40:51'),
+('192.168.84.147', 'II', '2019-05-28 19:42:36'),
+('192.168.84.247', '1233', '2019-05-28 15:02:29');
 
 -- --------------------------------------------------------
 
@@ -1021,7 +1028,8 @@ INSERT INTO `historial_ingredientes` (`clave`, `ingrediente`, `cantidad`, `fecha
 (66, 2, '-96.0000', '2019-05-28 02:55:19', 'uso'),
 (67, 2, '-3.9910', '2019-05-28 02:55:37', 'uso'),
 (68, 1, '999.9990', '2019-05-28 02:55:51', 'surtido'),
-(69, 2, '99.9910', '2019-05-28 02:55:53', 'surtido');
+(69, 2, '99.9910', '2019-05-28 02:55:53', 'surtido'),
+(70, 4, '1.0000', '2019-05-28 03:50:42', 'surtido');
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1105,7 @@ INSERT INTO `ingrediente` (`clave`, `nombre`, `cantidad`, `especificacion`, `exi
 (1, 'pollo', '1000.0000', 'kg', 4.0000),
 (2, 'queso', '100.0000', 'lt', 1.0000),
 (3, 'maiz', '115.0000', 'kg', 1.0000),
-(4, 'Agua', '162.0000', 'lt', 10.0000),
+(4, 'Agua', '163.0000', 'lt', 10.0000),
 (6, 'Otro mas', '0.1000', 'kg', 1.0000),
 (7, 'Anda', '26.0000', 'kg', 1.0000);
 
@@ -1361,7 +1369,21 @@ INSERT INTO `mensajes` (`id`, `destinatario`, `texto`, `fecha`, `visto`) VALUES
 (145, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-28 01:23:22', 1),
 (146, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-28 01:42:45', 1),
 (147, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-28 01:42:57', 1),
-(148, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-28 01:43:36', 1);
+(148, 'Admin100', 'El usuario chef1 ha registrado su salida', '2019-05-28 01:43:36', 1),
+(149, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-28 15:51:56', 1),
+(150, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-28 15:52:48', 1),
+(151, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-28 15:53:54', 1),
+(152, 'Admin100', 'El usuario chef1 ha registrado su entrada', '2019-05-28 16:00:50', 1),
+(153, 'Admin100', 'La cuenta en la mesa 1 ha sido cerrada', '2019-05-28 18:46:48', 1),
+(154, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-28 18:46:53', 1),
+(155, 'Admin100', 'La cuenta en la mesa -1 ha sido cerrada', '2019-05-28 18:46:59', 1),
+(156, 'Admin100', 'La cuenta en la mesa -1 ha sido cerrada', '2019-05-28 18:47:03', 1),
+(157, 'Admin100', 'La cuenta en la mesa 0 ha sido cerrada', '2019-05-28 18:47:08', 1),
+(158, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-28 19:43:18', 1),
+(159, 'Admin100', 'El usuario Admin100 ha registrado su salida', '2019-05-28 19:43:39', 1),
+(160, 'Admin100', 'El usuario admin ha registrado su entrada', '2019-05-29 02:33:21', 0),
+(161, 'Admin100', 'El usuario admin ha registrado su salida', '2019-05-29 02:39:36', 0),
+(162, 'Admin100', 'El usuario Admin100 ha registrado su entrada', '2019-05-29 02:40:42', 0);
 
 -- --------------------------------------------------------
 
@@ -1413,6 +1435,7 @@ INSERT INTO `mesa` (`numero`, `capacidad`) VALUES
 (1, 10),
 (2, 10),
 (12, 5),
+(19, 9),
 (23, 12),
 (50, 0),
 (122, 0);
@@ -1437,8 +1460,8 @@ INSERT INTO `notificaciones` (`clave`, `texto`, `fecha`) VALUES
 (1, 'El ingrediente Otro mas esta en existencia critica', '2019-05-27 06:31:55'),
 (2, 'hola', '2019-05-27 06:40:18'),
 (3, 'holamundo', '2019-05-27 06:48:36'),
-(4, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:00'),
-(5, 'El corte del día 2019-05-27 es de $0.0000', '2019-05-27 07:00:10'),
+(4, 'El corte del dia 2019-05-27 es de $0.0000', '2019-05-28 17:56:44'),
+(5, 'El corte del dia 2019-05-27 es de $0.0000', '2019-05-28 17:56:38'),
 (6, 'El ingrediente Otro mas se ha acabado. Se han inhabilitado0 platillos.', '2019-05-27 07:08:48'),
 (36, 'El ingrediente pollo se ha acabado. Se han inhabilitado 2 platillos.', '2019-05-28 02:54:37'),
 (37, 'El ingrediente pollo esta en existencia critica', '2019-05-28 02:54:37'),
@@ -1446,7 +1469,8 @@ INSERT INTO `notificaciones` (`clave`, `texto`, `fecha`) VALUES
 (39, 'El platillo Sopa du macaco ha quedado deshabilitado por falta de pollo', '2019-05-28 02:54:37'),
 (41, 'El ingrediente queso se ha acabado. Se han inhabilitado 1 platillos.', '2019-05-28 02:55:37'),
 (42, 'El ingrediente queso esta en existencia critica', '2019-05-28 02:55:37'),
-(43, 'El platillo Sopa du macaco ha quedado deshabilitado por falta de queso', '2019-05-28 02:55:37');
+(43, 'El platillo Sopa du macaco ha quedado deshabilitado por falta de queso', '2019-05-28 02:55:37'),
+(44, 'El corte del dia 2019-05-27 es de $0.0000', '2019-05-28 17:57:01');
 
 -- --------------------------------------------------------
 
@@ -1478,24 +1502,24 @@ INSERT INTO `orden` (`clave`, `fecha`, `usuario`, `mesa`, `estado`, `descripcion
 (21, '2019-03-18 02:18:40', 'Admin100', 0, 'pagada', 'Orden chico 1', '360.0000', 0, 1),
 (22, '2019-03-19 18:18:19', 'Admin100', 2, 'pagada', 'Orden nueva', '5484.0000', 0, 1),
 (23, '2019-03-19 18:33:19', 'Admin100', 2, 'pagada', 'Orden mesa 2', '1928.0000', 0, 1),
-(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', '240.0000', 1, 1),
+(24, '2019-03-19 20:22:23', 'Admin100', 2, 'cerrada', 'Orden nueva', '240.0000', 3, 1),
 (25, '2019-03-19 20:32:44', 'Admin100', 0, 'pagada', 'Lentes', '240.0000', 0, 1),
 (26, '2019-03-19 20:33:17', 'Admin100', 0, 'pagada', 'Anillo', '120.0000', 0, 1),
 (27, '2019-04-02 03:00:01', 'Admin100', 0, 'pagada', 'Katia', '360.0000', 0, 1),
 (28, '2019-04-02 19:13:09', 'Admin100', 0, 'pagada', 'Orden nueva', '100.0000', 0, 1),
 (29, '2019-04-16 18:26:26', 'Admin100', 0, 'pagada', 'Hola', '323.2000', 1, 1),
-(30, '2019-04-16 18:27:09', 'Admin100', 1, 'abierta', '', '0.0000', 0, 1),
-(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 2, 1),
+(30, '2019-04-16 18:27:09', 'Admin100', 1, 'cerrada', '', '0.0000', 0, 1),
+(31, '2019-04-28 03:02:01', 'Admin100', 2, 'cerrada', 'Hola', '14.0000', 3, 1),
 (32, '2019-04-28 03:17:49', 'Admin100', 2, 'cerrada', 'Q', '0.0000', 1, 1),
 (33, '2019-05-05 21:29:51', 'Admin100', 2, 'cerrada', 'Prueba drive', '14.0000', 0, 1),
-(34, '2019-05-05 21:42:54', 'Admin100', 0, 'cerrada', 'Juan', '0.0000', 0, 1),
+(34, '2019-05-05 21:42:54', 'Admin100', 0, 'cerrada', 'Juan', '0.0000', 11, 1),
 (35, '2019-05-05 21:43:41', 'Admin100', 0, 'cerrada', 'juanito', '0.0000', 0, 1),
 (36, '2019-05-05 21:44:18', 'Admin100', 0, 'cerrada', 'El queso', '0.0000', 0, 1),
-(37, '2019-05-05 21:45:03', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
-(38, '2019-05-05 21:45:17', 'Admin100', 0, 'abierta', 'queso', '0.0000', 0, 1),
-(39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 2, 1),
-(40, '2019-05-05 21:56:19', 'Admin100', -1, 'abierta', 'jej', '0.0000', 0, 1),
-(41, '2019-05-05 21:56:53', 'Admin100', -1, 'abierta', 'jj', '0.0000', 1, 1),
+(37, '2019-05-05 21:45:03', 'Admin100', 0, 'cerrada', 'queso', '0.0000', 0, 1),
+(38, '2019-05-05 21:45:17', 'Admin100', 0, 'cerrada', 'queso', '0.0000', 0, 1),
+(39, '2019-05-05 21:45:24', 'Admin100', 0, 'cerrada', 'yp', '1200.2000', 6, 1),
+(40, '2019-05-05 21:56:19', 'Admin100', -1, 'cerrada', 'jej', '0.0000', 0, 1),
+(41, '2019-05-05 21:56:53', 'Admin100', -1, 'cerrada', 'jj', '0.0000', 1, 1),
 (42, '2019-05-20 01:35:37', 'admin', 0, 'cerrada', 'jjajaj', '0.0000', 0, 1);
 
 --
@@ -1956,9 +1980,9 @@ CREATE TABLE `preferencias` (
 
 INSERT INTO `preferencias` (`nombre`, `valor`) VALUES
 ('acceso_codigo', 1),
-('apagado_dinamico', 0),
+('apagado_dinamico', 1),
 ('aplicacion_movil', 1),
-('ayuda_chefs', 1),
+('ayuda_chefs', 0),
 ('desperdicio_diario', 0),
 ('forma_impresa', 1),
 ('forma_visual', 0),
@@ -2003,7 +2027,7 @@ CREATE TABLE `recetas` (
 INSERT INTO `recetas` (`clave`, `cantidad`, `ingrediente`, `platillo`) VALUES
 (1, '0.5000', 1, 3),
 (4, '10.0000', 1, 6),
-(5, '0.0100', 2, 6);
+(6, '10.0000', 3, 6);
 
 -- --------------------------------------------------------
 
@@ -2079,7 +2103,7 @@ CREATE TABLE `usuario` (
   `tipo` enum('administrador','empleado','admin') DEFAULT NULL,
   `codigo` int(10) UNSIGNED NOT NULL,
   `tarjeta` int(11) DEFAULT NULL,
-  `login` timestamp NULL DEFAULT NULL
+  `login` timestamp NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2087,13 +2111,15 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`username`, `password`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `direccion`, `tipo`, `codigo`, `tarjeta`, `login`) VALUES
-('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, NULL, '0000-00-00 00:00:00'),
-('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'admin', 2994, 10999, '2019-05-05 20:44:59'),
-('Admin123', 'úÃ§´#qk,eƒ}r¾hX', 'Luis', '', '', 3323857013, '', 'administrador', 936, NULL, NULL),
-('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, 26976, '0000-00-00 00:00:00'),
+('admin', 'Ù€‡€­£0Å\0µ\'¶ôo6', 'Uma delisia', '', '', 0, '', 'administrador', 2893, 10999, '0000-00-00 00:00:00'),
+('Admin100', 'ª\\èkŠÉ+E¨ƒ h4“', 'Ivan', 'Lopez', 'Murillo', 331472010, 'Admin100', 'admin', 2994, 9, '2019-05-05 20:44:59'),
+('Admin123', 'úÃ§´#qk,eƒ}r¾hX', 'Luis', '', '', 3323857013, '', 'administrador', 936, 1030, NULL),
+('chef1', ']\r^pÜÎÆ^Ç²v˜@v', 'Chef', '', '', 0, '', 'empleado', 9425, NULL, '0000-00-00 00:00:00'),
 ('chef2', 'ªñÿÌþyÆþEŸ‹£Ñ', 'Chef 2', '', '', 0, '', 'empleado', 2056, NULL, '2019-05-05 22:21:43'),
 ('DAADSDA', 'øÙ¿¸ö}€ÿb‚ 3µ}', '', '', '', 0, '', 'administrador', 1872, NULL, '0000-00-00 00:00:00'),
-('IVX', 'œw·{bÝþiWƒ·®P@M', ' ', NULL, NULL, NULL, NULL, 'administrador', 3423, NULL, '0000-00-00 00:00:00');
+('ivan', 'Îàæ*ÄÝ4ˆ+¢›u66', '', '', '', 0, '', 'empleado', 5157, NULL, '0000-00-00 00:00:00'),
+('IVX', 'œw·{bÝþiWƒ·®P@M', ' ', NULL, NULL, NULL, NULL, 'administrador', 3423, NULL, '0000-00-00 00:00:00'),
+('nuevo', 'j\r;äHì¨éÒF€_óŠ', '', '', '', 0, '', 'empleado', 3167, NULL, '0000-00-00 00:00:00');
 
 --
 -- Disparadores `usuario`
@@ -2370,7 +2396,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `ayuda`
@@ -2388,7 +2414,7 @@ ALTER TABLE `chefs`
 -- AUTO_INCREMENT de la tabla `cocina`
 --
 ALTER TABLE `cocina`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `fechas`
@@ -2406,7 +2432,7 @@ ALTER TABLE `funcion`
 -- AUTO_INCREMENT de la tabla `historial_ingredientes`
 --
 ALTER TABLE `historial_ingredientes`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `ingrediente`
@@ -2418,7 +2444,7 @@ ALTER TABLE `ingrediente`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes_ayuda`
@@ -2430,7 +2456,7 @@ ALTER TABLE `mensajes_ayuda`
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -2466,7 +2492,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `clave` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `surtidos`
@@ -2568,7 +2594,7 @@ CREATE DEFINER=`root`@`localhost` EVENT `corte` ON SCHEDULE EVERY 1 DAY STARTS '
      INSERT INTO notificaciones(texto) VALUES (
      (SELECT CONCAT
          (
-          'El corte del día ', 
+          'El corte del dia ', 
           (SELECT DATE(NOW()) as fecha),
           ' es de $',
             (SELECT COALESCE((select sum(total) from orden where date(fecha) = date(now())),0))
