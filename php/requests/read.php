@@ -9,32 +9,48 @@
     -1 equals success
     */
 
-    $query = "SELECT clave FROM asistencia WHERE usuario = 
-    (SELECT username FROM usuario WHERE tarjeta = $code) AND 
-    salida IS NULL";
-    
-    $result = mysqli_query($connection, $query) or die("0");
-    $row = mysqli_fetch_array($result);
-    
-    if(isset($row['clave'])) //Si es salida 
-    {
-        $salida = true;
-        $query = "UPDATE asistencia SET salida = NOW() WHERE clave = ".$row['clave'];
-        $result = mysqli_query($connection,$query);
-    }
-    else //Es entrada
-    {
-        $salida = false;
-        $query = "INSERT INTO asistencia(usuario) VALUES (
-            (SELECT username FROM usuario WHERE tarjeta = $code))";
-        $result = mysqli_query($connection,$query) or die("0");
-    }
-
     $query = "SELECT username FROM usuario WHERE tarjeta = $code";
-    $result = mysqli_query($connection, $query) or die("1");
-    $row = mysqli_fetch_array($result);
+    $result = mysqli_query($connection,$query) or die("0");
+    if($row  = mysqli_fetch_array($result))  //SI la tarjeta está registrada
+    {
+        $user = $row['username'];
 
-    $tipo = $salida ? "<1" : "<0";
-    echo $row['username'].$tipo;
+        $query = "UPDATE usuario SET tarjeta = NULL WHERE tarjeta = 0";
+        mysqli_query($connection,$query) or die("0");   //Borramos los usuario esperando tarjeta
+
+        $query = "SELECT clave FROM asistencia WHERE usuario = 
+        '$user' AND salida IS NULL";
+        
+        $result = mysqli_query($connection, $query) or die("0");
+        $row = mysqli_fetch_array($result);
+        
+        if(isset($row['clave'])) //Si es salida 
+        {
+            $salida = true;
+            $query = "UPDATE asistencia SET salida = NOW() WHERE clave = ".$row['clave'];
+            $result = mysqli_query($connection,$query) or die("0");
+        }
+        else //Es entrada
+        {
+            $salida = false;
+            $query = "INSERT INTO asistencia(usuario) VALUES (
+                (SELECT username FROM usuario WHERE tarjeta = $code))";
+            $result = mysqli_query($connection,$query) or die("0");
+        }
+
+        $query = "SELECT username FROM usuario WHERE tarjeta = $code";
+        $result = mysqli_query($connection, $query) or die("1");
+        $row = mysqli_fetch_array($result);
+
+        $tipo = $salida ? "<1" : "<0";
+        echo $row['username'].$tipo;
+    }
+    else 
+    {
+        $query = "UPDATE usuario SET tarjeta = $code WHERE tarjeta = 0";
+        mysqli_query($connection,$query) or die("0");
+        echo "2";
+    }
+
     mysqli_close($connection);
 ?>

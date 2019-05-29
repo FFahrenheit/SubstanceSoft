@@ -1,5 +1,5 @@
 <?php
-	$connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("'error'");
+$connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("'error'");
 	if(isset($_POST['order']) && isset($_POST['type']) && isset($_POST['com']) && isset($_POST['imp']))
 	{
 		$order = $_POST['order'];
@@ -11,6 +11,13 @@
         $row = mysqli_fetch_array($result);
         $nombre = $row['nombre'];
 	}
+	else 
+	{
+		$order = 1;
+		$type = "local";
+		$com = "";
+		$imp = "Substance";
+	}
  	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 	use Mike42\Escpos\Printer;
 	use Mike42\Escpos\EscposImage;
@@ -20,7 +27,7 @@
 if($imp == "")
 {
 	echo json_encode('"Configura una impresora"');
-	die;
+	die();
 }
 if($type == "Remota")
 {
@@ -66,25 +73,32 @@ $printer->text(date("Y-m-d H:i:s") . "\n");
 $printer->text("" . "\n");
 $printer->setJustification(Printer::JUSTIFY_LEFT);
 $printer->text("------------------------------------------"."\n");
-$printer->text("Platillos                             Mesa.\n");
+$printer->text("Platillos                             Mesa\n");
 $printer->text("------------------------------------------"."\n");
 /*
 	Ahora vamos a imprimir los
 	productos
 */
+
 $query = "select pedidos.clave as pk, 
 platillo.nombre as platillo, orden.mesa as mesa, pedidos.hora as hora 
 from platillo, orden, pedidos 
-where platillo.clave = pedidos.platillo and platillo.cocina = $clave
+where platillo.clave = pedidos.platillo and platillo.cocina = $order
 and pedidos.estado = 'pedido' and orden.clave = pedidos.orden order by pedidos.estado";
 
 	$result = mysqli_query($connection,$query);
 	/*Alinear a la izquierda para la cantidad y el nombre*/
-	$total=0;
-	$printer->setJustification(Printer::JUSTIFY_LEFT);
 		while($row = mysqli_fetch_array($result))
 		{
-            $printer->text($row['nombre']."\n");
+			$qPlatillo = strlen($row['platillo']);
+			$qMesa = strlen($row['mesa']);
+			$offset = 42 - $qPlatillo - $qMesa;
+			$printer->setJustification(Printer::JUSTIFY_LEFT);
+			$printer->text($row['platillo']);
+			for($i=0; $i<$offset; $i++)
+			{
+				$printer->text(" ");
+			}
             $printer->text($row['mesa']."\n");
 		}
 /*
@@ -95,7 +109,7 @@ $printer->text("------------------------------------------"."\n");
 
 
 /*Alimentamos el papel 3 veces*/
-$printer->feed(2);
+$printer->feed(3);
 
 /*
 	Cortamos el papel. Si nuestra impresora

@@ -9,6 +9,13 @@
 		$query ="UPDATE orden SET impresiones = impresiones + 1 WHERE clave = $order";
 		$result = mysqli_query($connection,$query);
 	}
+	else 
+	{
+		$order = 20;
+		$type = "local";
+		$com = "";
+		$imp = "Substance";
+	}
 	//$order = 33; R U SURE?
  	require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
 	use Mike42\Escpos\Printer;
@@ -83,12 +90,19 @@ $printer->text(date("Y-m-d H:i:s") . "\n");
 $printer->text("" . "\n");
 $printer->setJustification(Printer::JUSTIFY_LEFT);
 $printer->text("------------------------------------------"."\n");
-$printer->text("CANT                 P.U        IMP.\n");
+$printer->text("CANT                    P.U.        IMP.\n");
 $printer->text("------------------------------------------"."\n");
 /*
 	Ahora vamos a imprimir los
 	productos
 */
+
+$query = "SELECT total FROM orden WHERE clave = $order";
+echo $query;
+$result = mysqli_query($connection,$query);
+$row = mysqli_fetch_array($result);
+$total = $row['total'];
+
 $query = "CALL obtenerTicket($order)";
 	$result = mysqli_query($connection,$query);
 	/*Alinear a la izquierda para la cantidad y el nombre*/
@@ -98,9 +112,31 @@ $query = "CALL obtenerTicket($order)";
 		{
 			$esp = ($row['conteo']==1)? "pieza  " : "piezas";
 			$printer->text($row['nombre']."\n");
-			$printer->text($row['conteo']." $esp          ".$row['precio']."       ".$row['subtotal']."\n");
+			$qEsp = strlen($esp." ".$row['conteo']);
+			$qPU = strlen($row['precio']." ".$esp);
+			$qIMP = strlen($row['subtotal']);
+			$printer->text($row['conteo']." $esp");
+			$off = 24 - $qEsp;
+			if($off>0)
+			{
+				for($i=0; $i<$off; $i++)
+				{
+					$printer->text(" ");
+				}
+			}
+			$printer->text($row['precio']);
+			$off1 = 42 -  $off - $qEsp - $qPU - $qIMP+7;
+			if($off1>0)
+			{
+				for($i=0; $i<$off1; $i++)
+				{
+					$printer->text(" ");
+				}
+			}
+			$printer->text($row['subtotal']."\n");
 			$total += $row['subtotal'];
 		}
+
 /*
 	Terminamos de imprimir
 	los productos, ahora va el total

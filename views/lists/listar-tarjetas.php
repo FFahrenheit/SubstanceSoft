@@ -22,7 +22,7 @@
 
 <body class="s-bg">
     <div class="s-nb">
-        <a href="./../functions/modulo0-funcion0.php"  style="float: left;">
+        <a href="./../functions/modulo0-funcion4.php"  style="float: left;">
             <img src="../../images/back.png" style="width: 50px;" alt="Regresar">
         </a>
         <a href="../../views/menus/index.php">
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <td>Nombre</td>
-                            <td>Código tarjeta</td>
+                            <td>&nbsp;</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,11 @@
                                 ?>
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
-                                <td><?php echo $row['tarjeta']; ?></td>
+                                <td>
+                                    <a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-danger" id="<?php echo $row['username'] ?>" onClick="showDetails(this)">
+                                        Desvincular
+                                    </a>
+                                </td>
                             </tr>
                         <?php
                     }
@@ -71,6 +75,25 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Desvincular tarjeta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro que quiere desvincular la tarjeta del usuario?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onClick="confirmReasign()">Desvincular</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 </body>
 <script src="../../js/vendor/common-functions.js"></script>
 <script src="../../js/forms/generar-codigo.js"></script>

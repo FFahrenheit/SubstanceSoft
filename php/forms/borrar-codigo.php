@@ -1,14 +1,9 @@
 <?php 
     $user = $_POST['user'];
-    $code = $_POST['code'];
 
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('"Error en conexion"');
 
-    $query = "UPDATE usuario SET tarjeta = NULL WHERE tarjeta = 0";
-
-    mysqli_query($connection,$query) or die("'Error, no se pudieron reasignar tarjetas'");
-
-    $query = "UPDATE usuario SET tarjeta = $code WHERE username = '$user'";
+    $query = "UPDATE usuario SET tarjeta = NULL WHERE username = '$user'";
 
     mysqli_query($connection,$query) or die('"Error, no se pudo asignar esta tarjeta"');
 

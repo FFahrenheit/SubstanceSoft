@@ -107,8 +107,7 @@ void setup()
   configurePins();
   Serial.begin(9600);
   //debug = !digitalRead(DEBUG_SW);
-  //configure = !digitalRead(CONFIGURE_SW); 
-  //Logica inversa porque es más fácil si no está conectado 1=>0
+  //configure = !digitalRead(CONFIGURE_SW);   //Logica inversa porque es más fácil si no está conectado 1=>0
   lcd.begin(16,2);
   lcd.print("</SubstanceSoft>");
   if(!configure)
@@ -117,6 +116,8 @@ void setup()
     showCredentials();
     wifi.begin(115200);
     nfc.begin();
+    innitConnection();
+    connectWifi();
     startNFC();
     connectWifi();
     Serial.println("Listo para recibir");
@@ -137,8 +138,6 @@ void loop()
     else if (menu=="a")
     {
       setCredentials();
-      innitConnection();
-      connectWifi();
     }
     okBeep();
   }
@@ -199,24 +198,43 @@ boolean registerCard(int card)
    wifi.print(command);
    String statusCode = waitResponse(2000);
    Serial.println("Status code: "+statusCode);
-   if(statusCode.indexOf("1:0")>0 || statusCode.indexOf("0:0")>0)
+   if(statusCode.indexOf("CLOSED")>0)
    {
-    errorBeep();
-    lcd.clear();
-    lcd.print("   Tarjeta no");
-    lcd.setCursor(0,1);
-    lcd.print("   registrada");
+     if(statusCode.indexOf("1:0")>0 || statusCode.indexOf("0:0")>0)
+     {
+      errorBeep();
+      lcd.clear();
+      lcd.print("   Tarjeta no");
+      lcd.setCursor(0,1);
+      lcd.print("   registrada");
+     }
+     else if(statusCode.indexOf("1:2")||statusCode.indexOf("0:2"))
+     {
+        errorBeep();
+        lcd.clear();
+        lcd.print("    Tarjeta");
+        lcd.setCursor(0,1);
+        lcd.print("   registrada");
+     }
+     else 
+     {
+      okBeep();
+      String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
+      String tipo = statusCode.substring(statusCode.indexOf("<")+1,statusCode.indexOf("CLOS"));
+      Serial.println(username);
+      lcd.clear();
+      (tipo == "1") ? lcd.print("  Hasta  luego") : lcd.print("   Bienvenido"); //salida
+      lcd.setCursor(0,1);
+      lcd.print(username);
+     }
    }
    else 
    {
-    okBeep();
-    String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
-    String tipo = statusCode.substring(statusCode.indexOf("<")+1,statusCode.indexOf("CLOS"));
-    Serial.println(username);
-    lcd.clear();
-    (tipo == "1") ? lcd.print("  Hasta  luego") : lcd.print("   Bienvenido"); //salida
-    lcd.setCursor(0,1);
-    lcd.print(username);
+      errorBeep();
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print("    peticion");
    }
 }
 
@@ -245,13 +263,27 @@ bool connectWifi()
   wifi.print("AT+CIPSTATUS\r\n");
   delay(1500);
   String response = getStatus();
-  Serial.println(response);
-  Serial.println("Index: "+(String)response.indexOf(":"));
-  String _statusCode = response.substring(response.indexOf(":")+1);
-  Serial.println("Estado: "+_statusCode);
-  int statusCode = _statusCode.toInt();
-  Serial.println("Status: "+(String)statusCode);
-  if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+  if(!response.equals("Error"))
+  {
+    Serial.println(response);
+    String _statusCode = response.substring(response.indexOf(":")+1);
+    Serial.println("Estado: "+_statusCode);
+    int statusCode = _statusCode.toInt();
+    Serial.println("Status: "+(String)statusCode);
+    if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+    {
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print(" conexion Wi-Fi");
+      errorBeep();
+      return connectWifi();
+    }
+    lcd.clear();
+    lcd.print("    Correcto");
+    return true; 
+  }
+  else 
   {
     lcd.clear();
     lcd.print("    Error en");
@@ -260,20 +292,17 @@ bool connectWifi()
     errorBeep();
     return connectWifi();
   }
-  lcd.clear();
-  lcd.print("    Correcto");
-  return true;
 }
 
 String getStatus()
 {
-  String response, ans;
+  String response, ans="Error";
   delay(1000); //Aguantame las carnes
   while(!wifi.available());
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
-    if(response.indexOf(":")>0)
+    if(response.indexOf("STATUS:")>0)
     {
       ans = response;
       Serial.println("Status: "+ans);
