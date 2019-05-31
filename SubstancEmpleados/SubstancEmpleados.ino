@@ -11,26 +11,23 @@
 #include <Wire.h>
 #include <Adafruit_PN532.h>
 
-//boolean debug = false; 
 boolean configure = false; 
 boolean gotIP = false;
 
 /**
- * configure tiene prioridad
- * true => El módulo será cargado con credenciales, solo abre el puerto 
- * serie, bloquea debug.
- * false => El módulo funciona de forma correcta
- * 
- * debug define si se quiere saber el código de una tarjeta o usar el módulo
- * true => El módulo imprimirá el número de tarjeta al pasarla
- * false => El módulo registra salidas y entradas
+ * Modos:
+ * Configure
+ * true => Se usa para poner el Arduino en modo
+ * configuración, es decir, cargar el SSID, 
+ * Password e IP local del server
+ * false => Se usa para usar el módulo en su
+ * funcionamiento común
  */
 
 const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
 const byte CONFIGURE_SW = 11;
-//const byte DEBUG_SW = 12;
 
 #define wifi Serial3
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
@@ -98,7 +95,6 @@ void startNFC()
 void configurePins()
 {
   pinMode(CONFIGURE_SW, INPUT_PULLUP);
-  //pinMode(DEBUG_SW,INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT); 
 }
@@ -108,7 +104,7 @@ void setup()
   configurePins();
   Serial.begin(9600);
   lcd.begin(16,2);
-  configure = !digitalRead(CONFIGURE_SW);
+  configure = !digitalRead(CONFIGURE_SW); //Verificar el estado de configuración
   Serial.println("Estado de configure: " + (String)configure);
   lcd.print("</SubstanceSoft>");
   if(!configure)
@@ -116,7 +112,7 @@ void setup()
     readCredentials(); //Lee las credenciales de la EEPROM
     showCredentials(); //Muestra las credenciales
     wifi.begin(115200); //Inicializa la velocidad del ESP8266
-    if(!gotIP && !tryWifi())
+    if(!gotIP && !tryWifi())   //Se intenta conectar una vez, si falla ...
     {
       innitConnection(); //Hace la conexión al WiFi
       connectWifi(); //Conecta al WiFi 
@@ -154,6 +150,7 @@ void loop()
     boolean success;
     uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  
     uint8_t uidLength;
+    while(wifi.available()>0);   //Si hay algún dato atorado en buffer
     digitalWrite(LED_BUILTIN, HIGH);
     success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
     digitalWrite(LED_BUILTIN,LOW);
