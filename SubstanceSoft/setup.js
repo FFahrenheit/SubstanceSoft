@@ -131,5 +131,5 @@ function getIp() {
     }
     var ipAddresses = networkInterfaces.join(', ')
     console.log(ipAddresses);
-    return '0.0.0.0';
+    return '127.0.0.1';
 }

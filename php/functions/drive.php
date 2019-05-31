@@ -36,7 +36,7 @@ function getOpenAccounts()
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="btn btn-primary">Consultar</a></p>';
+                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="indexbtn btn btn-primary">Consultar</a></p>';
                 $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
@@ -94,9 +94,9 @@ function getOpenOrders()
                     $output.='<h4 class="card-title">Mesa'.$row['mesa'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/nueva-comanda.php?clave='.$row['clave'].'" class="btn btn-primary">Agregar</a></p>';
-                $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="btn btn-danger">Cancelar</a></p>';
-                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
+                $output.='<p><a href="../functions/forms/nueva-comanda.php?clave='.$row['clave'].'" class="indexbtn btn btn-primary">Agregar</a></p>';
+                $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="indexbtn btn btn-danger">Cancelar</a></p>';
+                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Cerrar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
@@ -152,7 +152,7 @@ function getOpenOrders()
                         $output.='<h4 class="card-title">Mesa '.$row['mesa'].'</h4>';
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                    $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="btn btn-danger">Cancelar</a></p>';
+                    $output.='<p><a href="../functions/forms/cancelacion.php?clave='.$row['clave'].'" class="indexbtn btn btn-danger">Cancelar</a></p>';
                     $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
@@ -210,7 +210,7 @@ function getOpenOrders()
                         $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                    $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="btn btn-success">Imprimir ticket</a></p>';
+                    $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Imprimir ticket</a></p>';
                     $output.='</div></div></div></a>';
                     if(($i+1)%3==0)
                     {
@@ -268,7 +268,7 @@ function getOpenOrders()
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/pagar.php?clave='.$row['clave'].'" class="btn btn-success">Pagar</a></p>';
+                $output.='<p><a href="../functions/forms/pagar.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Pagar</a></p>';
                 $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
@@ -325,7 +325,7 @@ function getOpenOrders()
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
+                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Cerrar</a></p>';
                 $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {

@@ -66,9 +66,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Usuarios</h4>
                                                 <p class="card-text">Administre las credenciales con las que se usa el sistema</p>
-                                                <p><a href="../forms/nuevo-usuario.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-usuario.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-usuarios.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-usuario.php" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-usuario.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-usuarios.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -78,9 +78,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Cocinas</h4>
                                                 <p class="card-text">Administre las múlltiples zonas de cocina en el sistema</p>
-                                                <p><a href="../forms/nueva-cocina.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-cocina.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-cocinas.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nueva-cocina.html" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-cocina.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-cocinas.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -90,9 +90,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Ingredientes</h4>
                                                 <p class="card-text">Administre los distintos ingredientes usados en el sistema</p>
-                                                <p><a href="../forms/nuevo-ingrediente.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-ingredientes.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-ingredientes.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-ingrediente.html" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-ingredientes.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-ingredientes.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -105,9 +105,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Mesas</h4>
                                                 <p class="card-text">Administre las distintas mesas que hay en el sistema.</p>
-                                                <p><a href="../forms/nueva-mesa.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-mesas.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-mesas.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nueva-mesa.html" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-mesas.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-mesas.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -117,8 +117,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Roles</h4>
                                                 <p class="card-text">Administre los roles de usuario</p>
-                                                <p><a href="../forms/nuevo-permiso.php" class="btn btn-primary">Gestionar</a></p>
-                                                <p><a href="../lists/listar-roles.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-permiso.php" class="indexbtn btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../lists/listar-roles.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -128,9 +128,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Platillos</h4>
                                                 <p class="card-text">Administre los platillos en el sistema</p>
-                                                <p><a href="../forms/nuevo-platillo.php" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-platillos.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-platillos.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-platillo.php" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-platillos.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-platillos.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -143,9 +143,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Proveedores</h4>
                                                 <p class="card-text">Administre el listado de proveedores en el sistema</p>
-                                                <p><a href="../forms/nuevo-proveedor.html" class="btn btn-primary">Agregar</a></p>
-                                                <p><a href="../forms/modificar-proveedores.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-proveedor.html" class="indexbtn btn btn-primary">Agregar</a></p>
+                                                <p><a href="../forms/modificar-proveedores.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-surtidos.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -155,9 +155,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Surtidos</h4>
                                                 <p class="card-text">Administre los proveedores automáticos del sistema</p>
-                                                <p><a href="../forms/nuevo-surtido.php" class="btn btn-primary">Gestionar</a></p>
-                                                <p><a href="../forms/modificar-surtidos.php" class="btn btn-primary">Modificar</a></p>
-                                                <p><a href="../lists/listar-surtidos.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-surtido.php" class="indexbtn btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../forms/modificar-surtidos.php" class="indexbtn btn btn-primary">Modificar</a></p>
+                                                <p><a href="../lists/listar-surtidos.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>-->
@@ -167,8 +167,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Chefs</h4>
                                                 <p class="card-text">Administre las cocinas de los chefs</p>
-                                                <p><a href="../forms/nuevo-chef.php" class="btn btn-primary">Gestionar</a></p>
-                                                <p><a href="../lists/listar-chefs.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/nuevo-chef.php" class="indexbtn btn btn-primary">Gestionar</a></p>
+                                                <p><a href="../lists/listar-chefs.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -178,8 +178,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Codigos</h4>
                                                 <p class="card-text">Administre el inicio de sesión mediante codigos</p>
-                                                <p><a href="../forms/gestionar-codigos.php" class="btn btn-primary">Administrar</a></p>
-                                                <p><a href="../lists/listar-codigos.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/gestionar-codigos.php" class="indexbtn btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-codigos.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Recetas</h4>
                                                 <p class="card-text">Administre los ingredientes involucrados en los platillos</p>
-                                                <p><a href="../forms/gestionar-recetas.php" class="btn btn-primary">Administrar</a></p>
+                                                <p><a href="../forms/gestionar-recetas.php" class="indexbtn btn btn-primary">Administrar</a></p>
                                             </div>
                                         </div>
                                     </div>

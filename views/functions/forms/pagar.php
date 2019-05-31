@@ -78,7 +78,13 @@
                         <h3> Total: <?php echo "$".$row['total']; ?></h3> 
 
                         <?php 
-                            if($row['impresiones']>0)
+                            if($row['estado'] == 'pagada')
+                            {
+                                echo '<p>La cuenta ya está pagada</p>';
+                                echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
+
+                            }
+                            else if($row['impresiones']>0)
                             {
                                 echo '                        <a style="color: white;" data-toggle="modal" data-target="#delete"
                                 class="btn btn-success" id="'.$clave.'" onClick="showDetails(this)">

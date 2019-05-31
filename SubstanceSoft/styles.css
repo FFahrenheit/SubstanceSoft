@@ -17,7 +17,6 @@ button
     text-transform: uppercase;
     text-decoration: none;
     color: #000;
-    /*-webkit-text-stroke: 1px black;*/
 }
 
 .in
@@ -28,7 +27,24 @@ button
     font-size: 100%;
     padding: 10px 20px;
     border: solid rgb(0, 0, 0) 3px;
-    text-transform: uppercase;
     text-decoration: none;
     color: #000;
+}
+
+.btn
+{
+    border-radius: 9px;
+    color: rgb(0, 0, 0);
+    -webkit-text-stroke: 0.2px rgb(49, 49, 49);
+    font-size: 100%;
+    
+    border: solid rgb(56, 56, 56) 3px;
+    text-decoration: none;
+    -webkit-text-stroke: 0.1px black;
+}
+
+.btn :hover
+{
+    color: rgb(143, 143, 143);
+    border: solid rgb(71, 71, 71)3px;
 }
