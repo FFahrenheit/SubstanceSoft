@@ -33,7 +33,7 @@
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php
-        echo getSideBar();
+        echo getSideBar(0);
         ?>
         <!--Submenu-->
       </div>

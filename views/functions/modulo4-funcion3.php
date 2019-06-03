@@ -27,7 +27,7 @@
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php
-        echo getSideBar();
+        echo getSideBar(3);
         ?>
         <!--Submenu-->
       </div>

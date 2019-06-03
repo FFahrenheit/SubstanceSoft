@@ -299,7 +299,7 @@
     function getClaims()
     {
         global  $connection;
-        $query = "select * from orden where ESTADO='ABIERTA'";
+        $query = "select * from orden where ESTADO='ABIERTA' or estado = 'cerrada' ORDER BY fecha";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -324,7 +324,7 @@
                     $output.='<h4 class="card-title">Mesa'.$row['mesa'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/reclamos.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Abrir reclamo</a></p>';
+                $output.='<p><a href="../functions/forms/reclamos.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Consultar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {

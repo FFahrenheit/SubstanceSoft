@@ -27,7 +27,7 @@
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php
-        echo getSideBar();
+        echo getSideBar(6);
         ?>
         <!--Submenu-->
       </div>
@@ -49,8 +49,8 @@
         <div class="row">
           <div class="col-9 text-center">
             <!-- BODY -->
-            <h1 class="mt-4"> Liberaciones </h1>
-            <p> Aquí puede liberar las cuentas.</p>
+            <h1 class="mt-4"> Reclamos y descuentos </h1>
+            <p> Aquí puede administrar los reclamos y aplicar descuentos</p>
             <?php echo getClaims(); ?>
             <p> &nbsp;</p>
           </div>
