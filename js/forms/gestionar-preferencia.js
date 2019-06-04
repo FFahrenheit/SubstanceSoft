@@ -12,24 +12,27 @@ function setCodeStatus(new_status,preference)
     .then (res => res.json())
     .then (data =>
     {
-        if(datos.get("new") && datos.get("preferencia")==="aplicacion_movil")
+        if(datos.get("new")==="true" && datos.get("preferencia")==="aplicacion_movil")
         {
           var fs = require('fs');
-          var file = fs.readFileSync('C:/users/%userprofile%/Documents/SubstanceSoft_Backup/backup.sql');
-          var datos = new FormData();
-          datos.append("sql", file);
-          fetch('23.99.135.168/substancesoft/php/requests/recieveVM.php',
+          var file = fs.readFileSync('C:/Users/lghhs/Documents/SubstanceSoft_Backup/backup.sql');
+          var archivo = new FormData();
+          archivo.append("sql", file);
+          fetch('../../php/requests/recieveVM.php',
           {
               method: 'POST',
-              body: datos
+              body: archivo
           })
           .then (res => res.json())
           .then (data =>
           {
             console.log(data);
           })
+          .catch(function() {
+            alert("Can't connect to backend try latter");
+          });
         }
         //alert(data);
-        window.location.reload(true); 
+
     })
 }
