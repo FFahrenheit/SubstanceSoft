@@ -38,13 +38,14 @@
             <div class="container-fluid">
 
                 <?php
-                $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
+                    $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die;
                 ?>
                 <table class="table table-hover" style="margin: auto">
                     <thead>
                         <tr>
                             <td>Nombre de usuario</td>
-                            <td>Tarjeta asignada</td>
+                            <td>Estado</td>
+                            <td>&nbsp;</td>
                             <td>&nbsp;</td>
                         </tr>
                     </thead>
@@ -59,11 +60,36 @@
                             ?>
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
-                                <td><?php echo $row['tarjeta']; ?></td>
+                                <td><?php 
+                                        $asig = false;
+                                            if($row['tarjeta']=="0")
+                                            {
+                                                echo "Esperando tarjeta";
+                                            }
+                                            else if($row['tarjeta'])
+                                            {
+                                                echo "Tarjeta asignada"; 
+                                                $asig = true;
+                                            }
+                                            else 
+                                            {
+                                                echo "Sin tarjeta";
+                                            }
+                                            ?></td>
                                 <td>
                                     <a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-primary" id="<?php echo $row['username'] ?>" onClick="showDetails(this)">
                                     Asignar nuevo
                                     </a>
+                                </td>
+                                <td>
+                                <?php
+                                    if($asig)
+                                    {
+                                        echo '<a style="color: white;" data-toggle="modal" data-target="#delete" class="btn btn-danger" id="'.$row['username'].'" onClick="showDetails(this)">
+                                        Desvincular
+                                        </a>';
+                                    } 
+                                ?>
                                 </td>
                             </tr>
                         <?php
@@ -80,17 +106,43 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Registrar tarjeta</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" onclick="closeAll()" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Ingrese el ID de la tarjeta (Consúltelo en el módulo)
-                                <input id="codigo" placeholder="ID" type="number" value="0">
+                                ¿Desea asignar una nueva tarjeta?
+                                Si ya se cuenta con una tarjeta, esta será desvinculada. 
+                                Al hacer click en continuar, procederá a comenzar el registro
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" onClick="confirmDelete()">Registrar</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-secondary" onclick="closeAll()"data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Registrando tarjeta</h5>
+                                <button type="button" class="close" onclick="closeAll()" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>En el modulo empleados, pase una tarjeta no registrada para asignar a este usuario.</p>
+                                <div id="imagen">
+                                    <img src="../../images/load.gif" height="80" alt="Cargando">
+                                </div>
+                                <div id="status">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div id="ok">
+                                </div>
+                                <button type="button" class="btn btn-secondary" onclick="closeAll()" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>

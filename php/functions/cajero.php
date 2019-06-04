@@ -32,7 +32,7 @@
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="btn btn-primary">Consultar</a></p>';
+                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="indexbtn btn btn-primary">Consultar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
@@ -85,7 +85,7 @@
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="btn btn-success">Cerrar</a></p>';
+                $output.='<p><a href="../functions/forms/cerrar.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Cerrar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
@@ -138,7 +138,7 @@
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/pagar.php?clave='.$row['clave'].'" class="btn btn-success">Pagar</a></p>';
+                $output.='<p><a href="../functions/forms/pagar.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Pagar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
@@ -168,13 +168,13 @@
         global $user, $connection, $limit;
         $off = $page * $limit;
         $query = "select * from orden where ESTADO='pagada' 
-        AND fecha > (SELECT valor from fechas where nombre='fecha_fin') ORDER BY fecha 
+        AND fecha > (SELECT valor from fechas where nombre='fecha_in') ORDER BY fecha 
         DESC LIMIT $limit OFFSET $off";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
         {
-            for($i=0; $i<$result->num_rows; $i++)
+            for($i=0; $i<$result->num_rows; $i++) 
             {
                 $row = mysqli_fetch_array($result);
                 if($i%3 == 0)
@@ -194,7 +194,7 @@
                     $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="btn btn-success">Detalles</a></p>';
+                $output.='<p><a href="../functions/forms/detalles-cuenta.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Detalles</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {
@@ -215,6 +215,7 @@
             {
                 $output.="</div>";
             }
+            $output .= '<br></br>';
             $output .= getList($page+1, "ESTADO='pagada'");
         }
         return $output;  
@@ -228,7 +229,7 @@
         $row = mysqli_fetch_array($result);
         $total = $row['conteo'];
         $pages = ceil($total / $limit);
-        $output = '<div class="btn-group" role="group">';
+        $output = '<div class="indexbtn btn-group" role="group">';
         for($i = 1; $i<=$pages; $i++)
         {
             if($i == $page)
@@ -272,7 +273,7 @@
                         $output.='<h4 class="card-title">Cuenta '.$row['clave'].'</h4>';
                     }
                     $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                    $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="btn btn-success">Imprimir ticket</a></p>';
+                    $output.='<p><a href="../functions/forms/ticket.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Imprimir ticket</a></p>';
                     $output.='</div></div></div>';
                     if(($i+1)%3==0)
                     {
@@ -299,7 +300,7 @@
     function getClaims()
     {
         global  $connection;
-        $query = "select * from orden where ESTADO='ABIERTA'";
+        $query = "select * from orden where ESTADO='ABIERTA' or estado = 'cerrada' ORDER BY fecha";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
@@ -324,7 +325,7 @@
                     $output.='<h4 class="card-title">Mesa'.$row['mesa'].'</h4>';
                 }
                 $output.='<p class="card-text">En la mesa '.$row['mesa'].'</p>';
-                $output.='<p><a href="../functions/forms/reclamos.php?clave='.$row['clave'].'" class="btn btn-success">Abrir reclamo</a></p>';
+                $output.='<p><a href="../functions/forms/reclamos.php?clave='.$row['clave'].'" class="indexbtn btn btn-success">Consultar</a></p>';
                 $output.='</div></div></div>';
                 if(($i+1)%3==0)
                 {

@@ -187,3 +187,11 @@ a.hide:hover
     text-decoration: none;
     background-color: rgb(56, 56, 56);
 }
+
+.indexbtn 
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 160px;
+    display: inline-block;
+}

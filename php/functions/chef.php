@@ -39,7 +39,7 @@
                 $output.='<div class="card-block">';
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
-                $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="btn btn-primary">Ver y notificar</a></p>';
+                $output.='<p><a href="../functions/forms/visualizar.php?clave='.$row['pk'].'" class="indexbtn btn btn-primary">Ver y notificar</a></p>';
                 $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
@@ -97,7 +97,7 @@
                 $output.='<div class="card-block">';
                 $output.='<h4 class="card-title">Cocina: '.$row['nombre'].'</h4>';
                 $output.='<p class="card-text"></p>';
-                $output.='<p><a href="../functions/forms/ver.php?clave='.$row['pk'].'" class="btn btn-primary">Ver comandas</a></p>';
+                $output.='<p><a href="../functions/forms/ver.php?clave='.$row['pk'].'" class="indexbtn btn btn-primary">Ver comandas</a></p>';
                 $output.='</div></div></div></a>';
                 if(($i+1)%3==0)
                 {
@@ -175,8 +175,8 @@
             {
                 $out .= '<div class="chat darker">';
                 $out .= '<p>'.$row['mensaje'].'</p><p>&nbsp;</p>';
-                $out .= '<button class="btn btn-success" onclick="response(true,\''.$row['ayuda'].'\')">Aceptar</button><p>&nbsp;</p>';
-                $out .= '<button class="btn btn-danger" onclick="response(false, \''.$row['ayuda'].'\')">Rechazar</button><br>';
+                $out .= '<button class="indexbtn btn btn-success" onclick="response(true,\''.$row['ayuda'].'\')">Aceptar</button><p>&nbsp;</p>';
+                $out .= '<button class="indexbtn btn btn-danger" onclick="response(false, \''.$row['ayuda'].'\')">Rechazar</button><br>';
                 $out .= '<span class="time-right">'.$row['fecha'].'</span>';
             }
             $out .= '</div>';

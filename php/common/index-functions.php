@@ -4,7 +4,7 @@
         array("Administrar base", "Estadísticas", "Inventario", "Preferencias","Extras"),
         array( "Asignar mesa", "Crear comanda", "Cancelar","Liberar", "Marcar comandas"),
         array( "Recibir comandas", "Inventario", "Notificar comanda lista"),
-        array("Consultar","Ticket","Cobro","Liberar","Historial","Marcar comandas", "Reclamo de total"),
+        array("Consultar","Ticket","Cobro","Liberar","Historial","Marcar comandas", "Reclamos y descuentos"),
         array("Crear","Cancelar","Consultar","Cerrar","Ticket","Cobro"),
         array("Liberar", "Inventario", "Cuenta", "Ticket")
       );
@@ -18,7 +18,7 @@
           $curMod = $_SESSION['actual'];
       }
 
-      function getSideBar()
+      function getSideBar($actual = 1000)
       {
         global $permisos;
         global $curMod;
@@ -31,7 +31,14 @@
         for($i = 0; $i < sizeof($permisos[$curMod]); $i++)
         {
             $path = "modulo".$curMod."-funcion".$i.".php";
-            $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
+            if($i==$actual)
+            {
+                $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb ss-selected">&rarr; '.$permisos[$curMod][$i].'</a>';
+            }
+            else 
+            {
+                $output .= '<a href="../functions/'.$path.'" class="list-group-item list-group-item-action ss-sb">'.$permisos[$curMod][$i].'</a>';
+            }
         }
 
         return $output;

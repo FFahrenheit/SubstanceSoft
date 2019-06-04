@@ -33,7 +33,7 @@
       <div class="list-group list-group-flush">
         <!--Submenu-->
         <?php
-        echo getSideBar();
+        echo getSideBar(1);
         ?>
         <!--Submenu-->
       </div>
@@ -67,7 +67,7 @@
                     <div class="card-block">
                       <h4 class="card-title">Horas de venta</h4>
                       <p class="card-text">Consulte las horas de venta más populares</p>
-                      <p><a href="charts/horarios.php" class="btn btn-success">Ver</a></p>
+                      <p><a href="charts/horarios.php" class="indexbtn btn btn-success">Ver</a></p>
                     </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                     <div class="card-block">
                       <h4 class="card-title">Uso de ingredientes</h4>
                       <p class="card-text">Consulte el uso y surtido de ingredientes</p>
-                      <p><a href="charts/ingredientes.php" class="btn btn-success">Ver</a></p>
+                      <p><a href="charts/ingredientes.php" class="indexbtn btn btn-success">Ver</a></p>
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="card-block">
                       <h4 class="card-title">Empleados</h4>
                       <p class="card-text">Consulte la participación de empleados respecto a ordenes</p>
-                      <p><a href="charts/participacion.php" class="btn btn-success">Ver</a></p>
+                      <p><a href="charts/participacion.php" class="indexbtn btn btn-success">Ver</a></p>
                     </div>
                   </div>
                 </div>
@@ -107,7 +107,7 @@
                     <div class="card-block">
                       <h4 class="card-title">Montos ganados</h4>
                       <p class="card-text">Consulte las ganancias de los ultimos 7 días</p>
-                      <p><a href="charts/cortes.php" class="btn btn-success">Ver</a></p>
+                      <p><a href="charts/cortes.php" class="indexbtn btn btn-success">Ver</a></p>
                     </div>
                   </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="card-block">
                       <h4 class="card-title">Demanda</h4>
                       <p class="card-text">Consulte los platillos mas populares</p>
-                      <p><a href="charts/demanda.php" class="btn btn-success">Ver</a></p>
+                      <p><a href="charts/demanda.php" class="indexbtn btn btn-success">Ver</a></p>
                     </div>
                   </div>
                 </div>
@@ -130,7 +130,7 @@
                       <div class="card-block">
                         <h4 class="card-title">Asistencia</h4>
                         <p class="card-text">Consulte la asistencia de los usuarios</p>
-                        <p><a href="charts/asistencia.php" class="btn btn-success">Ver</a></p>
+                        <p><a href="charts/asistencia.php" class="indexbtn btn btn-success">Ver</a></p>
                       </div>
                     </div>
                 </a>

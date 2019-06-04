@@ -33,7 +33,7 @@
             <div class="list-group list-group-flush">
                 <!--Submenu-->
                 <?php
-                echo getSideBar();
+                echo getSideBar(4);
                 ?>
                 <!--Submenu-->
             </div>
@@ -69,7 +69,7 @@
                                                     <p class="card-text">Consulte y cambie las contraseñas de sus usuarios</p>
                                                     <strong>Requiere confirmación de administrador</strong>
                                                     <br></br>
-                                                    <p class="btn btn-primary">Administrar</p>
+                                                    <p class="btn btn-primary indexbtn">Administrar</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -80,8 +80,8 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Codigos</h4>
                                                 <p class="card-text">Administre el inicio de sesión mediante codigos</p>
-                                                <p><a href="../forms/gestionar-codigos.php" class="btn btn-primary">Administrar</a></p>
-                                                <p><a href="../lists/listar-codigos.php" class="btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/gestionar-codigos.php" class="indexbtn btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-codigos.php" class="indexbtn btn btn-primary">Ver</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -91,9 +91,9 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Sistema de empleados</h4>
                                                 <p class="card-text">Asigne una tarjeta a usuarios para usar en el sistema de empleados</p>
-                                                <p><a href="../forms/gestionar-tarjetas.php" class="btn btn-primary">Administrar</a></p>
-                                                <p><a href="../lists/listar-tarjetas.php" class="btn btn-primary">Ver</a></p>
-                                                <p><a href="../forms/configurar-arduino.html" class="btn btn-primary">Configurar</a></p>
+                                                <p><a href="../forms/gestionar-tarjetas.php" class="indexbtn btn btn-primary">Administrar</a></p>
+                                                <p><a href="../lists/listar-tarjetas.php" class="indexbtn btn btn-primary">Ver</a></p>
+                                                <p><a href="../forms/configurar-arduino.html" class="indexbtn btn btn-primary">Configurar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Configuración de impresión</h4>
                                                 <p class="card-text">Administre la impresora del equipo</p>
-                                                <p><a href="./forms/configurar-impresion.html" class="btn btn-primary">Administrar</a></p>
+                                                <p><a href="./forms/configurar-impresion.html" class="indexbtn btn btn-primary">Administrar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                             <div class="card-block">
                                                 <h4 class="card-title">Equipos conectados</h4>
                                                 <p class="card-text">Consulte la lista de equipos conocidos conectados</p>
-                                                <p><a href="../lists/listar-equipos.php" class="btn btn-primary">Consultar</a></p>
+                                                <p><a href="../lists/listar-equipos.php" class="indexbtn btn btn-primary">Consultar</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -126,8 +126,8 @@
                                                 <h4 class="card-title">Migración de datos</h4>
                                                 <p class="card-text">Exporte o importe la información actual de su sistema</p>
                                                 <strong>Requiere confirmación de administrador</strong>
-                                                <p><a href="./forms/confirmar-usuario.php?ref=export" class="btn btn-primary">Exportar</a></p>
-                                                <p><a href="./forms/confirmar-usuario.php?ref=import" class="btn btn-primary">Importar</a></p>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=export" class="indexbtn btn btn-primary">Exportar</a></p>
+                                                <p><a href="./forms/confirmar-usuario.php?ref=import" class="indexbtn btn btn-primary">Importar</a></p>
                                             </div>
                                         </div>
                                     </div>

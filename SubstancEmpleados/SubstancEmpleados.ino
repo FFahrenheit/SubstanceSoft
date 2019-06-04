@@ -11,25 +11,23 @@
 #include <Wire.h>
 #include <Adafruit_PN532.h>
 
-boolean debug = false; 
 boolean configure = false; 
+boolean gotIP = false;
 
 /**
- * configure tiene prioridad
- * true => El módulo será cargado con credenciales, solo abre el puerto 
- * serie, bloquea debug.
- * false => El módulo funciona de forma correcta
- * 
- * debug define si se quiere saber el código de una tarjeta o usar el módulo
- * true => El módulo imprimirá el número de tarjeta al pasarla
- * false => El módulo registra salidas y entradas
+ * Modos:
+ * Configure
+ * true => Se usa para poner el Arduino en modo
+ * configuración, es decir, cargar el SSID, 
+ * Password e IP local del server
+ * false => Se usa para usar el módulo en su
+ * funcionamiento común
  */
 
 const byte BUZZ = 10;
 const byte PN532_IRQ = 2;
 const byte PN532_RESET = 3;
 const byte CONFIGURE_SW = 11;
-const byte DEBUG_SW = 12;
 
 #define wifi Serial3
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
@@ -97,7 +95,6 @@ void startNFC()
 void configurePins()
 {
   pinMode(CONFIGURE_SW, INPUT_PULLUP);
-  pinMode(DEBUG_SW,INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(BUZZ,OUTPUT); 
 }
@@ -106,19 +103,22 @@ void setup()
 {
   configurePins();
   Serial.begin(9600);
-  //debug = !digitalRead(DEBUG_SW);
-  //configure = !digitalRead(CONFIGURE_SW); 
-  //Logica inversa porque es más fácil si no está conectado 1=>0
   lcd.begin(16,2);
+  configure = !digitalRead(CONFIGURE_SW); //Verificar el estado de configuración
+  Serial.println("Estado de configure: " + (String)configure);
   lcd.print("</SubstanceSoft>");
   if(!configure)
   {
-    readCredentials();
-    showCredentials();
-    wifi.begin(115200);
-    nfc.begin();
-    startNFC();
-    connectWifi();
+    readCredentials(); //Lee las credenciales de la EEPROM
+    showCredentials(); //Muestra las credenciales
+    wifi.begin(115200); //Inicializa la velocidad del ESP8266
+    if(!gotIP && !tryWifi())   //Se intenta conectar una vez, si falla ...
+    {
+      innitConnection(); //Hace la conexión al WiFi
+      connectWifi(); //Conecta al WiFi 
+    }
+    nfc.begin();  //Inicializa la comunicación con el módulo
+    startNFC(); //Inicia el NFC
     Serial.println("Listo para recibir");
   }
   readyBeep();
@@ -137,9 +137,9 @@ void loop()
     else if (menu=="a")
     {
       setCredentials();
-      innitConnection();
-      connectWifi();
     }
+    lcd.clear();
+    lcd.print("  Configurado.");
     okBeep();
   }
   else if(!configure)
@@ -150,6 +150,7 @@ void loop()
     boolean success;
     uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  
     uint8_t uidLength;
+    while(wifi.available()>0);   //Si hay algún dato atorado en buffer
     digitalWrite(LED_BUILTIN, HIGH);
     success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
     digitalWrite(LED_BUILTIN,LOW);
@@ -161,21 +162,9 @@ void loop()
       {
         counter+=pow(uid[i],i);
       }
-      if(debug)
-      {
-        Serial.println("\nValor: "+String(counter));
-        lcd.clear();
-        lcd.home();
-        lcd.print("    Tarjeta:");
-        lcd.setCursor(0,1);
-        lcd.print("     *"+String(counter));
-      }
-      else
-      {
-        lcd.clear();
-        lcd.print("   Procesando");
-        registerCard(counter);
-      }
+      lcd.clear();
+      lcd.print("   Procesando");
+      registerCard(counter);
     }
     else
     {
@@ -183,7 +172,7 @@ void loop()
       lcd.print("Error en lector");
       errorBeep();
     }
-    (debug) ? delay(5000) : delay(3500);
+    delay(3000);
   }
 }
 
@@ -199,24 +188,51 @@ boolean registerCard(int card)
    wifi.print(command);
    String statusCode = waitResponse(2000);
    Serial.println("Status code: "+statusCode);
-   if(statusCode.indexOf("1:0")>0 || statusCode.indexOf("0:0")>0)
+   if(statusCode.indexOf("CLOSED")>0)
    {
-    errorBeep();
-    lcd.clear();
-    lcd.print("   Tarjeta no");
-    lcd.setCursor(0,1);
-    lcd.print("   registrada");
+     if(statusCode.indexOf("1:0")>0)
+     {
+        errorBeep();
+        lcd.clear();
+        lcd.print("  Error en la");
+        lcd.setCursor(0,1);
+        lcd.print("    peticion");
+     }
+     else if(statusCode.indexOf("1:3")>0)
+     {
+      errorBeep();
+      lcd.clear();
+      lcd.print("   Tarjeta no");
+      lcd.setCursor(0,1);
+      lcd.print("   registrada");
+     }
+     else if(statusCode.indexOf("1:2")>0)
+     {
+        errorBeep();
+        lcd.clear();
+        lcd.print("    Tarjeta");
+        lcd.setCursor(0,1);
+        lcd.print("   registrada");
+     }
+     else
+     {
+      okBeep();
+      String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
+      String tipo = statusCode.substring(statusCode.indexOf("<")+1,statusCode.indexOf("CLOS"));
+      Serial.println(username);
+      lcd.clear();
+      (tipo == "1") ? lcd.print("  Hasta  luego") : lcd.print("   Bienvenido"); //salida
+      lcd.setCursor(0,1);
+      lcd.print(username);
+     }
    }
    else 
    {
-    okBeep();
-    String username = statusCode.substring(statusCode.indexOf(":")+1,statusCode.indexOf("<"));
-    String tipo = statusCode.substring(statusCode.indexOf("<")+1,statusCode.indexOf("CLOS"));
-    Serial.println(username);
-    lcd.clear();
-    (tipo == "1") ? lcd.print("  Hasta  luego") : lcd.print("   Bienvenido"); //salida
-    lcd.setCursor(0,1);
-    lcd.print(username);
+      errorBeep();
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print("    peticion");
    }
 }
 
@@ -240,19 +256,77 @@ void innitConnection()
   waitResponse(1500);
 }
 
+bool tryWifi()
+{
+  wifi.print("AT+CIPSTATUS\r\n");
+  delay(1500);
+  String response = getStatus();
+  if(!response.equals("Error"))
+  {
+    Serial.print("Aqui si jaló");
+    Serial.println(response);
+    String _statusCode = response.substring(response.indexOf(":")+1);
+    Serial.println("Estado: "+_statusCode);
+    int statusCode = _statusCode.toInt();
+    Serial.println("Status: "+(String)statusCode);
+    if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+    {
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print(" conexion Wi-Fi");
+      errorBeep();
+      return false;
+    }
+    lcd.clear();
+    lcd.print("    Correcto");
+    return true; 
+  }
+  else 
+  {
+    Serial.println("Es un error");
+    lcd.clear();
+    lcd.print("    Error en");
+    lcd.setCursor(0,1);
+    lcd.print(" conexion Wi-Fi");
+    errorBeep();
+    return false;
+  }
+}
+
 bool connectWifi()
 {
   wifi.print("AT+CIPSTATUS\r\n");
   delay(1500);
   String response = getStatus();
-  Serial.println(response);
-  Serial.println("Index: "+(String)response.indexOf(":"));
-  String _statusCode = response.substring(response.indexOf(":")+1);
-  Serial.println("Estado: "+_statusCode);
-  int statusCode = _statusCode.toInt();
-  Serial.println("Status: "+(String)statusCode);
-  if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+  if(gotIP)
   {
+    return true;
+  }
+  if(!response.equals("Error"))
+  {
+    Serial.print("Aqui si jaló");
+    Serial.println(response);
+    String _statusCode = response.substring(response.indexOf(":")+1);
+    Serial.println("Estado: "+_statusCode);
+    int statusCode = _statusCode.toInt();
+    Serial.println("Status: "+(String)statusCode);
+    if(statusCode == 4 || statusCode == 5) //Status 2 is totally ok...
+    {
+      lcd.clear();
+      lcd.print("    Error en");
+      lcd.setCursor(0,1);
+      lcd.print(" conexion Wi-Fi");
+      errorBeep();
+      return connectWifi();
+    }
+    lcd.clear();
+    lcd.print("    Correcto");
+    return true; 
+  }
+  else 
+  {
+    Serial.println("Es un error");
     lcd.clear();
     lcd.print("    Error en");
     lcd.setCursor(0,1);
@@ -260,23 +334,25 @@ bool connectWifi()
     errorBeep();
     return connectWifi();
   }
-  lcd.clear();
-  lcd.print("    Correcto");
-  return true;
 }
 
 String getStatus()
 {
-  String response, ans;
+  String response, ans="Error";
   delay(1000); //Aguantame las carnes
   while(!wifi.available());
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
-    if(response.indexOf(":")>0)
+    if(response.indexOf("US:")>0)
     {
       ans = response;
       Serial.println("Status: "+ans);
+    }
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
     }
     Serial.println(response);
   }
@@ -291,6 +367,11 @@ String waitResponse()
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
+    }
     Serial.println(response);
   }
   return response;
@@ -304,6 +385,11 @@ String waitResponse(int timeout)
   while(wifi.available())
   {
     response = wifi.readStringUntil('\n');
+    if(response.indexOf("GOT IP")>0)
+    {
+      Serial.println("GOT FCKING IP");
+      gotIP = true;
+    }
     Serial.println(response);
   }
   return response;

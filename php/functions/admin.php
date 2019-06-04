@@ -23,31 +23,31 @@
         $output.=  '<tr>';
         $output.=  "<td>Acceso con código</td>";
         $output.=  "<td>".getEstado("acceso_codigo");
-        $output.=  '<td><a href="../forms/gestionar-codigos.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/gestionar-codigos.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
         $output.=  '<tr>';
         $output.=  "<td>Apagado dinámico</td>";
         $output.=  "<td>".getEstado("apagado_dinamico");
-        $output.=  '<td><a href="../forms/gestionar-horario.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/gestionar-horario.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
         $output.=  '<tr>';
         $output.=  "<td>Desperdicio de ingredientes</td>";
         $output.=  "<td>".getEstado("desperdicio_diario");
-        $output.=  '<td><a href="../forms/gestionar-desperdicio.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/gestionar-desperdicio.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
         $output.=  '<tr>';
         $output.=  "<td>Sistema de ayuda entre chefs</td>";
         $output.=  "<td>".getEstado("ayuda_chefs");
-        $output.=  '<td><a href="../forms/ayuda-chefs.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/ayuda-chefs.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
         $output.=  '<tr>';
         $output.=  "<td>Uso de la aplicación móvil (Requiere internet)</td>";
         $output.=  "<td>".getEstado("aplicacion_movil");
-        $output.=  '<td><a href="../forms/aplicacion-movil.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/aplicacion-movil.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
 
         $output.= '<tr>';
@@ -61,7 +61,7 @@
             $show = "<font color = 'red'>Modo independiente</font>";
         }
         $output .= '<td>'.$show.'</td>';
-        $output.=  '<td><a href="../forms/gestionar-modo.php" class="btn btn-primary">Administrar</a></td>';
+        $output.=  '<td><a href="../forms/gestionar-modo.php" class="indexbtn btn btn-primary">Administrar</a></td>';
         $output.=  '</tr>';
         $output.= '</tbody></table>';
 

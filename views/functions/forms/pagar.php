@@ -78,14 +78,20 @@
                         <h3> Total: <?php echo "$".$row['total']; ?></h3> 
 
                         <?php 
-                            if($row['impresiones']>0)
+                            if($row['estado'] == 'pagada')
+                            {
+                                echo '<p> <strong>La cuenta ya está pagada<strong> </p>';
+                                //echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
+
+                            }
+                            else if($row['impresiones']>0)
                             {
                                 echo '                        <a style="color: white;" data-toggle="modal" data-target="#delete"
                                 class="btn btn-success" id="'.$clave.'" onClick="showDetails(this)">
                                                         Marcar como pagado
                                 </a>';
                                 echo '<br></br>';
-                                echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
+                                //echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
                             }
                             else 
                             {
@@ -98,7 +104,7 @@
                         <p>&nbsp;</p>
                     </div>
                 </div>
-                <button onclick="goBack()" class="btn btn-success">Regresar</button>
+                <a href="./../../menus/index.php" class="btn btn-success">Hecho</a>
             </div>
         </section>
         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
