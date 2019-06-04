@@ -136,7 +136,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            callback: function(label, index, labels) {
+                            callback: (label, index, labels) =>{
                                 var hours = Math.floor(label / 3600);
                                 label %= 3600;
                                 var minutes = Math.floor(label / 60);

@@ -41,8 +41,8 @@
                     <?php
                     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die("error en BD");
 
-                    $query = "SELECT username, AES_DECRYPT(password,'Sub5t4nc3S0Ft')
-                    AS pass FROM usuario ORDER BY username ASC";
+                    $query = "SELECT username, AES_DECRYPT(password,'Sub5t4nc3S0Ft'), login
+                    AS login FROM usuario ORDER BY username ASC";
 
                     $sql = mysqli_query($connection, $query) or die("error en query");
 
@@ -52,7 +52,7 @@
                             <thead>
                                 <tr>
                                     <td>Usuario</td>
-                                    <td>Contraseña</td>
+                                    <td>Último login</td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </thead>
@@ -61,7 +61,14 @@
                                 while ($row = mysqli_fetch_array($sql)) {
                                         echo '<tr>';
                                         echo "<td>" . $row['username'] . "</td>";
-                                        echo "<td>" . $row['pass'] . "</td>";
+                                        if($row['login'] == "" || $row['login'] == "0000-00-00 00:00:00")
+                                        {
+                                            echo "<td>No se ha iniciado sesión</td>";
+                                        }
+                                        else 
+                                        {
+                                            echo "<td>" . $row['login'] . "</td>";
+                                        }
                                         echo '<td><a class ="btn btn-primary"
                                         style="color: white;"
                                          href="cambiar-pass.php?user=' . $row['username'] . '">

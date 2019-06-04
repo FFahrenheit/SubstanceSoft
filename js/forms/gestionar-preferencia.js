@@ -12,6 +12,8 @@ function setCodeStatus(new_status,preference)
     .then (res => res.json())
     .then (data =>
     {
+      if(datos != null)
+      {
         if(datos.get("new") && datos.get("preferencia")==="aplicacion_movil")
         {
           var fs = require('fs');
@@ -29,7 +31,8 @@ function setCodeStatus(new_status,preference)
             console.log(data);
           })
         }
-        //alert(data);
+      }
+        alert(data);
         window.location.reload(true); 
     })
 }

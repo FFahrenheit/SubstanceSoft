@@ -51,14 +51,14 @@
                 if (!isset($row['valor']) || $row['valor'] == 0) 
                 {
                     echo '<h2>Actualmente se encuentra en modo <strong>dependiente</strong></h2>';
-                    echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
+                    echo '<img style = "height: 20%;" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(true,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
                 }
                 else 
                 {
                     echo '<h2>Actualmente se encuentra en modo <strong>independiente</strong></h2>';
-                    echo '<img height = "20%" src="../../images/switch.png" alt="Cambiar">';
+                    echo '<img  style = "height: 20%;" src="../../images/switch.png" alt="Cambiar">';
                     echo '<h3>Presione el botón para cambiar de modo</h3>';
                     echo '<button type="button" onclick = "setCodeStatus(false,'."'notificacion_chef'".')" class="btn btn-primary">Cambiar</button> ';
                 }
