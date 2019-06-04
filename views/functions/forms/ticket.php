@@ -98,7 +98,7 @@
                     <p> Clientes: <?php echo $row['clientes']; ?> </p>
                     <h3> Total: <?php echo "$" . $row['total']; ?></h3>
                     <p>&nbsp;</p>
-                    <button type="submit" onclick="printOrder(<?php echo $clave ?>)" class="btn btn-primary">
+                    <button type="submit" onclick="printOrder(<?php echo $clave ?>)" class="btn btn-primary indexbtn">
                         <?php
                         if ($row['impresiones'] == 0) {
                             echo 'Imprimir';
@@ -107,6 +107,10 @@
                         }
                         ?>
                     </button>
+                    <br></br>
+                    <a href ="./pagar.php?clave=<?php echo $clave;?>" class="btn btn-success indexbtn">
+                        Pagar y finalizar
+                    </a>
                 </div>
             </div>
             <button onclick="goBackDrive()" class="btn btn-success">Regresar</button>

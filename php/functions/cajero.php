@@ -168,13 +168,13 @@
         global $user, $connection, $limit;
         $off = $page * $limit;
         $query = "select * from orden where ESTADO='pagada' 
-        AND fecha > (SELECT valor from fechas where nombre='fecha_fin') ORDER BY fecha 
+        AND fecha > (SELECT valor from fechas where nombre='fecha_in') ORDER BY fecha 
         DESC LIMIT $limit OFFSET $off";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)
         {
-            for($i=0; $i<$result->num_rows; $i++)
+            for($i=0; $i<$result->num_rows; $i++) 
             {
                 $row = mysqli_fetch_array($result);
                 if($i%3 == 0)
@@ -215,6 +215,7 @@
             {
                 $output.="</div>";
             }
+            $output .= '<br></br>';
             $output .= getList($page+1, "ESTADO='pagada'");
         }
         return $output;  

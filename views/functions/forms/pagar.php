@@ -80,8 +80,8 @@
                         <?php 
                             if($row['estado'] == 'pagada')
                             {
-                                echo '<p>La cuenta ya está pagada</p>';
-                                echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
+                                echo '<p> <strong>La cuenta ya está pagada<strong> </p>';
+                                //echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
 
                             }
                             else if($row['impresiones']>0)
@@ -91,7 +91,7 @@
                                                         Marcar como pagado
                                 </a>';
                                 echo '<br></br>';
-                                echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
+                                //echo '<a href="./cerrar.php?clave='.$clave.'" class="btn btn-primary">Ir a cerrar y liberar</a>';
                             }
                             else 
                             {
@@ -104,7 +104,7 @@
                         <p>&nbsp;</p>
                     </div>
                 </div>
-                <button onclick="goBack()" class="btn btn-success">Regresar</button>
+                <a href="./../../menus/index.php" class="btn btn-success">Hecho</a>
             </div>
         </section>
         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
