@@ -55,7 +55,7 @@ $(document).on('keyup','#search',function(){
 var formulario = document.getElementById('formulario');
 var formulario2 = document.getElementById('formulario2');
 
-formulario.addEventListener('submit',function(e)
+formulario.addEventListener('submit', e =>
 {
     var clave = document.getElementById('clave').value;
     var qty = document.getElementById('qty').value;

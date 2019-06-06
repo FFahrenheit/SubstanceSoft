@@ -1,6 +1,6 @@
 var formulario = document.getElementById('formulario');
 
-formulario.addEventListener('submit',function(e)
+formulario.addEventListener('submit',e =>
 {
     e.preventDefault();
     console.log('working!'); 
@@ -19,7 +19,7 @@ formulario.addEventListener('submit',function(e)
             {
                 console.log("aqui llega js");
                 console.log(data);
-                alert(data);
+                // alert(data);
                 if(document.getElementById('drive').value==1)
                 {
                     var path  = '/substancesoft/views/functions/forms/nueva-comanda.php?clave='+data+'&drive=1';

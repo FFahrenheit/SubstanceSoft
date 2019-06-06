@@ -117,7 +117,6 @@
                 backgroundColor: window.chartColors.red,
                 data: [
                     <?php echo getExitData($user); ?>
-
                 ]
             }
         ]
