@@ -123,7 +123,7 @@
                     </div>
                   </div>
                 </div>
-                <a href="charts/demanda.php" class="a-card">
+                <a href="charts/asistencia.php" class="a-card">
                   <div class="card text-center">
                     <div class="card-body">
                       <img class="card-img-top img-fluid" src="../../images/stat.png" alt="Usuarios">
