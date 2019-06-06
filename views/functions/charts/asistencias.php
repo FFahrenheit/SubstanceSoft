@@ -54,6 +54,9 @@
                 <p class="lead text-center">A continuación puede consultar las entradas y salidas del usuario, además de una gráfica significativa</p>
                 <div class="row">
                     <div class="col-sm">
+                        <div id="container" style="width: 75%;">
+                            <canvas id="canvas"></canvas>
+                        </div>
                         <table class="table table-hover" style="margin: auto">
 
                             <thead>
@@ -88,12 +91,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-sm">
-
-                        <div id="container" style="width: 75%;">
-                            <canvas id="canvas"></canvas>
-                        </div>
-                    </div>
                 </div>
                 <!--button onclick="goBack()" class="btn btn-success">Regresar</button-->
         </div>
@@ -120,28 +117,44 @@
                 backgroundColor: window.chartColors.red,
                 data: [
                     <?php echo getExitData($user); ?>
-
                 ]
             }
         ]
     };
 
+    function getHour(label) {
+        var hours = Math.floor(label / 3600);
+        label %= 3600;
+        var minutes = Math.floor(label / 60);
+        var seconds = label % 60;
+        var h = (hours < 10) ? "0" + hours : hours;
+        var m = (minutes < 10) ? "0" + minutes : minutes;
+        var s = (seconds < 10) ? "0" + seconds : seconds;
+        return h + ":" + m + ":" + s;
+    }
 
-    window.onload = function() {
+    window.onload = () => {
         var ctx = document.getElementById('canvas').getContext('2d');
         window.myHorizontalBar = new Chart(ctx, {
             type: 'line',
             data: config,
             options: {
+                tooltips: {
+                    enabled: true,
+                    mode: 'single',
+                    callbacks: {
+                        label: (tooltipItems, data) => {
+                            return getHour(tooltipItems.yLabel);
+                        }
+                    }
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
-                            callback: (label, index, labels) =>{
-                                var hours = Math.floor(label / 3600);
-                                label %= 3600;
-                                var minutes = Math.floor(label / 60);
-                                var seconds = label % 60;
-                                return hours + ":" + minutes + ":" + seconds; 
+                            beginAtZero: true,
+                            max: 86400,
+                            callback: (label, index, labels) => {
+                                return getHour(label);
                             }
                         },
                         scaleLabel: {
