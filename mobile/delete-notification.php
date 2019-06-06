@@ -1,11 +1,8 @@
 <?php
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('{"error":1}');
-    $query = "SELECT * FROM notificaciones ORDER BY fecha DESC LIMIT 0,15";
+    $id = $_GET['id'];
+    $query = "DELETE FROM notificaciones WHERE clave = $id";
     $result = mysqli_query($connection, $query) or die ('{"error":2}');
-    while($row=mysqli_fetch_array($result))
-    {
-      $json[]=$row;
-    }
     mysqli_close($connection);
-    echo json_encode($json);
+    echo ('{"error":0}');
 ?>
