@@ -23,6 +23,10 @@
             echo json_encode("unable");
             die();
         }
+        else 
+        {
+            $sub = " codigo = $code";
+        }
     }
     else
     {
@@ -33,6 +37,8 @@
 
 
     $query = "SELECT AES_DECRYPT(password, 'Sub5t4nc3S0Ft') AS password, username,nombre , apellido_p, apellido_m, tipo, login from usuario where ".$sub;
+
+    //echo json_encode($query);
 
     freeQuery();
 

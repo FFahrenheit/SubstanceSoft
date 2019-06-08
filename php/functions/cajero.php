@@ -113,7 +113,7 @@
     function getUnpaidAccounts()
     {
         global $user, $connection;
-        $query = "select * from orden where ESTADO='cerrada'";
+        $query = "select * from orden where ESTADO!='cerrada' AND impresiones>0";
         $result = mysqli_query($connection, $query) or die ('"query"');
         $output = "";
         if($result->num_rows!=0)

@@ -97,11 +97,12 @@ $printer->text("------------------------------------------"."\n");
 	productos
 */
 
-$query = "SELECT total FROM orden WHERE clave = $order";
-echo $query;
+$query = "SELECT * FROM orden WHERE clave = $order";
+//echo $query;
 $result = mysqli_query($connection,$query);
 $row = mysqli_fetch_array($result);
 $total = $row['total'];
+$descripcion = $row['descripcion'];
 
 $query = "CALL obtenerTicket($order)";
 	$result = mysqli_query($connection,$query);
@@ -151,6 +152,7 @@ $printer->text("TOTAL: $".$total."\n");
 */
 $printer->setJustification(Printer::JUSTIFY_CENTER);
 $printer->text("Muchas gracias por su compra\n");
+$printer->text($descripcion);
 
 
 

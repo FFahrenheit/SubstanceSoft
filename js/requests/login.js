@@ -51,6 +51,7 @@ formulario2.addEventListener('submit', function (e) {
                         window.location.pathname = '/substancesoft/views/menus/index.php';
                         break;
                     default:
+                        console.log(data);
                         alert('Error en el sistema');
                 }
             })
@@ -110,6 +111,7 @@ formulario.addEventListener('submit',  (e) =>
                         window.location.pathname = '/substancesoft/views/menus/index.php';
                         break;
                     default:
+                            console.log(data);
                         alert("Error en el sistema");
                 }
             })

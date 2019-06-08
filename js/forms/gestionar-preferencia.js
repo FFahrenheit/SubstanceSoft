@@ -28,7 +28,7 @@ function setCodeStatus(new_status,preference)
           .then (res => res.json())
           .then (data =>
           {
-            console.log(data);
+            //console.log(data);
           })
           .catch(function() {
             alert("Can't connect to backend try latter");
