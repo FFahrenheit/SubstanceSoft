@@ -1,7 +1,7 @@
 <?php
     $connection = mysqli_connect("localhost", "root", "", "substancesoft") or die('{"error":1}');
 
-    $query = "SELECT * from ingrediente"; 
+    $query = "SELECT * from ingrediente";
 
     $result = mysqli_query($connection, $query) or die ('{"error":2}');
 
@@ -12,14 +12,14 @@
         echo "[";
         for($i = 0; $i<$nfilas; $i++)
         {
-            $row = mysqli_fetch_array($result); 
+            $row = mysqli_fetch_array($result);
             echo '{';
             $nombre = $row['nombre'];
             $existencia = $row['cantidad'];
             $critica = $row['existencia_critica'];
             $especificacion = $row['especificacion'];
             $clave = $row['clave'];
-            echo '"clave" : "'.$clave.'",';            
+            echo '"clave" : "'.$clave.'",';
             echo '"nombre" : "'.$nombre.'",';
             echo '"existencia": "'.$existencia.'",';
             echo '"critica" : "'.$critica.'",';
@@ -32,7 +32,7 @@
         }
         echo "]";
     }
-    else 
+    else
     {
         echo '{"error":4}';
     }
