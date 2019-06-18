@@ -7,7 +7,7 @@
 
     $result = mysqli_query($connection, $query) or die('"Usuario invalido"');
 
-    echo json_encode("Exito?");
+    echo json_encode("Exito");
 
     mysqli_close($connection);
 ?>
