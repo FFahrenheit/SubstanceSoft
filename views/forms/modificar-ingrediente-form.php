@@ -43,14 +43,21 @@
                 <form id="formulario" novalidate>
                     <div class="form-group">
                         <label for="">Nombre del ingrediente</label> <font color="red">*</font>
-                        <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>"" class="form-control" required>
+                        <input name="nombre" type="text" value="<?php printRow($row,'nombre'); ?>" class="form-control" required>
                         <div class="invalid-feedback">
                             Ingresa datos
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="">Cantidad: </label> <font color="red">*</font>
-                        <input type="number" name="cantidad" value="<?php printRow($row, 'cantidad');?>" class="form-control" required>
+                        <input type="number" step = "0.0001" name="cantidad" value="<?php printRow($row, 'cantidad');?>" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Ingresa datos
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Existencia cr&iacute;tica: </label> <font color="red">*</font>
+                        <input type="number" step = "0.0001" name="existencia_critica" value="<?php printRow($row, 'existencia_critica');?>" class="form-control" required>
                         <div class="invalid-feedback">
                             Ingresa datos
                         </div>
@@ -64,10 +71,6 @@
                             <option>ml</option>
                             <option>pza.</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                            <label for="">Existencia cr&iacute;tica: </label>
-                            <input name="existencia_critica" type="number" value="<?php  printRow($row,'existencia_critica');?>" class="form-control">
                     </div>
                     <div class="form-group">
                         <button type="submit"  class="btn btn-danger">Modificar</button>

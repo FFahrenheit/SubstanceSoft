@@ -11,7 +11,7 @@
 
     $result = mysqli_query($connection, $query) or die (' "Campos invalidos"');
 
-    echo json_encode("Ingrediente modificada. Regresando...");
+    echo json_encode('"Ingrediente modificado. Regresando..."');
 
     mysqli_close($connection);
 

@@ -25,8 +25,6 @@ formulario.addEventListener('submit',function(e)
 
                 //window.location.pathname = '/substancesoft/views/forms/modificar-cocina.php';
                 window.history.back();
-
-
             })
     }
 })
